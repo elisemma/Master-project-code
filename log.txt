@@ -13,3 +13,5 @@ dosen't work. I am not saving the calibration (json files) until the calibration
 - 50cm: No peaks found in the Eu spectrum. One peak in the Ba spectrum might be a bit off. The three calibration graphs look pretty good.
 
 
+14.04.23:
+Used all day to debug the calibration. Cs and Eu works, but the Ba calibration spectrum doesn't work. We have tried to use the spectrum from the summer school instead and that works. The fitting og peaks looks similiar in both of the spectra (my Ba spectrum and the summer school spectrum). We have figured out that there is something wrong in the last lines of the Spe file for the calibration Ba spectrum, but not what excactly is making the bug. 
