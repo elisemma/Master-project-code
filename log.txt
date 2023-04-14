@@ -1,9 +1,15 @@
 
-Log/ documentation for the code in my master project
-____________________________________________________________________________
 
+Log/ documentation for the code in my master project
+_____________________________________________________________________________________________________________________________________________________
+
+
+April 2023
 
 13.04.23: 
-Started the calibration in calibration.py. Want to make one function for each position. Have written a function to calibrate at the position 18cm.
-The calibration spectra for the Eu152 spectras don't look good. The curve for the resolution calibration looks really wierd. Looks like the regression 
-dosen't work. 
+Started the calibration in calibration.py. Want to make one function for each position. Have written a function to calibrate at the position 18cm and 50cm.
+- 18cm: The calibration spectrum for the Eu152 spectra don't look good. The curve for the resolution calibration looks really wierd. Looks like the regression 
+dosen't work. I am not saving the calibration (json files) until the calibration looks good.
+- 50cm: No peaks found in the Eu spectrum. One peak in the Ba spectrum might be a bit off. The three calibration graphs look pretty good.
+
+
