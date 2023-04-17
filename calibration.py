@@ -133,7 +133,7 @@ def calibration_50cm():
     sp_Cs137.plot()
 
     sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/calibration/Eu152_090317_50cm.Spe')
-    sp_Eu152.isotopes = ['137CS'] 
+    sp_Eu152.isotopes = ['152EU'] 
     sp_Eu152.auto_calibrate()
     sp_Eu152.plot()
 
@@ -153,10 +153,10 @@ def calibration_50cm():
 
 if __name__ == '__main__':
 
-    calibration_10cm()
+    # calibration_10cm()
     # calibration_18cm()
-    calibration_40cm()
-    # calibration_50cm()
+    # calibration_40cm()
+    calibration_50cm()
 
 
 
