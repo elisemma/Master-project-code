@@ -15,3 +15,7 @@ dosen't work. I am not saving the calibration (json files) until the calibration
 
 14.04.23:
 Used all day to debug the calibration. Cs and Eu works, but the Ba calibration spectrum doesn't work. We have tried to use the spectrum from the summer school instead and that works. The fitting og peaks looks similiar in both of the spectra (my Ba spectrum and the summer school spectrum). We have figured out that there is something wrong in the last lines of the Spe file for the calibration Ba spectrum, but not what excactly is making the bug. 
+
+
+17.04.23:
+Added calibration functions for 10cm and 40cm (only Eu sources). The calibration for 10 and 40 cm looks pretty good. Need some minor adjustments (will double check this with Andrew). Still need to fix calibration for 18cm (Ba) and 50cm (Eu). 

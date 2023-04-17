@@ -4,6 +4,25 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
+
+
+def calibration_10cm():
+    cb = ci.Calibration()
+
+    sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/calibration/Eu152_090317_10cm.Spe')
+    sp_Eu152.isotopes = ['152EU']
+    sp_Eu152.auto_calibrate()
+    sp_Eu152.plot()
+
+    sources = [{'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
+    sources = pd.DataFrame(sources)
+
+    cb.calibrate([sp_Eu152], sources=sources)
+    cb.plot()
+    cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/ElisesGeneratedFiles/Calibration/calibration_10cm.json')
+
+
+
 def calibration_18cm():
 
     cb = ci.Calibration()
@@ -49,7 +68,7 @@ def calibration_18cm():
     sp_nuclearDataSchool = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/SommerskoleUSA2022/KevinsWork/IDM/calibration/AA20220307_EuCsBa_65cm_IDMV1_mod.Spe')
     sp_nuclearDataSchool.isotopes = ['133BA'] 
     sp_nuclearDataSchool.auto_calibrate()
-    sp_nuclearDataSchool.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/ElisesGeneratedFiles/DebugCalibration/nuclearDataSchool.Spe')
+    # sp_nuclearDataSchool.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/ElisesGeneratedFiles/DebugCalibration/nuclearDataSchool.Spe')
     # sp_nuclearDataSchool.plot()
 
 
@@ -57,27 +76,45 @@ def calibration_18cm():
     #            {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
     #            {'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
 
-    # sources = [{'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'},
-    #            {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'}]
+    sources = [{'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'},
+               {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'}]
 
     # sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
     #            {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'}]
 
-    sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'}]
+    # sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'}]
 
     # sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'}]
 
     sources = pd.DataFrame(sources)
 
     # cb.calibrate([sp_Ba133, sp_newCs137, sp_Cs137_1, sp_Cs137_2, sp_Eu152, sp_newEu152, sp_Cs137], sources=sources)
+    cb.calibrate([sp_newCs137, sp_Cs137_1, sp_Cs137_2, sp_Eu152, sp_newEu152, sp_Cs137], sources=sources)
     # cb.calibrate([sp_Ba133, sp_Cs137, sp_newCs137, sp_Cs137_1], sources=sources)
     # cb.calibrate([sp_Cs137, sp_newCs137, sp_Cs137_1], sources=sources)
     # cb.calibrate([sp_Ba133], sources=sources)
-    cb.calibrate([sp_Ba133], sources=sources)
+    # cb.calibrate([sp_Ba133], sources=sources)
 
 
     cb.plot()
     # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/ElisesGeneratedFiles/Calibration/calibration_18cm.json')
+
+
+
+def calibration_40cm():
+    cb = ci.Calibration()
+
+    sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/calibration/Eu152_150217_40cm.Spe')
+    sp_Eu152.isotopes = ['152EU']
+    sp_Eu152.auto_calibrate()
+    sp_Eu152.plot()
+
+    sources = [{'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
+    sources = pd.DataFrame(sources)
+
+    cb.calibrate([sp_Eu152], sources=sources)
+    cb.plot()
+    cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/ElisesGeneratedFiles/Calibration/calibration_40cm.json')
 
 
 
@@ -113,9 +150,14 @@ def calibration_50cm():
 
 
 
+
 if __name__ == '__main__':
-    calibration_18cm()
+
+    calibration_10cm()
+    # calibration_18cm()
+    calibration_40cm()
     # calibration_50cm()
+
 
 
 
