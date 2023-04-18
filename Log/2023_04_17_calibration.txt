@@ -1,6 +1,0 @@
-
-17.04.23:
-Added calibration functions for 10cm and 40cm (only Eu sources). The calibration for 10 and 40 cm looks pretty good. Need some minor adjustments (will double check this with Andrew). Still need to fix calibration for 18cm (Ba). 
-
-Ask Andrew:
-How to make costumized fits for spes peaks where there can be contamination or peaks that require spes backround (in curie) (begrense range på bakgrund)

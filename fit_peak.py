@@ -19,7 +19,7 @@ def fit_peaks(spectrumName, position):
     effcal = list(cb.effcal)
     cb.effcal = effcal
 
-    sp.isotopes = ['86Y', '87Y', '88Y', '88ZR', '87NB', '88NB', '89NB', '90NB', '87MO', '89MO']
+    sp.isotopes = ['86Y', '87Y', '88Y', '88ZR', '87NB', '88NB', '89NB', '90NB', '91NB', '92NB','93NB', '94NB', '95NB', '96NB', '97NB', '98NB']
     sp.fit_peaks(bg='constant')
     sp._peaks = sp.peaks[(sp.peaks['counts']>300)]
     sp._peaks = sp.peaks[(sp.peaks['chi2']<10)]
