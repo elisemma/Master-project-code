@@ -2,3 +2,13 @@
 18.04.2023:
 
 Found and fixed a major problem with my q-value calculations. 
+
+In find_reaction_products.py I have two functions to find which isotopes are produced:
+
+1. def find_possible_reaction_products_from_d_Xn_reactions(Zr_isotopes, Zr_masses, Nb_isotopes, Nb_masses):
+    This function finds all the possible reaction products through the (d,Xn) reactions by calculating Q value and looking at the beam energy.
+
+
+2. def find_possible_reaction_products_from_d_pXn_reactions(Zr_target_isotopes, Zr_target_masses, Zr_prod_isotopes, Zr_prod_masses)
+    This function finds all the possible reaction products through the (d,pXn) reactions by calculating Q value and looking at the beam energy.
+    The last part of this function does not work yet and is commented out. The last part should calcluate the possible reaction products when 96Zr is the target.
