@@ -76,7 +76,7 @@ def calibration_18cm_new():
     sources = pd.DataFrame(sources)
 
     cb.calibrate([sp_newCs137, sp_newEu152], sources=sources)
-    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_180cm_new.pdf')
+    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm_new.pdf')
     cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm_new.json')
 
 
