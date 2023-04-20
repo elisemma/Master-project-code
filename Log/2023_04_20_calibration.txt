@@ -1,4 +1,97 @@
 
 20.04.2023:
 
-Making a new function to calibrate the new18cm files. Moving the data files (2017_Feb_Zr) into the github folder. Saving calibration plots and figures for 10cm, 18cm, new18cm, 40cm and 50cm.
+Making a new function to calibrate the new18cm files. Moving the data files (2017_Feb_Zr) into the github folder. Saving calibration plots and figures for 10cm, 18cm, new18cm, 40cm and 50cm. 
+
+The energy calibration for 10, 18, 18new and 40cm is fine, but some points in the 50cm plot is a bit off (just like 18cm was before separating between 18cm and new18cm files). All the calibration data for 50cm is measured on the 9th of march 2017 except the Co data which is measured on the 14th of march 2017, so (probably) not because of rebiasing.
+
+Adding the extra calibration data Andrew gave me. When including the 56Co file I get this error message:
+
+
+elisemma@eduroam-193-157-215-106 PlanBCode % python3 calibration.py
+Reading Spectrum /Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/calibration/Eu152_090317_10cm.Spe
+Reading Spectrum /Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/ExtraCalibrationData/Ba133/BE172501_10cm.Spe
+Reading Spectrum /Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/ExtraCalibrationData/Co56/CH170202_10cm.Spe
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.10/site-packages/pandas/core/indexes/range.py", line 345, in get_loc
+    return self._range.index(new_key)
+ValueError: 0 is not in range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/calibration.py", line 143, in <module>
+    calibration_10cm()
+  File "/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/calibration.py", line 28, in calibration_10cm
+    cb.calibrate([sp_Eu152, sp_Ba133_extra, sp_Co56_extra], sources=sources)
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/calibration.py", line 539, in calibrate
+    sp.fit_peaks()
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 978, in fit_peaks
+    p0 = self._get_p0(gammas)
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 728, in _get_p0
+    istp, gm = self._gammas(True)
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 621, in _gammas
+    g = Isotope(i).gammas(I_lim=self.fit_config['I_min'], E_lim=self.fit_config['E_min'], dE_511=self.fit_config['dE_511'], xrays=self.fit_config['xrays'])
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/isotope.py", line 111, in __init__
+    self.E_level = float(df['E_level'][0])
+  File "/opt/homebrew/lib/python3.10/site-packages/pandas/core/series.py", line 1012, in __getitem__
+    return self._get_value(key)
+  File "/opt/homebrew/lib/python3.10/site-packages/pandas/core/series.py", line 1121, in _get_value
+    loc = self.index.get_loc(label)
+  File "/opt/homebrew/lib/python3.10/site-packages/pandas/core/indexes/range.py", line 347, in get_loc
+    raise KeyError(key) from err
+KeyError: 0
+elisemma@eduroam-193-157-215-106 PlanBCode % 
+
+
+
+I am able to read the Co spectrum, but not use it in the calibration. 
+
+
+When I include the extra 137Cs spectrum in the calibration, the efficiency calibration gets messed up:)
+When I include the extra 152Eu spectrum the energy calibration looks like the 18cm calibration did before separating between before and after the rebiasing. 
+To sum up: Don't think the extra calibration data is a good idea to include, but will discuss this with Andrew. Maybe I'm wrong... 
+Saved the figures with the extra data in a separate folder.
+
+
+
+
+I am not able to plot the 56Co spectrum:
+
+
+elisemma@eduroam-193-157-215-106 PlanBCode % python3 calibration.py
+Reading Spectrum /Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/calibration/Eu152_090317_10cm.Spe
+Reading Spectrum /Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/ExtraCalibrationData/Ba133/BE172501_10cm.Spe
+Reading Spectrum /Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/ExtraCalibrationData/Co56/CH170202_10cm.Spe
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.10/site-packages/pandas/core/indexes/range.py", line 345, in get_loc
+    return self._range.index(new_key)
+ValueError: 0 is not in range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/calibration.py", line 153, in <module>
+    calibration_10cm()
+  File "/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/calibration.py", line 22, in calibration_10cm
+    sp_Co56_extra.plot()
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 1239, in plot
+    sub, itp, N_sub = self._split_fits()
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 817, in _split_fits
+    self.fit_peaks()
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 978, in fit_peaks
+    p0 = self._get_p0(gammas)
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 728, in _get_p0
+    istp, gm = self._gammas(True)
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 621, in _gammas
+    g = Isotope(i).gammas(I_lim=self.fit_config['I_min'], E_lim=self.fit_config['E_min'], dE_511=self.fit_config['dE_511'], xrays=self.fit_config['xrays'])
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/isotope.py", line 111, in __init__
+    self.E_level = float(df['E_level'][0])
+  File "/opt/homebrew/lib/python3.10/site-packages/pandas/core/series.py", line 1012, in __getitem__
+    return self._get_value(key)
+  File "/opt/homebrew/lib/python3.10/site-packages/pandas/core/series.py", line 1121, in _get_value
+    loc = self.index.get_loc(label)
+  File "/opt/homebrew/lib/python3.10/site-packages/pandas/core/indexes/range.py", line 347, in get_loc
+    raise KeyError(key) from err
+KeyError: 0
+elisemma@eduroam-193-157-215-106 PlanBCode % 
