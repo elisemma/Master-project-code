@@ -1,0 +1,4 @@
+
+20.04.2023:
+
+Making a new function to calibrate the new18cm files. Moving the data files (2017_Feb_Zr) into the github folder. Saving calibration plots and figures for 10cm, 18cm, new18cm, 40cm and 50cm.

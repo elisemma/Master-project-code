@@ -1,0 +1,9 @@
+SET_DETECTOR 2
+SET_PRESET_LIVE 60
+LOOP 5
+START
+WAIT
+SAVE "C:\User\Bernstein-Zr_2017-Feb\50MeV\Zr07_60s_???.Chn"
+SAVE "C:\User\Bernstein-Zr_2017-Feb\50MeV\Zr07_60s__???.Spe"
+CLEAR
+END_LOOP
