@@ -36,8 +36,8 @@ def find_possible_reactions(target_name, target_mass, Z_target, N_target, produc
         if (energyAvailable>0):
             reaction_not_found = False
             print(f'{product_name} can be produced through the {target_name}(d,{-delta_N+1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\n')
-        else:
-            print(f'Not enough energy available to produce {product_name} through (d,{-delta_N+1}n) . Avaiable energy: {energyAvailable:.2f}MeV')
+        # else:
+        #     print(f'Not enough energy available to produce {product_name} through (d,{-delta_N+1}n) . Avaiable energy: {energyAvailable:.2f}MeV')
 
 
     if (delta_Z == 0 and delta_N <= 1): #(d,pXn)
@@ -50,8 +50,8 @@ def find_possible_reactions(target_name, target_mass, Z_target, N_target, produc
         if (energyAvailable>0):
             reaction_not_found = False
             print(f'{product_name} can be produced through the {target_name}(d,p{-delta_N+1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\n')
-        else:
-            print(f'Not enough energy available to produce {product_name} through (d,p{-delta_N+1}n). Avaiable energy: {energyAvailable:.2f}MeV')
+        # else:
+        #     print(f'Not enough energy available to produce {product_name} through (d,p{-delta_N+1}n). Avaiable energy: {energyAvailable:.2f}MeV')
 
 
     if (delta_Z == 0 and delta_N <= 0): #(d,dXn)
@@ -64,8 +64,8 @@ def find_possible_reactions(target_name, target_mass, Z_target, N_target, produc
         if (energyAvailable>0):
             reaction_not_found = False
             print(f'{product_name} can be produced through the {target_name}(d,d{-delta_N}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\n')
-        else:
-            print(f'Not enough energy available to produce {product_name} through (d,d{-delta_N}n). Avaiable energy: {energyAvailable:.2f}MeV')
+        # else:
+        #     print(f'Not enough energy available to produce {product_name} through (d,d{-delta_N}n). Avaiable energy: {energyAvailable:.2f}MeV')
 
 
     if (delta_Z == 0 and delta_N <= -1): #(d,tXn)
@@ -78,8 +78,8 @@ def find_possible_reactions(target_name, target_mass, Z_target, N_target, produc
         if (energyAvailable>0):
             reaction_not_found = False
             print(f'{product_name} can be produced through the {target_name}(d,t{-delta_N-1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\n')
-        else:
-            print(f'Not enough energy available to produce {product_name} through (d,t{-delta_N-1}n). Avaiable energy: {energyAvailable:.2f}MeV')
+        # else:
+        #     print(f'Not enough energy available to produce {product_name} through (d,t{-delta_N-1}n). Avaiable energy: {energyAvailable:.2f}MeV')
 
 
     if (delta_Z == -1 and delta_N <= -1): #(d,aXn)
@@ -92,200 +92,66 @@ def find_possible_reactions(target_name, target_mass, Z_target, N_target, produc
         if (energyAvailable>0):
             reaction_not_found = False
             print(f'{product_name} can be produced through the {target_name}(d,a{-delta_N-1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\n')
-        else:
-            print(f'Not enough energy available to produce {product_name} through (d,a{-delta_N-1}n). Avaiable energy: {energyAvailable:.2f}MeV')
+        # else:
+        #     print(f'Not enough energy available to produce {product_name} through (d,a{-delta_N-1}n). Avaiable energy: {energyAvailable:.2f}MeV')
 
     if reaction_not_found:
         print('No possible reaction found')
 
 
 
+def iterating_over_targets_and_products(target_dict, poroduct_dict):
+    for target_name, target_info in target_dict.items():
+        for product_name, product_info in poroduct_dict.items():
+            print(f'________________________Target: {target_name}, Product: {product_name}______________________________________')
+            find_possible_reactions(target_name, target_info['mass']*u, target_info['Z'], target_info['N'], product_name, product_info['mass']*u, product_info['Z'], product_info['N'], 30)
+
+
+
 
 if __name__ == '__main__':
+
+
     u = 931.49410242 #[MeV/c^2]
+    target_dict = {'90Zr': {'mass': 89.904698755, 'Z': 40, 'N': 50}, 
+                   '91Zr': {'mass': 90.905640205, 'Z': 40, 'N': 51}, 
+                   '92Zr': {'mass': 91.905035336, 'Z': 40, 'N': 52}, 
+                   '94Zr': {'mass': 93.906312523, 'Z': 40, 'N': 54}, 
+                   '96Zr': {'mass': 95.908277615, 'Z': 40, 'N': 56}} #masses in [u] from NNDC
 
-    Nb_isotopes = ['86Nb', '87Nb', '88Nb', '89Nb', '90Nb', '91Nb', '92Nb', '93Nb', '94Nb', '95Nb', '96Nb', '97Nb', '98Nb']
-    Nb_masses = np.array([85.925781536, 86.920692473, 87.918226476, 88.913444696, 89.911259201, 90.906990256, 91.907188580, 92.906373170, 93.907279001, 94.906831110, 95.908101586, 96.908101622, 97.910332645]) #[u] from NNDC
+    poroduct_dict = {'86Nb': {'mass': 85.925781536, 'Z': 41, 'N': 45},
+                     '87Nb': {'mass': 86.920692473, 'Z': 41, 'N': 46},
+                     '88Nb': {'mass': 87.918226476, 'Z': 41, 'N': 47},
+                     '89Nb': {'mass': 88.913444696, 'Z': 41, 'N': 48},
+                     '90Nb': {'mass': 89.911259201, 'Z': 41, 'N': 49},
+                     '91Nb': {'mass': 90.906990256, 'Z': 41, 'N': 50},
+                     '92Nb': {'mass': 91.907188580, 'Z': 41, 'N': 51},
+                     '93Nb': {'mass': 92.906373170, 'Z': 41, 'N': 52},
+                     '94Nb': {'mass': 93.907279001, 'Z': 41, 'N': 53},
+                     '95Nb': {'mass': 94.906831110, 'Z': 41, 'N': 54},
+                     '96Nb': {'mass': 95.908101586, 'Z': 41, 'N': 55},
+                     '97Nb': {'mass': 96.908101622, 'Z': 41, 'N': 56},
+                     '98Nb': {'mass': 97.910332645, 'Z': 41, 'N': 57},
+ 
+                     '90Zr': {'mass': 89.904698755, 'Z': 40, 'N': 50}, 
+                     '91Zr': {'mass': 90.905640205, 'Z': 40, 'N': 51}, 
+                     '92Zr': {'mass': 91.905035336, 'Z': 40, 'N': 52}, 
+                     '93Zr': {'mass': 92.906470661, 'Z': 40, 'N': 53},
+                     '94Zr': {'mass': 93.906312523, 'Z': 40, 'N': 54}, 
+                     '95Zr': {'mass': 94.908040276, 'Z': 40, 'N': 55},
+                     '96Zr': {'mass': 95.908277615, 'Z': 40, 'N': 56},
 
-    Zr_target_isotopes = ['90Zr', '91Zr', '92Zr', '93Zr', '94Zr', '96Zr']
-    Zr_target_masses = np.array([89.904698755, 90.905640205, 91.905035336, 92.906470661, 93.906312523, 95.908277615]) #[u] from NNDC
-
-    Zr_isotopes_for_d_pXn = ['86Zr', '87Zr', '88Zr', '89Zr', '90Zr', '91Zr', '92Zr', '93Zr', '94Zr', '95Zr', '96Zr', '97Zr']
-    Zr_masses_for_d_pXn = np.array([85.916296814, 86.914817338, 87.910220715, 88.908879751, 89.904698755, 90.905640205, 91.905035336, 92.906470661, 93.906312523, 94.908040276, 95.908277615, 96.910963802]) #[u] from NNDC
-
-    find_possible_reactions('90Zr', 89.904698755*u, 40, 50, '88Y', 87.909501274*u, 39, 49, 30)
-
-
-
+                     '86Y': {'mass': 85.914886095, 'Z': 39, 'N': 47},
+                     '87Y': {'mass': 86.910876100, 'Z': 39, 'N': 48},
+                     '88Y': {'mass': 87.909501274, 'Z': 39, 'N': 49},
+                     '89Y': {'mass': 88.905838156, 'Z': 39, 'N': 50},
+                     '90Y': {'mass': 89.907141749, 'Z': 39, 'N': 51},
+                     '91Y': {'mass': 90.907298048, 'Z': 39, 'N': 52},
+                     '92Y': {'mass': 91.908945752, 'Z': 39, 'N': 53},
+                     '93Y': {'mass': 92.909578434, 'Z': 39, 'N': 54},
+                     '94Y': {'mass': 93.911592062, 'Z': 39, 'N': 55}} #masses in [u] from NNDC
 
     
-
-
-
-# def Q_value_for_N_neutrons_in_d_Xn_reactions(Zr_mass, Nb_product_mass, N_neutrons):
-#     #Function for calculating the Q-value for Zr(d,x*n)Nb for different Zr targets with different numbers of nutrons evaporating 
-#     deuteron_mass = 1875.6 #[MeV/c^2]
-#     neutron_mass = 939.5654133 #[MeV/c^2]
-
-#     Q_value = Zr_mass + deuteron_mass - Nb_product_mass - N_neutrons*neutron_mass #[MeV]
-
-#     return Q_value
-
-
-
-# def Q_value_for_N_neutrons_in_d_pXn_reactions(Zr_mass, Zr_product_mass, N_neutrons):
-#     deuteron_mass = 1875.6 #[MeV/c^2]
-#     neutron_mass = 939.5654133 #[MeV/c^2]
-#     proton_mass = 938.272088 #[MeV/c^2]
-
-#     Q_value = Zr_mass + deuteron_mass - Zr_product_mass - proton_mass - N_neutrons*neutron_mass #[MeV]
-
-#     return Q_value
-
-
-
-# def Energy_available(Q_value, beamEnergy=30): 
-#     energyAvailable = Q_value + beamEnergy
-
-#     return energyAvailable
-
-
-
-# def find_possible_reaction_products_from_d_Xn_reactions(Zr_isotopes, Zr_masses, Nb_isotopes, Nb_masses):
-
-#     u = 931.49410242 #[MeV/c^2]
-#     Zr_masses = Zr_masses*u #[MeV/c^2]
-#     Nb_masses = Nb_masses*u #[MeV/c^2]
-
-#     #Loop over every Zr isotopes with A=90-94:
-#     for i in range(len(Zr_isotopes)-1): #For 90Zr-94Zr:
-
-#         N_neutrons = 0
-#         Q_value = Q_value_for_N_neutrons_in_d_Xn_reactions(np.abs(Zr_masses[i]), np.abs(Nb_masses[i+6-N_neutrons]), N_neutrons)
-#         energyAvailable = Energy_available(Q_value)
-#         print('\n')
-#         print(f'Q-value for producing {Nb_isotopes[i+6-N_neutrons]} from {Zr_isotopes[i]} is {Q_value:.2f}MeV, and the available energy after the reaction is {energyAvailable:.2f}MeV.')
-
-#         while energyAvailable > 0: #Increasing the number of neutrons evaporated until we get a negative Q-value
-
-#             N_neutrons += 1
-#             Q_value = Q_value_for_N_neutrons_in_d_Xn_reactions(np.abs(Zr_masses[i]), np.abs(Nb_masses[i+6-N_neutrons]), N_neutrons)
-#             energyAvailable = Energy_available(Q_value)
-
-
-#             if energyAvailable > 0:
-#                 print(f'Q-value for producing {Nb_isotopes[i+6-N_neutrons]} from {Zr_isotopes[i]} is {Q_value:.2f}MeV, and the available energy after the reaction is {energyAvailable:.2f}MeV.')
-
-#     # For 96Zr:
-#     N_neutrons = 0
-#     Q_value = Q_value_for_N_neutrons_in_d_Xn_reactions(np.abs(Zr_masses[-1]), np.abs(Nb_masses[len(Zr_isotopes)+6-N_neutrons]), N_neutrons)
-#     energyAvailable = Energy_available(Q_value)
-
-#     print('\n')
-#     print(f'Q-value for producing {Nb_isotopes[len(Zr_isotopes)+6-N_neutrons]} from {Zr_isotopes[-1]} is {Q_value:.2f}MeV, and the available energy after the reaction is {energyAvailable:.2f}MeV.')
-
-
-#     while energyAvailable > 0: #Increasing the number of neutrons evaporated until we get a negative Q-value
-
-#         N_neutrons += 1
-#         Q_value = Q_value_for_N_neutrons_in_d_Xn_reactions(np.abs(Zr_masses[-1]), np.abs(Nb_masses[len(Zr_isotopes)+6-N_neutrons]), N_neutrons)
-#         energyAvailable = Energy_available(Q_value)
-
-
-#         if energyAvailable > 0:
-#             print(f'Q-value for producing {Nb_isotopes[len(Zr_isotopes)+6-N_neutrons]} from {Zr_isotopes[-1]} is {Q_value:.2f}MeV, and the available energy after the reaction is {energyAvailable:.2f}MeV.')
-
-
-
-
-# def find_possible_reaction_products_from_d_pXn_reactions(Zr_target_isotopes, Zr_target_masses, Zr_prod_isotopes, Zr_prod_masses):
-
-#     u = 931.49410242 #[MeV/c^2]
-#     Zr_target_masses = Zr_target_masses*u #[MeV/c^2] 
-#     Zr_prod_masses = Zr_prod_masses*u #[MeV/c^2]
-
-#     #Loop over every Zr isotopes with A=90-94:
-#     for i in range(len(Zr_target_isotopes)-1): #For 90Zr-94Zr:
-
-#         N_neutrons = 0
-#         Q_value = Q_value_for_N_neutrons_in_d_pXn_reactions(np.abs(Zr_target_masses[i]), np.abs(Zr_prod_masses[i+5-N_neutrons]), N_neutrons)
-#         energyAvailable = Energy_available(Q_value)
-#         print('\n')
-#         print(f'Q-value for producing {Zr_prod_isotopes[i+5-N_neutrons]} from {Zr_target_isotopes[i]} is {Q_value:.2f}MeV, and the available energy after the reaction is {energyAvailable:.2f}MeV.')
-
-#         while energyAvailable > 0: #Increasing the number of neutrons evaporated until we get a negative Q-value
-
-#             N_neutrons += 1
-#             Q_value = Q_value_for_N_neutrons_in_d_pXn_reactions(np.abs(Zr_target_masses[i]), np.abs(Zr_prod_masses[i+5-N_neutrons]), N_neutrons)
-#             energyAvailable = Energy_available(Q_value)
-
-
-#             if energyAvailable > 0:
-#                 print(f'Q-value for producing {Zr_prod_isotopes[i+5-N_neutrons]} from {Zr_target_isotopes[i]} is {Q_value:.2f}MeV, and the available energy after the reaction is {energyAvailable:.2f}MeV.')
-
-#     # # For 96Zr:
-#     # N_neutrons = 0
-#     # Q_value = Q_value_for_N_neutrons_in_d_pXn_reactions(np.abs(Zr_target_masses[-1]), np.abs(Zr_prod_masses[len(Zr_target_isotopes)-N_neutrons]), N_neutrons)
-#     # energyAvailable = Energy_available(Q_value)
-
-#     # print('\n')
-#     # print(f'Q-value for producing {Zr_prod_isotopes[len(Zr_target_isotopes)-N_neutrons]} from {Zr_target_isotopes[-1]} is {Q_value:.2f}MeV, and the available energy after the reaction is {energyAvailable:.2f}MeV.')
-
-
-#     # while energyAvailable > 0: #Increasing the number of neutrons evaporated until we get a negative Q-value
-
-#     #     N_neutrons += 1
-#     #     Q_value = Q_value_for_N_neutrons_in_d_pXn_reactions(np.abs(Zr_target_masses[-1]), np.abs(Zr_prod_masses[len(Zr_target_isotopes)-N_neutrons]), N_neutrons)
-#     #     energyAvailable = Energy_available(Q_value)
-
-
-#     #     if energyAvailable > 0:
-#     #         print(f'Q-value for producing {Zr_prod_isotopes[len(Zr_target_isotopes)-N_neutrons]} from {Zr_target_isotopes[-1]} is {Q_value:.2f}MeV, and the available energy after the reaction is {energyAvailable:.2f}MeV.')
-
-
-
-
-# if __name__ == '__main__':
-
-#     #Mass excess for possible target and product nuclei 
-#     Nb_isotopes = ['86Nb', '87Nb', '88Nb', '89Nb', '90Nb', '91Nb', '92Nb', '93Nb', '94Nb', '95Nb', '96Nb', '97Nb', '98Nb']
-#     Nb_masses = np.array([85.925781536, 86.920692473, 87.918226476, 88.913444696, 89.911259201, 90.906990256, 91.907188580, 92.906373170, 93.907279001, 94.906831110, 95.908101586, 96.908101622, 97.910332645]) #[u] from NNDC
-
-#     Zr_target_isotopes = ['90Zr', '91Zr', '92Zr', '93Zr', '94Zr', '96Zr']
-#     Zr_target_masses = np.array([89.904698755, 90.905640205, 91.905035336, 92.906470661, 93.906312523, 95.908277615]) #[u] from NNDC
-
-#     Zr_isotopes_for_d_pXn = ['86Zr', '87Zr', '88Zr', '89Zr', '90Zr', '91Zr', '92Zr', '93Zr', '94Zr', '95Zr', '96Zr', '97Zr']
-#     Zr_masses_for_d_pXn = np.array([85.916296814, 86.914817338, 87.910220715, 88.908879751, 89.904698755, 90.905640205, 91.905035336, 92.906470661, 93.906312523, 94.908040276, 95.908277615, 96.910963802]) #[u] from NNDC
-
-
-#     print('______________________________________________(d,Xn)__________________________________________________')
-#     find_possible_reaction_products_from_d_Xn_reactions(Zr_target_isotopes, Zr_target_masses, Nb_isotopes, Nb_masses)
-#     print('\n______________________________________________(d,pXn)__________________________________________________')
-#     find_possible_reaction_products_from_d_pXn_reactions(Zr_target_isotopes, Zr_target_masses, Zr_isotopes_for_d_pXn, Zr_masses_for_d_pXn)
-
-    
-# if __name__ == '__main__':
-#     #Mass excess for possible target and product nuclei 
-#     Nb_isotopes = ['86Nb', '87Nb', '88Nb', '89Nb', '90Nb', '91Nb', '92Nb', '93Nb', '94Nb', '95Nb', '96Nb', '97Nb', '98Nb']
-#     Nb_masses = np.array([85.925781536, 86.920692473, 87.918226476, 88.913444696, 89.911259201, 90.906990256, 91.907188580, 92.906373170, 93.907279001, 94.906831110, 95.908101586, 96.908101622, 97.910332645]) #[u] from NNDC
-
-#     Zr_target_isotopes = ['90Zr', '91Zr', '92Zr', '93Zr', '94Zr', '96Zr']
-#     Zr_target_masses = np.array([89.904698755, 90.905640205, 91.905035336, 92.906470661, 93.906312523, 95.908277615]) #[u] from NNDC
-
-#     Zr_isotopes_for_d_pXn = ['86Zr', '87Zr', '88Zr', '89Zr', '90Zr', '91Zr', '92Zr', '93Zr', '94Zr', '95Zr', '96Zr', '97Zr']
-#     Zr_masses_for_d_pXn = np.array([85.916296814, 86.914817338, 87.910220715, 88.908879751, 89.904698755, 90.905640205, 91.905035336, 92.906470661, 93.906312523, 94.908040276, 95.908277615, 96.910963802]) #[u] from NNDC
-
-
-#     print('______________________________________________(d,Xn)__________________________________________________')
-#     find_possible_reaction_products_from_d_Xn_reactions(Zr_target_isotopes, Zr_target_masses, Nb_isotopes, Nb_masses)
-#     print('\n______________________________________________(d,pXn)__________________________________________________')
-#     find_possible_reaction_products_from_d_pXn_reactions(Zr_target_isotopes, Zr_target_masses, Zr_isotopes_for_d_pXn, Zr_masses_for_d_pXn)
-
-
-
-
-        
-
-        
+iterating_over_targets_and_products(target_dict, poroduct_dict)
     
 
