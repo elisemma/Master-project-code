@@ -17,11 +17,12 @@ def find_possible_reactions_verbose(target_name, target_mass, Z_target, N_target
     delta_Z = Z_product-Z_target
     delta_N = N_product-N_target
 
-    neutron_mass = 939.5654133 #[MeV/c^2]
-    proton_mass = 938.272088 #[MeV/c^2]
-    deuteron_mass = 1875.6 #[MeV/c^2]
-    tritium_mass = 2809.432117 #[MeV/c^2]
-    alpha_mass = 3727.3794066 #[MeV/c^2]
+    u = 931.49410242 #[MeV/c^2]
+    neutron_mass = 1.00866491590*u #[MeV/c^2]
+    proton_mass = 1.007825031898*u #[MeV/c^2]
+    deuteron_mass = 2.014101777844*u #[MeV/c^2]
+    tritium_mass = 3.01604928132*u #[MeV/c^2]
+    alpha_mass = 4.00260325413*u #[MeV/c^2]
 
     initial_mass_array = np.array([target_mass, deuteron_mass])
 
@@ -36,9 +37,9 @@ def find_possible_reactions_verbose(target_name, target_mass, Z_target, N_target
 
         if (energyAvailable>0):
             reaction_not_found = False
-            print(f'{product_name} can be produced through the {target_name}(d,{-delta_N+1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\nQ-value = {Q_value:.2f}MeV\n')
+            print(f'{product_name} can be produced through the {target_name}(d,{-delta_N+1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f} MeV\nQ-value = {Q_value:.2f} MeV\n')
         else:
-            print(f'Not enough energy available to produce {product_name} through (d,{-delta_N+1}n) . Avaiable energy: {energyAvailable:.2f}MeV')
+            print(f'Not enough energy available to produce {product_name} through (d,{-delta_N+1}n) . Avaiable energy: {energyAvailable:.2f} MeV')
 
 
     if (delta_Z == 0 and delta_N <= 1): #(d,pXn)
@@ -50,9 +51,9 @@ def find_possible_reactions_verbose(target_name, target_mass, Z_target, N_target
 
         if (energyAvailable>0):
             reaction_not_found = False
-            print(f'{product_name} can be produced through the {target_name}(d,p{-delta_N+1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\nQ-value = {Q_value:.2f}MeV\n')
+            print(f'{product_name} can be produced through the {target_name}(d,p{-delta_N+1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f} MeV\nQ-value = {Q_value:.2f} MeV\n')
         else:
-            print(f'Not enough energy available to produce {product_name} through (d,p{-delta_N+1}n). Avaiable energy: {energyAvailable:.2f}MeV')
+            print(f'Not enough energy available to produce {product_name} through (d,p{-delta_N+1}n). Avaiable energy: {energyAvailable:.2f} MeV')
 
 
     if (delta_Z == 0 and delta_N <= 0): #(d,dXn)
@@ -64,9 +65,9 @@ def find_possible_reactions_verbose(target_name, target_mass, Z_target, N_target
 
         if (energyAvailable>0):
             reaction_not_found = False
-            print(f'{product_name} can be produced through the {target_name}(d,d{-delta_N}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\nQ-value = {Q_value:.2f}MeV\n')
+            print(f'{product_name} can be produced through the {target_name}(d,d{-delta_N}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f} MeV\nQ-value = {Q_value:.2f} MeV\n')
         else:
-            print(f'Not enough energy available to produce {product_name} through (d,d{-delta_N}n). Avaiable energy: {energyAvailable:.2f}MeV')
+            print(f'Not enough energy available to produce {product_name} through (d,d{-delta_N}n). Avaiable energy: {energyAvailable:.2f} MeV')
 
 
     if (delta_Z == 0 and delta_N <= -1): #(d,tXn)
@@ -78,9 +79,9 @@ def find_possible_reactions_verbose(target_name, target_mass, Z_target, N_target
 
         if (energyAvailable>0):
             reaction_not_found = False
-            print(f'{product_name} can be produced through the {target_name}(d,t{-delta_N-1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\nQ-value = {Q_value:.2f}MeV\n')
+            print(f'{product_name} can be produced through the {target_name}(d,t{-delta_N-1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f} MeV\nQ-value = {Q_value:.2f} MeV\n')
         else:
-            print(f'Not enough energy available to produce {product_name} through (d,t{-delta_N-1}n). Avaiable energy: {energyAvailable:.2f}MeV')
+            print(f'Not enough energy available to produce {product_name} through (d,t{-delta_N-1}n). Avaiable energy: {energyAvailable:.2f} MeV')
 
 
     if (delta_Z == -1 and delta_N <= -1): #(d,aXn)
@@ -92,9 +93,9 @@ def find_possible_reactions_verbose(target_name, target_mass, Z_target, N_target
 
         if (energyAvailable>0):
             reaction_not_found = False
-            print(f'{product_name} can be produced through the {target_name}(d,a{-delta_N-1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f}MeV\nQ-value = {Q_value:.2f}MeV\n')
+            print(f'{product_name} can be produced through the {target_name}(d,a{-delta_N-1}n){product_name} reaction.\nQ-value + beam energy = {energyAvailable:.2f} MeV\nQ-value = {Q_value:.2f} MeV\n')
         else:
-            print(f'Not enough energy available to produce {product_name} through (d,a{-delta_N-1}n). Avaiable energy: {energyAvailable:.2f}MeV')
+            print(f'Not enough energy available to produce {product_name} through (d,a{-delta_N-1}n). Avaiable energy: {energyAvailable:.2f} MeV')
 
     if reaction_not_found:
         print('No possible reaction found')
@@ -108,11 +109,12 @@ def find_possible_reactions(target_name, target_mass, Z_target, N_target, produc
     delta_Z = Z_product-Z_target
     delta_N = N_product-N_target
 
-    neutron_mass = 939.5654133 #[MeV/c^2]
-    proton_mass = 938.272088 #[MeV/c^2]
-    deuteron_mass = 1875.6 #[MeV/c^2]
-    tritium_mass = 2809.432117 #[MeV/c^2]
-    alpha_mass = 3727.3794066 #[MeV/c^2]
+    u = 931.49410242 #[MeV/c^2]
+    neutron_mass = 1.00866491590*u #[MeV/c^2]
+    proton_mass = 1.007825031898*u #[MeV/c^2]
+    deuteron_mass = 2.014101777844*u #[MeV/c^2]
+    tritium_mass = 3.01604928132*u #[MeV/c^2]
+    alpha_mass = 4.00260325413*u #[MeV/c^2]
 
     initial_mass_array = np.array([target_mass, deuteron_mass])
 
@@ -198,6 +200,7 @@ if __name__ == '__main__':
 
 
     u = 931.49410242 #[MeV/c^2]
+
     target_dict = {'90Zr': {'mass': 89.904698755, 'Z': 40, 'N': 50}, 
                    '91Zr': {'mass': 90.905640205, 'Z': 40, 'N': 51}, 
                    '92Zr': {'mass': 91.905035336, 'Z': 40, 'N': 52}, 
@@ -240,9 +243,23 @@ if __name__ == '__main__':
 
 iterating_over_targets_and_products(target_dict, product_dict)
 
-print('\n')
+# print('\n')
 
-find_possible_reactions_verbose('96Zr', target_dict['96Zr']['mass']*u, target_dict['96Zr']['Z'], target_dict['96Zr']['N'], 
-                                '94Y', product_dict['94Y']['mass']*u, product_dict['94Y']['Z'], product_dict['94Y']['N'], 30)
+# find_possible_reactions_verbose('96Zr', target_dict['96Zr']['mass']*u, target_dict['96Zr']['Z'], target_dict['96Zr']['N'], 
+#                                 '94Y', product_dict['94Y']['mass']*u, product_dict['94Y']['Z'], product_dict['94Y']['N'], 30)
+
+# find_possible_reactions_verbose('90Zr', target_dict['90Zr']['mass']*u, target_dict['90Zr']['Z'], target_dict['90Zr']['N'], 
+#                                 '88Y', product_dict['88Y']['mass']*u, product_dict['88Y']['Z'], product_dict['88Y']['N'], 30)
+
+# find_possible_reactions_verbose('90Zr', target_dict['90Zr']['mass']*u, target_dict['90Zr']['Z'], target_dict['90Zr']['N'], 
+#                                 '92Nb', product_dict['92Nb']['mass']*u, product_dict['92Nb']['Z'], product_dict['92Nb']['N'], 30)
+
+# find_possible_reactions_verbose('91Zr', target_dict['91Zr']['mass']*u, target_dict['91Zr']['Z'], target_dict['91Zr']['N'], 
+#                                 '92Nb', product_dict['92Nb']['mass']*u, product_dict['92Nb']['Z'], product_dict['92Nb']['N'], 30)
+
+
+
+
+
     
 

@@ -1,0 +1,18 @@
+
+25.04.2023:
+
+Yesterday I changed the find_reaction_products file and today I found and fixed a small bug in the same file. 
+
+The file consists of:
+- Q-value function which calculates the Q-value and takes two lists of masses as input; one for the initial masses and one for the final masses.
+
+- A find_possible_reactoions_verbose function which takes information about the target and reaction product as input and checks which reactions are possible if any.
+  This function also prints out the Q-value and has a lot of output. Therefore this function is suitable for a few reactions at a time when you want a lot of information.
+
+- A find_possible_reactions function which does the same as the one above, but dont have any printing to the terminal and instead returns a list of possible reactions.
+
+- A function to iterate over two dictionaries (one with all possible target nuclei and one with all possible products) and prints out the possible reactions for each 
+  product.
+
+NB: The disadvantage of having two separate functions which more or less do the same, is that one have to remember to do all changes in both functions when changing the 
+code. Therefore it might be a good idea to implement both functions in one code, but add a boolian input variable called "verbose" or "printing" or something. 
