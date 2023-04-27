@@ -1,0 +1,17 @@
+
+
+https://jtmorrell.github.io/curie/build/html/usersguide/spectroscopy.html
+
+Questions to the code on this website:
+
+- Why is sp.isotopes called two times with different number of isotopes?
+- line 5: what is gammas=xxx.gammas()
+- line 5: what is istp_col?
+-  In the fit peaks function, one can pass an argument for "gammas" with a list/dictionary/pandas dataframe.
+    What is the purpose of this?
+    Does it allow for other transitions which are unknown, i.e. the source isotopes is not known? This seems like what the guide suggests, as the isotope argument is optional.
+    In the example that is online, the code seems to have an error running depending on what the energy of the peak is. It seems like it needs to be a known transition for one of the listed isotopes... but then sometimes known energies don't work.
+    For completeness, arbitrary energies for contaminant peaks don't seem to work (1807 keV)... and yet, for some arbitrary numbers (1100.0 keV)?
+
+    Is there comprehensive example/script for Curie that can be used to learn from as the guide seems to be a bit scarce on some aspects.
+- Can I improve a fit for 
