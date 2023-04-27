@@ -13,32 +13,16 @@ def calibration_10cm():
     sp_Eu152.isotopes = ['152EU']
     # sp_Eu152.plot()
 
-    sp_Ba133_extra = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/ExtraCalibrationData/Ba133/BE172501_10cm.Spe')
-    sp_Ba133_extra.isotopes = ['133BA']
-    # sp_Ba133_extra.plot()
-
-    sp_Co56_extra = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/ExtraCalibrationData/Co56/CH170202_10cm.Spe')
-    sp_Co56_extra.isotopes = ['56Co']
-    # sp_Co56_extra.plot()
-
-    sp_Cs137_extra = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/ExtraCalibrationData/Cs137/BG172501_10cm.Spe')
-    sp_Cs137_extra.isotopes = ['137CS']
-    # sp_Cs137_extra.plot()
-
-    sp_Eu152_extra = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/ExtraCalibrationData/Eu152/AV172401_10cm.Spe')
-    sp_Eu152_extra.isotopes = ['152EU']
-    # sp_Eu152_extra.plot()
-
     sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
                {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
-               {'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'},
+               {'isotope':'152EU', 'A0':370000, 'ref_date':'11/01/1984 12:00:00'},
                {'isotope':'56CO', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
     sources = pd.DataFrame(sources)
 
     cb.calibrate([sp_Eu152], sources=sources)
-    # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_10cm.pdf')
-    # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_10cm.json')
-    # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/FiguresExtraDataIncluded/calibration_plots_10cm_extra.pdf')
+    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_10cm.pdf')
+    cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_10cm.json')
+
 
 
 def calibration_18cm():
@@ -66,13 +50,13 @@ def calibration_18cm():
 
     sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
                {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
-               {'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'},
+               {'isotope':'152EU', 'A0':370000, 'ref_date':'11/01/1984 12:00:00'},
                {'isotope':'56CO', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
     sources = pd.DataFrame(sources)
 
     cb.calibrate([sp_Ba133, sp_Cs137, sp_Cs137_2, sp_Eu152, sp_Co56], sources=sources)
-    # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm.pdf')
-    # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm.json')
+    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm.pdf')
+    cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm.json')
 
 
 
@@ -88,12 +72,12 @@ def calibration_18cm_new():
     # sp_newEu152.plot()
 
     sources = [{'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
-               {'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
+               {'isotope':'152EU', 'A0':370000, 'ref_date':'11/01/1984 12:00:00'}]
     sources = pd.DataFrame(sources)
 
     cb.calibrate([sp_newCs137, sp_newEu152], sources=sources)
-    # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm_new.pdf')
-    # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm_new.json')
+    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm_new.pdf')
+    cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm_new.json')
 
 
 
@@ -104,12 +88,12 @@ def calibration_40cm():
     sp_Eu152.isotopes = ['152EU']
     # sp_Eu152.plot()
 
-    sources = [{'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
+    sources = [{'isotope':'152EU', 'A0':370000, 'ref_date':'11/01/1984 12:00:00'}]
     sources = pd.DataFrame(sources)
 
     cb.calibrate([sp_Eu152], sources=sources)
-    # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_40cm.pdf')
-    # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_40cm.json')
+    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_40cm.pdf')
+    cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_40cm.json')
 
 
 
@@ -129,19 +113,19 @@ def calibration_50cm():
     sp_Eu152.isotopes = ['152EU'] 
     # sp_Eu152.plot()
 
-    sp_Co56 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/calibration/Co56_190217_18cm.Spe')
+    sp_Co56 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/calibration/Co56_140317_50cm.Spe')
     sp_Co56.isotopes = ['56CO'] 
     # sp_Co56.plot()
 
     sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
                {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
-               {'isotope':'152EU', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'},
+               {'isotope':'152EU', 'A0':370000, 'ref_date':'11/01/1984 12:00:00'},
                {'isotope':'56CO', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
     sources = pd.DataFrame(sources)
 
     cb.calibrate([sp_Ba133, sp_Cs137, sp_Eu152, sp_Co56], sources=sources)
-    # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_50cm.pdf')
-    # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_50cm.json')
+    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_50cm.pdf')
+    cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_50cm.json')
 
 
 
@@ -150,10 +134,10 @@ def calibration_50cm():
 if __name__ == '__main__':
 
     calibration_10cm()
-    # calibration_18cm()
-    # calibration_18cm_new()
-    # calibration_40cm()
-    # calibration_50cm()
+    calibration_18cm()
+    calibration_18cm_new()
+    calibration_40cm()
+    calibration_50cm()
 
 
 
