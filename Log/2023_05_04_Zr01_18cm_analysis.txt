@@ -1,0 +1,12 @@
+
+
+Trying to identify all radionuclei seen in the spectrum: 'BA130217_Zr01_18cm_30MeV'.
+Have found almost all the peaks by using my Q-value code. Peaks that had to be investigated:
+
+- 1807keV: Went through all candidates on the Table of radiative isotopes website Andrew showed me and non of
+  the radionuclides made a fit for the 1807 peak except 26Al. The problem with this radionuclide is the very
+  long half-life (7e5 years), but this nuclei has a E=1808 peak with I=99.76. Maybe 27Al(d,dn)26Al, but because 
+  of the long half-life sooo much of this reaction must have happend... 
+  Search settings on the website was: 10´804-1810keV, 1<=A<=98
+
+- 1296keV: Did not find any fits for this peak.. settings on the website: 1294-1298keV, 1<=A<=98

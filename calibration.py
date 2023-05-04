@@ -2,6 +2,7 @@ import numpy as np
 import curie as ci 
 import pandas as pd
 import matplotlib.pyplot as plt
+import pickle as pl 
 
 
 
@@ -11,7 +12,7 @@ def calibration_10cm():
 
     sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/calibration/Eu152_090317_10cm.Spe')
     sp_Eu152.isotopes = ['152EU']
-    # sp_Eu152.plot()
+    sp_Eu152.plot()
 
     sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
                {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
@@ -20,7 +21,7 @@ def calibration_10cm():
     sources = pd.DataFrame(sources)
 
     cb.calibrate([sp_Eu152], sources=sources)
-    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_10cm.pdf')
+    cb.plot(show=True, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_10cm.pdf')
     cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_10cm.json')
 
 
@@ -46,7 +47,9 @@ def calibration_18cm():
 
     sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/calibration/Eu152_150217_18cm.Spe')
     sp_Eu152.isotopes = ['152EU'] 
-    # sp_Eu152.plot()    
+    # fig = plt.figure()
+    sp_Eu152.plot()  
+    # pl.dump(fig,open('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/calibration/152Eu18cm.pickle','wb'))  
 
     sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
                {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
@@ -55,8 +58,9 @@ def calibration_18cm():
     sources = pd.DataFrame(sources)
 
     cb.calibrate([sp_Ba133, sp_Cs137, sp_Cs137_2, sp_Eu152, sp_Co56], sources=sources)
-    cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm.pdf')
-    cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm.json')
+    cb.plot()
+    # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm.pdf')
+    # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm.json')
 
 
 
@@ -78,7 +82,7 @@ def calibration_18cm_new():
     cb.calibrate([sp_newCs137, sp_newEu152], sources=sources)
     cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm_new.pdf')
     cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm_new.json')
-
+    # cb.plot()
 
 
 def calibration_40cm():
@@ -134,10 +138,10 @@ def calibration_50cm():
 if __name__ == '__main__':
 
     calibration_10cm()
-    calibration_18cm()
-    calibration_18cm_new()
-    calibration_40cm()
-    calibration_50cm()
+    # calibration_18cm()
+    # calibration_18cm_new()
+    # calibration_40cm()
+    # calibration_50cm()
 
 
 

@@ -15,3 +15,30 @@ Questions to the code on this website:
 
     Is there comprehensive example/script for Curie that can be used to learn from as the guide seems to be a bit scarce on some aspects.
 - Can I improve a fit for 
+
+
+
+
+When running the program with this lines:
+    sp.isotopes = ['89NB']
+    sp.fit_peaks(gammas=[{'energy':1100.0, 'intensity':10.66, 'unc_intensity':0.55}]) 
+I get no error message
+
+but this lines:
+    sp.isotopes = ['89NB']
+    sp.fit_peaks(gammas=[{'energy':1807.0, 'intensity':10.66, 'unc_intensity':0.55}])
+gives me the following error message:
+
+elisemma@eduroam-193-157-194-242 PlanBCode % python3 fit_peak.py
+Reading Spectrum /Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/30MeV/BA130217_Zr01_18cm_30MeV.Spe
+Traceback (most recent call last):
+  File "/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/fit_peak.py", line 58, in <module>
+    fit_peaks('BA130217_Zr01_18cm_30MeV', '18cm')
+  File "/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/fit_peak.py", line 42, in fit_peaks
+    sp.plot()
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 1239, in plot
+    sub, itp, N_sub = self._split_fits()
+  File "/opt/homebrew/lib/python3.10/site-packages/curie/spectrum.py", line 833, in _split_fits
+    itp_set = sorted(list(set(istp)))
+TypeError: '<' not supported between instances of 'str' and 'NoneType'
+
