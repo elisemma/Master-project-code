@@ -10,8 +10,8 @@ def fit_peaks(spectrumName, position):
     path = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/30MeV/'
     spectrumFile = path + spectrumName + '.Spe'
 
-    # cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '.json')
-    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '_new.json')
+    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '.json')
+    # cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '_new.json')
     # cb.plot()
 
     sp = ci.Spectrum(spectrumFile)
@@ -32,7 +32,7 @@ def fit_peaks(spectrumName, position):
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
     # sp.plot(scale = 'linlin')
     sp.plot()
-    sp.saveas('CR060317_Zr04_18cm_30MeV_peak_data.csv')
+    sp.saveas(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Zr_foils/{spectrumName}/{spectrumName}_peak_data.csv')
    
 
 
@@ -47,10 +47,10 @@ if __name__ == '__main__':
     # fit_peaks('BR150217_Zr02_18cm_30MeV', '18cm') #Date: 02/15/2017 19:13
     # #Zr03:
     # fit_peaks('BT160217_Zr03_18cm_30MeV', '18cm') #Date: 02/16/2017 10:32
-    # fit_peaks('CH260217_Zr03_18cm_30MeV', '18cm') #Date: 02/24/2017 17:15
+    fit_peaks('CH260217_Zr03_18cm_30MeV', '18cm') #Date: 02/24/2017 17:15
     # #Zr04:
     # fit_peaks('BI140217_Zr04_18cm_30MeV', '18cm') #Date: 02/14/2017 08:49
-    fit_peaks('CR060317_Zr04_18cm_30MeV', '18cm') #Date: 03/03/2017 19:04  NB: Must use new calibration 
+    # fit_peaks('CR060317_Zr04_18cm_30MeV', '18cm') #Date: 03/03/2017 19:04  NB: Must use new calibration 
     # #Zr05:
     # fit_peaks('AX130217_Zr05_18cm_30MeV', '18cm') #Date: 02/13/2017 15:07
     # fit_peaks('BS160217_Zr05_18cm_30MeV', '18cm') #Date: 02/15/2017 21:24

@@ -21,12 +21,11 @@ TODO:
 ___________________________
 
 - Isotopes: ['86Y', '87NB', '87Y', '87Ym', '89NB', '89NBm', xxx'89Ym'xxx, '89ZR', '90NB', '90Ym', '92Y', '96NB', '97NB', '97NBm', '98NBm']
-- fit_config: 'SNR_min':2.0, 'dE_511':9.0
-- Har ikke identifisert noen lavenergi pluss den helt høyeste toppen.
+- fit_config: 'SNR_min':3.5, 'dE_511':9.0
+
 
 
  
-
 'BP150217_Zr01_18cm_30MeV'
 ___________________________
 
@@ -65,10 +64,7 @@ ___________________________
 - E = 652: Kun 98Tc som passer, men half life = 4.2E+6 y
 - E = 1639: finner ikke
 - E = 1675: finner ikke:(
-- E = 72: finner ikke, men har ikke prøvd absolutt alle
-- E = 74: 76Zn passer, men finner ikke peak med E = 199 og I = 77 som burde vært der, har prøvd mange av de andre uten å finne noen
-- E = 84: 68mCu paser, men ikke de andre toppene. samme for 73mSe, 
-- E = 87: 81mRb passer
+
 
 
 
