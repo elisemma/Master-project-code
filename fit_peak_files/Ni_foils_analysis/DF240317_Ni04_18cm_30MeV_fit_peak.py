@@ -10,7 +10,7 @@ def fit_peaks(spectrumName, position):
     path = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/30MeV/'
     spectrumFile = path + spectrumName + '.Spe'
 
-    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '_new.json')
+    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibrationByHand_DF240317_Ni04_18cm_30MeV.json')
     
     # cb.plot()
 

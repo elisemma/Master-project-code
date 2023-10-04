@@ -10,8 +10,7 @@ def fit_peaks(spectrumName, position):
     path = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/30MeV/'
     spectrumFile = path + spectrumName + '.Spe'
 
-    # cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '_new.json')
-    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibrationByHand_CJ010317_Ti01_18cm_30MeV.json')
+    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_uncalibrated_params.json')
     # cb.plot()
 
     sp = ci.Spectrum(spectrumFile)
@@ -28,8 +27,7 @@ def fit_peaks(spectrumName, position):
 
 
 if __name__ == '__main__':
-  
 
-    #Ti02:
-    fit_peaks('CK010317_Ti02_18cm_30MeV', '18cm') #Date: 03/01/2017 15:43:23, $MEAS_TIM: 891 896
+    #Ti01:
+    fit_peaks('CS060317_Ti01_18cm_30MeV', '18cm') #Date: 03/06/2017 10:23:02, $MEAS_TIM: 15386 15401
 
