@@ -12,44 +12,46 @@ csTi01 =  "CS060317_Ti01_18cm_30MeV_calibration.Spe"
 
 # Defining the channelnumber and real energy of the peaks I will use in the calibration
 # for different foils
-channel_array_cjTi01 = np.array([1315, 2289, 2532, 2885, 5765])
-energy_array_cjTi01 = np.array([510.9989461, 889.277, 983.525, 1120.545, 2240.396])
-energy_unc_array_cjTi01 = np.array([0.0000031, 0.003, 0.004, 0.004, 0.01])
-cjTi01 = "CJ010317_Ti01_18cm_30MeV_calibration.Spe" 
+# channel_array_cjTi01 = np.array([1315, 2289, 2532, 2885, 5765])
+# energy_array_cjTi01 = np.array([510.9989461, 889.277, 983.525, 1120.545, 2240.396])
+# energy_unc_array_cjTi01 = np.array([0.0000031, 0.003, 0.004, 0.004, 0.01])
+# cjTi01 = "CJ010317_Ti01_18cm_30MeV_calibration.Spe" 
 
-channel_array_ckTi02 = np.array([1315, 2289, 2885, 5765]) #Burde ha med en stor topp på ch = 3377
-energy_array_ckTi02 = np.array([510.9989461, 889.277, 1120.545, 2240.396])
-energy_unc_array_ckTi02 = np.array([0.0000031, 0.003, 0.004, 0.01])
+channel_array_ckTi02 = np.array([1315, 2289, 2532, 2885, 3377, 5765]) #Using these values to make a calibration for all the Ti foils (CJ, CK, CL and CM)
+energy_array_ckTi02 = np.array([510.9989461, 889.277, 983.525, 1120.545, 1312.105, 2240.396])
+energy_unc_array_ckTi02 = np.array([0.0000031, 0.003, 0.004, 0.004, 0.004, 0.01])
+subset_params_ckTi02 = np.array([50,50,20,50,70,50])
 ckTi02 = "CK010317_Ti02_18cm_30MeV_calibration.Spe"
 
-channel_array_clTi03  = np.array([1315, 2289, 2885, 5765]) #Burde ha med en stor topp på ch = 3377
-energy_array_clTi03  = np.array([510.9989461, 889.277, 1120.545, 2240.396])
-energy_unc_array_clTi03  = np.array([0.0000031, 0.003, 0.004, 0.01])
-clTi03 = "CL010317_Ti03_18cm_30MeV_calibration.Spe"
+# channel_array_clTi03  = np.array([1315, 2289, 2885, 5765]) #Burde ha med en stor topp på ch = 3377
+# energy_array_clTi03  = np.array([510.9989461, 889.277, 1120.545, 2240.396])
+# energy_unc_array_clTi03  = np.array([0.0000031, 0.003, 0.004, 0.01])
+# clTi03 = "CL010317_Ti03_18cm_30MeV_calibration.Spe"
 
-channel_array_cmTi04 = np.array([1315, 2289, 2532, 2885]) #Burde ha med en stor topp på ch = 3377
-energy_array_cmTi04 = np.array([510.9989461, 889.277, 983.525, 1120.545])
-energy_unc_array_cmTi04 = np.array([0.0000031, 0.003, 0.004, 0.004])
-cmTi04 = "CM010317_Ti04_18cm_30MeV_calibration.Spe"
+# channel_array_cmTi04 = np.array([1315, 2289, 2532, 2885]) #Burde ha med en stor topp på ch = 3377
+# energy_array_cmTi04 = np.array([510.9989461, 889.277, 983.525, 1120.545])
+# energy_unc_array_cmTi04 = np.array([0.0000031, 0.003, 0.004, 0.004])
+# cmTi04 = "CM010317_Ti04_18cm_30MeV_calibration.Spe"
 
-channel_array_dfNi04 = np.array([1288, 2043, 2134, 6543])
+channel_array_dfNi04 = np.array([1288, 2043, 2134, 6543]) #Using these values to makea calibration for all the Ni foils (DF and DG)
 energy_array_dfNi04 = np.array([510.9989461, 810.7593, 846.770, 2598.500])
 energy_unc_array_dfNi04 = np.array([0.0000031, 0.002, 0.002, 0.004])
 dfNi04 = "DF240317_Ni04_18cm_30MeV_calibration.Spe"
 
 
-channel_array_dgNi05 = np.array([1288, 2043])
-energy_array_dgNi05 = np.array([510.9989461, 810.7593])
-energy_unc_array_dgNi05 = np.array([0.0000031, 0.002])
-dgNi05 = "DG240317_Ni05_18cm_30MeV_calibration.Spe"
+# channel_array_dgNi05 = np.array([1288, 2043]) #For få topper til å bruke i kalibrering
+# energy_array_dgNi05 = np.array([510.9989461, 810.7593])
+# energy_unc_array_dgNi05 = np.array([0.0000031, 0.002])
+# dgNi05 = "DG240317_Ni05_18cm_30MeV_calibration.Spe"
 
 
 
 # Defining which spectrum I want to calibrate
-channel_array = channel_array_dfNi04 
-energy_array = energy_array_dfNi04
-energy_unc_array = energy_unc_array_dfNi04
-spectrumname = dfNi04
+channel_array = channel_array_ckTi02 
+energy_array = energy_array_ckTi02
+energy_unc_array = energy_unc_array_ckTi02
+subset_params = subset_params_ckTi02
+spectrumname = ckTi02
 
 # Load and plot the SPE file
 filename = spectrumname
@@ -91,9 +93,13 @@ fits = []
 channel_nr_fit_list = []
 channel_nr_unc_list = []
 
-for guess in initial_guesses:
-    channels_subset = channels[(guess[1]-50):(guess[1]+50)]
-    counts_subset = counts[(guess[1]-50):(guess[1]+50)]
+for guess, subset in zip(initial_guesses, subset_params):
+    # channels_subset = channels[(guess[1]-50):(guess[1]+50)]
+    # counts_subset = counts[(guess[1]-50):(guess[1]+50)]
+    channels_subset = channels[(guess[1]-subset):(guess[1]+subset)]
+    counts_subset = counts[(guess[1]-subset):(guess[1]+subset)]
+    # plt.plot(channels_subset, counts_subset, color = 'orchid')
+    # plt.show()
     popt, cov = curve_fit(combined_function, channels_subset, counts_subset, p0=guess)
     fits.append(popt)
     print(popt[2])

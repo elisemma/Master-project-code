@@ -17,7 +17,7 @@ def fit_peaks(spectrumName, position):
     sp = ci.Spectrum(spectrumFile)
     sp.cb = cb 
  
-    sp.isotopes = ['56CO', '58CO', '61CU']
+    sp.isotopes = ['56CO', '58CO']
     sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0}
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
     # sp.plot(scale = 'linlin')
