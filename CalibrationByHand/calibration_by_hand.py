@@ -36,6 +36,7 @@ ckTi02 = "CK010317_Ti02_18cm_30MeV_calibration.Spe"
 channel_array_dfNi04 = np.array([1288, 2043, 2134, 6543]) #Using these values to makea calibration for all the Ni foils (DF and DG)
 energy_array_dfNi04 = np.array([510.9989461, 810.7593, 846.770, 2598.500])
 energy_unc_array_dfNi04 = np.array([0.0000031, 0.002, 0.002, 0.004])
+subset_params_dfNi04 = np.array([50,50,50,50])
 dfNi04 = "DF240317_Ni04_18cm_30MeV_calibration.Spe"
 
 
@@ -47,11 +48,11 @@ dfNi04 = "DF240317_Ni04_18cm_30MeV_calibration.Spe"
 
 
 # Defining which spectrum I want to calibrate
-channel_array = channel_array_ckTi02 
-energy_array = energy_array_ckTi02
-energy_unc_array = energy_unc_array_ckTi02
-subset_params = subset_params_ckTi02
-spectrumname = ckTi02
+channel_array = channel_array_dfNi04 
+energy_array = energy_array_dfNi04
+energy_unc_array = energy_unc_array_dfNi04
+subset_params = subset_params_dfNi04
+spectrumname = dfNi04
 
 # Load and plot the SPE file
 filename = spectrumname
