@@ -23,7 +23,7 @@ def fit_peaks(spectrumName, position):
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
     # sp.plot(scale = 'linlin')
     sp.plot()
-    sp.saveas(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Ti_foils/{spectrumName}/{spectrumName}_peak_data.csv')
+    sp.saveas(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Ni_foils/{spectrumName}/{spectrumName}_peak_data.csv')
    
 
 
