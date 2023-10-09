@@ -1,0 +1,2 @@
+filename,isotope,energy,counts,unc_counts,intensity,unc_intensity,efficiency,unc_efficiency,decays,unc_decays,decay_rate,unc_decay_rate,chi2,start_time,live_time,real_time
+/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/30MeV/DG240317_Ni05_18cm_30MeV.Spe,58CO,810.7593,537.1352876605953,29.803436146246746,0.9945,0.049725000000000005,0.001514654937459114,6.675485173817049e-05,356621.51095631445,34544.112615386235,17.38429906192427,1.6839286641018931,1.5704855055078166,03/24/2017 11:00:16,20512.0,20514.0

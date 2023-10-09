@@ -1,7 +1,7 @@
 import numpy as np 
 import matplotlib.pyplot as plt 
 from scipy.optimize import curve_fit
-
+from scipy import odr
 
 # csTi01 er bar en test. Automatisk kalibrering fungerer fint her
 channel_array_csTi01 = np.array([1270, 2210, 2444, 2783, 5561])
@@ -83,6 +83,7 @@ def combined_function(x, A, mu, sigma, a, b, c):
 
 
 
+
 # Define initial guesses for fitting parameters (A, mu, sigma, a, b, c)
 initial_guesses = []
 for i in range(len(channel_array)):
@@ -105,7 +106,7 @@ for guess, subset in zip(initial_guesses, subset_params):
     fits.append(popt)
     print(popt[2])
     channel_nr_fit_list.append(popt[1])
-    channel_nr_unc_list.append(popt[2]**2)
+    channel_nr_unc_list.append(np.sqrt(cov[1,1]))
 
     # Calculate the residuals
     residuals = counts_subset - combined_function(channels_subset, *popt)
@@ -130,23 +131,29 @@ plt.show()
 
 
 #Quadratic calibration 
-polyline = np.linspace(0,7000, 700000)
-calib_fit, cov_matrix = np.polyfit(channel_nr_fit_list, energy_array, 2, cov = True)
-model = np.poly1d(calib_fit)
+
+def quad_poly(B, x):
+    return B[0]*x**2 + B[1]*x + B[2]
+
+data = odr.RealData(channel_nr_fit_list,energy_array,sx = np.array(channel_nr_unc_list), sy = energy_unc_array)
+calib_model = odr.Model(quad_poly)
+odr = odr.ODR(data, calib_model,beta0 =[0,1,0])
+out = odr.run()#Run the regression
+calib_params = out.beta#out.beta is a list which contains the values of the parameters popped out from the fitting
+calib_params_unc = out.sd_beta#out.sd_beta is a list which contains the values of the errors of the parameters
 print("The energy calibration paramteters:")
-print(model)
+print(calib_params)
 # Extract the standard deviations (uncertainties) of the fit parameters
-calib_unc = np.sqrt(np.diag(cov_matrix))
-print(f"The uncertainties of the energy calibration is {calib_unc}")
+print(f"The uncertainties of the energy calibration is {calib_params_unc}")
 
+polyline = np.linspace(0,7000, 700000)
+model = np.poly1d(calib_params)
 
-# Finding the chi2 of the calibration:
-def chi_squared(observed, expected):
-    return np.sum( (observed - expected)**2/expected )
-
-chi_squared_calibration_fit = chi_squared(energy_array, model(channel_nr_fit_list))
 print("\n")
-print(f'Engcal:\n {calib_fit[2]}, \n {calib_fit[1]}, \n {calib_fit[0]}')
+print(f'Engcal:\n {calib_params[2]}, \n {calib_params[1]}, \n {calib_params[0]}')
+
+
+
 
 #Visualizing the calibration
 plt.errorbar(channel_nr_fit_list, energy_array, xerr=channel_nr_unc_list, yerr = energy_unc_array, fmt='o', label = 'datapoints', color = 'skyblue')
@@ -154,7 +161,7 @@ plt.plot(polyline, model(polyline), color = 'hotpink', label = 'fit')
 plt.legend()
 plt.xlabel("Channel number")
 plt.ylabel("Energy")
-plt.text(3000, 10, f'Engcal:\n {calib_fit[2]} +- {calib_unc[2]:.2e} \n {calib_fit[1]} +- {calib_unc[1]:.2e}\n {calib_fit[0]} +- {calib_unc[0]:.2e} \n\n Chi2 = {chi_squared_calibration_fit}', fontsize=8, color='black', backgroundcolor='hotpink')
+plt.text(3000, 10, f'Engcal:\n {calib_params[2]} +- {calib_params_unc[2]:.2e} \n {calib_params[1]} +- {calib_params_unc[1]:.2e}\n {calib_params[0]} +- {calib_params_unc[0]:.2e} \n\n Reduced Chi2 = {out.res_var}', fontsize=8, color='black', backgroundcolor='hotpink')
 plt.title(f'{spectrumname}')
 plt.show()
 
