@@ -5,19 +5,27 @@ from scipy.optimize import curve_fit
 
 
 def decay_constant_func(half_life):
+    #Function taht calculates the decay constant given the half life og a nucleus
     return np.log(2)/half_life
 
+
 def calc_A0(decay_constant, decays, unc_decays, start_time, stop_time):
+    #Function that calculates the end of beam activity given the number of decays between a start and 
+    #stop time after EOB and the decay constant of the nuclei
     count_time = stop_time - start_time
     after_EOB_time = start_time
     A0 = decays*decay_constant/(1-np.exp(-decay_constant*count_time))*np.exp(-decay_constant*after_EOB_time)
     A0_unc = unc_decays*decay_constant/(1-np.exp(-decay_constant*count_time))*np.exp(-decay_constant*after_EOB_time)
     return A0, A0_unc
 
+
 def activity_func(decay_constant, A0, t):
+    #Returns the activity as a function of time
     return A0*np.exp(-decay_constant*t)
 
+
 def fit_function(t, A0):
+    #This function will be fitted to the data points. Only want to fit the A0, and not decay constants etc.
     return activity_func(decay_constant, A0, t)
 
 
@@ -31,8 +39,10 @@ unc_decays = np.array([2.0e4, 3.0e4])
 start_times = np.array([5.0, 6.0])*24*3600
 stop_times = np.array([5.1, 6.1])*24*3600
 
+#Calculating the A0 with uncertainty given the data I have. 
 A0_data, A0_unc = calc_A0(decay_constant, decays, unc_decays, start_times,stop_times)
 
+#Fitting the activity curve to the data:
 initial_A0_guess = 100
 params, covariance = curve_fit(fit_function, start_times, A0_data, sigma=A0_unc, p0=[initial_A0_guess])
 optimized_A0 = params[0]
