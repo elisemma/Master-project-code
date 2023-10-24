@@ -81,7 +81,7 @@ activity_fit = activity_func(decay_constant, optimized_A0, time_array)
 
 # Plot the original data and the fitted decay curve
 plt.errorbar(start_times/(24*3600), A_data, yerr=A_unc, label='Data', color='lightgreen', fmt='o')
-plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve: N0={optimized_A0:.2f}, λ={decay_constant:.2f}', color='hotpink')
+plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve: A0={optimized_A0:.2f}', color='hotpink')
 plt.xlabel('Time (d)')
 
 plt.ylabel('Activity (Bq)')
