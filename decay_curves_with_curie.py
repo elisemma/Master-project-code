@@ -14,7 +14,7 @@ def fit_prod_rate(isotope, foil, path, file):
     isotopes, r, var_r = dc.fit_R()
     R = float(r[0])    
     var_R = float(var_r[0][0])
-    dc.plot()
+    # dc.plot()
     return R, var_R
 
 
@@ -25,12 +25,15 @@ def generate_prod_rate_csv(foil_type, isotopes, foil_list, path, file_concat):
     R_file.write('foil, isotope, R, var_R \n')
     print('foil, isotope, R, var_R \n')
 
+    df = pd.read_csv(path+file_concat)
+
     for isotope in isotopes:
         for foil in foil_list:
-            R, var_R = fit_prod_rate(isotope, foil, path, file_concat)
-            # var_R = float(var_R)
-            print(f'{foil}, {isotope}, {R}, {var_R} \n')
-            R_file.write(f'{foil}, {isotope}, {R}, {var_R} \n')
+            bool = df[df['filename'].str.contains(foil) & (df['isotope'] == isotope)].shape[0] > 0
+            if(bool):
+                R, var_R = fit_prod_rate(isotope, foil, path, file_concat)
+                print(f'{foil}, {isotope}, {R}, {var_R} \n')
+                R_file.write(f'{foil}, {isotope}, {R}, {var_R} \n')
     R_file.close()
 
 
@@ -103,14 +106,14 @@ df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
 df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04, df_BENi05, df_DANi01, df_DBNi02, df_DCNi03, df_DENi03, df_DFNi04, df_DGNi05), axis = 0)
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
-isotopes_Ni = ['58CO']
+isotopes_Ni = ['56CO', '58CO']
 foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
 
 
 
 
-
-generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+#Running the code_______________________________________________________________________________________________________________________
+generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
 
 
