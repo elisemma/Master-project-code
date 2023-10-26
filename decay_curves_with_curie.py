@@ -4,17 +4,39 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+
 def fit_prod_rate(isotope, foil, path, file):
     R_estimated = 5
     t_irr_h = 0.33
     dc = ci.DecayChain(isotope, units='h', R=[[R_estimated, t_irr_h]])
     dc.get_counts(foil, '02/13/2017 14:27:00', path+file)
 
-    isotopes, R, var_R = dc.fit_R()
-    dc.plot(titel = foil)
+    isotopes, r, var_r = dc.fit_R()
+    R = float(r[0])    
+    var_R = float(var_r[0][0])
+    dc.plot()
+    return R, var_R
 
 
 
+def generate_prod_rate_csv(foil_type, isotopes, foil_list, path, file_concat):
+
+    R_file = open(path+'production_rate_'+foil_type+'.csv', 'w')
+    R_file.write('foil, isotope, R, var_R \n')
+    print('foil, isotope, R, var_R \n')
+
+    for isotope in isotopes:
+        for foil in foil_list:
+            R, var_R = fit_prod_rate(isotope, foil, path, file_concat)
+            # var_R = float(var_R)
+            print(f'{foil}, {isotope}, {R}, {var_R} \n')
+            R_file.write(f'{foil}, {isotope}, {R}, {var_R} \n')
+    R_file.close()
+
+
+
+
+# Ti peak data _____________________________________________________________________________________________________________________
 path_Ti = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/MyGeneratedFiles/Ti_foils/'
 file_CJTi01 = 'CJ010317_Ti01_18cm_30MeV/CJ010317_Ti01_18cm_30MeV_peak_data.csv'
 file_CKTi02 = 'CK010317_Ti02_18cm_30MeV/CK010317_Ti02_18cm_30MeV_peak_data.csv'
@@ -38,21 +60,57 @@ df_CSTi01 = pd.read_csv(path_Ti+file_CSTi01)
 df_CTTi02 = pd.read_csv(path_Ti+file_CTTi02)
 df_CUTi03 = pd.read_csv(path_Ti+file_CUTi03)
 
-df_concat = pd.concat((df_CJTi01, df_CKTi02, df_CLTi03, df_CMTi04, df_CPTi05, df_CQTi04, df_CSTi01, df_CTTi02, df_CUTi03), axis = 0)
-df_concat.to_csv(path_Ti+file_concat_Ti)
+df_concat_Ti = pd.concat((df_CJTi01, df_CKTi02, df_CLTi03, df_CMTi04, df_CPTi05, df_CQTi04, df_CSTi01, df_CTTi02, df_CUTi03), axis = 0)
+df_concat_Ti.to_csv(path_Ti+file_concat_Ti)
 
-isotope = '48V'
-foil = 'Ti05'
-path = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Ti_foils/'
-file = 'combined_peak_data_Ti01.csv'
-
-fit_prod_rate(isotope, foil, path_Ti, file_concat_Ti)
+isotopes_Ti = ['48V', '46SC']
+foil_list_Ti = ['Ti01', 'Ti02','Ti03', 'Ti04', 'Ti05']
 
 
 
+# Ni peak data _____________________________________________________________________________________________________________________
+path_Ni = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/MyGeneratedFiles/Ni_foils/'
+file_AYNi02 = 'AY130217_Ni02_18cm_30MeV/AY130217_Ni02_18cm_30MeV_peak_data.csv'
+file_AZNi02 = 'AZ130217_Ni02_18cm_30MeV/AZ130217_Ni02_18cm_30MeV_peak_data.csv'
+file_BBNi01 = 'BB130217_Ni01_18cm_30MeV/BB130217_Ni01_18cm_30MeV_peak_data.csv'
+file_BCNi03 = 'BC130217_Ni03_18cm_30MeV/BC130217_Ni03_18cm_30MeV_peak_data.csv'
+file_BDNi04 = 'BD130217_Ni04_18cm_30MeV/BD130217_Ni04_18cm_30MeV_peak_data.csv'
+file_BENi05 = 'BE130217_Ni05_18cm_30MeV/BE130217_Ni05_18cm_30MeV_peak_data.csv'
+file_DANi01 = 'DA200317_Ni01_18cm_30MeV/DA200317_Ni01_18cm_30MeV_peak_data.csv'
+file_DBNi02 = 'DB200317_Ni02_18cm_30MeV/DB200317_Ni02_18cm_30MeV_peak_data.csv'
+file_DCNi03 = 'DC200317_Ni03_18cm_30MeV/DC200317_Ni03_18cm_30MeV_peak_data.csv'
+file_DENi03 = 'DE210317_Ni03_18cm_30MeV/DE210317_Ni03_18cm_30MeV_peak_data.csv'
+file_DFNi04 = 'DF240317_Ni04_18cm_30MeV/DF240317_Ni04_18cm_30MeV_peak_data.csv'
+file_DGNi05 = 'DG240317_Ni05_18cm_30MeV/DG240317_Ni05_18cm_30MeV_peak_data.csv'
+
+
+file_concat_Ni = 'combined_peak_data_Ni.csv'
+
+df_AYNi02 = pd.read_csv(path_Ni+file_AYNi02)
+df_AZNi02 = pd.read_csv(path_Ni+file_AZNi02)
+df_BBNi01 = pd.read_csv(path_Ni+file_BBNi01)
+df_BCNi03 = pd.read_csv(path_Ni+file_BCNi03)
+df_BDNi04 = pd.read_csv(path_Ni+file_BDNi04)
+df_BENi05 = pd.read_csv(path_Ni+file_BENi05)
+df_DANi01 = pd.read_csv(path_Ni+file_DANi01)
+df_DBNi02 = pd.read_csv(path_Ni+file_DBNi02)
+df_DCNi03 = pd.read_csv(path_Ni+file_DCNi03)
+df_DENi03 = pd.read_csv(path_Ni+file_DENi03)
+df_DFNi04 = pd.read_csv(path_Ni+file_DFNi04)
+df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
+
+
+df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04, df_BENi05, df_DANi01, df_DBNi02, df_DCNi03, df_DENi03, df_DFNi04, df_DGNi05), axis = 0)
+df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
+
+isotopes_Ni = ['58CO']
+foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
 
 
 
+
+
+generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 
 
 
