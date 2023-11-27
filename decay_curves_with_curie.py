@@ -14,8 +14,16 @@ def fit_prod_rate(isotope, foil, path, file):
     isotopes, r, var_r = dc.fit_R()
     R = float(r[0])    
     var_R = float(var_r[0][0])
-    # dc.plot()
+    dc.plot()
     return R, var_R
+
+# def fit_A0(isotope, foil, path, file):
+#     dc = ci.DecayChain(isotope, units='h', A0=3E4)
+#     dc.get_counts(foil, '02/13/2017 14:27:00', path+file)
+
+#     dc.fit_A0()
+
+#     dc.plot()
 
 
 
@@ -31,6 +39,7 @@ def generate_prod_rate_csv(foil_type, isotopes, foil_list, path, file_concat):
         for foil in foil_list:
             bool = df[df['filename'].str.contains(foil) & (df['isotope'] == isotope)].shape[0] > 0
             if(bool):
+                print(f'Foil: {foil}_________________________')
                 R, var_R = fit_prod_rate(isotope, foil, path, file_concat)
                 print(f'{foil}, {isotope}, {R}, {var_R} \n')
                 R_file.write(f'{foil}, {isotope}, {R}, {var_R} \n')
@@ -104,17 +113,42 @@ df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
 
 
 df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04, df_BENi05, df_DANi01, df_DBNi02, df_DCNi03, df_DENi03, df_DFNi04, df_DGNi05), axis = 0)
+# df_concat_Ni = pd.concat((df_DANi01,df_BCNi03), axis = 0)
+# df_concat_Ni = pd.concat((df_DCNi03, df_DENi03, df_BCNi03), axis = 0)
+
+
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
-isotopes_Ni = ['56CO', '58CO']
-foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
+# isotopes_Ni = ['56CO', '58CO']
+isotopes_Ni = ['56CO']
+
+# foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
+foil_list_Ni = ['Ni03']
 
 
-
+#Combined_Ni01_Ni03.csv
 
 #Running the code_______________________________________________________________________________________________________________________
-generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+# generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+# generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
+df = df_concat_Ni[df_concat_Ni['isotope'] == '56CO']
+df = df[df['filename'].str.contains('Ni03')]
+print(df)
+
+df.to_csv('onlyNi03_56Co.csv')
+
+#Converting the dates to datetime-objects
+# df['start_time'] = pd.to_datetime(df['start_time'])
+
+# plt.plot(df['start_time'], df['decay_rate'], 'o')
+# plt.show()
+
+
+# generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, 'Combined_Ni01_Ni03.csv')
+# generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/MyGeneratedFiles/Ni_foils/DC200317_Ni03_18cm_30MeV/', 'DC200317_Ni03_18cm_30MeV_peak_data.csv')
+
+fit_prod_rate('56CO', 'Ni03', './', 'onlyNi03_56Co.csv')
 
 
 

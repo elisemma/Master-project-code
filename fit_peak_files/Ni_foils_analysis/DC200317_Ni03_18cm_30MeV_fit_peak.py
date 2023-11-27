@@ -7,10 +7,10 @@ import matplotlib.pyplot as plt
 
 def fit_peaks(spectrumName, position):
 
-    path = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/30MeV/'
+    path = '../../2017_Feb_Zr/30MeV/'
     spectrumFile = path + spectrumName + '.Spe'
 
-    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '_new.json')
+    cb = ci.Calibration('../../MyGeneratedFiles/Calibration/json_files/calibration_' + position + '_new.json')
     
     # cb.plot()
 
@@ -21,11 +21,9 @@ def fit_peaks(spectrumName, position):
     # sp.isotopes = ['56CO', '58CO', '61CU']
     sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0}
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
-    # sp.plot(scale = 'linlin')
-    sp.plot()
-    sp.saveas(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Ni_foils/{spectrumName}/{spectrumName}_peak_data.csv')
-   
-
+    sp.plot(scale = 'linlin')
+    # sp.plot()
+    sp.saveas(f'../../MyGeneratedFiles/Ni_foils/{spectrumName}/{spectrumName}_peak_data.csv')
 
 
 if __name__ == '__main__':

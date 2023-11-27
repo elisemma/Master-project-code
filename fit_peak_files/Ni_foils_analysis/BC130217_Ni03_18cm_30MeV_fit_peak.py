@@ -7,10 +7,10 @@ import matplotlib.pyplot as plt
 
 def fit_peaks(spectrumName, position):
 
-    path = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/2017_Feb_Zr/30MeV/'
+    path = '../../2017_Feb_Zr/30MeV/'
     spectrumFile = path + spectrumName + '.Spe'
 
-    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '.json')
+    cb = ci.Calibration('../../MyGeneratedFiles/Calibration/json_files/calibration_' + position + '.json')
     
     # cb.plot()
 
@@ -23,7 +23,7 @@ def fit_peaks(spectrumName, position):
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
     # sp.plot(scale = 'linlin')
     sp.plot()
-    sp.saveas(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Ni_foils/{spectrumName}/{spectrumName}_peak_data.csv')
+    sp.saveas(f'../../MyGeneratedFiles/Ni_foils/{spectrumName}/{spectrumName}_peak_data.csv')
    
 
 
