@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 
 def fit_peaks(spectrumName, position):
 
-    path = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/background_spectra/'
+    path = '../../FilerFraAndrew/background_spectra/'
     spectrumFile = path + 'BC170825_background' + '.Spe'
 
     # cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '.json')
-    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_' + position + '.json')
-    cb = ci.Calibration('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibrationByHand_CK010317_Ti02_18cm_30MeV.json')
+    cb = ci.Calibration('../MyGeneratedFiles/Calibration/json_files/calibration_' + position + '.json')
+    cb = ci.Calibration('../MyGeneratedFiles/Calibration/json_files/calibrationByHand_CK010317_Ti02_18cm_30MeV.json')
     # cb.plot()
 
     sp = ci.Spectrum(spectrumFile)

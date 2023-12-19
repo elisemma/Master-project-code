@@ -132,11 +132,11 @@ foil_list_Ni = ['Ni03']
 # generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
-df = df_concat_Ni[df_concat_Ni['isotope'] == '56CO']
-df = df[df['filename'].str.contains('Ni03')]
-print(df)
+# df = df_concat_Ni[df_concat_Ni['isotope'] == '56CO']
+# df = df[df['filename'].str.contains('Ni03')]
+# print(df)
 
-df.to_csv('onlyNi03_56Co.csv')
+# df.to_csv('onlyNi03_56Co.csv')
 
 #Converting the dates to datetime-objects
 # df['start_time'] = pd.to_datetime(df['start_time'])
@@ -148,7 +148,7 @@ df.to_csv('onlyNi03_56Co.csv')
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, 'Combined_Ni01_Ni03.csv')
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/MyGeneratedFiles/Ni_foils/DC200317_Ni03_18cm_30MeV/', 'DC200317_Ni03_18cm_30MeV_peak_data.csv')
 
-fit_prod_rate('56CO', 'Ni03', './', 'onlyNi03_56Co.csv')
+# fit_prod_rate('56CO', 'Ni03', './', 'onlyNi03_56Co.csv')
 
 
 
