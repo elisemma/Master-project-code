@@ -28,6 +28,7 @@ start_time = df_48V.iloc[0,3]
 #Saving a date as a datetime-object: datetime(year, month, day, hour, minute, second)
 time_EOB = datetime.datetime(2017, 2, 13, 12, 50, 3)
 
+
 #Calculating the difference between the EOB time and start time
 test_delta_t = start_time - time_EOB
 
