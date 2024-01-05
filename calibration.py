@@ -59,6 +59,7 @@ def calibration_18cm():
 
     cb.calibrate([sp_Ba133, sp_Cs137, sp_Cs137_2, sp_Eu152, sp_Co56], sources=sources)
     cb.plot()
+    print(cb.effcal)
     # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm.pdf')
     # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm.json')
 
@@ -82,7 +83,7 @@ def calibration_18cm_new():
     cb.calibrate([sp_newCs137, sp_newEu152], sources=sources)
     cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm_new.pdf')
     cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm_new.json')
-    # cb.plot()
+    cb.plot()
 
 
 def calibration_40cm():
@@ -137,9 +138,9 @@ def calibration_50cm():
 
 if __name__ == '__main__':
 
-    calibration_10cm()
-    # calibration_18cm()
-    # calibration_18cm_new()
+    # calibration_10cm()
+    calibration_18cm()
+    calibration_18cm_new()
     # calibration_40cm()
     # calibration_50cm()
 
