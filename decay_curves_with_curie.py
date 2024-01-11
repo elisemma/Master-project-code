@@ -14,16 +14,8 @@ def fit_prod_rate(isotope, foil, path, file):
     isotopes, r, var_r = dc.fit_R()
     R = float(r[0])    
     var_R = float(var_r[0][0])
-    dc.plot()
+    dc.plot(palette='american', shade='dark', style='paper')
     return R, var_R
-
-# def fit_A0(isotope, foil, path, file):
-#     dc = ci.DecayChain(isotope, units='h', A0=3E4)
-#     dc.get_counts(foil, '02/13/2017 14:27:00', path+file)
-
-#     dc.fit_A0()
-
-#     dc.plot()
 
 
 
@@ -34,7 +26,6 @@ def generate_prod_rate_csv(foil_type, isotopes, foil_list, path, file_concat):
     print('foil, isotope, R, var_R \n')
 
     df = pd.read_csv(path+file_concat)
-
     for isotope in isotopes:
         for foil in foil_list:
             bool = df[df['filename'].str.contains(foil) & (df['isotope'] == isotope)].shape[0] > 0
@@ -76,7 +67,11 @@ df_concat_Ti = pd.concat((df_CJTi01, df_CKTi02, df_CLTi03, df_CMTi04, df_CPTi05,
 df_concat_Ti.to_csv(path_Ti+file_concat_Ti)
 
 isotopes_Ti = ['48V', '46SC']
+# isotopes_Ti = ['48V']
+
 foil_list_Ti = ['Ti01', 'Ti02','Ti03', 'Ti04', 'Ti05']
+# foil_list_Ti = ['Ti05']
+
 
 
 
@@ -115,8 +110,12 @@ df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
 df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04, df_BENi05, df_DANi01, df_DBNi02, df_DCNi03, df_DENi03, df_DFNi04, df_DGNi05), axis = 0)
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
-isotopes_Ni = ['56CO', '58CO', '61CU']
-foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
+# isotopes_Ni = ['56CO', '58CO', '61CU']
+isotopes_Ni = ['61CU']
+
+# foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
+foil_list_Ni = ['Ni05']
+
 
 
 
@@ -124,12 +123,27 @@ foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
 # print(df_concat_Ti[df_concat_Ti['chi2']>10])
 # print(df_concat_Ni[df_concat_Ni['chi2']>10])
 
-print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti01') & (df_concat_Ti['isotope'] == '48V')])
+# print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti01') & (df_concat_Ti['isotope'] == '48V')])
+df_concat_Ni = df_concat_Ni.drop(columns=['start_time'])
+df_concat_Ni = df_concat_Ni.drop(columns=['live_time'])
+df_concat_Ni = df_concat_Ni.drop(columns=['real_time'])
+df_concat_Ni = df_concat_Ni.drop(columns=['intensity'])
+df_concat_Ni = df_concat_Ni.drop(columns=['unc_efficiency'])
+df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
+
+
+
+
+
+# print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti05') & (df_concat_Ti['isotope'] == '48V')])
+print(df_concat_Ni[df_concat_Ni['filename'].str.contains('Ni05') & (df_concat_Ni['isotope'] == '61CU')])
+
 
 
 #Running the code_______________________________________________________________________________________________________________________
-generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
-# generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+# generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+
 
 
 

@@ -59,7 +59,7 @@ def calibration_18cm():
 
     cb.calibrate([sp_Ba133, sp_Cs137, sp_Cs137_2, sp_Eu152, sp_Co56], sources=sources)
     cb.plot()
-    print(cb.effcal)
+    print(cb.rescal)
     # cb.plot(show=False, saveas = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm.pdf')
     # cb.saveas('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/PlanBCode/MyGeneratedFiles/Calibration/json_files/calibration_18cm.json')
 

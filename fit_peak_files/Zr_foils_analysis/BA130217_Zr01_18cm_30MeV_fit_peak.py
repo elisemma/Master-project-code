@@ -15,7 +15,9 @@ def fit_peaks(spectrumName, position):
     sp = ci.Spectrum(spectrumFile)
     sp.cb = cb 
 
-    sp.isotopes = ['86Y', '87ZR', '87NB', '87Y', '87Ym', '89NB', '89NBm', '89Ym', '89ZR', '90NB', '90Ym', '91Y', '92Y', '96NB', '97NB', '97NBm', '98NBm']
+    # sp.isotopes = ['86Y', '87ZR', '87NB', '87Y', '87Ym', '89NB', '89NBm', '89Ym', '89ZR', '90NB', '90Ym', '91Y', '92Y', '96NB', '97NB', '97NBm', '98NBm']
+    sp.isotopes = ['87NB', '87Y', '87Ym', '89NB', '89NBm', '89ZR', '90NB', '90Ym', '24NA', '40K']
+
     # sp.isotopes = ['86Y']
 
     sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0}

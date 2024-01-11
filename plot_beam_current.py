@@ -18,13 +18,14 @@ def average_beam_cur_func(times, integrated_beam_cur):
         delta_time_sec = delta_time.total_seconds()
         average_beam_cur_list.append(cur/delta_time_sec)
         times_sec.append(delta_time_sec)
-    return np.array(times_sec), np.array(average_beam_cur_list)
+    return np.array(times_sec), np.array(average_beam_cur_list)*2e-07
 
 
-print('times: ', times)
+
 times_sec, average_beam_cur = average_beam_cur_func(times, integrated_beam_cur)
 
-plt.plot(times_sec, average_beam_cur, color = 'hotpink', marker = 'o')
+plt.plot(times_sec, average_beam_cur*1e9, color = 'hotpink', marker = 'o')
 plt.xlabel('Time since start of irradiation (s)')
-plt.ylabel('Average beam current')
+plt.ylabel('Average beam current (nA)')
+# plt.savefig('./Figures/beam_current.pdf')
 plt.show()
