@@ -63,14 +63,25 @@ df_CSTi01 = pd.read_csv(path_Ti+file_CSTi01)
 df_CTTi02 = pd.read_csv(path_Ti+file_CTTi02)
 df_CUTi03 = pd.read_csv(path_Ti+file_CUTi03)
 
+
+#Want to exclude one bad peak:
+# Values to exclude
+isotope_to_exclude = '48V'
+energy_to_exclude = 928.327
+# Create a boolean mask based on the conditions
+mask = (df_CKTi02['isotope'] != isotope_to_exclude) | (df_CKTi02['energy'] != energy_to_exclude)
+# Use boolean indexing to exclude rows based on the conditions
+df_CKTi02 = df_CKTi02[mask]
+
+
 df_concat_Ti = pd.concat((df_CJTi01, df_CKTi02, df_CLTi03, df_CMTi04, df_CPTi05, df_CQTi04, df_CSTi01, df_CTTi02, df_CUTi03), axis = 0)
 df_concat_Ti.to_csv(path_Ti+file_concat_Ti)
 
-isotopes_Ti = ['48V', '46SC']
+# isotopes_Ti = ['48V', '46SC']
 # isotopes_Ti = ['48V']
 
-foil_list_Ti = ['Ti01', 'Ti02','Ti03', 'Ti04', 'Ti05']
-# foil_list_Ti = ['Ti05']
+# foil_list_Ti = ['Ti01', 'Ti02','Ti03', 'Ti04', 'Ti05']
+# foil_list_Ti = ['Ti02']
 
 
 
@@ -111,10 +122,10 @@ df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04,
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 # isotopes_Ni = ['56CO', '58CO', '61CU']
-isotopes_Ni = ['61CU']
+isotopes_Ni = ['56CO']
 
 # foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
-foil_list_Ni = ['Ni05']
+foil_list_Ni = ['Ni01']
 
 
 
@@ -135,8 +146,8 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 
 
 
-# print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti05') & (df_concat_Ti['isotope'] == '48V')])
-print(df_concat_Ni[df_concat_Ni['filename'].str.contains('Ni05') & (df_concat_Ni['isotope'] == '61CU')])
+# print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti02') & (df_concat_Ti['isotope'] == '48V')])
+print(df_concat_Ni[df_concat_Ni['filename'].str.contains('Ni01') & (df_concat_Ni['isotope'] == '56CO')])
 
 
 
