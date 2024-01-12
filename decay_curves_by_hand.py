@@ -29,12 +29,12 @@ def fit_function(t, A0):
 
 def decay_chain(foil, isotope, decay_constant, path, file_concat):
     df = pd.read_csv(path+file_concat)
-    print('df before mask: ', df)
 
     #Sort out the rows containing the right foil and isotope
     mask = (df['filename'].str.contains(foil) & (df['isotope'] == isotope))
     df = df[mask]
-    print('df after mask: ', df)
+    print(foil, isotope)
+    print(df)
 
     #Get the decays w unc 
     decays = np.array(df['decays'])
@@ -52,21 +52,25 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
 
     start_times_array = np.array(start_times_list)
     real_times = np.array(df['real_time'])
-    #Calculating the A with uncertainty given the data I have. 
-    A_data, A_unc = calculate_A(decays, unc_decays, start_times_array, real_times)
-    #Fitting the activity curve to the data:
-    initial_A0_guess = 100
-    params, covariance = curve_fit(fit_function, start_times_array, A_data, sigma=A_unc, p0=[initial_A0_guess])
-    optimized_A0 = params[0]
-    activity_fit = activity_func(decay_constant, optimized_A0, time_array)
 
-    # Plot the original data and the fitted decay curve
-    plt.errorbar(start_times_array/(24*3600), A_data, yerr=A_unc, label='Data', color='lightgreen', fmt='o')
-    plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve: A0={optimized_A0:.2f}', color='hotpink')
-    plt.xlabel('Time (d)')
-    plt.ylabel('Activity (Bq)')
-    plt.legend()
-    plt.show()
+    bool = df[df['filename'].str.contains(foil) & (df['isotope'] == isotope)].shape[0] > 0
+    if(bool):
+        #Calculating the A with uncertainty given the data I have. 
+        A_data, A_unc = calculate_A(decays, unc_decays, start_times_array, real_times)
+        #Fitting the activity curve to the data:
+        initial_A0_guess = 100
+        params, covariance = curve_fit(fit_function, start_times_array, A_data, sigma=A_unc, p0=[initial_A0_guess])
+        optimized_A0 = params[0]
+        activity_fit = activity_func(decay_constant, optimized_A0, time_array)
+
+        # Plot the original data and the fitted decay curve
+        plt.errorbar(start_times_array/(24*3600), A_data, yerr=A_unc, label='Data', color='skyblue', fmt='o', capsize = 5.0)
+        plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve: A0={optimized_A0:.2f}', color='hotpink')
+        plt.xlabel('Time (d)')
+        plt.ylabel('Activity (Bq)')
+        plt.title(f'{foil}, {isotope}')
+        plt.legend()
+        plt.show()
 
 
 
@@ -74,7 +78,10 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
 
 time_array = np.linspace(0,40,1000)*24*3600 #[s]
 half_life_56Co = 77.236*24*3600 #[s], 56Co
+half_life_58Co = 70.86*24*3600 #[s], 56Co
 decay_constant_56Co = decay_constant_func(half_life_56Co)
+decay_constant_58Co = decay_constant_func(half_life_58Co)
+
 
 
 
@@ -119,6 +126,15 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 #Running the code______________________________________________________________________________________
 # decay_chain(decay_constant, df_48V)
 decay_constant = decay_constant_56Co
-decay_chain('Ni01', '56CO', decay_constant, path_Ni, file_concat_Ni)
+foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
+isotope_list = ['56CO', '58CO']
+
+for isotope in isotope_list:
+    if isotope == '56CO':
+        decay_constant = decay_constant_56Co
+    elif isotope == '58CO':
+        decay_constant = decay_constant_58Co
+    for foil in foil_list:
+        decay_chain(foil, isotope, decay_constant, path_Ni, file_concat_Ni)
 
 
