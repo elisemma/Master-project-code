@@ -34,11 +34,18 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
     mask = (df['filename'].str.contains(foil) & (df['isotope'] == isotope))
     df = df[mask]
     print(foil, isotope)
+    print('Before relative unc check')
     print(df)
 
+    df = df[df['unc_decays'] / df['decays'] <= 3]
+    print('After relative unc check')
+    print(df)
     #Get the decays w unc 
     decays = np.array(df['decays'])
     unc_decays = np.array(df['unc_decays'])
+
+    # print('relative uncertainty decays: ', unc_decays/decays)
+
 
     start_times_list = []
     # datetime(year, month, day, hour, minute, second)
@@ -127,7 +134,8 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 # decay_chain(decay_constant, df_48V)
 decay_constant = decay_constant_56Co
 foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
-isotope_list = ['56CO', '58CO']
+# isotope_list = ['56CO', '58CO']
+isotope_list = ['58CO']
 
 for isotope in isotope_list:
     if isotope == '56CO':
