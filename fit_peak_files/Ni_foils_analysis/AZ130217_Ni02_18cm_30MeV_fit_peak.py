@@ -21,7 +21,7 @@ def fit_peaks(spectrumName, position):
     # sp.isotopes = ['55CO', '56CO', '57NI', '58CO', '61CU']
     sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0}
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
-    # sp.plot(scale = 'linlin')
+    sp.plot(scale = 'linlin')
     sp.plot()
     sp.saveas(f'../../MyGeneratedFiles/Ni_foils/{spectrumName}/{spectrumName}_peak_data.csv')
    

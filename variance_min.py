@@ -4,28 +4,29 @@ import curie as ci
 import pandas as pd 
 from scipy.interpolate import splev, splrep
 
+#One file for running the stack calulations with varying dp values and save the csv files in a folder
+
+#This file with one class for foil and one function somethong for variance minimization
 
 
-class VarianceMin:
-    def __init__(self, stack, beam_energy, projectile, target_material, reaction_list, A0, areal_dens, areal_dens_unc_percent):
-        self.stack = stack
-        self.beam_energy = beam_energy
-        self.projectile = projectile
-        self.reaction_list = reaction_list
+class Foil: 
+    #wclass hich returns the beam current with unc for one foil
+    def __init__(self, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent):
+        self.beam_energy_in_foil = beam_energy_in_foil
         self.target_material = target_material
-        self.A0 = A0
+        self.reaction_list = reaction_list
+        self.A0_list = A0_list
+        self.A0_unc_list = A0_unc_list
         self.areal_dens = areal_dens
         self.areal_dens_unc_percent = areal_dens_unc_percent
-        self.molar_mass = None
-        self.molar_mass_unc = None
-        self.decay_const_list = [] 
-        
+        self.decay_const_list = []
 
+    #move assign_molar_mass, calc_decay_constant, monitor_cross_section, calculate_beam_current_w_unc and weighted_average_beam_current to this class 
 
     def assign_molar_mass(self):
         # Assigning the molar mass of the target material
         if self.target_material == 'Ni':
-            self.molar_mass = 58.6934
+            self.molar_mas  = 58.6934
             self.molar_mass_unc = 0.0004
 
         elif self.target_material == 'Ti':
@@ -56,6 +57,26 @@ class VarianceMin:
 
             else:
                 print('Error: Unknown monitor reaction')
+
+
+
+class VarianceMin:
+    def __init__(self, stack, beam_energy, projectile, target_material, reaction_list, A0, areal_dens, areal_dens_unc_percent):
+        self.stack = stack
+        self.beam_energy = beam_energy
+        self.projectile = projectile
+        self.reaction_list = reaction_list
+        self.target_material = target_material
+        self.A0 = A0
+        self.areal_dens = areal_dens
+        self.areal_dens_unc_percent = areal_dens_unc_percent
+        self.molar_mass = None
+        self.molar_mass_unc = None
+        self.decay_const_list = [] 
+        
+
+
+    
 
 
     def energy_in_foil(self, N, E0, dp): 

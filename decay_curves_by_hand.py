@@ -34,11 +34,11 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
     mask = (df['filename'].str.contains(foil) & (df['isotope'] == isotope))
     df = df[mask]
     print(foil, isotope)
-    print('Before relative unc check')
+    print('Before relative unc check \n')
     print(df)
 
-    df = df[df['unc_decays'] / df['decays'] <= 3]
-    print('After relative unc check')
+    df = df[df['unc_decays'] / df['decays'] <= 1]
+    print('After relative unc check \n')
     print(df)
     #Get the decays w unc 
     decays = np.array(df['decays'])
@@ -76,6 +76,7 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
         plt.xlabel('Time (d)')
         plt.ylabel('Activity (Bq)')
         plt.title(f'{foil}, {isotope}')
+        plt.ylim(0)
         plt.legend()
         plt.show()
 
@@ -124,6 +125,19 @@ df_DFNi04 = pd.read_csv(path_Ni+file_DFNi04)
 df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
 
 df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04, df_BENi05, df_DANi01, df_DBNi02, df_DCNi03, df_DENi03, df_DFNi04, df_DGNi05), axis = 0)
+
+
+# Specify the isotope and allowed energies
+isotope_to_exclude = '56CO'
+allowed_energies = [1037.843, 1238.288, 1771.357]
+
+# Create a boolean mask based on the conditions
+mask = (df_concat_Ni['isotope'] == isotope_to_exclude) & (~df_concat_Ni['energy'].isin(allowed_energies))
+
+# Apply the mask to exclude rows
+df_concat_Ni = df_concat_Ni[~mask]
+
+
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 
@@ -132,10 +146,9 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 #Running the code______________________________________________________________________________________
 # decay_chain(decay_constant, df_48V)
-decay_constant = decay_constant_56Co
 foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
 # isotope_list = ['56CO', '58CO']
-isotope_list = ['58CO']
+isotope_list = ['56CO']
 
 for isotope in isotope_list:
     if isotope == '56CO':

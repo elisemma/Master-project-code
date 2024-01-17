@@ -31,7 +31,7 @@ def generate_prod_rate_csv(foil_type, isotopes, foil_list, path, file_concat):
             bool = df[df['filename'].str.contains(foil) & (df['isotope'] == isotope)].shape[0] > 0
             if(bool):
                 print(f'Foil: {foil}_________________________')
-                R, var_R = fit_prod_rate(isotope, foil, path, file_concat)
+                R, var_R = fit_prod_rate('58COm', foil, path, file_concat)
                 print(f'{foil}, {isotope}, {R}, {var_R} \n')
                 R_file.write(f'{foil}, {isotope}, {R}, {var_R} \n')
     R_file.close()
@@ -119,13 +119,26 @@ df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
 
 
 df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04, df_BENi05, df_DANi01, df_DBNi02, df_DCNi03, df_DENi03, df_DFNi04, df_DGNi05), axis = 0)
+
+
+# Specify the isotope and allowed energies
+isotope_to_exclude = '58CO'
+allowed_energies = [810.7593]
+
+# Create a boolean mask based on the conditions
+mask = (df_concat_Ni['isotope'] == isotope_to_exclude) & (~df_concat_Ni['energy'].isin(allowed_energies))
+
+# Apply the mask to exclude rows
+df_concat_Ni = df_concat_Ni[~mask]
+
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
-# isotopes_Ni = ['56CO', '58CO', '61CU']
-isotopes_Ni = ['56CO']
 
-# foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
-foil_list_Ni = ['Ni01']
+
+# isotopes_Ni = ['56CO', '58CO', '61CU']
+isotopes_Ni = ['58CO']
+foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
+# foil_list_Ni = ['Ni01']
 
 
 
@@ -147,7 +160,7 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 
 
 # print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti02') & (df_concat_Ti['isotope'] == '48V')])
-print(df_concat_Ni[df_concat_Ni['filename'].str.contains('Ni01') & (df_concat_Ni['isotope'] == '56CO')])
+# print(df_concat_Ni[df_concat_Ni['filename'].str.contains('Ni01') & (df_concat_Ni['isotope'] == '56CO')])
 
 
 

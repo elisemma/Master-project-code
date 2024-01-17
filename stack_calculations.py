@@ -10,8 +10,8 @@ from scipy.interpolate import splev, splrep
 
 
 
-stack_30MeV = [{'compound':'Fe', 'name': 'SS1', 'ad':100.199},
-               {'compound':'Ni', 'name': 'Ni01', 'ad':23.253},
+stack_30MeV = [{'compound':'Fe', 'name': 'SS1', 'ad':100.199},#stainless steel compund ci.COMPOUND_LIST can be printed to get the stainless steel compound, add kapton and silicone  
+               {'compound':'Ni', 'name': 'Ni01', 'ad':23.253}, #recalc ad to check that they are correct 
                {'compound':'Zr', 'name': 'Zr01', 'ad':16.142},
                {'compound':'Ti', 'name': 'Ti01', 'ad':11.535},
                {'compound':'Al', 'name': 'E1', 'ad':68.312},
@@ -36,7 +36,7 @@ stack_30MeV = [{'compound':'Fe', 'name': 'SS1', 'ad':100.199},
                {'compound':'Fe', 'name': 'SS2', 'ad':100.865}]
 
 
-st = ci.Stack(stack_30MeV, E0=30, N=100000, particle='d', dp = 1)
+st = ci.Stack(stack_30MeV, E0=30, dE0 = 0.3, N=1000000, particle='d', dp = 1)
 # st.plot()
 # print(st.stack)
 
