@@ -118,7 +118,8 @@ stack_30MeV = [{'compound':'SS_316', 'name': 'SS1', 'ad':100.199},
 
 
 st = ci.Stack(stack_30MeV, E0=30, dE0 = 0.3, N=100000, particle='d', dp = 1)
-st.plot()
+print(st.stack)
+# st.plot()
 
 
 

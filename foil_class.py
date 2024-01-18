@@ -42,22 +42,22 @@ class Foil:
             print('Error: Unknown target material')
 
 
-    def calculate_decay_const(self):
+    def calculate_decay_constant(self):
         # Calculating the decay constant of the production nuclei by checking the reaction happening 
         for reaction_product in self.reaction_list:
-            if reaction_product == '46Sc':
+            if reaction_product == '46SC':
                 self.decay_const_list.append(np.log(2)/(83.79*24*3600)) #1/[s]
 
             elif reaction_product == '48V':
                 self.decay_const_list.append(np.log(2)/(15.9735*24*3600)) #1/[s]
 
-            elif reaction_product == '56Co':
+            elif reaction_product == '56CO':
                 self.decay_const_list.append(np.log(2)/(77.236*24*3600)) #1/[s])
 
-            elif reaction_product == '58Co':
+            elif reaction_product == '58CO':
                 self.decay_const_list.append(np.log(2)/(70.86*24*3600)) #1/[s])
 
-            elif reaction_product == '61Cu':
+            elif reaction_product == '61CU':
                 self.decay_const_list.append(np.log(2)/(3.339*3600)) #1/[s])
 
             else:
@@ -65,10 +65,10 @@ class Foil:
 
 
 
-    def monitor_cross_section(self):
+    def find_monitor_cross_section(self):
         # Using the IAEA data to get the monitor cross section for the energy in a foil
         for reaction_product in self.reaction_list:
-            filename = 'IAEA_monitor_xs_' + reaction_product + '.txt'
+            filename = './Monitor_cross_section_data/IAEA_monitor_xs_' + reaction_product + '.txt'
             with open(filename) as file:
                 lines = file.readlines()[7:-1]
                 E_list = []
@@ -95,16 +95,16 @@ class Foil:
             self.xs_mon_list.append(interpolated_xs)
             self.xs_mon_unc_list.append(np.interp(self.beam_energy_in_foil, E, unc_xs))  # Assuming linear interpolation for uncertainty
 
-    def calculate_beam_currents_w_unc(self, Energy, decay_const):
+    def calculate_beam_currents_w_unc(self):
         # Calculating the beam current with uncertainty by using the end of beam activity, areal density, molar mass, decay constant and monitor cross section
         N_A = 6.0221408e+23
         t_irr = 1200 #[s]
         t_irr_unc = 3 #[s]
-        N_T = float(self.areal_dens)*N_A/self.molar_mass*10 #[nuclei/m^2] when areal_dens is given in mg/cm^2
+        N_T = float(self.areal_dens)/1000*N_A/self.molar_mass*10 #[nuclei/m^2] when areal_dens is given in g/cm^2
 
 
         for i in range(len(self.reaction_list)):
-            beam_current = self.A0/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list*t_irr))) #[d/s]
+            beam_current = self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) #[d/s]
             beam_current_in_A = beam_current*1.60217634e-19 #[A]
             beam_current_in_nA = beam_current_in_A*1e9 #[nA]
 
@@ -115,29 +115,29 @@ class Foil:
             dfdx_list = [] #Jacobian
             unc_list = []
         
-            dA0 = self.A0*1e-8
-            dfdA0 = (self.A0+dA0/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list*t_irr))) - self.A0-dA0/(N_T*self.xs_mon_list[i]*(1-np.exp( -self.decay_const_list*t_irr))))/dA0
+            dA0 = self.A0_list[i]*1e-8
+            dfdA0 = (self.A0_list[i]+dA0/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]-dA0/(N_T*self.xs_mon_list[i]*(1-np.exp( -self.decay_const_list[i]*t_irr))))/dA0
             dfdx_list.append(dfdA0)
             unc_list.append(self.A0_unc_list[i])
         
             # dN_T = N_T*1e-8
-            # dfdN_T = (self.A0/((N_T+dN_T)*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list*t_irr))) - self.A0/((N_T-dN_T)*self.xs_mon_list[i]*(1- np.exp(-self.decay_const_list*t_irr))))/dN_T
+            # dfdN_T = (self.A0_list[i]/((N_T+dN_T)*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/((N_T-dN_T)*self.xs_mon_list[i]*(1- np.exp(-self.decay_const_list[i]*t_irr))))/dN_T
             # dfdx_list.append(dfdN_T)
             # unc_list.append(N_T_unc)
         
             dxs = self.xs_mon_list[i]*1e-8
-            dfdxs = (self.A0/(N_T*(self.xs_mon_list[i]+dxs)*(1-np.exp(-self.decay_const_list*t_irr))) - self.A0/(N_T*(self.xs_mon_list[i]-dxs)*(1-np. exp(-self.decay_const_list*t_irr))))/dxs
+            dfdxs = (self.A0_list[i]/(N_T*(self.xs_mon_list[i]+dxs)*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/(N_T*(self.xs_mon_list[i]-dxs)*(1-np. exp(-self.decay_const_list[i]*t_irr))))/dxs
             dfdx_list.append(dfdxs)
             unc_list.append(self.xs_mon_unc_list[i])
         
             dt_irr = t_irr*1e-8
-            dfdt_irr = (self.A0/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list*(t_irr+dt_irr)))) - self.A0/(N_T*self.xs_mon_list[i]*(1-np. exp(-self.decay_const_list*(t_irr-dt_irr)))))/dt_irr 
+            dfdt_irr = (self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*(t_irr+dt_irr)))) - self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np. exp(-self.decay_const_list[i]*(t_irr-dt_irr)))))/dt_irr 
             dfdx_list.append(dfdt_irr)
             unc_list.append(t_irr_unc)
         
             dfdx = np.array(dfdx_list)
             unc = np.array(unc_list)
-            beam_current_unc = np.sqrt(np.sum(np.multiply(dfdx,dfdx)* np.multiply(unc,unc)))*1. 60217634e-19*1e9
+            beam_current_unc = np.sqrt(np.sum(np.multiply(dfdx,dfdx)* np.multiply(unc,unc)))*1.60217634e-19*1e9
 
             self.beam_current_list.append(beam_current_in_nA)
             self.beam_current_unc_list.append(beam_current_unc)
@@ -148,14 +148,17 @@ class Foil:
         # Calculating the weighted average beam current of all the monitor reactions happening in a specific foil
         weight_list = []
 
-        for i in range(len(self.reaction_list)): 
-            weight = 1/self.beam_current_unc_list[i]**2
+        for i in range(len(self.reaction_list)):
+            weight = 1 / self.beam_current_unc_list[i]**2
             weight_list.append(weight)
-    
-        self.weighted_average_beam_current = np.sum(np.array(self.beam_current_list)*np.array(weight_list))/np.   sum(np.array(weight_list))
 
-        self.var_weighted_average_beam_current = np.sum((self.beam_current_list-self.weighted_average_beam_current)**2)/len(self.beam_current_list)
-        
+        # Calculate the weighted average beam current
+        self.weighted_average_beam_current = np.average(self.beam_current_list, weights=weight_list)
+
+        # Calculate the variance using the weighted_average_beam_current
+        variance = np.average((np.array(self.beam_current_list) - self.weighted_average_beam_current)**2, weights=weight_list)
+        self.var_weighted_average_beam_current = float(variance)
+
 
 
 
