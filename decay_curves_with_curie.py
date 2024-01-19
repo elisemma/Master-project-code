@@ -14,7 +14,7 @@ def fit_prod_rate(isotope, foil, path, file):
     isotopes, r, var_r = dc.fit_R()
     R = float(r[0])    
     var_R = float(var_r[0][0])
-    dc.plot(palette='american', shade='dark', style='paper')
+    dc.plot(palette='american', shade='dark', style='paper', max_plot_chi2=100)
     return R, var_R
 
 
@@ -137,8 +137,8 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 # isotopes_Ni = ['56CO', '58CO', '61CU']
 isotopes_Ni = ['58CO']
-foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
-# foil_list_Ni = ['Ni01']
+# foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
+foil_list_Ni = ['Ni02']
 
 
 
@@ -169,5 +169,8 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
 
+
+
+# ./Calculated_A0
 
 

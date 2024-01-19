@@ -100,8 +100,8 @@ class Foil:
         N_A = 6.0221408e+23
         t_irr = 1200 #[s]
         t_irr_unc = 3 #[s]
-        N_T = float(self.areal_dens)/1000*N_A/self.molar_mass*10 #[nuclei/m^2] when areal_dens is given in g/cm^2
-
+        N_T_per_cm2 = float(self.areal_dens)/1000*N_A/self.molar_mass*10 #[nuclei/cm^2] when areal_dens is given in g/cm^2
+        N_T = N_T_per_cm2*1e4 #[nuclei/m^2]
 
         for i in range(len(self.reaction_list)):
             beam_current = self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) #[d/s]

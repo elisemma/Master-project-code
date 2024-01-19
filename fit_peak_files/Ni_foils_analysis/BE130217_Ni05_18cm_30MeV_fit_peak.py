@@ -26,7 +26,20 @@ def fit_peaks(spectrumName, position):
     sp.plot()
     sp.saveas(f'../../MyGeneratedFiles/Ni_foils/{spectrumName}/{spectrumName}_peak_data.csv')
    
+# def fit_peaks(spectrumName, position):
 
+#     path = '../../2017_Feb_Zr/30MeV/'
+#     spectrumFile = path + spectrumName + '.Spe'
+
+#     cb = ci.Calibration('../../MyGeneratedFiles/Calibration/json_files/calibration_' + position + '_new.json')
+    
+#     # cb.plot()
+
+#     sp = ci.Spectrum(spectrumFile)
+#     sp.cb = cb 
+#     sp.plot(scale = 'linlin')
+#     # sp.plot()
+#     # sp.saveas(f'{spectrumName}_peak_data_NO_PEAK_FITTED.Spe')
 
 
 if __name__ == '__main__':
