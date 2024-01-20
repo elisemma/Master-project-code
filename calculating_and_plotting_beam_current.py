@@ -14,12 +14,10 @@ stack_df = pd.read_csv('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/D
 monitor_stack_df = stack_df[stack_df['name'].str.contains('Ni|Ti')]
 print(monitor_stack_df)
 
+loop_number = 0
+
 for index, row in monitor_stack_df.iterrows():
     foil_name = row['name']
-    # if 'Ni' in foil_name:
-    #     reaction_list = ['56CO', '61CU']
-    # if 'Ti' in foil_name:
-    #     reaction_list = ['46SC', '48V']
     target_material = row['compound']
     beam_energy_in_foil = row['mu_E']
 
@@ -60,9 +58,24 @@ for index, row in monitor_stack_df.iterrows():
     foil_beam_cur_list = foil.beam_current_list
     foil_beam_cur_unc_list = foil.beam_current_unc_list
 
+    if target_material == 'Ni':
+        color_list = ['violet', 'mediumvioletred', 'lightpink']
+        average_color = 'hotpink'
+
+    if target_material == 'Ti':
+        color_list = ['skyblue', 'royalblue']
+        average_color = 'dodgerblue'
+
     for i in range(len(foil_beam_cur_list)):
-        plt.errorbar(beam_energy_in_foil, foil_beam_cur_list[i], yerr = foil_beam_cur_unc_list[i], label = f'{foil_name}: {reaction_list[i]}')
-    plt.errorbar(beam_energy_in_foil, foil_average_beam_cur, yerr = np.sqrt(foil_average_beam_cur_var), label = f'{foil_name}: Average')
-# plt.legend()
+        plt.errorbar(beam_energy_in_foil, foil_beam_cur_list[i], yerr = foil_beam_cur_unc_list[i], color=color_list[i])
+        if loop_number == 0 or loop_number == 1:
+            plt.plot([], [], label=f'{target_material}: {reaction_list[i]}', color=color_list[i])
+
+    plt.errorbar(beam_energy_in_foil, foil_average_beam_cur, yerr = np.sqrt(foil_average_beam_cur_var), color=average_color)
+    if loop_number == 0 or loop_number == 1:
+            plt.plot([], [], label=f'{target_material}: Average', color=average_color)
+    loop_number += 1
+
+plt.legend()
 plt.show()
 
