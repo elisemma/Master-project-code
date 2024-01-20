@@ -118,10 +118,10 @@ df_CKTi02 = df_CKTi02[mask]
 df_concat_Ti = pd.concat((df_CJTi01, df_CKTi02, df_CLTi03, df_CMTi04, df_CPTi05, df_CQTi04, df_CSTi01, df_CTTi02, df_CUTi03), axis = 0)
 df_concat_Ti.to_csv(path_Ti+file_concat_Ti)
 
-# isotopes_Ti = ['48V', '46SC']
+isotopes_Ti = ['48V', '46SC']
 # isotopes_Ti = ['48V']
 
-# foil_list_Ti = ['Ti01', 'Ti02','Ti03', 'Ti04', 'Ti05']
+foil_list_Ti = ['Ti01', 'Ti02','Ti03', 'Ti04', 'Ti05']
 # foil_list_Ti = ['Ti02']
 
 
@@ -211,7 +211,9 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 # generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
-generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+# generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+
 
 
 # ./Calculated_A0
