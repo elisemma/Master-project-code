@@ -152,12 +152,12 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 #Running the code______________________________________________________________________________________
 # decay_chain(decay_constant, df_48V)
 foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
-isotope_list = ['56CO', '58CO', '61CU']
-# isotope_list = ['56CO']
+# isotope_list = ['56CO', '58CO', '61CU']
+isotope_list = ['56CO']
 
 
 for foil in foil_list:
-    csv_file_path = f'./Calculated_A0/{foil}_A0.csv'
+    csv_file_path = f'./Calculated_A0/{foil}_A0_by_hand.csv'
     with open(csv_file_path, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])

@@ -2,7 +2,7 @@ import curie as ci
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import csv
 
 
 def fit_prod_rate(isotope, foil, path, file):
@@ -36,6 +36,47 @@ def generate_prod_rate_csv(foil_type, isotopes, foil_list, path, file_concat):
                 R_file.write(f'{foil}, {isotope}, {R}, {var_R} \n')
     R_file.close()
 
+
+
+
+def fit_activity(isotope, foil, path, file):
+    t_irr_h = 0.33
+    dc = ci.DecayChain(isotope, units='h', A0=1000)
+    dc.get_counts(foil, '02/13/2017 14:27:00', path+file)
+
+    isotopes, a0, var_a0 = dc.fit_A0()
+    
+    if isotope == '58COm':
+        print('_______________')
+        print(isotopes)
+        A0 = float(a0[1])
+        var_A0 = float(var_a0[1][1])
+    else:
+        A0 = float(a0[0])
+        var_A0 = float(var_a0[0][0])
+
+    unc_A0 = np.sqrt(var_A0)
+    dc.plot(palette='american', shade='dark', style='paper', max_plot_chi2=100)
+    return A0, unc_A0
+
+
+def generate_activity_csv(isotope_list, foil_list, path, file_concat):
+    df = pd.read_csv(path+file_concat)
+    for foil in foil_list:
+        csv_file_path = f'./Calculated_A0/{foil}_A0_by_curie.csv'
+        with open(csv_file_path, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])
+            for isotope in isotope_list:
+                bool = df[df['filename'].str.contains(foil) & (df['isotope'] == isotope)].shape[0] > 0
+                if(bool):
+                    if isotope == '58CO':
+                        isotope = '58COm'
+                    A0, A0_unc = fit_activity(isotope, foil, path, file_concat)
+                    if isotope == '58COm':
+                        isotope = '58CO'
+                    csv_writer.writerow([f'{isotope}', f'{A0}', f'{A0_unc}'])
+                   
 
 
 
@@ -136,9 +177,11 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 
 # isotopes_Ni = ['56CO', '58CO', '61CU']
-isotopes_Ni = ['58CO']
-# foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
-foil_list_Ni = ['Ni02']
+# isotopes_Ni = ['58CO', '61CU']
+isotopes_Ni = ['61CU']
+
+foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
+# foil_list_Ni = ['Ni02']
 
 
 
@@ -166,9 +209,9 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 
 #Running the code_______________________________________________________________________________________________________________________
 # generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
-generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+# generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
-
+generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
 
 # ./Calculated_A0
