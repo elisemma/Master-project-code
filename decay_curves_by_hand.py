@@ -1,4 +1,5 @@
 
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
@@ -72,10 +73,9 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
         optimized_A0_unc = np.sqrt(covariance[0,0])
         activity_fit = activity_func(decay_constant, optimized_A0, time_array)
 
-
         # Plot the original data and the fitted decay curve
         plt.errorbar(start_times_array/(24*3600), A_data, yerr=A_unc, label='Data', color='skyblue', fmt='o', capsize = 5.0)
-        plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve: A0={optimized_A0:.2f} +- {optimized_A0_unc:.2f}', color='hotpink')
+        plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve: A0={optimized_A0:.2f}', color='hotpink')
         plt.xlabel('Time (d)')
         plt.ylabel('Activity (Bq)')
         plt.title(f'{foil}, {isotope}')
@@ -88,37 +88,13 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
 
 
 
-def write_A0_to_file(foil, isotope_list, path, file_concat):
-    csv_file_path = f'./Calculated_A0/{foil}_A0.csv'
-    df = pd.read_csv(path+file_concat)
-
-    with open(csv_file_path, 'w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])
-        for isotope in isotope_list:
-            bool = df[df['filename'].str.contains(foil) & (df['isotope'] == isotope)].shape[0] > 0
-            if(bool):
-                if isotope == '56CO':
-                    print('HEYYYY')
-                    decay_constant = decay_constant_56Co
-                elif isotope == '58CO':
-                    decay_constant = decay_constant_58Co
-           
-                A0, A0_unc = decay_chain(foil, isotope, decay_constant, path, file_concat)
-                csv_writer.writerow([f'{isotope}', f'{A0}', f'{A0_unc}'])
-
-
-
-
-
 
 time_array = np.linspace(0,40,1000)*24*3600 #[s]
 half_life_56Co = 77.236*24*3600 #[s], 56Co
-half_life_58Co = 70.86*24*3600 #[s], 58Co
-half_life_61Cu = 3.339*3600 #[s], 61Cu
+half_life_58Co = 70.86*24*3600 #[s], 56Co
 decay_constant_56Co = decay_constant_func(half_life_56Co)
 decay_constant_58Co = decay_constant_func(half_life_58Co)
-decay_constant_61Cu = decay_constant_func(half_life_61Cu)
+
 
 
 
@@ -180,25 +156,15 @@ isotope_list = ['56CO', '58CO', '61CU']
 # isotope_list = ['56CO']
 
 
-for isotope in isotope_list:
-    if isotope == '56CO':
-        print('HEYYYY')
-        decay_constant = decay_constant_56Co
-    elif isotope == '58CO':
-        decay_constant = decay_constant_58Co
-    elif isotope == '61CU':
-        decay_constant = decay_constant_61Cu
-    for foil in foil_list:
-        write_A0_to_file(foil, isotope_list, path_Ni, file_concat_Ni)
-        # decay_chain(foil, isotope, decay_constant, path_Ni, file_concat_Ni)
-
-
-
-# csv_file_path = f'./Calculated_A0/{foil}_A0.csv'
-
-# # Write data to the CSV file
-# with open(csv_file_path, 'w', newline='') as csv_file:
-#     csv_writer = csv.writer(csv_file)
-#     # Write header and data in a single row
-#     csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])
-#     csv_writer.writerow([f'{isotope}', f'{optimized_A0}', f'{optimized_A0_unc}'])
+for foil in foil_list:
+    csv_file_path = f'./Calculated_A0/{foil}_A0.csv'
+    with open(csv_file_path, 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file)
+        csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])
+        for isotope in isotope_list:
+            if isotope == '56CO':
+                decay_constant = decay_constant_56Co
+            elif isotope == '58CO':
+                decay_constant = decay_constant_58Co
+            A0, A0_unc = decay_chain(foil, isotope, decay_constant, path_Ni, file_concat_Ni)
+            csv_writer.writerow([f'{isotope}', f'{A0}', f'{A0_unc}'])
