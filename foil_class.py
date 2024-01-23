@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import curie as ci 
 import pandas as pd 
-from scipy.interpolate import splev, splrep
-
+# from scipy.interpolate import splev, splrep
+from scipy.interpolate import interp1d
 #One file for running the stack calulations with varying dp values and save the csv files in a folder
 
 #This file with one class for foil and one function for variance minimization
@@ -83,30 +83,53 @@ class Foil:
                 file.close()
 
             E = np.array(E_list)
-            xs = np.array(xs_list)
+            xs = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
             unc_xs = np.array(xs_unc_list)
             weights = 1 / unc_xs
-            spl = splrep(E, xs, w=weights, k=4)
+           
+            interp_xs = interp1d(E, xs,kind='cubic')
 
+            interp_unc_xs = interp1d(E, xs_unc_list, kind='cubic')
+
+            # energy_plotting_array= np.linspace(20,40,10000)
+            # plt.plot(energy_plotting_array, splev(energy_plotting_array, spl), label=f'{reaction_product} interpol')
+
+            # y = interp_xs(energy_plotting_array
+            # plt.plot(E, xs, 'bo', label='data')
+            # plt.plot(energy_plotting_array, interp_xs(energy_plotting_array))
+            # plt.legend()
+            # plt.show()
             # Interpolate the entire list of energies
-            interpolated_xs = splev(self.beam_energy_in_foil, spl)
+            # interpolated_xs = splev(self.beam_energy_in_foil, spl)
 
+            interpolated_xs = interp_xs(self.beam_energy_in_foil)
+            interpolated_xs_unc = interp_unc_xs(self.beam_energy_in_foil)
             # Append the interpolated value to the xs_mon_list
             self.xs_mon_list.append(interpolated_xs)
-            self.xs_mon_unc_list.append(np.interp(self.beam_energy_in_foil, E, unc_xs))  # Assuming linear interpolation for uncertainty
+            self.xs_mon_unc_list.append(interpolated_xs_unc)
+            # self.xs_mon_unc_list.append(np.interp(self.beam_energy_in_foil, E, unc_xs))  # Assuming linear interpolation for uncertainty
 
     def calculate_beam_currents_w_unc(self):
         # Calculating the beam current with uncertainty by using the end of beam activity, areal density, molar mass, decay constant and monitor cross section
         N_A = 6.0221408e+23
         t_irr = 1200 #[s]
         t_irr_unc = 3 #[s]
-        N_T_per_cm2 = float(self.areal_dens)/1000*N_A/self.molar_mass*10 #[nuclei/cm^2] when areal_dens is given in g/cm^2
-        N_T = N_T_per_cm2*1e4 #[nuclei/m^2]
+        # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
+        
+        areal_dens = float(self.areal_dens)/1000.0 # g/cm2
+        molar_dens = areal_dens/self.molar_mass # mol/cm2
+
+        N_T_per_cm2 = N_A*molar_dens # nuclei / cm2 
+
+        # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
+        N_T = N_T_per_cm2*1.0e4 #[nuclei/m^2]
+
 
         for i in range(len(self.reaction_list)):
             beam_current = self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) #[d/s]
             beam_current_in_A = beam_current*1.60217634e-19 #[A]
-            beam_current_in_nA = beam_current_in_A*1e9 #[nA]
+            beam_current_in_nA = beam_current_in_A*1.0e9 #[nA]
+
 
 
             areal_dens_unc = self.areal_dens*10*self.areal_dens_unc_percent/100
