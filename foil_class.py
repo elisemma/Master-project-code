@@ -11,7 +11,8 @@ from scipy.interpolate import interp1d
 
 class Foil: 
     #wclass hich returns the beam current with unc for one foil
-    def __init__(self, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent):
+    def __init__(self, foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent):
+        self.foil_name = foil_name
         self.beam_energy_in_foil = beam_energy_in_foil
         self.target_material = target_material
         self.reaction_list = reaction_list
@@ -66,48 +67,65 @@ class Foil:
 
 
     def find_monitor_cross_section(self):
+        #Importing the energy/fluxes from the stack calculation
+        flux_file = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_1.00_fluxes.csv'
+        csv_flux_data = pd.read_csv(flux_file)
+        
+        target_flux_data = csv_flux_data.loc[csv_flux_data['name'] == self.foil_name]
+        energy = target_flux_data.loc[:,'energy']
+        flux = target_flux_data.loc[:,'flux']
+        energy_from_stack_calc = energy.values.tolist()
+        flux_from_stack_calc = flux.values.tolist() #[MeV]
+
+
         # Using the IAEA data to get the monitor cross section for the energy in a foil
         for reaction_product in self.reaction_list:
             filename = './Monitor_cross_section_data/IAEA_monitor_xs_' + reaction_product + '.txt'
             with open(filename) as file:
                 lines = file.readlines()[7:-1]
-                E_list = []
+                E_mon_list = []
                 xs_list = []
                 xs_unc_list = []
 
                 for line in lines:
                     words = line.split()
-                    E_list.append(float(words[0]))
+                    E_mon_list.append(float(words[0]))
                     xs_list.append(float(words[1]))
                     xs_unc_list.append(float(words[2]))
                 file.close()
 
-            E = np.array(E_list)
-            xs = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
-            unc_xs = np.array(xs_unc_list)
-            weights = 1 / unc_xs
-           
-            interp_xs = interp1d(E, xs,kind='cubic')
 
-            interp_unc_xs = interp1d(E, xs_unc_list, kind='cubic')
+            E_mon = np.array(E_mon_list)
+            xs_mon = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
+            unc_xs_mon = np.array(xs_unc_list)
+            weights = 1 / unc_xs_mon
 
-            # energy_plotting_array= np.linspace(20,40,10000)
-            # plt.plot(energy_plotting_array, splev(energy_plotting_array, spl), label=f'{reaction_product} interpol')
+            interp_xs = interp1d(E_mon, xs_mon,kind='cubic')
+            interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='cubic')
 
-            # y = interp_xs(energy_plotting_array
-            # plt.plot(E, xs, 'bo', label='data')
+            #Plotting to check theinterpolation by eye
+            # energy_plotting_array= np.linspace(3,50,10000)
+            # plt.plot(E_mon, xs_mon, 'bo', label='data')
             # plt.plot(energy_plotting_array, interp_xs(energy_plotting_array))
             # plt.legend()
             # plt.show()
-            # Interpolate the entire list of energies
-            # interpolated_xs = splev(self.beam_energy_in_foil, spl)
 
-            interpolated_xs = interp_xs(self.beam_energy_in_foil)
-            interpolated_xs_unc = interp_unc_xs(self.beam_energy_in_foil)
-            # Append the interpolated value to the xs_mon_list
-            self.xs_mon_list.append(interpolated_xs)
-            self.xs_mon_unc_list.append(interpolated_xs_unc)
-            # self.xs_mon_unc_list.append(np.interp(self.beam_energy_in_foil, E, unc_xs))  # Assuming linear interpolation for uncertainty
+
+            #Need to take the integral of the xs for the different energybins in the foil to find the right monitor cross section
+            xs_for_energies_in_foil = interp_xs(energy_from_stack_calc)
+            xs_un_norm = np.trapz(np.multiply(xs_for_energies_in_foil,flux_from_stack_calc), x=energy_from_stack_calc)
+            xs_norm = xs_un_norm/np.trapz(flux_from_stack_calc, x= energy_from_stack_calc)
+            self.xs_mon_list.append(xs_norm)
+
+            #Finding the uncertainty in the same way as the cross section
+            xs_unc_for_energies_in_foil = interp_unc_xs(energy_from_stack_calc)
+            xs_unc_un_norm = np.trapz(np.multiply(xs_unc_for_energies_in_foil,flux_from_stack_calc), x=energy_from_stack_calc)
+            xs_unc_norm = xs_unc_un_norm/np.trapz(flux_from_stack_calc, x= energy_from_stack_calc)
+            self.xs_mon_unc_list.append(xs_unc_norm)
+
+
+
+
 
     def calculate_beam_currents_w_unc(self):
         # Calculating the beam current with uncertainty by using the end of beam activity, areal density, molar mass, decay constant and monitor cross section

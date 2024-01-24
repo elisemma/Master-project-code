@@ -44,7 +44,7 @@ for index, row in monitor_stack_df.iterrows():
     # print('A0', A0_list)
     # print('A0_unc', A0_unc_list)
 
-    foil = Foil(beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent)
+    foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent)
 
     foil.assign_molar_mass()
     foil.calculate_decay_constant()
@@ -71,9 +71,9 @@ for index, row in monitor_stack_df.iterrows():
         if loop_number == 0 or loop_number == 1:
             plt.plot([], [], label=f'{target_material}: {reaction_list[i]}', color=color_list[i])
 
-    plt.errorbar(beam_energy_in_foil, foil_average_beam_cur, yerr = np.sqrt(foil_average_beam_cur_var), color=average_color)
-    if loop_number == 0 or loop_number == 1:
-            plt.plot([], [], label=f'{target_material}: Average', color=average_color)
+    # plt.errorbar(beam_energy_in_foil, foil_average_beam_cur, yerr = np.sqrt(foil_average_beam_cur_var), color=average_color)
+    # if loop_number == 0 or loop_number == 1:
+            # plt.plot([], [], label=f'{target_material}: Average', color=average_color)
     loop_number += 1
 
 plt.legend()
