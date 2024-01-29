@@ -33,10 +33,10 @@ subset_params_dbNi02 = np.array([50])
 dbNi02 = "DB200317_Ni02_18cm_30MeV_peak_data_NO_PEAK_FITTED.Spe"
 
 
-channel_array_beNi05 = np.array([810]) #Using these values to makea calibration for all the Ni foils (DF and DG)
-energy_array_beNi05 = np.array([810])
-energy_unc_array_beNi05 = np.array([1])
-subset_params_beNi05 = np.array([50])
+channel_array_beNi05 = np.array([1332, 2114]) #Using these values to makea calibration for all the Ni foils (DF and DG)
+energy_array_beNi05 = np.array([511, 810])
+energy_unc_array_beNi05 = np.array([1, 1])
+subset_params_beNi05 = np.array([50,50])
 beNi05 = "BE130217_Ni05_18cm_30MeV_peak_data_NO_PEAK_FITTED.Spe"
 
 
@@ -58,7 +58,7 @@ channels = np.arange(0, counts.size, 1)
 
 plt.plot(channels, counts)
 plt.title(f'{spectrumname}')
-
+# plt.show()
 
 
 
@@ -101,6 +101,44 @@ for guess, subset in zip(initial_guesses, subset_params):
     # Calculate the reduced chi-squared value
     reduced_chi_squared = chi_squared / degrees_of_freedom
 
-    plt.plot(channels_subset, combined_function(channels_subset, *popt), label = f'reduced chi2: {reduced_chi_squared}')
+    plt.plot(channels_subset, combined_function(channels_subset, *popt), label = f'reduced chi2: {reduced_chi_squared}', linestyle = 'dashed')
 plt.legend()
+plt.show()
+
+
+
+
+#Quadratic calibration 
+
+def quad_poly(B, x):
+    return B[0]*x**2 + B[1]*x + B[2]
+
+data = odr.RealData(channel_nr_fit_list,energy_array,sx = np.array(channel_nr_unc_list), sy = energy_unc_array)
+calib_model = odr.Model(quad_poly)
+odr = odr.ODR(data, calib_model,beta0 =[0,1,0])
+out = odr.run()#Run the regression
+calib_params = out.beta#out.beta is a list which contains the values of the parameters popped out from the fitting
+calib_params_unc = out.sd_beta#out.sd_beta is a list which contains the values of the errors of the parameters
+print("The energy calibration paramteters:")
+print(calib_params)
+# Extract the standard deviations (uncertainties) of the fit parameters
+print(f"The uncertainties of the energy calibration is {calib_params_unc}")
+
+polyline = np.linspace(0,7000, 700000)
+model = np.poly1d(calib_params)
+
+print("\n")
+print(f'Engcal:\n {calib_params[2]}, \n {calib_params[1]}, \n {calib_params[0]}')
+
+
+
+
+#Visualizing the calibration
+plt.errorbar(channel_nr_fit_list, energy_array, xerr=channel_nr_unc_list, yerr = energy_unc_array, fmt='o', label = 'datapoints', color = 'skyblue')
+plt.plot(polyline, model(polyline), color = 'hotpink', label = 'fit')
+plt.legend()
+plt.xlabel("Channel number")
+plt.ylabel("Energy")
+plt.text(3000, 10, f'Engcal:\n {calib_params[2]} +- {calib_params_unc[2]:.2e} \n {calib_params[1]} +- {calib_params_unc[1]:.2e}\n {calib_params[0]} +- {calib_params_unc[0]:.2e} \n\n Reduced Chi2 = {out.res_var}', fontsize=8, color='black', backgroundcolor='hotpink')
+plt.title(f'{spectrumname}')
 plt.show()

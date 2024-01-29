@@ -134,7 +134,8 @@ file_AZNi02 = 'AZ130217_Ni02_18cm_30MeV/AZ130217_Ni02_18cm_30MeV_peak_data.csv'
 file_BBNi01 = 'BB130217_Ni01_18cm_30MeV/BB130217_Ni01_18cm_30MeV_peak_data.csv'
 file_BCNi03 = 'BC130217_Ni03_18cm_30MeV/BC130217_Ni03_18cm_30MeV_peak_data.csv'
 file_BDNi04 = 'BD130217_Ni04_18cm_30MeV/BD130217_Ni04_18cm_30MeV_peak_data.csv'
-file_BENi05 = 'BE130217_Ni05_18cm_30MeV/BE130217_Ni05_18cm_30MeV_peak_data.csv'
+file_BENi05 = 'BE130217_Ni05_18cm_30MeV/BE130217_Ni05_18cm_30MeV_peak_data_by_hand.csv'
+# file_BENi05 = 'BE130217_Ni05_18cm_30MeV/BE130217_Ni05_18cm_30MeV_peak_data.csv'
 file_DANi01 = 'DA200317_Ni01_18cm_30MeV/DA200317_Ni01_18cm_30MeV_peak_data.csv'
 file_DBNi02 = 'DB200317_Ni02_18cm_30MeV/DB200317_Ni02_18cm_30MeV_peak_data.csv'
 file_DCNi03 = 'DC200317_Ni03_18cm_30MeV/DC200317_Ni03_18cm_30MeV_peak_data.csv'
@@ -150,13 +151,19 @@ df_AZNi02 = pd.read_csv(path_Ni+file_AZNi02)
 df_BBNi01 = pd.read_csv(path_Ni+file_BBNi01)
 df_BCNi03 = pd.read_csv(path_Ni+file_BCNi03)
 df_BDNi04 = pd.read_csv(path_Ni+file_BDNi04)
-df_BENi05 = pd.read_csv(path_Ni+file_BENi05)
+df_BENi05 = pd.read_csv(path_Ni+file_BENi05, delimiter=';')
 df_DANi01 = pd.read_csv(path_Ni+file_DANi01)
 df_DBNi02 = pd.read_csv(path_Ni+file_DBNi02)
 df_DCNi03 = pd.read_csv(path_Ni+file_DCNi03)
 df_DENi03 = pd.read_csv(path_Ni+file_DENi03)
 df_DFNi04 = pd.read_csv(path_Ni+file_DFNi04)
 df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
+
+
+# print(df_BENi05['isotope'])
+# print(df_BDNi04['isotope'])
+
+
 
 
 df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04, df_BENi05, df_DANi01, df_DBNi02, df_DCNi03, df_DENi03, df_DFNi04, df_DGNi05), axis = 0)
@@ -178,7 +185,7 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 # isotopes_Ni = ['56CO', '58CO', '61CU']
 # isotopes_Ni = ['58CO', '61CU']
-isotopes_Ni = ['61CU']
+isotopes_Ni = ['58CO']
 
 foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
 # foil_list_Ni = ['Ni02']
@@ -211,8 +218,8 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 # generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
-# generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
-generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+# generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 
 
 

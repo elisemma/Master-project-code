@@ -1,0 +1,2 @@
+filename;isotope;energy;counts;unc_counts;intensity;unc_intensity;efficiency;unc_efficiency;decays;unc_decays;decay_rate;unc_decay_rate;chi2;start_time;live_time;real_time
+../../2017_Feb_Zr/30MeV/BE130217_Ni05_18cm_30MeV.Spe;58CO;810.7593;22;2;0.9945;0.049725000000000005;0.001514654937459114;6.675485173817049e-05;14605.0883494;0.1127247132879;14.4891749498;0.000992093515;1;02/13/2017 21:37:39;1008.0;1008.0
