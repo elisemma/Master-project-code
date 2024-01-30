@@ -11,7 +11,7 @@ from scipy.interpolate import interp1d
 
 class Foil: 
     #wclass hich returns the beam current with unc for one foil
-    def __init__(self, foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent):
+    def __init__(self, foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp):
         self.foil_name = foil_name
         self.beam_energy_in_foil = beam_energy_in_foil
         self.target_material = target_material
@@ -27,6 +27,7 @@ class Foil:
         self.beam_current_unc_list = []
         self.weighted_average_beam_current = None
         self.var_weighted_average_beam_current = None
+        self.dp = dp
 
 
     def assign_molar_mass(self):
@@ -68,7 +69,7 @@ class Foil:
 
     def find_monitor_cross_section(self):
         #Importing the energy/fluxes from the stack calculation
-        flux_file = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_1.00_fluxes.csv'
+        flux_file = f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{self.dp:.2f}_fluxes.csv'
         csv_flux_data = pd.read_csv(flux_file)
         
         target_flux_data = csv_flux_data.loc[csv_flux_data['name'] == self.foil_name]
@@ -99,7 +100,6 @@ class Foil:
             xs_mon = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
             unc_xs_mon = np.array(xs_unc_list)
             weights = 1 / unc_xs_mon
-
             interp_xs = interp1d(E_mon, xs_mon,kind='cubic')
             interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='cubic')
 

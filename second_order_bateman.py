@@ -24,7 +24,8 @@ def activity_func(decay_constant, A0, t):
 
 
 def bateman_unstable_daughter(decay_const_p, decay_const_d,A0_p,A0_d,time):
-    activity_d = decay_const_d*(A0_p*decay_const_p*(np.exp(-decay_const_p)+np.exp(-decay_const_d))/(decay_const_p-decay_const_d) + A0_d*np.exp(-decay_const_d*time))
+    # activity_d = decay_const_d*(A0_p*decay_const_p*(np.exp(-decay_const_p*time)+np.exp(-decay_const_d*time))/(decay_const_p-decay_const_d) + A0_d*np.exp(-decay_const_d*time))
+    activity_d = A0_p*decay_const_d/(decay_const_d-decay_const_p)*(np.exp(-decay_const_p*time) - np.exp(-decay_const_d*time))+A0_d*np.exp(-decay_const_d*time)
 
     return activity_d
 
@@ -87,16 +88,26 @@ def decay_chain(foil, isotope, decay_const_p, decay_const_d, path, file_concat):
         optimized_A0_p = params[0]
         optimized_A0_d = params[1]
         optimized_A0_unc = np.sqrt(covariance[1,1])
-        activity_fit = bateman_unstable_daughter(decay_const_p, decay_const_d,optimized_A0_p,optimized_A0_d,time_array)
+        activity_fit_d = bateman_unstable_daughter(decay_const_p, decay_const_d,optimized_A0_p,optimized_A0_d,time_array)
+        activity_fit_p = activity_func(decay_constant_58COm,optimized_A0_p,time_array)
+
+        print('Daughter_______________')
+        print('activity_fit_d_0: ',   activity_fit_d[0])
+        print('opt A0_d: ', optimized_A0_d)
+        print('time 0: ', time_array[0])
+        print('Parent_______________')
+        print('activity_fit_p_0: ',   activity_fit_p[0])
+        print('opt A0_p: ', optimized_A0_p)
+        print('time 0: ', time_array[0])
 
         # Plot the original data and the fitted decay curve
         plt.errorbar(start_times_array/(24*3600), A_data_58CO, yerr=A_unc_58CO, label='Data', color='skyblue', fmt='o', capsize = 5.0)
-        plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve for 58CO: A0={optimized_A0_d:.2f}', color='hotpink')
-        plt.plot(time_array/(24*3600), activity_func(decay_constant_58COm, optimized_A0_p, time_array),label=f'Fitted Decay Curve for 58COm: A0={optimized_A0_p:.2f}', color='orchid')
+        plt.plot(time_array/(24*3600), activity_fit_d, label=f'Fitted Decay Curve for 58CO: A0={optimized_A0_d:.2f}', color='hotpink')
+        plt.plot(time_array/(24*3600), activity_fit_p, label=f'Fitted Decay Curve for 58COm: A0={optimized_A0_p:.2f}', color='orchid')
         plt.xlabel('Time (d)')
         plt.ylabel('Activity (Bq)')
         plt.title(f'{foil}, {isotope}')
-        plt.ylim([0,5000])
+        # plt.ylim([0,5000])
         plt.legend()
         plt.show()
 
@@ -160,6 +171,7 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 #Running the code___________________________________________________________________
 foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
+# foil_list = ['Ni01']
 isotope_list = ['58CO']
 
 

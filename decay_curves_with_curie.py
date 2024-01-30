@@ -185,7 +185,7 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 # isotopes_Ni = ['56CO', '58CO', '61CU']
 # isotopes_Ni = ['58CO', '61CU']
-isotopes_Ni = ['58CO']
+isotopes_Ni = ['61CU']
 
 foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
 # foil_list_Ni = ['Ni02']

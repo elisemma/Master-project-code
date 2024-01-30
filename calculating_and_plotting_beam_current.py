@@ -11,7 +11,9 @@ import os
 def caclulate_beam_currents_in_foil(dp, compound):
     stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.2f}.csv')
 
-    monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')]
+    # monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')]
+    compartment = '05'
+    monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')  & (stack_df['name'].str.contains(compartment))]
 
     beam_current_list_of_list = [] #This list will cointain lists of beam currents for all the mon reactions in the foils: [[Ni01:56CO, Ni01:58CO, Ni01:61CU], [Ni02:56CO, Ni02:58CO, Ni02:61CU], ...]
     beam_current_unc_list_of_list = [] #Same as beam_current_list_of_list but with the uncertainties
@@ -41,7 +43,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
         areal_dens = row['areal_density']
         areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
 
-        foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent)
+        foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp=1.00)
 
         foil.assign_molar_mass()
         foil.calculate_decay_constant()
