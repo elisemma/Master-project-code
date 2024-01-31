@@ -129,8 +129,8 @@ marker_list = ['d', '*', 's', '<', 'o']
 color_list = ['deepskyblue', 'mediumseagreen', 'gold', 'violet', 'mediumvioletred']
 color_background_list = ['peachpuff', 'lightgreen', 'pink', 'paleturquoise', 'lemonchiffon']
 
-lower_energy_compartments = data_by_reaction['48V']['energy']
-upper_energy_compartments = data_by_reaction['61CU']['energy']
+lower_energy_compartments = data_by_reaction['48V']['energy'][:]
+upper_energy_compartments = data_by_reaction['61CU']['energy'][:]
 
 lower_energy_compartments.reverse()
 upper_energy_compartments.reverse()
@@ -158,7 +158,8 @@ for i in range(len(compartment_separation_energies)+1):
     else:
         upper_bound = compartment_separation_energies[i]
 
-    plt.axvspan(lower_bound, upper_bound, facecolor=color_background_list[i], alpha=0.4)#, label=f'compartment {5-i}')
+    plt.axvspan(lower_bound, upper_bound, facecolor=color_background_list[i], alpha=0.4)
+
 
 
 plt.xlim([lower_energy_compartments[0]-1, upper_energy_compartments[-1]+1])
