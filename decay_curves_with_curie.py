@@ -63,6 +63,7 @@ def fit_activity(isotope, foil, path, file):
 def generate_activity_csv(isotope_list, foil_list, path, file_concat):
     df = pd.read_csv(path+file_concat)
     for foil in foil_list:
+        print(foil)
         csv_file_path = f'./Calculated_A0/{foil}_A0_by_curie.csv'
         with open(csv_file_path, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
@@ -70,11 +71,7 @@ def generate_activity_csv(isotope_list, foil_list, path, file_concat):
             for isotope in isotope_list:
                 bool = df[df['filename'].str.contains(foil) & (df['isotope'] == isotope)].shape[0] > 0
                 if(bool):
-                    if isotope == '58CO':
-                        isotope = '58COm'
                     A0, A0_unc = fit_activity(isotope, foil, path, file_concat)
-                    if isotope == '58COm':
-                        isotope = '58CO'
                     csv_writer.writerow([f'{isotope}', f'{A0}', f'{A0_unc}'])
                    
 
@@ -134,8 +131,7 @@ file_AZNi02 = 'AZ130217_Ni02_18cm_30MeV/AZ130217_Ni02_18cm_30MeV_peak_data.csv'
 file_BBNi01 = 'BB130217_Ni01_18cm_30MeV/BB130217_Ni01_18cm_30MeV_peak_data.csv'
 file_BCNi03 = 'BC130217_Ni03_18cm_30MeV/BC130217_Ni03_18cm_30MeV_peak_data.csv'
 file_BDNi04 = 'BD130217_Ni04_18cm_30MeV/BD130217_Ni04_18cm_30MeV_peak_data.csv'
-file_BENi05 = 'BE130217_Ni05_18cm_30MeV/BE130217_Ni05_18cm_30MeV_peak_data_by_hand.csv'
-# file_BENi05 = 'BE130217_Ni05_18cm_30MeV/BE130217_Ni05_18cm_30MeV_peak_data.csv'
+file_BENi05 = 'BE130217_Ni05_18cm_30MeV/BE130217_Ni05_18cm_30MeV_peak_data.csv'
 file_DANi01 = 'DA200317_Ni01_18cm_30MeV/DA200317_Ni01_18cm_30MeV_peak_data.csv'
 file_DBNi02 = 'DB200317_Ni02_18cm_30MeV/DB200317_Ni02_18cm_30MeV_peak_data.csv'
 file_DCNi03 = 'DC200317_Ni03_18cm_30MeV/DC200317_Ni03_18cm_30MeV_peak_data.csv'
@@ -151,7 +147,7 @@ df_AZNi02 = pd.read_csv(path_Ni+file_AZNi02)
 df_BBNi01 = pd.read_csv(path_Ni+file_BBNi01)
 df_BCNi03 = pd.read_csv(path_Ni+file_BCNi03)
 df_BDNi04 = pd.read_csv(path_Ni+file_BDNi04)
-df_BENi05 = pd.read_csv(path_Ni+file_BENi05, delimiter=';')
+df_BENi05 = pd.read_csv(path_Ni+file_BENi05)
 df_DANi01 = pd.read_csv(path_Ni+file_DANi01)
 df_DBNi02 = pd.read_csv(path_Ni+file_DBNi02)
 df_DCNi03 = pd.read_csv(path_Ni+file_DCNi03)
@@ -161,6 +157,7 @@ df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
 
 
 # print(df_BENi05['isotope'])
+# print(df_BENi05['decay_rate'])
 # print(df_BDNi04['isotope'])
 
 
@@ -188,7 +185,7 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 isotopes_Ni = ['61CU']
 
 foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
-# foil_list_Ni = ['Ni02']
+# foil_list_Ni = ['Ni05']
 
 
 

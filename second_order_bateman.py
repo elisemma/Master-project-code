@@ -109,7 +109,7 @@ def decay_chain(foil, isotope, decay_const_p, decay_const_d, path, file_concat):
         plt.title(f'{foil}, {isotope}')
         # plt.ylim([0,5000])
         plt.legend()
-        plt.show()
+        # plt.show()
 
         return optimized_A0_d, optimized_A0_unc
 
@@ -152,7 +152,6 @@ df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04,
 
 # Specify the isotope and allowed energies
 isotope_to_exclude = '58CO'
-# allowed_energies = [1037.843, 1238.288, 1771.357]
 allowed_energies = [810.7593]
 
 
@@ -177,10 +176,10 @@ isotope_list = ['58CO']
 
 for foil in foil_list:
     print(f'__________FOIL {foil}___________')
-    csv_file_path = f'./Calculated_A0/{foil}_A0_by_hand.csv'
+    csv_file_path = f'./Calculated_A0/{foil}_A0_by_hand_second_order.csv'
     with open(csv_file_path, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])
         for isotope in isotope_list:
             A0_d, A0_unc = decay_chain(foil, isotope, decay_constant_58COm, decay_constant_58CO, path_Ni, file_concat_Ni)
-            # csv_writer.writerow([f'{isotope}', f'{A0}', f'{A0_unc}'])
+            csv_writer.writerow([f'{isotope}', f'{A0_d}', f'{A0_unc}'])
