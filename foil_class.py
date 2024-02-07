@@ -28,6 +28,9 @@ class Foil:
         self.weighted_average_beam_current = None
         self.var_weighted_average_beam_current = None
         self.dp = dp
+        self.calc_xs_list = []
+        self.calc_xs_unc_list = []
+
 
 
     def assign_molar_mass(self):
@@ -200,6 +203,66 @@ class Foil:
         variance = np.average((np.array(self.beam_current_list) - self.weighted_average_beam_current)**2, weights=weight_list)
         self.var_weighted_average_beam_current = float(variance)
 
+
+
+    def convert_beam_current_back_to_xs_w_unc(self):
+
+        # Calculating the cross section with uncertainty by using the end of beam activity, areal density, molar mass, decay constant and beam current
+        N_A = 6.0221408e+23
+        t_irr = 1200 #[s]
+        t_irr_unc = 3 #[s]
+        # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
+        
+        areal_dens = float(self.areal_dens)/1000.0 # g/cm2
+        molar_dens = areal_dens/self.molar_mass # mol/cm2
+
+        N_T_per_cm2 = N_A*molar_dens # nuclei / cm2 
+
+        # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
+        N_T = N_T_per_cm2*1.0e4 #[nuclei/m^2]
+
+
+        for i in range(len(self.reaction_list)):
+
+            beam_current_in_d_per_s = self.beam_current_list[i]/(1.60217634e-19*1.0e9)
+            beam_current_in_d_per_s_unc = self.beam_current_unc_list[i]/(1.60217634e-19*1.0e9)
+            xs = self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*t_irr)))*1e+28*1e3 #[mb]
+
+
+            areal_dens_unc = self.areal_dens*10*self.areal_dens_unc_percent/100
+            N_T_unc = N_T*np.sqrt((areal_dens_unc/self.areal_dens)**2 + (self.molar_mass_unc/self.molar_mass)**2) #[nuclei/cm^2]
+        
+            dfdx_list = [] #Jacobian
+            unc_list = []
+        
+            dA0 = self.A0_list[i]*1e-8
+            dfdA0 = (self.A0_list[i]+dA0/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]-dA0/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*t_irr))))/dA0
+            dfdx_list.append(dfdA0)
+            unc_list.append(self.A0_unc_list[i])
+        
+            # dN_T = N_T*1e-8
+            # dfdN_T = (self.A0_list[i]/((N_T+dN_T)*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/((N_T-dN_T)*self.xs_mon_list[i]*(1- np.exp(-self.decay_const_list[i]*t_irr))))/dN_T
+            # dfdx_list.append(dfdN_T)
+            # unc_list.append(N_T_unc)
+        
+            dbc = self.beam_current_list[i]*1e-8
+            dfdbc = (self.A0_list[i]/(N_T*(beam_current_in_d_per_s+beam_current_in_d_per_s_unc)*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/(N_T*(beam_current_in_d_per_s-beam_current_in_d_per_s_unc)*(1-np.exp(-self.decay_const_list[i]*t_irr))))/dA0
+            dfdx_list.append(dfdbc)
+            unc_list.append(self.beam_current_unc_list[i])
+        
+            dt_irr = t_irr*1e-8
+            dfdt_irr = (self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr+dt_irr)))) - self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr-dt_irr)))))/dA0
+            dfdx_list.append(dfdt_irr)
+            unc_list.append(t_irr_unc)
+        
+            dfdx = np.array(dfdx_list)
+            unc = np.array(unc_list)
+            xs_unc = np.sqrt(np.sum(np.multiply(dfdx,dfdx)* np.multiply(unc,unc)))*1.60217634e-19*1e9
+
+            self.calc_xs_list.append(xs)
+            self.calc_xs_unc_list.append(xs_unc)
+
+    
 
 
 

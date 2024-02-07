@@ -42,6 +42,13 @@ def caclulate_beam_currents_in_foil(dp, compound):
         # print('A0_conccat: ', A0_concat_df)
 
         reaction_list = A0_concat_df['Isotope'].tolist()
+        # if compound =='Ni':
+        #     reaction_list = ['58CO']
+        # if compound == 'Ti':
+        #     reaction_list = ['48V']
+
+        # A0_concat_df = A0_concat_df[A0_concat_df['Isotope']==reaction_list[0]]
+
         A0_list = A0_concat_df['A0'].tolist()
         A0_unc_list = A0_concat_df['A0_unc'].tolist()
         A0_unc_list = [1e10 if np.isinf(value) else value for value in A0_unc_list]
@@ -77,11 +84,9 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 
 
-
-
 #__________________________Running the function________________________________
 
-dp = 1.17
+dp = 1.00
 beam_current_list_of_list_Ni, beam_current_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_beam_currents_in_foil(dp, 'Ni')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 
@@ -125,7 +130,7 @@ color_list = ['deepskyblue', 'mediumseagreen', 'gold', 'violet', 'mediumvioletre
 color_background_list = ['peachpuff', 'lightgreen', 'pink', 'paleturquoise', 'lemonchiffon']
 
 lower_energy_compartments = data_by_reaction['48V']['energy'][:]
-upper_energy_compartments = data_by_reaction['61CU']['energy'][:]
+upper_energy_compartments = data_by_reaction['58CO']['energy'][:]
 
 lower_energy_compartments.reverse()
 upper_energy_compartments.reverse()

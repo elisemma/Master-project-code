@@ -96,6 +96,13 @@ def plot_chi2(dp_list, compartment):
                 A0_concat_df = A0_by_curie_df
 
             reaction_list = A0_concat_df['Isotope'].tolist()
+            # if target_material =='Ni':
+            #     reaction_list = ['58CO']
+            # if target_material == 'Ti':
+            #     reaction_list = ['48V']
+
+            # A0_concat_df = A0_concat_df[A0_concat_df['Isotope']==reaction_list[0]]
+
             A0_list = A0_concat_df['A0'].tolist()
             A0_unc_list = A0_concat_df['A0_unc'].tolist()
             A0_unc_list = [1e10 if np.isinf(value) else value for value in A0_unc_list]
@@ -122,10 +129,10 @@ def plot_chi2(dp_list, compartment):
     plt.show()
 
 
-dp_array = np.arange(0.5, 1.19, 0.01)
+dp_array = np.arange(0.5, 1.41, 0.01)
 # dp_array=[0.90, 1.00, 1.10]
 
-plot_chi2(dp_array, '05')
+plot_chi2(dp_array, '03')
 
 
 
