@@ -69,9 +69,7 @@ class Foil:
 
     def find_monitor_cross_section(self):
         #Importing the energy/fluxes from the stack calculation
-        # flux_file = f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{self.dp:.2f}_fluxes.csv'
-        flux_file = f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations_copy_dp_080_120/stack_30MeV_dp_{self.dp:.2f}_fluxes.csv'
-        
+        flux_file = f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{self.dp:.2f}_fluxes.csv'
         csv_flux_data = pd.read_csv(flux_file)
         
         target_flux_data = csv_flux_data.loc[csv_flux_data['name'] == self.foil_name]
@@ -105,7 +103,7 @@ class Foil:
             interp_xs = interp1d(E_mon, xs_mon,kind='cubic')
             interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='cubic')
 
-            #Plotting to check theinterpolation by eye
+            # #Plotting to check theinterpolation by eye
             # energy_plotting_array= np.linspace(3,50,10000)
             # plt.plot(E_mon, xs_mon, 'bo', label='data')
             # plt.plot(energy_plotting_array, interp_xs(energy_plotting_array))

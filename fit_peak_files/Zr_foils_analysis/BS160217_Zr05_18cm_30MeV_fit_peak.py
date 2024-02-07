@@ -27,7 +27,7 @@ def fit_peaks(spectrumName, position):
 
     # sp.isotopes = ['85Y', '85Ym', '86Y', '87NB', '87Y', '87Ym', '88Y', '89NB', '89NBm', '89Ym', '89ZR', '90NB', '90Ym', '91NBm', '92Y', '95NB', '95NBm', '95ZR', '96NB', '97NB', '97NBm', '98NBm']
     # sp.isotopes = ['97ZR']
-    sp.isotopes = ['89NB', '89ZR', '90NB', '92Y', '24NA', '40K']
+    sp.isotopes = ['89NB', '89ZR', '90NB', '92Y', '24NA', '40K', '96NB']
     sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0}
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
     # sp.plot(scale = 'linlin')

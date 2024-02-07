@@ -89,8 +89,9 @@ def plot_chi2(dp_list, compartment):
 
             if os.path.exists(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Calculated_A0/{foil_name}_A0_by_hand.csv'):
                 A0_by_hand_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Calculated_A0/{foil_name}_A0_by_hand.csv')
-
                 A0_concat_df = pd.concat((A0_by_hand_df, A0_by_curie_df), axis=0)
+
+
             else:
                 A0_concat_df = A0_by_curie_df
 
@@ -111,51 +112,21 @@ def plot_chi2(dp_list, compartment):
         chi2_list.append(chi2)
         red_chi2_list.append(red_chi2)
 
-    # red_chi2_array = len()*np.array(chi2_list)
+    min_index = red_chi2_list.index(min(red_chi2_list))
+    min_dp = dp_list[min_index]
 
     plt.plot(dp_list, red_chi2_list)
     plt.xlabel('dp')
     plt.ylabel('reduced chi2')
+    plt.title(f'Compartment {compartment}, minimized when dp = {min_dp:.2f}')
     plt.show()
 
 
-dp_array = np.arange(0.8, 1.21, 0.01)
+dp_array = np.arange(0.5, 1.19, 0.01)
 # dp_array=[0.90, 1.00, 1.10]
 
-plot_chi2(dp_array, '04')
+plot_chi2(dp_array, '05')
 
-
-
-
-
-
-# test_data = np.array([100, 120, 110, 117, 122])
-# test_data_unc = np.array([8, 12, 10, 17, 12])
-
-
-
-
-
-
-
-
-
-
-
-# def calculate_chi_squared():
-#     # Finding the chi squared of the beam current by giving the calculated beam current with uncertainty and the weighted average beam current which will be assigned as the true value
-#     calculated_beam_currents, beam_currents_unc = self.calculate_beam_current_w_unc()
-#     weighted_average_beam_current = self.calculate_weighted_average_beam_current()
-
-#     weighted_average_beam_current_array = np.zeros(len(calculated_beam_currents))
-#     weighted_average_beam_current_array.fill(weighted_average_beam_current)
-#     x_diff = weighted_average_beam_current_array-calculated_beam_currents 
-
-#     # chi_squared = np.sum( np.multiply(x_diff, x_diff)/ np.multiply(beam_currents_unc, beam_currents_unc))
-
-#     chi_squared = np.sum(np.multiply(x_diff, x_diff)/true)
-
-#     return chi_squared
 
 
 

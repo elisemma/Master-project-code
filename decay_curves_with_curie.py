@@ -60,6 +60,7 @@ def fit_activity(isotope, foil, path, file):
     return A0, unc_A0
 
 
+
 def generate_activity_csv(isotope_list, foil_list, path, file_concat):
     df = pd.read_csv(path+file_concat)
     for foil in foil_list:
@@ -160,11 +161,7 @@ df_DGNi05 = pd.read_csv(path_Ni+file_DGNi05)
 # print(df_BENi05['decay_rate'])
 # print(df_BDNi04['isotope'])
 
-
-
-
 df_concat_Ni = pd.concat((df_AYNi02, df_AZNi02, df_BBNi01, df_BCNi03, df_BDNi04, df_BENi05, df_DANi01, df_DBNi02, df_DCNi03, df_DENi03, df_DFNi04, df_DGNi05), axis = 0)
-
 
 # Specify the isotope and allowed energies
 isotope_to_exclude = '58CO'
@@ -175,6 +172,7 @@ mask = (df_concat_Ni['isotope'] == isotope_to_exclude) & (~df_concat_Ni['energy'
 
 # Apply the mask to exclude rows
 df_concat_Ni = df_concat_Ni[~mask]
+df_concat_Ni = df_concat_Ni[~((df_concat_Ni['isotope'] == '58CO') & (df_concat_Ni['filename'].str.contains('30MeV/BB|30MeV/AY|30MeV/AZ|30MeV/BC|30MeV/BD|30MeV/BE')))]
 
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
@@ -182,7 +180,7 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 # isotopes_Ni = ['56CO', '58CO', '61CU']
 # isotopes_Ni = ['58CO', '61CU']
-isotopes_Ni = ['61CU']
+isotopes_Ni = ['58CO', '61CU']
 
 foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
 # foil_list_Ni = ['Ni05']
@@ -205,9 +203,57 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 
 
 
-
 # print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti02') & (df_concat_Ti['isotope'] == '48V')])
 # print(df_concat_Ni[df_concat_Ni['filename'].str.contains('Ni01') & (df_concat_Ni['isotope'] == '56CO')])
+
+
+
+
+
+
+# Zr peak data _____________________________________________________________________________________________________________________
+path_Zr = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/MyGeneratedFiles/Zr_foils/'
+file_AXZR05 = 'AX130217_Zr05_18cm_30MeV/AX130217_Zr05_18cm_30MeV_peak_data.csv'
+file_BAZR01 = 'BA130217_Zr01_18cm_30MeV/BA130217_Zr01_18cm_30MeV_peak_data.csv'
+file_BIZR04 = 'BI140217_Zr04_18cm_30MeV/BI140217_Zr04_18cm_30MeV_peak_data.csv'
+file_BPZR01 = 'BP150217_Zr01_18cm_30MeV/BP150217_Zr01_18cm_30MeV_peak_data.csv'
+file_BRZR02 = 'BR150217_Zr02_18cm_30MeV/BR150217_Zr02_18cm_30MeV_peak_data.csv'
+file_BSZR05 = 'BS160217_Zr05_18cm_30MeV/BS160217_Zr05_18cm_30MeV_peak_data.csv'
+file_BTZR03 = 'CH260217_Zr03_18cm_30MeV/CH260217_Zr03_18cm_30MeV_peak_data.csv'
+file_BXZR01 = 'BX190217_Zr01_18cm_30MeV/BX190217_Zr01_18cm_30MeV_peak_data.csv'
+file_CHZR03 = 'BT160217_Zr03_18cm_30MeV/BT160217_Zr03_18cm_30MeV_peak_data.csv'
+file_CRZR04 = 'CR060317_Zr04_18cm_30MeV/CR060317_Zr04_18cm_30MeV_peak_data.csv'
+
+file_concat_Zr = 'combined_peak_data_Zr.csv'
+
+df_AXXR05 = pd.read_csv(path_Zr+file_AXZR05)
+df_BAZR01 = pd.read_csv(path_Zr+file_BAZR01)
+df_BIZR04 = pd.read_csv(path_Zr+file_BIZR04)
+df_BPZR01 = pd.read_csv(path_Zr+file_BPZR01)
+df_BRZR02 = pd.read_csv(path_Zr+file_BRZR02)
+df_BSZR05 = pd.read_csv(path_Zr+file_BSZR05)
+df_BTZR03 = pd.read_csv(path_Zr+file_BTZR03)
+df_BXZR01 = pd.read_csv(path_Zr+file_BXZR01)
+df_CHZR03 = pd.read_csv(path_Zr+file_CHZR03)
+df_CRZR04 = pd.read_csv(path_Zr+file_CRZR04)
+
+
+df_concat_Zr = pd.concat((df_AXXR05, df_BAZR01, df_BIZR04, df_BPZR01, df_BRZR02, df_BSZR05, df_BTZR03, df_BXZR01, df_CHZR03, df_CRZR04), axis = 0)
+df_concat_Zr.to_csv(path_Zr+file_concat_Zr)
+
+
+
+# isotopes_Zr = ['96NB']
+# isotopes_Zr = ['87NB','89NB', '90NB', '95NB']
+isotopes_Zr = ['88Y', '91Y', '92Y']
+
+
+foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
+
+
+# print(df_concat_Zr[df_concat_Zr['filename'].str.contains('Zr01') & (df_concat_Zr['isotope'] == '96NB')])
+
+
 
 
 
@@ -218,6 +264,7 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 # generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 
+# generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)
 
 
 # ./Calculated_A0

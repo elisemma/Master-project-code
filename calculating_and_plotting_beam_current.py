@@ -9,13 +9,13 @@ import os
 
 
 def caclulate_beam_currents_in_foil(dp, compound):
-    # stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.2f}.csv')
-    stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations_copy_dp_080_120/stack_30MeV_dp_{dp:.2f}.csv')
-    
+    stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.2f}.csv')
+   
 
     monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')]
-    # compartment = '03'
-    # monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')  & (stack_df['name'].str.contains(compartment))]
+    # compartments = ['01', '02', '03', '04']  # Example list of compartments
+    # monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}') & stack_df['name'].str.contains('|'.join(compartments))]
+
 
     beam_current_list_of_list = [] #This list will cointain lists of beam currents for all the mon reactions in the foils: [[Ni01:56CO, Ni01:58CO, Ni01:61CU], [Ni02:56CO, Ni02:58CO, Ni02:61CU], ...]
     beam_current_unc_list_of_list = [] #Same as beam_current_list_of_list but with the uncertainties
@@ -33,10 +33,8 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
         if os.path.exists(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Calculated_A0/{foil_name}_A0_by_hand.csv'):
             A0_by_hand_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Calculated_A0/{foil_name}_A0_by_hand.csv')
-            A0_by_hand_second_ord_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Calculated_A0/{foil_name}_A0_by_hand_second_order.csv')
+            A0_concat_df = pd.concat((A0_by_hand_df, A0_by_curie_df), axis=0)
 
-
-            A0_concat_df = pd.concat((A0_by_hand_second_ord_df, A0_by_hand_df, A0_by_curie_df), axis=0)
         else:
             A0_concat_df = A0_by_curie_df
 
@@ -50,7 +48,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
         areal_dens = row['areal_density']
         areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
 
-        foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp=1.00)
+        foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
 
         foil.assign_molar_mass()
         foil.calculate_decay_constant()
@@ -58,9 +56,6 @@ def caclulate_beam_currents_in_foil(dp, compound):
         foil.calculate_beam_currents_w_unc()
         foil.calculate_weighted_average_beam_current()
 
-
-        foil_average_beam_cur = foil.weighted_average_beam_current
-        foil_average_beam_cur_var = foil.var_weighted_average_beam_current
         foil_beam_cur_list = foil.beam_current_list
         foil_beam_cur_unc_list = foil.beam_current_unc_list
 
@@ -86,7 +81,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 #__________________________Running the function________________________________
 
-dp = 1.20
+dp = 1.17
 beam_current_list_of_list_Ni, beam_current_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_beam_currents_in_foil(dp, 'Ni')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 
