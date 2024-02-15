@@ -4,6 +4,7 @@ natTi(d,x)46Sc
 	fit	fit			
 Energy	Pade	Uncert.	Phys. yield	Phys. yield	1 h irrad.
 MeV	mb	mb	(MBq/uAh)	(uCi/uAh)	(MBq/uA)
+0.0	0.00	0.00	0       	0       	0
 3.0	0.31	0.07	7.75E-06	2.09E-04	7.75E-06
 3.1	0.43	0.09	1.88E-05	5.09E-04	1.88E-05
 3.2	0.55	0.12	3.35E-05	9.04E-04	3.34E-05

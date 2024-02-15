@@ -18,6 +18,8 @@ def p0(x, a):
 
 
 def fit_p0(x_data, y_data, unc_data):
+    y_data = np.array(y_data)
+    y_data[np.isnan(y_data)] = 0
     popt, cov  = curve_fit(p0, x_data, y_data, p0=100, sigma=unc_data)
     return popt[0]
 
@@ -129,10 +131,10 @@ def plot_chi2(dp_list, compartment):
     plt.show()
 
 
-dp_array = np.arange(0.5, 1.41, 0.01)
+dp_array = np.arange(0.8, 1.21, 0.01)
 # dp_array=[0.90, 1.00, 1.10]
 
-plot_chi2(dp_array, '03')
+plot_chi2(dp_array, '05')
 
 
 

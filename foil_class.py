@@ -24,6 +24,23 @@ class Foil:
         self.xs_mon_list = []
         self.xs_mon_unc_list = [0,0,0]
         self.beam_current_list = []
+        # self.beam_current_list = [121.28345799833693, 121.28345799833693, 121.28345799833693] #Ti01
+        # self.beam_current_list = [116.76837658051204, 116.76837658051204, 116.76837658051204] #Ti02
+        # self.beam_current_list = [155.42020573005345, 155.42020573005345, 155.42020573005345] #Ti03
+        # self.beam_current_list = [325.04609065955310, 325.04609065955310, 325.04609065955310] #Ti04
+
+        # self.beam_current_list = [139.73797054629617, 139.73797054629617, 139.73797054629617] #Ni01
+        # self.beam_current_list = [129.92782065665395, 129.92782065665395, 129.92782065665395] #Ni02
+        # self.beam_current_list = [131.52169312518836, 131.52169312518836, 131.52169312518836] #Ni03
+        # self.beam_current_list = [140.60725637748243, 140.60725637748243, 140.60725637748243] #Ni04
+        # self.beam_current_list = [145.40154279152310, 145.40154279152310, 145.40154279152310] #Ni05
+
+
+
+
+      
+
+
         self.beam_current_unc_list = []
         self.weighted_average_beam_current = None
         self.var_weighted_average_beam_current = None
@@ -32,6 +49,8 @@ class Foil:
         self.calc_xs_unc_list = []
 
 
+        #average bc for Ti:  [129.37211084708628, 137.04225062883893, 109.54315171895075]
+        #average bc for Ni:  [139.12206134108385, 142.21669363276803, 201.93713192279714]
 
     def assign_molar_mass(self):
         # Assigning the molar mass of the target material
@@ -86,7 +105,7 @@ class Foil:
         for reaction_product in self.reaction_list:
             filename = './Monitor_cross_section_data/IAEA_monitor_xs_' + reaction_product + '.txt'
             with open(filename) as file:
-                lines = file.readlines()[7:-1]
+                lines = file.readlines()[6:-1]
                 E_mon_list = []
                 xs_list = []
                 xs_unc_list = []
@@ -103,11 +122,11 @@ class Foil:
             xs_mon = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
             unc_xs_mon = np.array(xs_unc_list)
             weights = 1 / unc_xs_mon
-            interp_xs = interp1d(E_mon, xs_mon,kind='cubic')
-            interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='cubic')
+            interp_xs = interp1d(E_mon, xs_mon,kind='linear')
+            interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='linear')
 
             # #Plotting to check theinterpolation by eye
-            # energy_plotting_array= np.linspace(3,50,10000)
+            # energy_plotting_array= np.linspace(0,50,10000)
             # plt.plot(E_mon, xs_mon, 'bo', label='data')
             # plt.plot(energy_plotting_array, interp_xs(energy_plotting_array))
             # plt.legend()

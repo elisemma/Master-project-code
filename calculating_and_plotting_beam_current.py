@@ -13,9 +13,6 @@ def caclulate_beam_currents_in_foil(dp, compound):
    
 
     monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')]
-    # compartments = ['01', '02', '03', '04']  # Example list of compartments
-    # monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}') & stack_df['name'].str.contains('|'.join(compartments))]
-
 
     beam_current_list_of_list = [] #This list will cointain lists of beam currents for all the mon reactions in the foils: [[Ni01:56CO, Ni01:58CO, Ni01:61CU], [Ni02:56CO, Ni02:58CO, Ni02:61CU], ...]
     beam_current_unc_list_of_list = [] #Same as beam_current_list_of_list but with the uncertainties
@@ -61,7 +58,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
         foil.calculate_decay_constant()
         foil.find_monitor_cross_section()
         foil.calculate_beam_currents_w_unc()
-        foil.calculate_weighted_average_beam_current()
+        # foil.calculate_weighted_average_beam_current()
 
         foil_beam_cur_list = foil.beam_current_list
         foil_beam_cur_unc_list = foil.beam_current_unc_list
@@ -86,7 +83,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 #__________________________Running the function________________________________
 
-dp = 1.00
+dp = 0.98
 beam_current_list_of_list_Ni, beam_current_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_beam_currents_in_foil(dp, 'Ni')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 
@@ -136,6 +133,26 @@ lower_energy_compartments.reverse()
 upper_energy_compartments.reverse()
 
 compartment_separation_energies = (np.array(upper_energy_compartments[:-1]) + np.array(lower_energy_compartments[1:]))/2
+
+
+avrg_bc_Ti_list = []
+avrg_bc_Ni_list = []
+
+
+for i in range (len(data_by_reaction['56CO']['beam_current'])):
+    avrg_bc_Ti = (data_by_reaction['46SC']['beam_current'][i] + data_by_reaction['48V']['beam_current'][i])/2
+    avrg_bc_Ti_list.append(avrg_bc_Ti)
+
+    avrg_bc_Ni = (data_by_reaction['56CO']['beam_current'][i] + data_by_reaction['58CO']['beam_current'][i] + data_by_reaction['61CU']['beam_current'][i])/3
+    avrg_bc_Ni_list.append(avrg_bc_Ni)
+
+avrg_bc_Ni_comp5 = (data_by_reaction['58CO']['beam_current'][i] + data_by_reaction['61CU']['beam_current'][i])/2
+avrg_bc_Ni_list.append(avrg_bc_Ni_comp5)
+
+
+
+print('average bc for Ti: ', avrg_bc_Ti_list)
+print('average bc for Ni: ', avrg_bc_Ni_list)
 
 
 
