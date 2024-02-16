@@ -22,18 +22,20 @@ class Foil:
         self.areal_dens_unc_percent = areal_dens_unc_percent
         self.decay_const_list = []
         self.xs_mon_list = []
-        self.xs_mon_unc_list = [0,0,0]
+        self.xs_mon_unc_list = []
         self.beam_current_list = []
-        # self.beam_current_list = [121.28345799833693, 121.28345799833693, 121.28345799833693] #Ti01
-        # self.beam_current_list = [116.76837658051204, 116.76837658051204, 116.76837658051204] #Ti02
-        # self.beam_current_list = [155.42020573005345, 155.42020573005345, 155.42020573005345] #Ti03
-        # self.beam_current_list = [325.04609065955310, 325.04609065955310, 325.04609065955310] #Ti04
+        # self.beam_current_list = [121.81390490600629, 121.81390490600629, 121.81390490600629] #Ti01
+        # self.beam_current_list = [118.16823107631916, 118.16823107631916, 118.16823107631916] #Ti02
+        # self.beam_current_list = [130.11726708415515, 130.11726708415515, 130.11726708415515] #Ti03
+        # self.beam_current_list = [136.52858551164277, 136.52858551164277, 136.52858551164277] #Ti04
+        # self.beam_current_list = [5759.722655366452, 5759.722655366452, 5759.722655366452] #Ti05
 
-        # self.beam_current_list = [139.73797054629617, 139.73797054629617, 139.73797054629617] #Ni01
-        # self.beam_current_list = [129.92782065665395, 129.92782065665395, 129.92782065665395] #Ni02
-        # self.beam_current_list = [131.52169312518836, 131.52169312518836, 131.52169312518836] #Ni03
-        # self.beam_current_list = [140.60725637748243, 140.60725637748243, 140.60725637748243] #Ni04
-        # self.beam_current_list = [145.40154279152310, 145.40154279152310, 145.40154279152310] #Ni05
+
+        # self.beam_current_list = [139.60625113146912, 139.60625113146912, 139.60625113146912] #Ni01
+        # self.beam_current_list = [131.4792290248961, 131.4792290248961, 131.4792290248961] #Ni02
+        # self.beam_current_list = [134.35574913752646, 134.35574913752646, 134.35574913752646] #Ni03
+        # self.beam_current_list = [ 119.58052940582952, 119.58052940582952, 119.58052940582952] #Ni04
+        # self.beam_current_list = [99.38820740577283, 99.38820740577283, 99.38820740577283] #Ni05
 
 
 
@@ -97,8 +99,16 @@ class Foil:
         target_flux_data = csv_flux_data.loc[csv_flux_data['name'] == self.foil_name]
         energy = target_flux_data.loc[:,'energy']
         flux = target_flux_data.loc[:,'flux']
-        energy_from_stack_calc = energy.values.tolist()
-        flux_from_stack_calc = flux.values.tolist() #[MeV]
+        energy_from_stack_calc_list = energy.values.tolist()
+        flux_from_stack_calc_list = flux.values.tolist() #[MeV]
+        # energy_from_stack_calc = energy.values.tolist()
+        # flux_from_stack_calc = flux.values.tolist() #[MeV]
+
+        # Deleting the pileups near E=0
+        energy_from_stack_calc_unfiltered = np.array(energy_from_stack_calc_list)
+        flux_from_stack_calc_unfiltered = np.array(flux_from_stack_calc_list)
+        energy_from_stack_calc = energy_from_stack_calc_unfiltered[energy_from_stack_calc_unfiltered >= 0.275]
+        flux_from_stack_calc = flux_from_stack_calc_unfiltered[energy_from_stack_calc_unfiltered >= 0.275]
 
 
         # Using the IAEA data to get the monitor cross section for the energy in a foil
@@ -120,7 +130,7 @@ class Foil:
 
             E_mon = np.array(E_mon_list)
             xs_mon = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
-            unc_xs_mon = np.array(xs_unc_list)
+            unc_xs_mon = np.array(xs_unc_list)*1e-28*1e-3 #convert mb to m^2
             weights = 1 / unc_xs_mon
             interp_xs = interp1d(E_mon, xs_mon,kind='linear')
             interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='linear')
