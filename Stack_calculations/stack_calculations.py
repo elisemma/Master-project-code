@@ -116,7 +116,11 @@ stack_30MeV = [{'compound':'SS_316', 'name': 'SS1', 'ad':100.199},
 
 
 
-dp_array = np.arange(0.97, 0.99, 0.001)
+dp_array = np.arange(0.8, 1.21, 0.01)
+# dp_array2 = np.arange(0.97, 0.99, 0.001)
+# dp_array1 = np.arange(0.99, 1.001, 0.001)
+# dp_array2 = np.arange(0.94, 0.96, 0.001)
+# dp_array = np.union1d(dp_array1, dp_array2)
 print(dp_array)
 dp_array_length = len(dp_array)
 index = 0

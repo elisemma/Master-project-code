@@ -9,7 +9,8 @@ import os
 
 
 def caclulate_beam_currents_in_foil(dp, compound):
-    stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.2f}.csv')
+    stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.3f}.csv')
+
    
 
     monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')]
@@ -43,12 +44,11 @@ def caclulate_beam_currents_in_foil(dp, compound):
         #     reaction_list = ['58CO']
         # if compound == 'Ti':
         #     reaction_list = ['48V']
-
         # A0_concat_df = A0_concat_df[A0_concat_df['Isotope']==reaction_list[0]]
 
         A0_list = A0_concat_df['A0'].tolist()
         A0_unc_list = A0_concat_df['A0_unc'].tolist()
-        A0_unc_list = [1e10 if np.isinf(value) else value for value in A0_unc_list]
+        A0_unc_list = [1e18 if np.isinf(value) else value for value in A0_unc_list]
         areal_dens = row['areal_density']
         areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
 
@@ -83,7 +83,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 #__________________________Running the function________________________________
 
-dp = 0.99
+dp = 0.950
 beam_current_list_of_list_Ni, beam_current_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_beam_currents_in_foil(dp, 'Ni')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 
@@ -104,10 +104,6 @@ for i, reaction_list in enumerate(reaction_list_list_Ni):
         data_by_reaction[reaction]['beam_current'].append(beam_current_list_of_list_Ni[i][j])
         data_by_reaction[reaction]['beam_current_unc'].append(beam_current_unc_list_of_list_Ni[i][j])
         data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list_Ni[i][j])
-
-# print(reaction_list_list_Ti)
-# reaction_list_list_Ti = reaction_list_list_Ti[:-1]
-# print(reaction_list_list_Ti)
 
 
 # Iterate through reaction_list_list_Ti
@@ -138,28 +134,6 @@ upper_energy_compartments.reverse()
 compartment_separation_energies = (np.array(upper_energy_compartments[:-1]) + np.array(lower_energy_compartments[1:]))/2
 
 
-# avrg_bc_Ti_list = []
-# avrg_bc_Ni_list = []
-
-
-# for i in range (len(data_by_reaction['56CO']['beam_current'])):
-#     avrg_bc_Ti = (data_by_reaction['46SC']['beam_current'][i] + data_by_reaction['48V']['beam_current'][i])/2
-#     avrg_bc_Ti_list.append(avrg_bc_Ti)
-
-#     avrg_bc_Ni = (data_by_reaction['56CO']['beam_current'][i] + data_by_reaction['58CO']['beam_current'][i] + data_by_reaction['61CU']['beam_current'][i])/3
-#     avrg_bc_Ni_list.append(avrg_bc_Ni)
-
-# avrg_bc_Ni_comp5 = (data_by_reaction['58CO']['beam_current'][-1] + data_by_reaction['61CU']['beam_current'][-1])/2
-# avrg_bc_Ni_list.append(avrg_bc_Ni_comp5)
-
-# avrg_bc_Ti_comp5 = (data_by_reaction['46SC']['beam_current'][-1] + data_by_reaction['48V']['beam_current'][-1])/2
-# avrg_bc_Ti_list.append(avrg_bc_Ti_comp5)
-
-
-# print('average bc for Ti: ', avrg_bc_Ti_list)
-# print('average bc for Ni: ', avrg_bc_Ni_list)
-
-
 
 # Loop over every reaction
 for i, (reaction, data) in enumerate(data_by_reaction.items()):
@@ -187,7 +161,7 @@ for i in range(len(compartment_separation_energies)+1):
 plt.xlim([lower_energy_compartments[0]-1, upper_energy_compartments[-1]+1])
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Beam current (nA)')
-plt.title(f'dp = {dp:.2f}')
+plt.title(f'dp = {dp:.3f}')
 plt.legend()
 plt.show()
 

@@ -94,7 +94,6 @@ def run_chi2(x_data, y_data, unc_data, method):
             xs_mon = np.array(xs_mon_list)
             interp_xs_mon = interp1d(E_mon, xs_mon,kind='linear')
 
-
             #Getting observed data for the rection
             calc_xs = data['calc_xs']
             calc_xs_unc = data['calc_xs_unc']
@@ -129,8 +128,8 @@ def beam_currents_in_foil(foil_name, beam_energy_in_foil, target_material, react
     return foil_beam_cur_list, foil_beam_cur_unc_list
 
 
-def caclulate_xs_in_compound(dp, compound):
-    stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.2f}.csv')
+def caclulate_xs_in_stack(stack_df, compound, dp):
+    # stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.2f}.csv')
    
 
     monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')]
@@ -165,7 +164,7 @@ def caclulate_xs_in_compound(dp, compound):
         A0_unc_list = A0_concat_df['A0_unc'].tolist()
         A0_unc_list = [1e10 if np.isinf(value) else value for value in A0_unc_list]
         areal_dens = row['areal_density']
-        areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
+        areal_dens_unc_percent = 0.2 #XXXXXXXXXXXX this is not true, need to find it
 
         foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
 
@@ -173,6 +172,7 @@ def caclulate_xs_in_compound(dp, compound):
         foil.calculate_decay_constant()
         foil.find_monitor_cross_section()
         foil.calculate_beam_currents_w_unc()
+        foil.calculate_weighted_average_beam_current()
         foil.convert_beam_current_back_to_xs_w_unc()
 
         foil_calc_xs_list = foil.calc_xs_list
@@ -205,7 +205,7 @@ def caclulate_xs_in_compound(dp, compound):
 
 
 
-def plot_chi2(dp_list, compartment, method):
+def plot_chi2(dp_list, compartment_list, method):
     chi2_list = []
     red_chi2_list = []
     method_list = ['p0', 'p1']
@@ -219,12 +219,17 @@ def plot_chi2(dp_list, compartment, method):
         energy_list=[]
 
         # for foil in compartment:
-        stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.2f}.csv')
+        stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.3f}.csv')
 
         monitor_compounds = ['Ni', 'Ti']
         # if compartment == '05':
         #     monitor_compounds = ['Ni']
-        monitor_stack_df = pd.concat([stack_df[(stack_df['name'].str.contains(compound)) & (stack_df['name'].str.contains(compartment))] for compound in monitor_compounds])
+        # monitor_stack_df = pd.concat([stack_df[(stack_df['name'].str.contains(compound)) & (stack_df['name'].str.contains(compartment))] for compound in monitor_compounds])
+        monitor_stack_df = pd.concat([stack_df[(stack_df['name'].str.contains(compound)) & 
+                                      (stack_df['name'].str.contains(compartment))] 
+                              for compound in monitor_compounds 
+                              for compartment in compartment_list])
+
          
         # print(monitor_stack_df)
 
@@ -269,12 +274,12 @@ def plot_chi2(dp_list, compartment, method):
                 data_by_reaction = {}
 
                 for compound in monitor_compounds:
-                    data_dict = caclulate_xs_in_compound(dp, compound)
+                    data_dict = caclulate_xs_in_stack(monitor_stack_df, compound, dp)
                     data_by_reaction.update(data_dict)
                 x_data = data_by_reaction
                 y_data = []
                 unc_data = []
-
+               
         chi2, red_chi2 = run_chi2(x_data, y_data, unc_data, method)
         chi2_list.append(chi2)
         red_chi2_list.append(red_chi2)
@@ -282,19 +287,31 @@ def plot_chi2(dp_list, compartment, method):
     min_index = red_chi2_list.index(min(red_chi2_list))
     min_dp = dp_list[min_index]
 
+
     plt.plot(dp_list, red_chi2_list)
     plt.xlabel('dp')
     plt.ylabel('reduced chi2')
-    plt.title(f'Compartment {compartment}, minimized when dp = {min_dp:.2f}')
+    plt.title(f'Compartment {compartment_list}, method: {method}, minimized when dp = {min_dp:.3f}')
     plt.show()
 
 
 
 
 #_____________________Running the code___________________________
-dp_array = np.arange(0.8, 1.21, 0.01)
 
-plot_chi2(dp_array, '04', 'p0')
+dp_array1 = np.arange(0.8, 1.21, 0.01)
+dp_array2 = np.arange(0.97, 0.99, 0.001)
+dp_array3 = np.union1d(dp_array1, dp_array2)
+dp_array4 = np.arange(0.99, 1.001, 0.001)
+dp_array5 = np.union1d(dp_array3, dp_array4)
+dp_array6 = np.arange(0.94, 0.96, 0.001)
+dp_array = np.union1d(dp_array5, dp_array6)
+
+# plot_chi2(dp_array, ['01', '02', '03', '04'], 'global_xs')
+plot_chi2(dp_array, ['04'], 'p0')
+
+
+print(dp_array)
 
 
 

@@ -24,25 +24,6 @@ class Foil:
         self.xs_mon_list = []
         self.xs_mon_unc_list = []
         self.beam_current_list = []
-        # self.beam_current_list = [121.81390490600629, 121.81390490600629, 121.81390490600629] #Ti01
-        # self.beam_current_list = [118.16823107631916, 118.16823107631916, 118.16823107631916] #Ti02
-        # self.beam_current_list = [130.11726708415515, 130.11726708415515, 130.11726708415515] #Ti03
-        # self.beam_current_list = [136.52858551164277, 136.52858551164277, 136.52858551164277] #Ti04
-        # self.beam_current_list = [5759.722655366452, 5759.722655366452, 5759.722655366452] #Ti05
-
-
-        # self.beam_current_list = [139.60625113146912, 139.60625113146912, 139.60625113146912] #Ni01
-        # self.beam_current_list = [131.4792290248961, 131.4792290248961, 131.4792290248961] #Ni02
-        # self.beam_current_list = [134.35574913752646, 134.35574913752646, 134.35574913752646] #Ni03
-        # self.beam_current_list = [ 119.58052940582952, 119.58052940582952, 119.58052940582952] #Ni04
-        # self.beam_current_list = [99.38820740577283, 99.38820740577283, 99.38820740577283] #Ni05
-
-
-
-
-      
-
-
         self.beam_current_unc_list = []
         self.weighted_average_beam_current = None
         self.var_weighted_average_beam_current = None
@@ -50,9 +31,6 @@ class Foil:
         self.calc_xs_list = []
         self.calc_xs_unc_list = []
 
-
-        #average bc for Ti:  [129.37211084708628, 137.04225062883893, 109.54315171895075]
-        #average bc for Ni:  [139.12206134108385, 142.21669363276803, 201.93713192279714]
 
     def assign_molar_mass(self):
         # Assigning the molar mass of the target material
@@ -93,7 +71,7 @@ class Foil:
 
     def find_monitor_cross_section(self):
         #Importing the energy/fluxes from the stack calculation
-        flux_file = f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{self.dp:.2f}_fluxes.csv'
+        flux_file = f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{self.dp:.3f}_fluxes.csv'
         csv_flux_data = pd.read_csv(flux_file)
         
         target_flux_data = csv_flux_data.loc[csv_flux_data['name'] == self.foil_name]
@@ -180,10 +158,8 @@ class Foil:
             beam_current_in_A = beam_current*1.60217634e-19 #[A]
             beam_current_in_nA = beam_current_in_A*1.0e9 #[nA]
 
-
-
-            areal_dens_unc = self.areal_dens*10*self.areal_dens_unc_percent/100
-            N_T_unc = N_T*np.sqrt((areal_dens_unc/self.areal_dens)**2 + (self.molar_mass_unc/self.molar_mass)**2) #[nuclei/cm^2]
+            areal_dens_unc = areal_dens*self.areal_dens_unc_percent/100
+            N_T_unc = N_T*np.sqrt((areal_dens_unc/areal_dens)**2 + (self.molar_mass_unc/self.molar_mass)**2) #[nuclei/m^2]
         
             dfdx_list = [] #Jacobian
             unc_list = []
@@ -193,10 +169,10 @@ class Foil:
             dfdx_list.append(dfdA0)
             unc_list.append(self.A0_unc_list[i])
         
-            # dN_T = N_T*1e-8
-            # dfdN_T = (self.A0_list[i]/((N_T+dN_T)*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/((N_T-dN_T)*self.xs_mon_list[i]*(1- np.exp(-self.decay_const_list[i]*t_irr))))/dN_T
-            # dfdx_list.append(dfdN_T)
-            # unc_list.append(N_T_unc)
+            dN_T = N_T*1e-8
+            dfdN_T = (self.A0_list[i]/((N_T+dN_T)*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/((N_T-dN_T)*self.xs_mon_list[i]*(1- np.exp(-self.decay_const_list[i]*t_irr))))/dN_T
+            dfdx_list.append(dfdN_T)
+            unc_list.append(N_T_unc)
         
             dxs = self.xs_mon_list[i]*1e-8
             dfdxs = (self.A0_list[i]/(N_T*(self.xs_mon_list[i]+dxs)*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/(N_T*(self.xs_mon_list[i]-dxs)*(1-np. exp(-self.decay_const_list[i]*t_irr))))/dxs
@@ -250,16 +226,17 @@ class Foil:
         # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
         N_T = N_T_per_cm2*1.0e4 #[nuclei/m^2]
 
+        beam_current_in_d_per_s = self.weighted_average_beam_current/(1.60217634e-19*1.0e9)
+        beam_current_in_d_per_s_unc = np.sqrt(self.var_weighted_average_beam_current)/(1.60217634e-19*1.0e9)
+
+
 
         for i in range(len(self.reaction_list)):
-
-            beam_current_in_d_per_s = self.beam_current_list[i]/(1.60217634e-19*1.0e9)
-            beam_current_in_d_per_s_unc = self.beam_current_unc_list[i]/(1.60217634e-19*1.0e9)
+            
             xs = self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*t_irr)))*1e+28*1e3 #[mb]
 
-
-            areal_dens_unc = self.areal_dens*10*self.areal_dens_unc_percent/100
-            N_T_unc = N_T*np.sqrt((areal_dens_unc/self.areal_dens)**2 + (self.molar_mass_unc/self.molar_mass)**2) #[nuclei/cm^2]
+            areal_dens_unc = areal_dens*self.areal_dens_unc_percent/100
+            N_T_unc = N_T*np.sqrt((areal_dens_unc/areal_dens)**2 + (self.molar_mass_unc/self.molar_mass)**2) #[nuclei/m^2]
         
             dfdx_list = [] #Jacobian
             unc_list = []
@@ -269,24 +246,24 @@ class Foil:
             dfdx_list.append(dfdA0)
             unc_list.append(self.A0_unc_list[i])
         
-            # dN_T = N_T*1e-8
-            # dfdN_T = (self.A0_list[i]/((N_T+dN_T)*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/((N_T-dN_T)*self.xs_mon_list[i]*(1- np.exp(-self.decay_const_list[i]*t_irr))))/dN_T
-            # dfdx_list.append(dfdN_T)
-            # unc_list.append(N_T_unc)
+            dN_T = N_T*1e-8
+            dfdN_T = (self.A0_list[i]/((N_T+dN_T)*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/((N_T-dN_T)*beam_current_in_d_per_s*(1- np.exp(-self.decay_const_list[i]*t_irr))))/dN_T
+            dfdx_list.append(dfdN_T)
+            unc_list.append(N_T_unc)
         
             dbc = self.beam_current_list[i]*1e-8
-            dfdbc = (self.A0_list[i]/(N_T*(beam_current_in_d_per_s+beam_current_in_d_per_s_unc)*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/(N_T*(beam_current_in_d_per_s-beam_current_in_d_per_s_unc)*(1-np.exp(-self.decay_const_list[i]*t_irr))))/dA0
+            dfdbc = (self.A0_list[i]/(N_T*(beam_current_in_d_per_s+dbc)*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/(N_T*(beam_current_in_d_per_s-dbc)*(1-np.exp(-self.decay_const_list[i]*t_irr))))/dbc
             dfdx_list.append(dfdbc)
             unc_list.append(self.beam_current_unc_list[i])
         
             dt_irr = t_irr*1e-8
-            dfdt_irr = (self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr+dt_irr)))) - self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr-dt_irr)))))/dA0
+            dfdt_irr = (self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr+dt_irr)))) - self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr-dt_irr)))))/dt_irr
             dfdx_list.append(dfdt_irr)
             unc_list.append(t_irr_unc)
         
             dfdx = np.array(dfdx_list)
             unc = np.array(unc_list)
-            xs_unc = np.sqrt(np.sum(np.multiply(dfdx,dfdx)* np.multiply(unc,unc)))*1.60217634e-19*1e9
+            xs_unc = np.sqrt(np.sum(np.multiply(dfdx,dfdx)* np.multiply(unc,unc)))*1e+28*1e3 #[mb]
 
             self.calc_xs_list.append(xs)
             self.calc_xs_unc_list.append(xs_unc)
