@@ -46,14 +46,9 @@ def fit_activity(isotope, foil, path, file):
 
     isotopes, a0, var_a0 = dc.fit_A0()
     
-    if isotope == '58COm':
-        print('_______________')
-        print(isotopes)
-        A0 = float(a0[1])
-        var_A0 = float(var_a0[1][1])
-    else:
-        A0 = float(a0[0])
-        var_A0 = float(var_a0[0][0])
+    
+    A0 = float(a0[0])
+    var_A0 = float(var_a0[0][0])
 
     unc_A0 = np.sqrt(var_A0)
     dc.plot(palette='american', shade='dark', style='paper', max_plot_chi2=100)
@@ -65,7 +60,7 @@ def generate_activity_csv(isotope_list, foil_list, path, file_concat):
     df = pd.read_csv(path+file_concat)
     for foil in foil_list:
         print(foil)
-        csv_file_path = f'./Calculated_A0/{foil}_A0_by_curie.csv'
+        csv_file_path = f'./Calculated_A0/{foil}_A0_by_curie_NEW_RUN.csv'
         with open(csv_file_path, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])
@@ -174,13 +169,15 @@ mask = (df_concat_Ni['isotope'] == isotope_to_exclude) & (~df_concat_Ni['energy'
 df_concat_Ni = df_concat_Ni[~mask]
 df_concat_Ni = df_concat_Ni[~((df_concat_Ni['isotope'] == '58CO') & (df_concat_Ni['filename'].str.contains('30MeV/BB|30MeV/AY|30MeV/AZ|30MeV/BC|30MeV/BD|30MeV/BE')))]
 
+print(df_concat_Ni[df_concat_Ni['isotope']=='61CU'])
+
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 
 
 # isotopes_Ni = ['56CO', '58CO', '61CU']
-# isotopes_Ni = ['58CO', '61CU']
 isotopes_Ni = ['58CO', '61CU']
+# isotopes_Ni = ['58CO']
 
 foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
 # foil_list_Ni = ['Ni05']
@@ -261,7 +258,7 @@ foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
 # generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
-generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+# generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 # generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 
 # generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)

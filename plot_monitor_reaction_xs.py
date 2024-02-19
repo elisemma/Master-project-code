@@ -97,39 +97,96 @@ def get_IAEA_monitro_xs(reaction_product):
 
 #__________________________Running the function________________________________
 
-dp = 0.950
-calc_xs_list_of_list_Ni, calc_xs_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_xs_in_foil(dp, 'Ni')
-calc_xs_list_of_list_Ti, calc_xs_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_xs_in_foil(dp, 'Ti')
+# dp = 0.950
+# calc_xs_list_of_list_Ni, calc_xs_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_xs_in_foil(dp, 'Ni')
+# calc_xs_list_of_list_Ti, calc_xs_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_xs_in_foil(dp, 'Ti')
+
+
+calc_xs_list_of_list_Ni_p0, calc_xs_unc_list_of_list_Ni_p0, beam_energy_in_foil_list_list_Ni_p0, reaction_list_list_Ni_p0 = caclulate_xs_in_foil(0.988, 'Ni')
+calc_xs_list_of_list_Ti_p0, calc_xs_unc_list_of_list_Ti_p0, beam_energy_in_foil_list_list_Ti_p0, reaction_list_list_Ti_p0 = caclulate_xs_in_foil(0.988, 'Ti')
+
+calc_xs_list_of_list_Ni_p1, calc_xs_unc_list_of_list_Ni_p1, beam_energy_in_foil_list_list_Ni_p1, reaction_list_list_Ni_p1 = caclulate_xs_in_foil(0.977, 'Ni')
+calc_xs_list_of_list_Ti_p1, calc_xs_unc_list_of_list_Ti_p1, beam_energy_in_foil_list_list_Ti_p1, reaction_list_list_Ti_p1 = caclulate_xs_in_foil(0.977, 'Ti')
+
 
 
 
 #___________________________Sorting the data___________________________________
 
-# Initialize nested dictionary to store beam currents, uncertainties and energies for each reaction
-data_by_reaction = {}
+# # Initialize nested dictionary to store beam currents, uncertainties and energies for each reaction
+# data_by_reaction = {}
+
+# # Iterate through reaction_list_list_Ni
+# for i, reaction_list in enumerate(reaction_list_list_Ni):
+#     for j, reaction in enumerate(reaction_list):
+#         if reaction not in data_by_reaction:
+#             data_by_reaction[reaction] = {'calc_xs': [], 'calc_xs_unc': [], 'energy': []}  # Initialize inner dictionary with lists
+#         # Add calc_xs, calc_xs_unc and energy corresponding to the reaction
+#         data_by_reaction[reaction]['calc_xs'].append(calc_xs_list_of_list_Ni[i][j])
+#         data_by_reaction[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ni[i][j])
+#         data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list_Ni[i][j])
+
+
+
+# # Iterate through reaction_list_list_Ti
+# for i, reaction_list in enumerate(reaction_list_list_Ti):
+#     for j, reaction in enumerate(reaction_list):
+#         if reaction not in data_by_reaction:
+#             data_by_reaction[reaction] = {'calc_xs': [], 'calc_xs_unc': [], 'energy': []}  # Initialize inner dictionary with lists
+#         # Add calc_xs, calc_xs_unc and energy corresponding to the reaction
+#         data_by_reaction[reaction]['calc_xs'].append(calc_xs_list_of_list_Ti[i][j])
+#         data_by_reaction[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ti[i][j])
+#         data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list_Ti[i][j])
+
+
+data_by_reaction_p0 = {}
 
 # Iterate through reaction_list_list_Ni
-for i, reaction_list in enumerate(reaction_list_list_Ni):
+for i, reaction_list in enumerate(reaction_list_list_Ni_p0):
     for j, reaction in enumerate(reaction_list):
-        if reaction not in data_by_reaction:
-            data_by_reaction[reaction] = {'calc_xs': [], 'calc_xs_unc': [], 'energy': []}  # Initialize inner dictionary with lists
+        if reaction not in data_by_reaction_p0:
+            data_by_reaction_p0[reaction] = {'calc_xs': [], 'calc_xs_unc': [], 'energy': []}  # Initialize inner dictionary with lists
         # Add calc_xs, calc_xs_unc and energy corresponding to the reaction
-        data_by_reaction[reaction]['calc_xs'].append(calc_xs_list_of_list_Ni[i][j])
-        data_by_reaction[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ni[i][j])
-        data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list_Ni[i][j])
+        data_by_reaction_p0[reaction]['calc_xs'].append(calc_xs_list_of_list_Ni_p0[i][j])
+        data_by_reaction_p0[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ni_p0[i][j])
+        data_by_reaction_p0[reaction]['energy'].append(beam_energy_in_foil_list_list_Ni_p0[i][j])
 
 
 
 # Iterate through reaction_list_list_Ti
-for i, reaction_list in enumerate(reaction_list_list_Ti):
+for i, reaction_list in enumerate(reaction_list_list_Ti_p0):
     for j, reaction in enumerate(reaction_list):
-        if reaction not in data_by_reaction:
-            data_by_reaction[reaction] = {'calc_xs': [], 'calc_xs_unc': [], 'energy': []}  # Initialize inner dictionary with lists
+        if reaction not in data_by_reaction_p0:
+            data_by_reaction_p0[reaction] = {'calc_xs': [], 'calc_xs_unc': [], 'energy': []}  # Initialize inner dictionary with lists
         # Add calc_xs, calc_xs_unc and energy corresponding to the reaction
-        data_by_reaction[reaction]['calc_xs'].append(calc_xs_list_of_list_Ti[i][j])
-        data_by_reaction[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ti[i][j])
-        data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list_Ti[i][j])
+        data_by_reaction_p0[reaction]['calc_xs'].append(calc_xs_list_of_list_Ti_p0[i][j])
+        data_by_reaction_p0[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ti_p0[i][j])
+        data_by_reaction_p0[reaction]['energy'].append(beam_energy_in_foil_list_list_Ti_p0[i][j])
 
+
+data_by_reaction_p1 = {}
+
+# Iterate through reaction_list_list_Ni
+for i, reaction_list in enumerate(reaction_list_list_Ni_p1):
+    for j, reaction in enumerate(reaction_list):
+        if reaction not in data_by_reaction_p1:
+            data_by_reaction_p1[reaction] = {'calc_xs': [], 'calc_xs_unc': [], 'energy': []}  # Initialize inner dictionary with lists
+        # Add calc_xs, calc_xs_unc and energy corresponding to the reaction
+        data_by_reaction_p1[reaction]['calc_xs'].append(calc_xs_list_of_list_Ni_p1[i][j])
+        data_by_reaction_p1[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ni_p1[i][j])
+        data_by_reaction_p1[reaction]['energy'].append(beam_energy_in_foil_list_list_Ni_p1[i][j])
+
+
+
+# Iterate through reaction_list_list_Ti
+for i, reaction_list in enumerate(reaction_list_list_Ti_p1):
+    for j, reaction in enumerate(reaction_list):
+        if reaction not in data_by_reaction_p1:
+            data_by_reaction_p1[reaction] = {'calc_xs': [], 'calc_xs_unc': [], 'energy': []}  # Initialize inner dictionary with lists
+        # Add calc_xs, calc_xs_unc and energy corresponding to the reaction
+        data_by_reaction_p1[reaction]['calc_xs'].append(calc_xs_list_of_list_Ti_p1[i][j])
+        data_by_reaction_p1[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ti_p1[i][j])
+        data_by_reaction_p1[reaction]['energy'].append(beam_energy_in_foil_list_list_Ti_p1[i][j])
 
 
 
@@ -151,32 +208,117 @@ E_mon_list_61CU, xs_list_61CU, xs_unc_list_61CU = get_IAEA_monitro_xs('61CU')
 
 # ______________________________Plotting________________________________________
 
-marker_list = ['d', '*', 's', '<', 'o']
-color_list = ['deepskyblue', 'mediumseagreen', 'gold', 'violet', 'mediumvioletred']
+# marker_list = ['d', '*', 's', '<', 'o']
+# color_list = ['deepskyblue', 'mediumseagreen', 'gold', 'violet', 'mediumvioletred']
 
 
-# Loop over every reaction
-for i, (reaction, data) in enumerate(data_by_reaction.items()):
-    calc_xs = data['calc_xs']
-    calc_xs_unc = data['calc_xs_unc']
-    energies = data['energy']
-    plt.errorbar(energies, calc_xs, yerr=calc_xs_unc, marker=marker_list[i], markersize=5, linestyle='', color=color_list[i], label=f'{reaction} calculated with avrg bc')
+# # Loop over every reaction
+# for i, (reaction, data) in enumerate(data_by_reaction.items()):
+#     calc_xs = data['calc_xs']
+#     calc_xs_unc = data['calc_xs_unc']
+#     energies = data['energy']
+#     plt.errorbar(energies, calc_xs, yerr=calc_xs_unc, marker=marker_list[i], markersize=5, linestyle='', color=color_list[i], label=f'{reaction} calculated with avrg bc')
 
-plt.plot(E_mon_list_56CO, xs_list_56CO, color='deepskyblue', label='IAEA 56Co')
-plt.plot(E_mon_list_58CO, xs_list_58CO, color='mediumseagreen', label='IAEA 58Co')
-plt.plot(E_mon_list_61CU, xs_list_61CU, color='gold', label='IAEA 61Cu')
-plt.plot(E_mon_list_48V, xs_list_48V, color='violet', label='IAEA 48V')
-plt.plot(E_mon_list_46SC, xs_list_46SC, color='mediumvioletred', label='IAEA 46Sc')
+# plt.plot(E_mon_list_56CO, xs_list_56CO, color='deepskyblue', label='IAEA 56Co')
+# plt.plot(E_mon_list_58CO, xs_list_58CO, color='mediumseagreen', label='IAEA 58Co')
+# plt.plot(E_mon_list_61CU, xs_list_61CU, color='gold', label='IAEA 61Cu')
+# plt.plot(E_mon_list_48V, xs_list_48V, color='violet', label='IAEA 48V')
+# plt.plot(E_mon_list_46SC, xs_list_46SC, color='mediumvioletred', label='IAEA 46Sc')
 
+# plt.xlabel('Beam energy (MeV)')
+# plt.ylabel('Cross section (mb)')
+# plt.title(f'dp = {dp:.3f}')
+# plt.legend()
+# plt.show()
+
+
+
+calc_xs_56CO_p0 = data_by_reaction_p0['56CO']['calc_xs']
+calc_xs_unc_56CO_p0 = data_by_reaction_p0['56CO']['calc_xs_unc']
+energies_56CO_p0 = data_by_reaction_p0['56CO']['energy']
+
+calc_xs_58CO_p0 = data_by_reaction_p0['58CO']['calc_xs']
+calc_xs_unc_58CO_p0 = data_by_reaction_p0['58CO']['calc_xs_unc']
+energies_58CO_p0 = data_by_reaction_p0['58CO']['energy']
+
+calc_xs_61CU_p0 = data_by_reaction_p0['61CU']['calc_xs']
+calc_xs_unc_61CU_p0 = data_by_reaction_p0['61CU']['calc_xs_unc']
+energies_61CU_p0 = data_by_reaction_p0['61CU']['energy']
+
+calc_xs_46SC_p0 = data_by_reaction_p0['46SC']['calc_xs']
+calc_xs_unc_46SC_p0 = data_by_reaction_p0['46SC']['calc_xs_unc']
+energies_46SC_p0 = data_by_reaction_p0['46SC']['energy']
+
+calc_xs_48V_p0 = data_by_reaction_p0['48V']['calc_xs']
+calc_xs_unc_48V_p0 = data_by_reaction_p0['48V']['calc_xs_unc']
+energies_48V_p0 = data_by_reaction_p0['48V']['energy']
+
+
+calc_xs_56CO_p1 = data_by_reaction_p1['56CO']['calc_xs']
+calc_xs_unc_56CO_p1 = data_by_reaction_p1['56CO']['calc_xs_unc']
+energies_56CO_p1 = data_by_reaction_p1['56CO']['energy']
+
+calc_xs_58CO_p1 = data_by_reaction_p1['58CO']['calc_xs']
+calc_xs_unc_58CO_p1 = data_by_reaction_p1['58CO']['calc_xs_unc']
+energies_58CO_p1 = data_by_reaction_p1['58CO']['energy']
+
+calc_xs_61CU_p1 = data_by_reaction_p1['61CU']['calc_xs']
+calc_xs_unc_61CU_p1 = data_by_reaction_p1['61CU']['calc_xs_unc']
+energies_61CU_p1 = data_by_reaction_p1['61CU']['energy']
+
+calc_xs_46SC_p1 = data_by_reaction_p1['46SC']['calc_xs']
+calc_xs_unc_46SC_p1 = data_by_reaction_p1['46SC']['calc_xs_unc']
+energies_46SC_p1 = data_by_reaction_p1['46SC']['energy']
+
+calc_xs_48V_p1 = data_by_reaction_p1['48V']['calc_xs']
+calc_xs_unc_48V_p1 = data_by_reaction_p1['48V']['calc_xs_unc']
+energies_48V_p1 = data_by_reaction_p1['48V']['energy']
+
+
+plt.errorbar(energies_56CO_p0, calc_xs_56CO_p0, yerr=calc_xs_unc_56CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+plt.errorbar(energies_56CO_p1, calc_xs_56CO_p1, yerr=calc_xs_unc_56CO_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
+plt.plot(E_mon_list_56CO, xs_list_56CO, color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
-plt.title(f'dp = {dp:.3f}')
+plt.title(f'56CO')
 plt.legend()
 plt.show()
 
+plt.errorbar(energies_58CO_p0, calc_xs_58CO_p0, yerr=calc_xs_unc_58CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+plt.errorbar(energies_58CO_p1, calc_xs_58CO_p1, yerr=calc_xs_unc_58CO_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
+plt.plot(E_mon_list_58CO, xs_list_58CO, color='hotpink', label='IAEA')
+plt.xlabel('Beam energy (MeV)')
+plt.ylabel('Cross section (mb)')
+plt.title(f'58CO')
+plt.legend()
+plt.show()
 
+plt.errorbar(energies_61CU_p0, calc_xs_61CU_p0, yerr=calc_xs_unc_61CU_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+plt.errorbar(energies_61CU_p1, calc_xs_61CU_p1, yerr=calc_xs_unc_61CU_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
+plt.plot(E_mon_list_61CU, xs_list_61CU, color='hotpink', label='IAEA')
+plt.xlabel('Beam energy (MeV)')
+plt.ylabel('Cross section (mb)')
+plt.title(f'61CU')
+plt.legend()
+plt.show()
 
+plt.errorbar(energies_46SC_p0, calc_xs_46SC_p0, yerr=calc_xs_unc_46SC_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+plt.errorbar(energies_46SC_p1, calc_xs_46SC_p1, yerr=calc_xs_unc_46SC_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
+plt.plot(E_mon_list_46SC, xs_list_46SC, color='hotpink', label='IAEA')
+plt.xlabel('Beam energy (MeV)')
+plt.ylabel('Cross section (mb)')
+plt.title(f'46SC')
+plt.legend()
+plt.show()
 
+plt.errorbar(energies_48V_p0, calc_xs_48V_p0, yerr=calc_xs_unc_48V_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+plt.errorbar(energies_48V_p1, calc_xs_48V_p1, yerr=calc_xs_unc_48V_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
+plt.plot(E_mon_list_48V, xs_list_48V, color='hotpink', label='IAEA')
+plt.xlabel('Beam energy (MeV)')
+plt.ylabel('Cross section (mb)')
+plt.title(f'48V')
+plt.legend()
+plt.show()
 
 
 
