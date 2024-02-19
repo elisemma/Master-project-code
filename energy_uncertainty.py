@@ -6,7 +6,7 @@ import pandas as pd
 
 dp = 0.977
 # foil_name = 'Ni01'
-foil_list = ['Ni01', 'Zr01', 'Ti01', 'Ni02', 'Zr02', 'Ti02', 'Ni03', 'Zr03', 'Ti03', 'Ni04', 'Zr04', 'Ni05', 'Zr05', 'Ti05']
+foil_list = ['Ni01', 'Zr01', 'Ti01', 'Ni02', 'Zr02', 'Ti02', 'Ni03', 'Zr03', 'Ti03', 'Ni04', 'Zr04', 'Ti04', 'Ni05', 'Zr05', 'Ti05']
 # foil_list = ['Ti05']
 # foil_list = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
 
@@ -15,7 +15,7 @@ foil_list = ['Ni01', 'Zr01', 'Ti01', 'Ni02', 'Zr02', 'Ti02', 'Ni03', 'Zr03', 'Ti
 flux_file = f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.3f}_fluxes.csv'
 csv_flux_data = pd.read_csv(flux_file)
 # stack_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Stack_calculations/stack_30MeV_dp_{dp:.3f}.csv')
-
+foil_energy_data = {}
 
 for foil_name in foil_list:
     # mu_energy = float(stack_df[stack_df['name']==foil_name]['mu_E'])
@@ -52,6 +52,8 @@ for foil_name in foil_list:
     energy_plus_unc = energy_list[index_right]-mu_energy
 
     print(f'{foil_name}, fwhm = {fwhm:.2f}, E = {mu_energy:.2f} + {energy_plus_unc:.2f} - {energy_min_unc:.2f}')
+    foil_energy_data[foil_name] = {'energy': mu_energy, 'min_unc': energy_min_unc, 'plus_unc': energy_plus_unc}
+
     # Plotting________________________________________________________________________________________________________________________________________________________
     # plt.plot(energy_list, flux_list, label = f'{foil_name}')
     plt.plot(energy_list, flux_list, label = f'{foil_name}, fwhm = {fwhm:.2f}')
@@ -63,5 +65,7 @@ plt.xlabel('Energy (MeV)')
 plt.ylabel('Reltive deutron flux')
 plt.legend()
 plt.show()
+
+print(foil_energy_data)
 
 
