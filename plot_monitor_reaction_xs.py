@@ -25,7 +25,7 @@ def caclulate_xs_in_foil(dp, compound):
     for index, row in monitor_stack_df.iterrows():
         foil_name = row['name']
         target_material = row['compound']
-        beam_energy_in_foil = row['mu_E']
+        # beam_energy_in_foil = row['mu_E']
 
         A0_by_curie_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Calculated_A0/{foil_name}_A0_by_curie.csv')
 
@@ -46,7 +46,7 @@ def caclulate_xs_in_foil(dp, compound):
         areal_dens = row['areal_density']
         areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
 
-        foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
 
         foil.assign_molar_mass()
         foil.calculate_decay_constant()
@@ -57,6 +57,7 @@ def caclulate_xs_in_foil(dp, compound):
 
         foil_calc_xs_list = foil.calc_xs_list
         foil_calc_xs_unc_list = foil.calc_xs_unc_list
+        beam_energy_in_foil = foil.beam_energy_in_foil
 
 
         beam_energy_in_foil_array = np.zeros(len(reaction_list))
@@ -64,7 +65,7 @@ def caclulate_xs_in_foil(dp, compound):
         beam_energy_in_foil_list_list.append(beam_energy_in_foil_array)
         reaction_list_list.append(reaction_list)
         calc_xs_list_of_list.append(foil_calc_xs_list)
-        calc_xs_unc_list_of_list.append(foil_calc_xs_unc_list)
+        calc_xs_unc_list_of_list.append(foil_calc_xsp_unc_list)
         
 
     return calc_xs_list_of_list, calc_xs_unc_list_of_list, beam_energy_in_foil_list_list, reaction_list_list

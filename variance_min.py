@@ -114,8 +114,8 @@ def run_chi2(x_data, y_data, unc_data, method):
     return chi2, red_chi2
 
 
-def beam_currents_in_foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp):
-    foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+def beam_currents_in_foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp):
+    foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
 
     foil.assign_molar_mass()
     foil.calculate_decay_constant()
@@ -124,8 +124,9 @@ def beam_currents_in_foil(foil_name, beam_energy_in_foil, target_material, react
 
     foil_beam_cur_list = foil.beam_current_list
     foil_beam_cur_unc_list = foil.beam_current_unc_list
+    beam_energy_in_foil = foil.beam_energy_in_foil
 
-    return foil_beam_cur_list, foil_beam_cur_unc_list
+    return beam_energy_in_foil, foil_beam_cur_list, foil_beam_cur_unc_list
 
 
 def caclulate_xs_in_stack(stack_df, compound, dp):
@@ -145,7 +146,7 @@ def caclulate_xs_in_stack(stack_df, compound, dp):
     for index, row in monitor_stack_df.iterrows():
         foil_name = row['name']
         target_material = row['compound']
-        beam_energy_in_foil = row['mu_E']
+        # beam_energy_in_foil = row['mu_E']
 
         A0_by_curie_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Calculated_A0/{foil_name}_A0_by_curie.csv')
 
@@ -166,7 +167,7 @@ def caclulate_xs_in_stack(stack_df, compound, dp):
         areal_dens = row['areal_density']
         areal_dens_unc_percent = 0.2 #XXXXXXXXXXXX this is not true, need to find it
 
-        foil = Foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
 
         foil.assign_molar_mass()
         foil.calculate_decay_constant()
@@ -175,6 +176,7 @@ def caclulate_xs_in_stack(stack_df, compound, dp):
         foil.calculate_weighted_average_beam_current()
         foil.convert_beam_current_back_to_xs_w_unc()
 
+        beam_energy_in_foil = foil.beam_energy_in_foil
         foil_calc_xs_list = foil.calc_xs_list
         foil_calc_xs_unc_list = foil.calc_xs_unc_list
 
@@ -236,7 +238,7 @@ def plot_chi2(dp_list, compartment_list, method):
         for index, row in monitor_stack_df.iterrows():
             foil_name = row['name']
             target_material = row['compound']
-            beam_energy_in_foil = row['mu_E']
+            # beam_energy_in_foil = row['mu_E']
             areal_dens = row['areal_density']
             areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
 
@@ -258,12 +260,15 @@ def plot_chi2(dp_list, compartment_list, method):
 
             if method in method_list:
 
-                foil_beam_cur_list, foil_beam_cur_unc_list = beam_currents_in_foil(foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+                beam_energy_in_foil, foil_beam_cur_list, foil_beam_cur_unc_list = beam_currents_in_foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+                if np.isnan(beam_energy_in_foil):
+                    beam_energy_in_foil = 0
 
                 for beam_current, beam_current_unc in zip(foil_beam_cur_list, foil_beam_cur_unc_list):
                     beam_current_list.append(beam_current)
                     beam_current_unc_list.append(beam_current_unc)
                     energy_list.append(beam_energy_in_foil)
+                    print(beam_energy_in_foil)
                 x_data = energy_list
                 y_data = beam_current_list
                 unc_data = beam_current_unc_list

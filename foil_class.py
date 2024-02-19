@@ -11,9 +11,8 @@ from scipy.interpolate import interp1d
 
 class Foil: 
     #wclass hich returns the beam current with unc for one foil
-    def __init__(self, foil_name, beam_energy_in_foil, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp):
+    def __init__(self, foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp):
         self.foil_name = foil_name
-        self.beam_energy_in_foil = beam_energy_in_foil
         self.target_material = target_material
         self.reaction_list = reaction_list
         self.A0_list = A0_list
@@ -23,6 +22,7 @@ class Foil:
         self.decay_const_list = []
         self.xs_mon_list = []
         self.xs_mon_unc_list = []
+        self.beam_energy_in_foil = None
         self.beam_current_list = []
         self.beam_current_unc_list = []
         self.weighted_average_beam_current = None
@@ -88,7 +88,7 @@ class Foil:
         energy_from_stack_calc = energy_from_stack_calc_unfiltered[energy_from_stack_calc_unfiltered >= 0.275]
         flux_from_stack_calc = flux_from_stack_calc_unfiltered[energy_from_stack_calc_unfiltered >= 0.275]
 
-
+        self.beam_energy_in_foil = np.sum(energy_from_stack_calc * flux_from_stack_calc)/np.sum(flux_from_stack_calc)
         # Using the IAEA data to get the monitor cross section for the energy in a foil
         for reaction_product in self.reaction_list:
             filename = './Monitor_cross_section_data/IAEA_monitor_xs_' + reaction_product + '.txt'
