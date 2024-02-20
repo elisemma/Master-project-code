@@ -4,6 +4,8 @@ import curie as ci
 import pandas as pd 
 from foil_class import Foil
 import os 
+from scipy.interpolate import PchipInterpolator
+
 
 
 
@@ -45,7 +47,7 @@ def caclulate_xs_in_foil(dp, compound):
         A0_unc_list = [1e10 if np.isinf(value) else value for value in A0_unc_list]
         areal_dens = row['areal_density']
 
-        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp)
+        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp, 12.642)
 
         foil.assign_molar_mass()
         foil.assign_areal_dens_unc_percent()
@@ -89,8 +91,11 @@ def get_IAEA_monitro_xs(reaction_product):
             xs_list.append(float(words[1]))
             xs_unc_list.append(float(words[2]))
         file.close()
+    interp_xs = PchipInterpolator(E_mon_list, xs_list)
+    interp_unc_xs = PchipInterpolator(E_mon_list, xs_unc_list)
 
-    return E_mon_list, xs_list, xs_unc_list
+    # return E_mon_list, xs_list, xs_unc_list
+    return interp_xs, interp_unc_xs
 
 
 
@@ -213,12 +218,18 @@ for i, reaction_list in enumerate(reaction_list_list_Ti_p1):
 
 
 #____________________________Getting monitor xs__________________________________
+E_mon_array = np.linspace(0,30,100000)
 
-E_mon_list_46SC, xs_list_46SC, xs_unc_list_46SC = get_IAEA_monitro_xs('46SC')
-E_mon_list_48V, xs_list_48V, xs_unc_list_48V = get_IAEA_monitro_xs('48V')
-E_mon_list_56CO, xs_list_56CO, xs_unc_list_56CO = get_IAEA_monitro_xs('56CO')
-E_mon_list_58CO, xs_list_58CO, xs_unc_list_58CO = get_IAEA_monitro_xs('58CO')
-E_mon_list_61CU, xs_list_61CU, xs_unc_list_61CU = get_IAEA_monitro_xs('61CU')
+# , xs_list_46SC, xs_unc_list_46SC = get_IAEA_monitro_xs('46SC')
+#  xs_list_48V, xs_unc_list_48V = get_IAEA_monitro_xs('48V')
+# , xs_list_56CO, xs_unc_list_56CO = get_IAEA_monitro_xs('56CO')
+# , xs_list_58CO, xs_unc_list_58CO = get_IAEA_monitro_xs('58CO')
+# , xs_list_61CU, xs_unc_list_61CU = get_IAEA_monitro_xs('61CU')
+interp_xs_46SC, interp_unc_xs_46SC = get_IAEA_monitro_xs('46SC')
+interp_xs_48V, interp_unc_xs_48V = get_IAEA_monitro_xs('48V')
+interp_xs_56CO, interp_unc_xs_56CO = get_IAEA_monitro_xs('56CO')
+interp_xs_58CO, interp_unc_xs_58CO = get_IAEA_monitro_xs('58CO')
+interp_xs_61CU, interp_unc_xs_61CU = get_IAEA_monitro_xs('61CU')
 
 
 
@@ -238,11 +249,11 @@ E_mon_list_61CU, xs_list_61CU, xs_unc_list_61CU = get_IAEA_monitro_xs('61CU')
 #     energies = data['energy']
 #     plt.errorbar(energies, calc_xs, yerr=calc_xs_unc, marker=marker_list[i], markersize=5, linestyle='', color=color_list[i], label=f'{reaction} calculated with avrg bc')
 
-# plt.plot(E_mon_list_56CO, xs_list_56CO, color='deepskyblue', label='IAEA 56Co')
-# plt.plot(E_mon_list_58CO, xs_list_58CO, color='mediumseagreen', label='IAEA 58Co')
-# plt.plot(E_mon_list_61CU, xs_list_61CU, color='gold', label='IAEA 61Cu')
-# plt.plot(E_mon_list_48V, xs_list_48V, color='violet', label='IAEA 48V')
-# plt.plot(E_mon_list_46SC, xs_list_46SC, color='mediumvioletred', label='IAEA 46Sc')
+# plt.plot(, xs_list_56CO, color='deepskyblue', label='IAEA 56Co')
+# plt.plot(, xs_list_58CO, color='mediumseagreen', label='IAEA 58Co')
+# plt.plot(, xs_list_61CU, color='gold', label='IAEA 61Cu')
+# plt.plot( xs_list_48V, color='violet', label='IAEA 48V')
+# plt.plot(, xs_list_46SC, color='mediumvioletred', label='IAEA 46Sc')
 
 # plt.xlabel('Beam energy (MeV)')
 # plt.ylabel('Cross section (mb)')
@@ -300,7 +311,7 @@ energies_48V_p1 = data_by_reaction_p1['48V']['energy']
 
 plt.errorbar(energies_56CO_p0, calc_xs_56CO_p0, xerr=[Ni_energy_min_unc_list[:-1], Ni_energy_plus_unc_list[:-1]], yerr=calc_xs_unc_56CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.errorbar(energies_56CO_p1, calc_xs_56CO_p1, xerr=[Ni_energy_min_unc_list[:-1], Ni_energy_plus_unc_list[:-1]], yerr=calc_xs_unc_56CO_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-plt.plot(E_mon_list_56CO, xs_list_56CO, color='hotpink', label='IAEA')
+plt.plot(E_mon_array, interp_xs_56CO(E_mon_array), color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'56CO')
@@ -310,7 +321,7 @@ plt.show()
 
 plt.errorbar(energies_58CO_p0, calc_xs_58CO_p0, xerr=[Ni_energy_min_unc_list, Ni_energy_plus_unc_list], yerr=calc_xs_unc_58CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.errorbar(energies_58CO_p1, calc_xs_58CO_p1, xerr=[Ni_energy_min_unc_list, Ni_energy_plus_unc_list], yerr=calc_xs_unc_58CO_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-plt.plot(E_mon_list_58CO, xs_list_58CO, color='hotpink', label='IAEA')
+plt.plot(E_mon_array, interp_xs_58CO(E_mon_array), color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'58CO')
@@ -320,7 +331,7 @@ plt.show()
 
 plt.errorbar(energies_61CU_p0, calc_xs_61CU_p0, xerr=[Ni_energy_min_unc_list, Ni_energy_plus_unc_list], yerr=calc_xs_unc_61CU_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.errorbar(energies_61CU_p1, calc_xs_61CU_p1, xerr=[Ni_energy_min_unc_list, Ni_energy_plus_unc_list], yerr=calc_xs_unc_61CU_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-plt.plot(E_mon_list_61CU, xs_list_61CU, color='hotpink', label='IAEA')
+plt.plot(E_mon_array, interp_xs_61CU(E_mon_array), color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'61CU')
@@ -330,7 +341,7 @@ plt.show()
 
 plt.errorbar(energies_46SC_p0, calc_xs_46SC_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_46SC_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.errorbar(energies_46SC_p1, calc_xs_46SC_p1, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_46SC_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-plt.plot(E_mon_list_46SC, xs_list_46SC, color='hotpink', label='IAEA')
+plt.plot(E_mon_array, interp_xs_46SC(E_mon_array), color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'46SC')
@@ -340,7 +351,7 @@ plt.show()
 
 plt.errorbar(energies_48V_p0, calc_xs_48V_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_48V_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.errorbar(energies_48V_p1, calc_xs_48V_p1, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_48V_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-plt.plot(E_mon_list_48V, xs_list_48V, color='hotpink', label='IAEA')
+plt.plot(E_mon_array, interp_xs_48V(E_mon_array), color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'48V')

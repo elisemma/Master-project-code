@@ -8,7 +8,7 @@ import os
 
 
 def caclulate_xs_in_foil(dp, compound):
-    stack_df = pd.read_csv(f'./Stack_calculations/stack_50MeV_dp_{dp:.2f}.csv')
+    stack_df = pd.read_csv(f'./Stack_calculations/stack_50MeV_dp_{dp:.3f}.csv')
     monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')]
     monitor_stack_df = monitor_stack_df.drop(monitor_stack_df[monitor_stack_df['name'] == 'Fe01'].index)
 
@@ -232,7 +232,7 @@ plt.plot(E_mon_list_48V, xs_list_48V, color='hotpink', label='IAEA 48V')
 
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
-plt.title(f'dp = {dp:.2f}')
+plt.title(f'dp = {dp:.3f}')
 plt.legend()
 plt.show()
 

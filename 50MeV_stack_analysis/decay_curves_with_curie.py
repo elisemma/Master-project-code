@@ -102,8 +102,8 @@ df_BZFe05 = pd.read_csv(path_Fe+file_BZFe05)
 
 
 df_concat_Fe = pd.concat((df_BUFe01, df_BVFe02, df_BWFe03, df_BYFe04, df_BZFe05), axis = 0)
-# df_concat_Fe = df_concat_Fe[~((df_concat_Fe['isotope'] == '56CO') & (~df_concat_Fe['energy'].isin([846.770, 1037.843, 1238.288, 1771.357, 2034.791, 2598.500])))]
-df_concat_Fe = df_concat_Fe[~((df_concat_Fe['isotope'] == '56CO') & (~df_concat_Fe['energy'].isin([1037.843, 1238.288, 1771.357, 2034.791, 2598.500])))]
+df_concat_Fe = df_concat_Fe[~((df_concat_Fe['isotope'] == '56CO') & (~df_concat_Fe['energy'].isin([846.770, 1037.843, 1238.288, 1771.357, 2034.791, 2598.500])))]
+# df_concat_Fe = df_concat_Fe[~((df_concat_Fe['isotope'] == '56CO') & (~df_concat_Fe['energy'].isin([1037.843, 1238.288, 1771.357, 2034.791, 2598.500])))]
 df_concat_Fe.to_csv(path_Fe+file_concat_Fe)
 
 
@@ -122,8 +122,8 @@ foil_list_Fe = ['Fe01', 'Fe02','Fe03', 'Fe04', 'Fe05']
 
 
 #Running the code_______________________________________________________________________________________________________________________
-generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
-# generate_activity_csv(isotopes_Fe, foil_list_Fe, path_Fe, file_concat_Fe)
+# generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+generate_activity_csv(isotopes_Fe, foil_list_Fe, path_Fe, file_concat_Fe)
 
 
 

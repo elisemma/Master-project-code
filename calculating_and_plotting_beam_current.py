@@ -58,11 +58,12 @@ def caclulate_beam_currents_in_foil(dp, compound):
         foil.calculate_decay_constant()
         foil.find_monitor_cross_section()
         foil.calculate_beam_currents_w_unc()
-        # foil.calculate_weighted_average_beam_current()
+        foil.calculate_weighted_average_beam_current()
 
         foil_beam_cur_list = foil.beam_current_list
         foil_beam_cur_unc_list = foil.beam_current_unc_list
         beam_energy_in_foil = foil.beam_energy_in_foil
+        avrg_beam_current = foil.weighted_average_beam_current
 
         beam_energy_in_foil_array = np.zeros(len(reaction_list))
         beam_energy_in_foil_array.fill(beam_energy_in_foil)
@@ -72,6 +73,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
         beam_energy_in_foil_list_list.append(beam_energy_in_foil_array)
         reaction_list_list.append(reaction_list)
 
+        print(f'Weighted average beam current for foil {foil_name} is {avrg_beam_current}')
 
     return beam_current_list_of_list, beam_current_unc_list_of_list, beam_energy_in_foil_list_list, reaction_list_list
 
@@ -167,6 +169,8 @@ plt.legend()
 plt.show()
 
 
+# print('Beam current for 58Co: ', data_by_reaction['58CO'])
+# print('Beam current for 61Cu: ', data_by_reaction['61CU'])
 
 
 

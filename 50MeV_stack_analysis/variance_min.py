@@ -97,7 +97,7 @@ def plot_chi2(dp_list, compartment_list, method):
         energy_list=[]
 
         # for foil in compartment:
-        stack_df = pd.read_csv(f'./Stack_calculations/stack_50MeV_dp_{dp:.2f}.csv')
+        stack_df = pd.read_csv(f'./Stack_calculations/stack_50MeV_dp_{dp:.3f}.csv')
         monitor_compounds = ['Fe', 'Ti']
         # if compartment == '05':
         #     monitor_compounds = ['Ni']
@@ -152,7 +152,7 @@ def plot_chi2(dp_list, compartment_list, method):
     plt.plot(dp_list, red_chi2_list)
     plt.xlabel('dp')
     plt.ylabel('reduced chi2')
-    plt.title(f'Compartment {compartment_list}, method: {method}, minimized when dp = {min_dp:.2f}')
+    plt.title(f'Compartment {compartment_list}, method: {method}, minimized when dp = {min_dp:.3f}')
     plt.show()
     print(monitor_stack_df)
 
@@ -161,9 +161,11 @@ def plot_chi2(dp_list, compartment_list, method):
 
 #_____________________Running the code___________________________
 
-dp_array = np.arange(0.8, 1.21, 0.01)
+dp_array1 = np.arange(0.8, 1.21, 0.01)
+dp_array2 = np.arange(0.95, 0.98, 0.001)
+dp_array = np.union1d(dp_array1, dp_array2)
 
-plot_chi2(dp_array, ['02', '08'], 'p1')
+plot_chi2(dp_array, ['03', '09'], 'p0')
 
 
 # print(dp_array)

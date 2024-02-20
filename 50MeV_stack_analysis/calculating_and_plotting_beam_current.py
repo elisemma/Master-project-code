@@ -6,7 +6,7 @@ from foil_class import Foil
 import os 
 
 def caclulate_beam_currents_in_foil(dp, compound):
-    stack_df = pd.read_csv(f'./Stack_calculations/stack_50MeV_dp_{dp:.2f}.csv')
+    stack_df = pd.read_csv(f'./Stack_calculations/stack_50MeV_dp_{dp:.3f}.csv')
 
    
 
@@ -147,7 +147,7 @@ for i, (reaction, data) in enumerate(data_by_reaction.items()):
 # plt.xlim([lower_energy_compartments[0]-1, upper_energy_compartments[-1]+1])
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Beam current (nA)')
-plt.title(f'dp = {dp:.2f}')
+plt.title(f'dp = {dp:.3f}')
 plt.legend()
 plt.show()
 

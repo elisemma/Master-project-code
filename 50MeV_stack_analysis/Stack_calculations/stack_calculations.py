@@ -115,7 +115,9 @@ stack_50MeV = [{'compound':'SS_316', 'name': 'SS3', 'ad':100.476},
 
 
 
-dp_array = np.arange(0.8, 1.21, 0.01)
+# dp_array = np.arange(0.8, 1.21, 0.01)
+dp_array = np.arange(0.95, 0.98, 0.001)
+
 print(dp_array)
 dp_array_length = len(dp_array)
 index = 0
@@ -123,12 +125,12 @@ index = 0
 for dp in dp_array:
     index += 1
     print('__________________________________________')
-    print(f'Running stack calculation for dp = {dp:.2f}')
+    print(f'Running stack calculation for dp = {dp:.3f}')
     st = ci.Stack(stack_50MeV, E0=50, dE0 = 0.75, N=1e6, particle='d', dp = dp) #15% dE0
-    st.saveas(f'stack_50MeV_dp_{dp:.2f}.csv')
+    st.saveas(f'stack_50MeV_dp_{dp:.3f}.csv')
     percent_done = index/dp_array_length*100
     
-    print(f'{percent_done:.2f}% of the calculation is done')
+    print(f'{percent_done:.3f}% of the calculation is done')
     print('__________________________________________\n')
 
 # print(st.stack)

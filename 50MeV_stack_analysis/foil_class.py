@@ -73,7 +73,7 @@ class Foil:
 
     def find_monitor_cross_section(self):
         #Importing the energy/fluxes from the stack calculation
-        flux_file = f'./Stack_calculations/stack_50MeV_dp_{self.dp:.2f}_fluxes.csv'
+        flux_file = f'./Stack_calculations/stack_50MeV_dp_{self.dp:.3f}_fluxes.csv'
         csv_flux_data = pd.read_csv(flux_file)
         
         target_flux_data = csv_flux_data.loc[csv_flux_data['name'] == self.foil_name]

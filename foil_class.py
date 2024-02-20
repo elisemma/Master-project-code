@@ -4,6 +4,8 @@ import curie as ci
 import pandas as pd 
 # from scipy.interpolate import splev, splrep
 from scipy.interpolate import interp1d
+from scipy.interpolate import PchipInterpolator
+
 #One file for running the stack calulations with varying dp values and save the csv files in a folder
 
 #This file with one class for foil and one function for variance minimization
@@ -11,7 +13,7 @@ from scipy.interpolate import interp1d
 
 class Foil: 
     #wclass hich returns the beam current with unc for one foil
-    def __init__(self, foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp):
+    def __init__(self, foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp, scaling_factor):
         self.foil_name = foil_name
         self.target_material = target_material
         self.reaction_list = reaction_list
@@ -29,6 +31,7 @@ class Foil:
         self.weighted_average_beam_current = None
         self.var_weighted_average_beam_current = None
         self.dp = dp
+        self.scaling_factor = scaling_factor
         self.calc_xs_list = []
         self.calc_xs_unc_list = []
 
@@ -121,8 +124,11 @@ class Foil:
             xs_mon = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
             unc_xs_mon = np.array(xs_unc_list)*1e-28*1e-3 #convert mb to m^2
             weights = 1 / unc_xs_mon
-            interp_xs = interp1d(E_mon, xs_mon,kind='linear')
-            interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='linear')
+            # interp_xs = interp1d(E_mon, xs_mon,kind='linear')
+            # interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='linear')
+            interp_xs = PchipInterpolator(E_mon, xs_mon)
+            interp_unc_xs = PchipInterpolator(E_mon, unc_xs_mon)
+
 
             # #Plotting to check theinterpolation by eye
             # energy_plotting_array= np.linspace(0,50,10000)
@@ -242,8 +248,8 @@ class Foil:
         # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
         N_T = N_T_per_cm2*1.0e4 #[nuclei/m^2]
 
-        beam_current_in_d_per_s = self.weighted_average_beam_current/(1.60217634e-19*1.0e9)
-        beam_current_in_d_per_s_unc = np.sqrt(self.var_weighted_average_beam_current)/(1.60217634e-19*1.0e9)
+        beam_current_in_d_per_s = self.weighted_average_beam_current/(1.60217634e-19*1.0e9)*self.scaling_factor
+        beam_current_in_d_per_s_unc = np.sqrt(self.var_weighted_average_beam_current)/(1.60217634e-19*1.0e9)*self.scaling_factor
 
 
 
