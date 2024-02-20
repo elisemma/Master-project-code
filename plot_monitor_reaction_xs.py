@@ -44,11 +44,11 @@ def caclulate_xs_in_foil(dp, compound):
         A0_unc_list = A0_concat_df['A0_unc'].tolist()
         A0_unc_list = [1e10 if np.isinf(value) else value for value in A0_unc_list]
         areal_dens = row['areal_density']
-        areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
 
-        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp)
 
         foil.assign_molar_mass()
+        foil.assign_areal_dens_unc_percent()
         foil.calculate_decay_constant()
         foil.find_monitor_cross_section()
         foil.calculate_beam_currents_w_unc()
@@ -305,6 +305,7 @@ plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'56CO')
 plt.legend()
+plt.xlim(0,30)
 plt.show()
 
 plt.errorbar(energies_58CO_p0, calc_xs_58CO_p0, xerr=[Ni_energy_min_unc_list, Ni_energy_plus_unc_list], yerr=calc_xs_unc_58CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
@@ -314,6 +315,7 @@ plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'58CO')
 plt.legend()
+plt.xlim(0,30)
 plt.show()
 
 plt.errorbar(energies_61CU_p0, calc_xs_61CU_p0, xerr=[Ni_energy_min_unc_list, Ni_energy_plus_unc_list], yerr=calc_xs_unc_61CU_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
@@ -323,6 +325,7 @@ plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'61CU')
 plt.legend()
+plt.xlim(0,30)
 plt.show()
 
 plt.errorbar(energies_46SC_p0, calc_xs_46SC_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_46SC_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
@@ -332,6 +335,7 @@ plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'46SC')
 plt.legend()
+plt.xlim(0,30)
 plt.show()
 
 plt.errorbar(energies_48V_p0, calc_xs_48V_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_48V_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
@@ -341,6 +345,7 @@ plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
 plt.title(f'48V')
 plt.legend()
+plt.xlim(0,30)
 plt.show()
 
 

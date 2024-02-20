@@ -50,11 +50,11 @@ def caclulate_beam_currents_in_foil(dp, compound):
         A0_unc_list = A0_concat_df['A0_unc'].tolist()
         A0_unc_list = [1e18 if np.isinf(value) else value for value in A0_unc_list]
         areal_dens = row['areal_density']
-        areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
 
-        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp)
 
         foil.assign_molar_mass()
+        foil.assign_areal_dens_unc_percent()
         foil.calculate_decay_constant()
         foil.find_monitor_cross_section()
         foil.calculate_beam_currents_w_unc()
@@ -84,7 +84,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 #__________________________Running the function________________________________
 
-dp = 0.950
+dp = 0.977
 beam_current_list_of_list_Ni, beam_current_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_beam_currents_in_foil(dp, 'Ni')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 

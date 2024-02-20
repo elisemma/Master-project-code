@@ -114,10 +114,11 @@ def run_chi2(x_data, y_data, unc_data, method):
     return chi2, red_chi2
 
 
-def beam_currents_in_foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp):
-    foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+def beam_currents_in_foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp):
+    foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp)
 
     foil.assign_molar_mass()
+    foil.assign_areal_dens_unc_percent()
     foil.calculate_decay_constant()
     foil.find_monitor_cross_section()
     foil.calculate_beam_currents_w_unc()
@@ -165,11 +166,11 @@ def caclulate_xs_in_stack(stack_df, compound, dp):
         A0_unc_list = A0_concat_df['A0_unc'].tolist()
         A0_unc_list = [1e10 if np.isinf(value) else value for value in A0_unc_list]
         areal_dens = row['areal_density']
-        areal_dens_unc_percent = 0.2 #XXXXXXXXXXXX this is not true, need to find it
 
-        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp)
 
         foil.assign_molar_mass()
+        foil.assign_areal_dens_unc_percent() 
         foil.calculate_decay_constant()
         foil.find_monitor_cross_section()
         foil.calculate_beam_currents_w_unc()
@@ -201,7 +202,7 @@ def caclulate_xs_in_stack(stack_df, compound, dp):
                 # Add calc_xs, calc_xs_unc and energy corresponding to the reaction
                 data_by_reaction[reaction]['calc_xs'].append(calc_xs_list_of_list[i][j])
                 data_by_reaction[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list[i][j])
-                data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list[i][j])
+                data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list[i][j])    
 
     return data_by_reaction
 
@@ -215,7 +216,6 @@ def plot_chi2(dp_list, compartment_list, method):
 
     for dp in dp_list:
         # calculate beam current here
-        print(f'dp={dp}_________________________')
         beam_current_list=[]
         beam_current_unc_list=[]
         energy_list=[]
@@ -240,7 +240,6 @@ def plot_chi2(dp_list, compartment_list, method):
             target_material = row['compound']
             # beam_energy_in_foil = row['mu_E']
             areal_dens = row['areal_density']
-            areal_dens_unc_percent = 2 #XXXXXXXXXXXX this is not true, need to find it
 
             A0_by_curie_df = pd.read_csv(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Calculated_A0/{foil_name}_A0_by_curie.csv')
 
@@ -260,7 +259,7 @@ def plot_chi2(dp_list, compartment_list, method):
 
             if method in method_list:
 
-                beam_energy_in_foil, foil_beam_cur_list, foil_beam_cur_unc_list = beam_currents_in_foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp)
+                beam_energy_in_foil, foil_beam_cur_list, foil_beam_cur_unc_list = beam_currents_in_foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp)
                 if np.isnan(beam_energy_in_foil):
                     beam_energy_in_foil = 0
 
@@ -268,7 +267,6 @@ def plot_chi2(dp_list, compartment_list, method):
                     beam_current_list.append(beam_current)
                     beam_current_unc_list.append(beam_current_unc)
                     energy_list.append(beam_energy_in_foil)
-                    print(beam_energy_in_foil)
                 x_data = energy_list
                 y_data = beam_current_list
                 unc_data = beam_current_unc_list
@@ -298,6 +296,7 @@ def plot_chi2(dp_list, compartment_list, method):
     plt.ylabel('reduced chi2')
     plt.title(f'Compartment {compartment_list}, method: {method}, minimized when dp = {min_dp:.3f}')
     plt.show()
+    print(monitor_stack_df)
 
 
 

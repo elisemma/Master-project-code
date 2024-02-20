@@ -11,15 +11,16 @@ from scipy.interpolate import interp1d
 
 class Foil: 
     #wclass hich returns the beam current with unc for one foil
-    def __init__(self, foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, areal_dens_unc_percent, dp):
+    def __init__(self, foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp):
         self.foil_name = foil_name
         self.target_material = target_material
         self.reaction_list = reaction_list
         self.A0_list = A0_list
         self.A0_unc_list = A0_unc_list
         self.areal_dens = areal_dens
-        self.areal_dens_unc_percent = areal_dens_unc_percent
+        self.areal_dens_unc_percent = None
         self.decay_const_list = []
+        self.decay_const_unc_list = []
         self.xs_mon_list = []
         self.xs_mon_unc_list = []
         self.beam_energy_in_foil = None
@@ -31,6 +32,11 @@ class Foil:
         self.calc_xs_list = []
         self.calc_xs_unc_list = []
 
+
+    def assign_areal_dens_unc_percent(self):
+        areal_dens_unc_dict = {'Ni01': 0.0645, 'Ni02': 0.1688, 'Ni03': 0.2992, 'Ni04': 0.2974, 'Ni05': 0.0835,
+                               'Ti01': 0.8236, 'Ti02': 0.7751, 'Ti03': 0.7629, 'Ti04': 0.8289, 'Ti05': 0.2651}
+        self.areal_dens_unc_percent = areal_dens_unc_dict[self.foil_name]
 
     def assign_molar_mass(self):
         # Assigning the molar mass of the target material
@@ -51,18 +57,23 @@ class Foil:
         for reaction_product in self.reaction_list:
             if reaction_product == '46SC':
                 self.decay_const_list.append(np.log(2)/(83.79*24*3600)) #1/[s]
+                self.decay_const_unc_list.append(np.log(2)*0.04*24*3600/((83.79*24*3600)**2)) #1/[s]
 
             elif reaction_product == '48V':
                 self.decay_const_list.append(np.log(2)/(15.9735*24*3600)) #1/[s]
+                self.decay_const_unc_list.append(np.log(2)*0.0025*24*3600/((15.9735*24*3600)**2)) #1/[s]
 
             elif reaction_product == '56CO':
                 self.decay_const_list.append(np.log(2)/(77.236*24*3600)) #1/[s])
+                self.decay_const_unc_list.append(np.log(2)*0.026*24*3600/((77.236*24*3600)**2)) #1/[s]
 
             elif reaction_product == '58CO':
                 self.decay_const_list.append(np.log(2)/(70.86*24*3600)) #1/[s])
+                self.decay_const_unc_list.append(np.log(2)*0.06*24*3600/((70.86*24*3600)**2)) #1/[s]
 
             elif reaction_product == '61CU':
                 self.decay_const_list.append(np.log(2)/(3.339*3600)) #1/[s])
+                self.decay_const_unc_list.append(np.log(2)*0.008*3600/((3.339*3600)**2)) #1/[s]
 
             else:
                 print('Error: Unknown monitor reaction')
@@ -183,6 +194,11 @@ class Foil:
             dfdt_irr = (self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np.exp(-self.decay_const_list[i]*(t_irr+dt_irr)))) - self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np. exp(-self.decay_const_list[i]*(t_irr-dt_irr)))))/dt_irr 
             dfdx_list.append(dfdt_irr)
             unc_list.append(t_irr_unc)
+
+            ddecay_const = self.decay_const_list[i]*1e-8
+            dfddecay_const = (self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np.exp(-(self.decay_const_list[i]+ddecay_const)*t_irr))) - self.A0_list[i]/(N_T*self.xs_mon_list[i]*(1-np. exp(-(self.decay_const_list[i]-ddecay_const)*t_irr))))/ddecay_const 
+            dfdx_list.append(dfddecay_const)
+            unc_list.append(self.decay_const_unc_list[i])
         
             dfdx = np.array(dfdx_list)
             unc = np.array(unc_list)
@@ -260,6 +276,11 @@ class Foil:
             dfdt_irr = (self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr+dt_irr)))) - self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr-dt_irr)))))/dt_irr
             dfdx_list.append(dfdt_irr)
             unc_list.append(t_irr_unc)
+
+            ddecay_const = self.decay_const_list[i]*1e-8
+            dfddecay_const = (self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-(self.decay_const_list[i]+ddecay_const)*t_irr))) - self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-(self.decay_const_list[i]-ddecay_const)*t_irr))))/ddecay_const
+            dfdx_list.append(dfddecay_const)
+            unc_list.append(self.decay_const_unc_list[i])
         
             dfdx = np.array(dfdx_list)
             unc = np.array(unc_list)
