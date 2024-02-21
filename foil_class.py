@@ -13,7 +13,7 @@ from scipy.interpolate import PchipInterpolator
 
 class Foil: 
     #wclass hich returns the beam current with unc for one foil
-    def __init__(self, foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp, scaling_factor):
+    def __init__(self, foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp):
         self.foil_name = foil_name
         self.target_material = target_material
         self.reaction_list = reaction_list
@@ -31,7 +31,6 @@ class Foil:
         self.weighted_average_beam_current = None
         self.var_weighted_average_beam_current = None
         self.dp = dp
-        self.scaling_factor = scaling_factor
         self.calc_xs_list = []
         self.calc_xs_unc_list = []
 
@@ -231,7 +230,6 @@ class Foil:
         self.var_weighted_average_beam_current = float(variance)
 
 
-
     def convert_beam_current_back_to_xs_w_unc(self):
 
         # Calculating the cross section with uncertainty by using the end of beam activity, areal density, molar mass, decay constant and beam current
@@ -248,8 +246,8 @@ class Foil:
         # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
         N_T = N_T_per_cm2*1.0e4 #[nuclei/m^2]
 
-        beam_current_in_d_per_s = self.weighted_average_beam_current/(1.60217634e-19*1.0e9)*self.scaling_factor
-        beam_current_in_d_per_s_unc = np.sqrt(self.var_weighted_average_beam_current)/(1.60217634e-19*1.0e9)*self.scaling_factor
+        beam_current_in_d_per_s = self.weighted_average_beam_current/(1.60217634e-19*1.0e9)
+        beam_current_in_d_per_s_unc = np.sqrt(self.var_weighted_average_beam_current)/(1.60217634e-19*1.0e9)
 
 
 
@@ -273,10 +271,10 @@ class Foil:
             dfdx_list.append(dfdN_T)
             unc_list.append(N_T_unc)
         
-            dbc = self.beam_current_list[i]*1e-8
+            dbc = beam_current_in_d_per_s*1e-8
             dfdbc = (self.A0_list[i]/(N_T*(beam_current_in_d_per_s+dbc)*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/(N_T*(beam_current_in_d_per_s-dbc)*(1-np.exp(-self.decay_const_list[i]*t_irr))))/dbc
             dfdx_list.append(dfdbc)
-            unc_list.append(self.beam_current_unc_list[i])
+            unc_list.append(beam_current_in_d_per_s_unc)
         
             dt_irr = t_irr*1e-8
             dfdt_irr = (self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr+dt_irr)))) - self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr-dt_irr)))))/dt_irr

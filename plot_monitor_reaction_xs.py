@@ -47,7 +47,7 @@ def caclulate_xs_in_foil(dp, compound):
         A0_unc_list = [1e10 if np.isinf(value) else value for value in A0_unc_list]
         areal_dens = row['areal_density']
 
-        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp, 12.642)
+        foil = Foil(foil_name, target_material, reaction_list, A0_list, A0_unc_list, areal_dens, dp)
 
         foil.assign_molar_mass()
         foil.assign_areal_dens_unc_percent()
@@ -60,6 +60,11 @@ def caclulate_xs_in_foil(dp, compound):
         foil_calc_xs_list = foil.calc_xs_list
         foil_calc_xs_unc_list = foil.calc_xs_unc_list
         beam_energy_in_foil = foil.beam_energy_in_foil
+        weighted_average_beam_current = foil.weighted_average_beam_current
+        var_weighted_average_beam_current = float(foil.var_weighted_average_beam_current)
+        sig_avrg_bc = np.sqrt(var_weighted_average_beam_current)
+
+        print(f'Foil: {foil_name}, avrg bc = {weighted_average_beam_current} +- {sig_avrg_bc}')
 
 
         beam_energy_in_foil_array = np.zeros(len(reaction_list))
@@ -125,10 +130,10 @@ foil_energy_data = {'Ni01': {'energy': 27.337003000000003, 'min_unc': 0.60700300
 # calc_xs_list_of_list_Ni, calc_xs_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_xs_in_foil(dp, 'Ni')
 # calc_xs_list_of_list_Ti, calc_xs_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_xs_in_foil(dp, 'Ti')
 
-
+# print('_____________p0, dp= 0.988___________________')
 calc_xs_list_of_list_Ni_p0, calc_xs_unc_list_of_list_Ni_p0, beam_energy_in_foil_list_list_Ni_p0, reaction_list_list_Ni_p0 = caclulate_xs_in_foil(0.988, 'Ni')
 calc_xs_list_of_list_Ti_p0, calc_xs_unc_list_of_list_Ti_p0, beam_energy_in_foil_list_list_Ti_p0, reaction_list_list_Ti_p0 = caclulate_xs_in_foil(0.988, 'Ti')
-
+# print('_____________p1, dp= 0.977___________________')
 calc_xs_list_of_list_Ni_p1, calc_xs_unc_list_of_list_Ni_p1, beam_energy_in_foil_list_list_Ni_p1, reaction_list_list_Ni_p1 = caclulate_xs_in_foil(0.977, 'Ni')
 calc_xs_list_of_list_Ti_p1, calc_xs_unc_list_of_list_Ti_p1, beam_energy_in_foil_list_list_Ti_p1, reaction_list_list_Ti_p1 = caclulate_xs_in_foil(0.977, 'Ti')
 
@@ -187,6 +192,13 @@ for i, reaction_list in enumerate(reaction_list_list_Ti_p0):
         data_by_reaction_p0[reaction]['calc_xs_unc'].append(calc_xs_unc_list_of_list_Ti_p0[i][j])
         data_by_reaction_p0[reaction]['energy'].append(beam_energy_in_foil_list_list_Ti_p0[i][j])
 
+#New values after the scaling factor is applied 
+data_by_reaction_p0['58CO']['calc_xs'][-1] = 1.0192801735000916
+data_by_reaction_p0['58CO']['calc_xs_unc'][-1] = 0.09889413863949252
+data_by_reaction_p0['61CU']['calc_xs'][-1] = 0.03757637008354755
+data_by_reaction_p0['61CU']['calc_xs_unc'][-1] = 0.009638847896506993
+
+
 
 data_by_reaction_p1 = {}
 
@@ -213,8 +225,11 @@ for i, reaction_list in enumerate(reaction_list_list_Ti_p1):
         data_by_reaction_p1[reaction]['energy'].append(beam_energy_in_foil_list_list_Ti_p1[i][j])
 
 
-
-
+#New values after the scaling factor is applied 
+data_by_reaction_p1['58CO']['calc_xs'][-1] = 1.3668111126405154
+data_by_reaction_p1['58CO']['calc_xs_unc'][-1] = 0.13261280969184164
+data_by_reaction_p1['61CU']['calc_xs'][-1] = 0.05038830494124271
+data_by_reaction_p1['61CU']['calc_xs_unc'][-1] = 0.012925282724536654
 
 
 #____________________________Getting monitor xs__________________________________

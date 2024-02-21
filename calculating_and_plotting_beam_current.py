@@ -121,6 +121,13 @@ for i, reaction_list in enumerate(reaction_list_list_Ti):
 
 
 
+#Scaling the beam current in the Ni05 foil by a factor 12.642
+data_by_reaction['58CO']['beam_current'][-1] = data_by_reaction['58CO']['beam_current'][-1]*12.642
+data_by_reaction['58CO']['beam_current_unc'][-1] = data_by_reaction['58CO']['beam_current_unc'][-1]*12.642
+data_by_reaction['61CU']['beam_current'][-1] = data_by_reaction['61CU']['beam_current'][-1]*12.642
+data_by_reaction['61CU']['beam_current_unc'][-1] = data_by_reaction['61CU']['beam_current_unc'][-1]*12.642
+
+
 
 # ______________________________Plotting________________________________________
 
@@ -167,6 +174,8 @@ plt.ylabel('Beam current (nA)')
 plt.title(f'dp = {dp:.3f}')
 plt.legend()
 plt.show()
+
+print(data_by_reaction)
 
 
 # print('Beam current for 58Co: ', data_by_reaction['58CO'])

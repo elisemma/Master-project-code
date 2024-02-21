@@ -9,6 +9,27 @@ from scipy.interpolate import interp1d
 from scipy.interpolate import PchipInterpolator
 
 
+
+#_________________________________________________________________________________
+
+#This code only works when a scaling factor is included in my foil class!!!!!!!!!!
+
+#________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def get_IAEA_monitro_xs(reaction_product):
     filename = './Monitor_cross_section_data/IAEA_monitor_xs_' + reaction_product + '.txt'
     E_mon_list = []
@@ -253,3 +274,6 @@ plot_chi2(scaling_factor_list)
 
 # data_by_reaction = {'58CO': {'beam_current': [38.12635144593368], 'beam_current_unc': [8.854036377386427], 'energy': [2.2266116583208797]},
                     # '61CU': {'beam_current': [0.5806523386626631], 'beam_current_unc': [0.13051120241881975], 'energy': [2.2266116583208797]}}
+
+
+                    

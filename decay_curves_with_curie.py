@@ -60,7 +60,7 @@ def generate_activity_csv(isotope_list, foil_list, path, file_concat):
     df = pd.read_csv(path+file_concat)
     for foil in foil_list:
         print(foil)
-        csv_file_path = f'./Calculated_A0/{foil}_A0_by_curie_NEW_RUN.csv'
+        csv_file_path = f'./Calculated_A0/{foil}_A0_by_curie.csv'
         with open(csv_file_path, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])
@@ -169,7 +169,7 @@ mask = (df_concat_Ni['isotope'] == isotope_to_exclude) & (~df_concat_Ni['energy'
 df_concat_Ni = df_concat_Ni[~mask]
 df_concat_Ni = df_concat_Ni[~((df_concat_Ni['isotope'] == '58CO') & (df_concat_Ni['filename'].str.contains('30MeV/BB|30MeV/AY|30MeV/AZ|30MeV/BC|30MeV/BD|30MeV/BE')))]
 
-print(df_concat_Ni[df_concat_Ni['isotope']=='61CU'])
+# print(df_concat_Ni[df_concat_Ni['isotope']=='61CU'])
 
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
@@ -240,9 +240,9 @@ df_concat_Zr.to_csv(path_Zr+file_concat_Zr)
 
 
 
-# isotopes_Zr = ['96NB']
+isotopes_Zr = ['96NB']
 # isotopes_Zr = ['87NB','89NB', '90NB', '95NB']
-isotopes_Zr = ['88Y', '91Y', '92Y']
+# isotopes_Zr = ['88Y', '91Y', '92Y']
 
 
 foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
@@ -255,13 +255,14 @@ foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
 
 
 #Running the code_______________________________________________________________________________________________________________________
+
 # generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
 # generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 # generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 
-# generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)
+generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)
 
 
 # ./Calculated_A0
