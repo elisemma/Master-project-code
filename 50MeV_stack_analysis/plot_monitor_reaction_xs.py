@@ -85,22 +85,22 @@ def get_IAEA_monitro_xs(reaction_product):
 
 
 
-# #_________________________Energy info from another file________________________
-# foil_energy_data = {'Ni01': {'energy': 27.337003000000003, 'min_unc': 0.6070030000000024, 'plus_unc': 0.6529969999999956}, 
-#                     'Zr01': {'energy': 26.375581480000005, 'min_unc': 0.605581480000005, 'plus_unc': 0.5944185199999943}, 
-#                     'Ti01': {'energy': 25.518248420000003, 'min_unc': 0.5882484200000029, 'plus_unc': 0.6117515799999964}, 
-#                     'Ni02': {'energy': 20.392268865, 'min_unc': 0.7422688649999998, 'plus_unc': 0.7577311350000002}, 
-#                     'Zr02': {'energy': 19.1745053, 'min_unc': 0.7845052999999993, 'plus_unc': 0.7754946999999994}, 
-#                     'Ti02': {'energy': 18.058134579999997, 'min_unc': 0.8081345799999973, 'plus_unc': 0.8118654200000037}, 
-#                     'Ni03': {'energy': 13.9680305, 'min_unc': 0.9780305000000009, 'plus_unc': 1.0619695}, 
-#                     'Zr03': {'energy': 12.309193775999999, 'min_unc': 1.059193775999999, 'plus_unc': 1.1008062240000012}, 
-#                     'Ti03': {'energy': 10.706294196000002, 'min_unc': 1.1362941960000015, 'plus_unc': 1.2037058039999984}, 
-#                     'Ni04': {'energy': 8.648899379944393, 'min_unc': 1.2988993799443929, 'plus_unc': 1.5211006200556056}, 
-#                     'Zr04': {'energy': 6.082350534817555, 'min_unc': 1.4923505348175548, 'plus_unc': 1.8676494651824447}, 
-#                     'Ti04': {'energy': 3.6998866038357203, 'min_unc': 2.2298866038357206, 'plus_unc': 2.090113396164279}, 
-#                     'Ni05': {'energy': 2.2266116583208797, 'min_unc': 1.8966116583208799, 'plus_unc': 1.4033883416791202}, 
-#                     'Zr05': {'energy': 1.5675066930508672, 'min_unc': 1.2375066930508674, 'plus_unc': 0.7424933069491328}, 
-#                     'Ti05': {'energy': 0.7071428571428571, 'min_unc': 0.37714285714285717, 'plus_unc': 0.2828571428571429}}
+#_________________________Energy info from another file________________________
+foil_energy_data ={'Fe01': {'energy': 48.25110370000002, 'min_unc': 0.9011037000000144, 'plus_unc': 0.8988962999999828}, 
+                   'Zr06': {'energy': 47.66121943333334, 'min_unc': 0.9112194333333434, 'plus_unc': 0.8887805666666537}, 
+                   'Ti06': {'energy': 47.13022093333334, 'min_unc': 0.8802209333333408, 'plus_unc': 0.9197790666666563}, 
+                   'Fe02': {'energy': 41.876494533333336, 'min_unc': 1.0264945333333273, 'plus_unc': 1.073505466666667}, 
+                   'Zr07': {'energy': 41.21671893333334, 'min_unc': 1.066718933333334, 'plus_unc': 1.0332810666666603}, 
+                   'Ti08': {'energy': 40.62009246666667, 'min_unc': 1.0700924666666722, 'plus_unc': 1.0299075333333363}, 
+                   'Fe03': {'energy': 37.24984646666667, 'min_unc': 1.099846466666662, 'plus_unc': 1.1001535333333408}, 
+                   'Zr08': {'energy': 36.523388133333334, 'min_unc': 1.173388133333333, 'plus_unc': 1.1266118666666713}, 
+                   'Ti09': {'energy': 35.86358033333333, 'min_unc': 1.1135803333333314, 'plus_unc': 1.1864196666666658}, 
+                   'Fe04': {'energy': 32.115906233333334, 'min_unc': 1.2659062333333324, 'plus_unc': 1.2340937666666676}, 
+                   'Zr09': {'energy': 31.29907423333333, 'min_unc': 1.249074233333328, 'plus_unc': 1.2509257666666684}, 
+                   'Ti10': {'energy': 30.5522245, 'min_unc': 1.3022245000000012, 'plus_unc': 1.2977755000000002}, 
+                   'Fe05': {'energy': 26.2370075, 'min_unc': 1.4870075000000007, 'plus_unc': 1.5129924999999993}, 
+                   'Zr10': {'energy': 25.275796966666668, 'min_unc': 1.5257969666666682, 'plus_unc': 1.5742030333333332}, 
+                   'Ti11': {'energy': 24.390982466666664, 'min_unc': 1.5409824666666623, 'plus_unc': 1.5590175333333391}}
 
 
 
@@ -263,10 +263,10 @@ E_mon_list_56CO, xs_list_56CO, xs_unc_list_56CO = get_IAEA_monitro_xs('56CO')
 # plt.legend()
 # plt.show()
 
-# Fe_energy_min_unc_list = [foil_energy_data[foil]['min_unc'] for foil in foil_energy_data if foil.startswith('Fe')]
-# Fe_energy_plus_unc_list = [foil_energy_data[foil]['plus_unc'] for foil in foil_energy_data if foil.startswith('Fe')]
-# Ti_energy_min_unc_list = [foil_energy_data[foil]['min_unc'] for foil in foil_energy_data if foil.startswith('Ti')]
-# Ti_energy_plus_unc_list = [foil_energy_data[foil]['plus_unc'] for foil in foil_energy_data if foil.startswith('Ti')]
+Fe_energy_min_unc_list = [foil_energy_data[foil]['min_unc'] for foil in foil_energy_data if foil.startswith('Fe')]
+Fe_energy_plus_unc_list = [foil_energy_data[foil]['plus_unc'] for foil in foil_energy_data if foil.startswith('Fe')]
+Ti_energy_min_unc_list = [foil_energy_data[foil]['min_unc'] for foil in foil_energy_data if foil.startswith('Ti')]
+Ti_energy_plus_unc_list = [foil_energy_data[foil]['plus_unc'] for foil in foil_energy_data if foil.startswith('Ti')]
 
 
 calc_xs_56CO_p0 = data_by_reaction_p0['56CO']['calc_xs']
@@ -308,40 +308,8 @@ energies_48V_p1 = data_by_reaction_p1['48V']['energy']
 
 
 
-# plt.errorbar(energies_56CO_p0, calc_xs_56CO_p0, xerr=[Fe_energy_min_unc_list[:-1], Fe_energy_plus_unc_list[:-1]], yerr=calc_xs_unc_56CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
-# plt.errorbar(energies_56CO_p1, calc_xs_56CO_p1, xerr=[Fe_energy_min_unc_list[:-1], Fe_energy_plus_unc_list[:-1]], yerr=calc_xs_unc_56CO_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-# plt.plot(E_mon_list_56CO, xs_list_56CO, color='hotpink', label='IAEA')
-# plt.xlabel('Beam energy (MeV)')
-# plt.ylabel('Cross section (mb)')
-# plt.title(f'56CO')
-# plt.legend()
-# plt.xlim(0,50)
-# plt.show()
-
-# plt.errorbar(energies_46SC_p0, calc_xs_46SC_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_46SC_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
-# plt.errorbar(energies_46SC_p1, calc_xs_46SC_p1, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_46SC_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-# plt.plot(E_mon_list_46SC, xs_list_46SC, color='hotpink', label='IAEA')
-# plt.xlabel('Beam energy (MeV)')
-# plt.ylabel('Cross section (mb)')
-# plt.title(f'46SC')
-# plt.legend()
-# plt.xlim(0,50)
-# plt.show()
-
-# plt.errorbar(energies_48V_p0, calc_xs_48V_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_48V_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
-# plt.errorbar(energies_48V_p1, calc_xs_48V_p1, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_48V_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-# plt.plot(E_mon_list_48V, xs_list_48V, color='hotpink', label='IAEA')
-# plt.xlabel('Beam energy (MeV)')
-# plt.ylabel('Cross section (mb)')
-# plt.title(f'48V')
-# plt.legend()
-# plt.xlim(0,50)
-# plt.show()
-
-
-plt.errorbar(energies_56CO_p0, calc_xs_56CO_p0, yerr=calc_xs_unc_56CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
-plt.errorbar(energies_56CO_p1, calc_xs_56CO_p1, yerr=calc_xs_unc_56CO_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-# plt.errorbar(energies_56CO_avrg, calc_xs_56CO_avrg, yerr=calc_xs_unc_56CO_avrg, marker='d', markersize=5, linestyle='', color='grey', label='avrg')
+plt.errorbar(energies_56CO_p0, calc_xs_56CO_p0, xerr=[Fe_energy_min_unc_list, Fe_energy_plus_unc_list], yerr=calc_xs_unc_56CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+plt.errorbar(energies_56CO_p1, calc_xs_56CO_p1, xerr=[Fe_energy_min_unc_list, Fe_energy_plus_unc_list], yerr=calc_xs_unc_56CO_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
 plt.plot(E_mon_list_56CO, xs_list_56CO, color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
@@ -350,9 +318,8 @@ plt.legend()
 plt.xlim(0,50)
 plt.show()
 
-plt.errorbar(energies_46SC_p0, calc_xs_46SC_p0, yerr=calc_xs_unc_46SC_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
-plt.errorbar(energies_46SC_p1, calc_xs_46SC_p1, yerr=calc_xs_unc_46SC_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-# plt.errorbar(energies_46SC_avrg, calc_xs_46SC_avrg, yerr=calc_xs_unc_46SC_avrg, marker='d', markersize=5, linestyle='', color='grey', label='avrg')
+plt.errorbar(energies_46SC_p0, calc_xs_46SC_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_46SC_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+plt.errorbar(energies_46SC_p1, calc_xs_46SC_p1, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_46SC_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
 plt.plot(E_mon_list_46SC, xs_list_46SC, color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
@@ -361,9 +328,8 @@ plt.legend()
 plt.xlim(0,50)
 plt.show()
 
-plt.errorbar(energies_48V_p0, calc_xs_48V_p0, yerr=calc_xs_unc_48V_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
-plt.errorbar(energies_48V_p1, calc_xs_48V_p1, yerr=calc_xs_unc_48V_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
-# plt.errorbar(energies_48V_avrg, calc_xs_48V_avrg, yerr=calc_xs_unc_48V_avrg, marker='d', markersize=5, linestyle='', color='grey', label='avrg')
+plt.errorbar(energies_48V_p0, calc_xs_48V_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_48V_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+plt.errorbar(energies_48V_p1, calc_xs_48V_p1, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_48V_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
 plt.plot(E_mon_list_48V, xs_list_48V, color='hotpink', label='IAEA')
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Cross section (mb)')
@@ -371,6 +337,40 @@ plt.title(f'48V')
 plt.legend()
 plt.xlim(0,50)
 plt.show()
+
+
+# plt.errorbar(energies_56CO_p0, calc_xs_56CO_p0, yerr=calc_xs_unc_56CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+# plt.errorbar(energies_56CO_p1, calc_xs_56CO_p1, yerr=calc_xs_unc_56CO_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
+# # plt.errorbar(energies_56CO_avrg, calc_xs_56CO_avrg, yerr=calc_xs_unc_56CO_avrg, marker='d', markersize=5, linestyle='', color='grey', label='avrg')
+# plt.plot(E_mon_list_56CO, xs_list_56CO, color='hotpink', label='IAEA')
+# plt.xlabel('Beam energy (MeV)')
+# plt.ylabel('Cross section (mb)')
+# plt.title(f'56CO')
+# plt.legend()
+# plt.xlim(0,50)
+# plt.show()
+
+# plt.errorbar(energies_46SC_p0, calc_xs_46SC_p0, yerr=calc_xs_unc_46SC_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+# plt.errorbar(energies_46SC_p1, calc_xs_46SC_p1, yerr=calc_xs_unc_46SC_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
+# # plt.errorbar(energies_46SC_avrg, calc_xs_46SC_avrg, yerr=calc_xs_unc_46SC_avrg, marker='d', markersize=5, linestyle='', color='grey', label='avrg')
+# plt.plot(E_mon_list_46SC, xs_list_46SC, color='hotpink', label='IAEA')
+# plt.xlabel('Beam energy (MeV)')
+# plt.ylabel('Cross section (mb)')
+# plt.title(f'46SC')
+# plt.legend()
+# plt.xlim(0,50)
+# plt.show()
+
+# plt.errorbar(energies_48V_p0, calc_xs_48V_p0, yerr=calc_xs_unc_48V_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
+# plt.errorbar(energies_48V_p1, calc_xs_48V_p1, yerr=calc_xs_unc_48V_p1, marker='d', markersize=5, linestyle='', color='gold', label='p1')
+# # plt.errorbar(energies_48V_avrg, calc_xs_48V_avrg, yerr=calc_xs_unc_48V_avrg, marker='d', markersize=5, linestyle='', color='grey', label='avrg')
+# plt.plot(E_mon_list_48V, xs_list_48V, color='hotpink', label='IAEA')
+# plt.xlabel('Beam energy (MeV)')
+# plt.ylabel('Cross section (mb)')
+# plt.title(f'48V')
+# plt.legend()
+# plt.xlim(0,50)
+# plt.show()
 
 
 
