@@ -43,8 +43,9 @@ class Zr_foil:
 
     def calculate_decay_constant_w_unc(self):
         # Calculating the decay constant of the production nuclei by checking the reaction happening 
-        half_life_dict = {'96NB': {'half_life': 23.35*3600, 'half_life_unc': 5*3600},
-                          '87Y':  {'half_life': 79.8*3600, 'half_life_unc': 3*3600}}
+        half_life_dict = {'96NB': {'half_life': 23.35*3600, 'half_life_unc': 0.05*3600},
+                          '90NB': {'half_life': 14.60*3600, 'half_life_unc': 0.05*3600},
+                          '87Y':  {'half_life': 79.8*3600, 'half_life_unc': 0.3*3600}}
 
         self.decay_const = np.log(2)/half_life_dict[self.reaction_product]['half_life'] #1/[s])
         self.decay_const_unc = np.log(2)* half_life_dict[self.reaction_product]['half_life_unc'] /(half_life_dict[self.reaction_product]['half_life']**2) #1/[s]

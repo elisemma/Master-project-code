@@ -35,13 +35,13 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
     #Sort out the rows containing the right foil and isotope
     mask = (df['filename'].str.contains(foil) & (df['isotope'] == isotope))
     df = df[mask]
-    print(foil, isotope)
-    print('Before relative unc check \n')
-    print(df)
+    # print(foil, isotope)
+    # print('Before relative unc check \n')
+    # print(df)
 
-    df = df[df['unc_decays'] / df['decays'] <= 1]
-    print('After relative unc check \n')
-    print(df)
+    # df = df[df['unc_decays'] / df['decays'] <= 1]
+    # print('After relative unc check \n')
+    # print(df)
     #Get the decays w unc 
     decays = np.array(df['decays'])
     unc_decays = np.array(df['unc_decays'])
@@ -91,9 +91,11 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
 
 time_array = np.linspace(0,40,1000)*24*3600 #[s]
 half_life_56Co = 77.236*24*3600 #[s], 56Co
-half_life_58Co = 70.86*24*3600 #[s], 56Co
+half_life_58Co = 70.86*24*3600 #[s], 58Co
+half_life_90Nb = 14.60*3600 #[s]
 decay_constant_56Co = decay_constant_func(half_life_56Co)
 decay_constant_58Co = decay_constant_func(half_life_58Co)
+decay_constant_90Nb = decay_constant_func(half_life_90Nb)
 
 
 
@@ -143,9 +145,66 @@ mask = (df_concat_Ni['isotope'] == isotope_to_exclude) & (~df_concat_Ni['energy'
 
 # Apply the mask to exclude rows
 df_concat_Ni = df_concat_Ni[~mask]
-
-
 df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
+
+
+
+
+
+
+
+
+# Zr peak data _____________________________________________________________________________________________________________________
+path_Zr = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/MyGeneratedFiles/Zr_foils/'
+file_AXZR05 = 'AX130217_Zr05_18cm_30MeV/AX130217_Zr05_18cm_30MeV_peak_data.csv'
+file_BAZR01 = 'BA130217_Zr01_18cm_30MeV/BA130217_Zr01_18cm_30MeV_peak_data.csv'
+file_BIZR04 = 'BI140217_Zr04_18cm_30MeV/BI140217_Zr04_18cm_30MeV_peak_data.csv'
+file_BPZR01 = 'BP150217_Zr01_18cm_30MeV/BP150217_Zr01_18cm_30MeV_peak_data.csv'
+file_BRZR02 = 'BR150217_Zr02_18cm_30MeV/BR150217_Zr02_18cm_30MeV_peak_data.csv'
+file_BSZR05 = 'BS160217_Zr05_18cm_30MeV/BS160217_Zr05_18cm_30MeV_peak_data.csv'
+file_BTZR03 = 'CH260217_Zr03_18cm_30MeV/CH260217_Zr03_18cm_30MeV_peak_data.csv'
+file_BXZR01 = 'BX190217_Zr01_18cm_30MeV/BX190217_Zr01_18cm_30MeV_peak_data.csv'
+file_CHZR03 = 'BT160217_Zr03_18cm_30MeV/BT160217_Zr03_18cm_30MeV_peak_data.csv'
+file_CRZR04 = 'CR060317_Zr04_18cm_30MeV/CR060317_Zr04_18cm_30MeV_peak_data.csv'
+
+file_concat_Zr = 'combined_peak_data_Zr.csv'
+
+df_AXXR05 = pd.read_csv(path_Zr+file_AXZR05)
+df_BAZR01 = pd.read_csv(path_Zr+file_BAZR01)
+df_BIZR04 = pd.read_csv(path_Zr+file_BIZR04)
+df_BPZR01 = pd.read_csv(path_Zr+file_BPZR01)
+df_BRZR02 = pd.read_csv(path_Zr+file_BRZR02)
+df_BSZR05 = pd.read_csv(path_Zr+file_BSZR05)
+df_BTZR03 = pd.read_csv(path_Zr+file_BTZR03)
+df_BXZR01 = pd.read_csv(path_Zr+file_BXZR01)
+df_CHZR03 = pd.read_csv(path_Zr+file_CHZR03)
+df_CRZR04 = pd.read_csv(path_Zr+file_CRZR04)
+
+
+df_concat_Zr = pd.concat((df_AXXR05, df_BAZR01, df_BIZR04, df_BPZR01, df_BRZR02, df_BSZR05, df_BTZR03, df_BXZR01, df_CHZR03, df_CRZR04), axis = 0)
+df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 329.058)] # Exclude rows where isotope is '90NB' and energy is 329.058
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 1129.224)] 
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 2186.242)] 
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 2318.959)] 
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] !=132.716 )] 
+
+df_concat_Zr.to_csv(path_Zr+file_concat_Zr)
+
+
+
+# isotopes_Zr = ['96NB', '90NB']
+isotopes_Zr = ['90NB']
+
+# isotopes_Zr = ['87NB','89NB', '90NB', '95NB']
+# isotopes_Zr = ['87NB']
+
+# isotopes_Zr = ['88Y', '91Y', '92Y']
+
+
+# foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
+foil_list_Zr = ['Zr04']
+
+
 
 
 
@@ -153,10 +212,14 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 #Running the code______________________________________________________________________________________
 # decay_chain(decay_constant, df_48V)
-foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
+# foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
 # isotope_list = ['56CO', '58CO', '61CU']
-isotope_list = ['56CO']
+# isotope_list = ['56CO']
 
+foil_list = foil_list_Zr
+isotope_list = isotopes_Zr
+path = path_Zr
+file_concat = file_concat_Zr
 
 for foil in foil_list:
     csv_file_path = f'./Calculated_A0/{foil}_A0_by_hand.csv'
@@ -168,5 +231,7 @@ for foil in foil_list:
                 decay_constant = decay_constant_56Co
             elif isotope == '58CO':
                 decay_constant = decay_constant_58Co
-            A0, A0_unc = decay_chain(foil, isotope, decay_constant, path_Ni, file_concat_Ni)
+            elif isotope == '90NB':
+                decay_constant = decay_constant_90Nb
+            A0, A0_unc = decay_chain(foil, isotope, decay_constant, path, file_concat)
             csv_writer.writerow([f'{isotope}', f'{A0}', f'{A0_unc}'])

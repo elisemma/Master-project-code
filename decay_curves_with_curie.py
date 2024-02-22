@@ -236,19 +236,32 @@ df_CRZR04 = pd.read_csv(path_Zr+file_CRZR04)
 
 
 df_concat_Zr = pd.concat((df_AXXR05, df_BAZR01, df_BIZR04, df_BPZR01, df_BRZR02, df_BSZR05, df_BTZR03, df_BXZR01, df_CHZR03, df_CRZR04), axis = 0)
+df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 329.058)] # Exclude rows where isotope is '90NB' and energy is 329.058
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 1129.224)] 
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 2186.242)] 
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 2318.959)] 
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] !=132.716 )] 
+
+
+
 df_concat_Zr.to_csv(path_Zr+file_concat_Zr)
 
 
 
-isotopes_Zr = ['96NB']
+isotopes_Zr = ['96NB', '90NB']
+# isotopes_Zr = ['96NB']
+
 # isotopes_Zr = ['87NB','89NB', '90NB', '95NB']
+# isotopes_Zr = ['87NB']
+
 # isotopes_Zr = ['88Y', '91Y', '92Y']
 
 
-foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
+foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr05']
+# foil_list_Zr = ['Zr04']
 
 
-# print(df_concat_Zr[df_concat_Zr['filename'].str.contains('Zr01') & (df_concat_Zr['isotope'] == '96NB')])
+# print(df_concat_Zr[df_concat_Zr['filename'].str.contains('Zr05') & (df_concat_Zr['isotope'] == '90NB')])
 
 
 

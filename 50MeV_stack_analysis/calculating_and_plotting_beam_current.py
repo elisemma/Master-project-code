@@ -11,7 +11,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
    
 
     monitor_stack_df = stack_df[stack_df['name'].str.contains(f'{compound}')]
-    monitor_stack_df = monitor_stack_df.drop(monitor_stack_df[monitor_stack_df['name'] == 'Fe01'].index)
+    # monitor_stack_df = monitor_stack_df.drop(monitor_stack_df[monitor_stack_df['name'] == 'Fe01'].index)
 
     beam_current_list_of_list = [] #This list will cointain lists of beam currents for all the mon reactions in the foils: [[Ti01:46SC, Ti01:48V], [Ti02:46SC, Ti02:48V], ...]
     beam_current_unc_list_of_list = [] #Same as beam_current_list_of_list but with the uncertainties
@@ -68,7 +68,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 
 #______________________Runnig the code____________________________________________
-dp = 0.94
+dp = 0.979
 beam_current_list_of_list_Fe, beam_current_unc_list_of_list_Fe, beam_energy_in_foil_list_list_Fe, reaction_list_list_Fe = caclulate_beam_currents_in_foil(dp, 'Fe')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 
@@ -102,7 +102,7 @@ for i, reaction_list in enumerate(reaction_list_list_Ti):
         data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list_Ti[i][j])
 
 
-
+print(data_by_reaction)
 
 
 # ______________________________Plotting________________________________________

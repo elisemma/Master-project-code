@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 from Zr_foil_class import Zr_foil 
 from scipy.interpolate import splrep, splev
+import os 
 
 
 Zr_energy_data = {'Zr01': {'energy': 26.375581480000005, 'min_unc': 0.605581480000005, 'plus_unc': 0.5944185199999943},
@@ -20,7 +21,13 @@ Zr_energy_plus_unc_list = [Zr_energy_data[foil]['plus_unc'] for foil in Zr_energ
 def calc_xs(foil_name, reaction_product):
     #(foil_name, reaction_product, A0, A0_unc)
     A0_by_curie_df = pd.read_csv(f'./Calculated_A0/{foil_name}_A0_by_curie.csv')
-    A0_filtered_df = A0_by_curie_df[A0_by_curie_df['Isotope']==reaction_product]
+    if os.path.exists(f'./Calculated_A0/{foil_name}_A0_by_hand.csv'):
+        A0_by_hand_df = pd.read_csv(f'./Calculated_A0/{foil_name}_A0_by_hand.csv')
+        A0_concat_df = pd.concat((A0_by_hand_df, A0_by_curie_df), axis=0)
+    else:
+        A0_concat_df = A0_by_curie_df
+
+    A0_filtered_df = A0_concat_df[A0_concat_df['Isotope']==reaction_product]
     A0 = A0_filtered_df['A0'].iloc[0]
     A0_unc = A0_filtered_df['A0_unc'].iloc[0]
 
@@ -71,6 +78,8 @@ def plot_xs(reaction_product, Z, A, foil_list): #NB this function assumes that t
 
 
 plot_xs('96NB', 41, 96, ['Zr01', 'Zr02', 'Zr03', 'Zr04'])
+plot_xs('90NB', 41, 90, ['Zr01', 'Zr02', 'Zr03', 'Zr04'])
+
 
 
 

@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import curie as ci 
 import pandas as pd 
 from scipy.interpolate import interp1d
+from scipy.interpolate import PchipInterpolator
 #One file for running the stack calulations with varying dp values and save the csv files in a folder
 
 #This file with one class for foil and one function for variance minimization
@@ -112,8 +113,10 @@ class Foil:
             xs_mon = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
             unc_xs_mon = np.array(xs_unc_list)*1e-28*1e-3 #convert mb to m^2
             weights = 1 / unc_xs_mon
-            interp_xs = interp1d(E_mon, xs_mon,kind='linear')
-            interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='linear')
+            # interp_xs = interp1d(E_mon, xs_mon,kind='linear')
+            # interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='linear')
+            interp_xs = PchipInterpolator(E_mon, xs_mon)
+            interp_unc_xs = PchipInterpolator(E_mon, unc_xs_mon)
 
             # #Plotting to check theinterpolation by eye
             # energy_plotting_array= np.linspace(0,50,10000)
@@ -258,10 +261,10 @@ class Foil:
             dfdx_list.append(dfdN_T)
             unc_list.append(N_T_unc)
         
-            dbc = self.beam_current_list[i]*1e-8
+            dbc = beam_current_in_d_per_s*1e-8
             dfdbc = (self.A0_list[i]/(N_T*(beam_current_in_d_per_s+dbc)*(1-np.exp(-self.decay_const_list[i]*t_irr))) - self.A0_list[i]/(N_T*(beam_current_in_d_per_s-dbc)*(1-np.exp(-self.decay_const_list[i]*t_irr))))/dbc
             dfdx_list.append(dfdbc)
-            unc_list.append(self.beam_current_unc_list[i])
+            unc_list.append(beam_current_in_d_per_s_unc)
         
             dt_irr = t_irr*1e-8
             dfdt_irr = (self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr+dt_irr)))) - self.A0_list[i]/(N_T*beam_current_in_d_per_s*(1-np.exp(-self.decay_const_list[i]*(t_irr-dt_irr)))))/dt_irr

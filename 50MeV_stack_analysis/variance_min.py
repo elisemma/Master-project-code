@@ -165,7 +165,7 @@ dp_array1 = np.arange(0.8, 1.21, 0.01)
 dp_array2 = np.arange(0.95, 0.98, 0.001)
 dp_array = np.union1d(dp_array1, dp_array2)
 
-plot_chi2(dp_array, ['03', '09'], 'p0')
+plot_chi2(dp_array, ['05', '11'], 'p1')
 
 
 # print(dp_array)
