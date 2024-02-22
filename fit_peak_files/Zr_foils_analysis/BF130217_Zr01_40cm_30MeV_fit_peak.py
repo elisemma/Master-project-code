@@ -30,10 +30,6 @@ def fit_peaks(spectrumName, position):
 if __name__ == '__main__':
 
   
-    fit_peaks('AX130217_Zr05_18cm_30MeV', '18cm') #Date: 02/13/2017 15:07
-
-
-
-
+    fit_peaks('BF130217_Zr01_40cm_30MeV', '40cm') #Date: 02/13/2017 15:07
 
 

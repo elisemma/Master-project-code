@@ -4,7 +4,7 @@ import curie as ci
 import pandas as pd 
 
 
-class foil: 
+class Foil: 
     #wclass hich returns the beam current with unc for one foil
     def __init__(self, foil_name, reaction_product, A0, A0_unc):
         self.foil_name = foil_name
@@ -29,7 +29,17 @@ class foil:
                             'Zr02': {'areal_dens': 16.378, 'areal_dens_unc_percent': 0.2992},
                             'Zr03': {'areal_dens': 16.140, 'areal_dens_unc_percent': 0.2478},
                             'Zr04': {'areal_dens': 16.195, 'areal_dens_unc_percent': 0.5619},
-                            'Zr05': {'areal_dens': 16.400, 'areal_dens_unc_percent': 0.2195}}
+                            'Zr05': {'areal_dens': 16.400, 'areal_dens_unc_percent': 0.2195},
+                            'Ti01': {'areal_dens': 11.535, 'areal_dens_unc_percent': 0.8236},
+                            'Ti02': {'areal_dens': 11.740, 'areal_dens_unc_percent': 0.7751},
+                            'Ti03': {'areal_dens': 11.273, 'areal_dens_unc_percent': 0.7629},
+                            'Ti04': {'areal_dens': 11.099, 'areal_dens_unc_percent': 0.8289},
+                            'Ti05': {'areal_dens': 11.317, 'areal_dens_unc_percent': 0.2651},
+                            'Ni01': {'areal_dens': 23.253, 'areal_dens_unc_percent': 0.0645},
+                            'Ni02': {'areal_dens': 23.103, 'areal_dens_unc_percent': 0.1688},
+                            'Ni03': {'areal_dens': 23.064, 'areal_dens_unc_percent': 0.2992},
+                            'Ni04': {'areal_dens': 23.201, 'areal_dens_unc_percent': 0.2974},
+                            'Ni05': {'areal_dens': 22.746, 'areal_dens_unc_percent': 0.0835}}
 
         self.areal_dens = areal_dens_dict[self.foil_name]['areal_dens']
         self.areal_dens_unc_percent = areal_dens_dict[self.foil_name]['areal_dens_unc_percent']
@@ -57,7 +67,20 @@ class foil:
                               'Zr02': {'beam_current': 123.4575028703829, 'beam_current_unc': 7.710074388016526},
                               'Zr03': {'beam_current': 131.18779932476846, 'beam_current_unc': 4.0835044453116245},
                               'Zr04': {'beam_current': 96.63429803291486, 'beam_current_unc': 23.282870237984515},
-                              'Zr05': {'beam_current': 0, 'beam_current_unc': 0}}
+                              'Zr05': {'beam_current': 7.443715398272095, 'beam_current_unc': 6.995006437642473},
+                              'Ni01': {'beam_current': 136.2920634033693, 'beam_current_unc': 15.088128123068422},
+                              'Ni02': {'beam_current': 129.94732270947284, 'beam_current_unc': 6.838926948100149},
+                              'Ni03': {'beam_current': 134.93337063605304, 'beam_current_unc': 2.1254299196587896},
+                              'Ni04': {'beam_current': 115.47046333281607, 'beam_current_unc': 5.3612072356381315},
+                              'Ni05': {'beam_current': 7.443715398272095, 'beam_current_unc': 6.995006437642473},
+                              'Ti01': {'beam_current': 121.3537108681938 , 'beam_current_unc': 2.074524514096691},
+                              'Ti02': {'beam_current': 117.9039121079045, 'beam_current_unc': 1.8458020844093919},
+                              'Ti03': {'beam_current': 127.3507935992085, 'beam_current_unc': 0.18696389527430857},
+                              'Ti04': {'beam_current': 78.0621294846752, 'beam_current_unc': 18.801405804383073},
+                              'Ti05': {'beam_current': 0, 'beam_current_unc': 0},}
+
+
+
 
         self.beam_current = beam_current_dict[self.foil_name]['beam_current']
         self.beam_current_unc = beam_current_dict[self.foil_name]['beam_current_unc']

@@ -167,6 +167,14 @@ file_BXZR01 = 'BX190217_Zr01_18cm_30MeV/BX190217_Zr01_18cm_30MeV_peak_data.csv'
 file_CHZR03 = 'BT160217_Zr03_18cm_30MeV/BT160217_Zr03_18cm_30MeV_peak_data.csv'
 file_CRZR04 = 'CR060317_Zr04_18cm_30MeV/CR060317_Zr04_18cm_30MeV_peak_data.csv'
 
+file_BFZR01 = 'BF130217_Zr01_40cm_30MeV/BF130217_Zr01_40cm_30MeV_peak_data.csv'
+file_BGZR02 = 'BG130217_Zr02_40cm_30MeV/BG130217_Zr02_40cm_30MeV_peak_data.csv'
+file_BHZR03 = 'BH130217_Zr03_40cm_30MeV/BH130217_Zr03_40cm_30MeV_peak_data.csv'
+file_BOZR04 = 'BO150217_Zr04_40cm_30MeV/BO150217_Zr04_40cm_30MeV_peak_data.csv'
+
+file_CYZR02 = 'CY090317_Zr02_10cm_30MeV/CY090317_Zr02_10cm_30MeV_peak_data.csv'
+file_CZZR05 = 'CZ120317_Zr05_10cm_30MeV/CZ120317_Zr05_10cm_30MeV_peak_data.csv'
+
 file_concat_Zr = 'combined_peak_data_Zr.csv'
 
 df_AXXR05 = pd.read_csv(path_Zr+file_AXZR05)
@@ -180,15 +188,18 @@ df_BXZR01 = pd.read_csv(path_Zr+file_BXZR01)
 df_CHZR03 = pd.read_csv(path_Zr+file_CHZR03)
 df_CRZR04 = pd.read_csv(path_Zr+file_CRZR04)
 
+df_BFZR01 = pd.read_csv(path_Zr+file_BFZR01)
+df_BGZR02 = pd.read_csv(path_Zr+file_BGZR02)
+df_BHZR03 = pd.read_csv(path_Zr+file_BHZR03)
+df_BOZR04 = pd.read_csv(path_Zr+file_BOZR04)
 
-df_concat_Zr = pd.concat((df_AXXR05, df_BAZR01, df_BIZR04, df_BPZR01, df_BRZR02, df_BSZR05, df_BTZR03, df_BXZR01, df_CHZR03, df_CRZR04), axis = 0)
+df_CYZR02 = pd.read_csv(path_Zr+file_CYZR02)
+df_CZZR05 = pd.read_csv(path_Zr+file_CZZR05)
+
+
+
+df_concat_Zr = pd.concat((df_AXXR05, df_BAZR01, df_BIZR04, df_BPZR01, df_BRZR02, df_BSZR05, df_BTZR03, df_BXZR01, df_CHZR03, df_CRZR04, df_BFZR01, df_BGZR02, df_BHZR03, df_BOZR04, df_CYZR02, df_CZZR05), axis = 0)
 df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 329.058)] # Exclude rows where isotope is '90NB' and energy is 329.058
-# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 1129.224)] 
-# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 2186.242)] 
-# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 2318.959)] 
-# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] !=132.716 )] 
-
-df_concat_Zr.to_csv(path_Zr+file_concat_Zr)
 
 
 
