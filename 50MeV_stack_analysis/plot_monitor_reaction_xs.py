@@ -118,8 +118,8 @@ calc_xs_list_of_list_Ti_p0, calc_xs_unc_list_of_list_Ti_p0, beam_energy_in_foil_
 calc_xs_list_of_list_Fe_p1, calc_xs_unc_list_of_list_Fe_p1, beam_energy_in_foil_list_list_Fe_p1, reaction_list_list_Fe_p1 = caclulate_xs_in_foil(0.979, 'Fe')
 calc_xs_list_of_list_Ti_p1, calc_xs_unc_list_of_list_Ti_p1, beam_energy_in_foil_list_list_Ti_p1, reaction_list_list_Ti_p1 = caclulate_xs_in_foil(0.979, 'Ti')
 
-calc_xs_list_of_list_Fe_avrg, calc_xs_unc_list_of_list_Fe_avrg, beam_energy_in_foil_list_list_Fe_avrg, reaction_list_list_Fe_avrg = caclulate_xs_in_foil(0.972, 'Fe')
-calc_xs_list_of_list_Ti_avrg, calc_xs_unc_list_of_list_Ti_avrg, beam_energy_in_foil_list_list_Ti_avrg, reaction_list_list_Ti_avrg = caclulate_xs_in_foil(0.972, 'Ti')
+# calc_xs_list_of_list_Fe_avrg, calc_xs_unc_list_of_list_Fe_avrg, beam_energy_in_foil_list_list_Fe_avrg, reaction_list_list_Fe_avrg = caclulate_xs_in_foil(0.972, 'Fe')
+# calc_xs_list_of_list_Ti_avrg, calc_xs_unc_list_of_list_Ti_avrg, beam_energy_in_foil_list_list_Ti_avrg, reaction_list_list_Ti_avrg = caclulate_xs_in_foil(0.972, 'Ti')
 
 
 #___________________________Sorting the data___________________________________

@@ -5,6 +5,55 @@ from foil_class_for_xs_calc import Foil
 from scipy.interpolate import splrep, splev
 import os 
 import csv
+from x4i3 import exfor_manager, exfor_entry
+from urllib.request import urlopen
+
+
+
+
+def get_exfor_data(target, reaction, product): #f.exs: ('ZR-0', 'D,*', 'NB-90')
+    # Pull data from EXFOR
+    db = exfor_manager.X4DBManagerDefault()
+
+    x = db.retrieve(target=target,reaction=reaction,quantity='SIG' )
+    # Wildcards in 'reaction' seem to produce a TON of false positives, even when querying with 'product'
+    # x = db.retrieve(target='BI-209',reaction='D,*',product='PO-209',quantity='SIG' )
+    # query() just searches for data matching search parameters
+
+    # Hold extracted data for plotting
+    plot_Dict = {}
+    for key in x.keys():
+        entry = x[key]
+        datasets = entry.getDataSets()
+
+        # Make sure only one subentry is retrieved per entry!
+        num_of_sub_subentries = len(list(datasets.keys()))
+
+        if num_of_sub_subentries == 1:
+            # We're all good...
+            subentry = next(iter(datasets.values()))
+
+        else:
+            # Poorly-formatted EXFOR - multiple subentries for one entry
+            print('Number of datasets found in entry', next(iter(datasets))[1][0:5], ': ', num_of_sub_subentries)
+
+            for i in datasets.values():
+                # Only select subentries leading to the specified product
+                if product in str(i.reaction):
+                    subentry = i
+    
+
+        # Pull metadata and stash into dictionary
+        # print(subentry.getSimplified())
+        # print(subentry.getSimplified().data)
+        author_name = subentry.author[0].split('.',-1)[-1]
+        year = subentry.year
+        # print(author_name)
+        # print(year)
+        # print(type(subentry))
+        plot_Dict[author_name] = (author_name, year, np.array(subentry.getSimplified().data, dtype=float), subentry.subent)
+
+    return plot_Dict
 
 
 
@@ -34,8 +83,8 @@ def calc_xs(foil_name, reaction_product):
 
 
 
-def get_talys_data(filename):
-    E_talys, xs_talys = np.loadtxt('./talys_calculations/'+filename, unpack = True, skiprows = 24)
+def get_talys_data(filename, foil_name):
+    E_talys, xs_talys = np.loadtxt(f'./talys_calculations/talys_{foil_name[0:2]}/talys/'+filename, unpack = True, skiprows = 24)
     E_list = [0]+list(E_talys)
     xs_list = [0]+list(xs_talys)
     return E_list, xs_list
@@ -73,12 +122,8 @@ def plot_xs(reaction_product, Z, A, foil_list):
         xs_list.append(xs)
         xs_unc_list.append(xs_unc)
 
-    talys_file = f'rp0{Z}0{A}.tot'
-    E_talys, xs_talys = get_talys_data(talys_file)
-    talys_spline = splrep(E_talys, xs_talys)
-    energy_array = np.linspace(0,30,300)
 
-
+    #Write calculated xs and energy w unc to file
     csv_file_path = f'./Calculated_xs/{reaction_product}_xs.csv'
     with open(csv_file_path, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
@@ -86,9 +131,51 @@ def plot_xs(reaction_product, Z, A, foil_list):
         for i in range(len(foil_list)):
             csv_writer.writerow([f'{foil_list[i]}', f'{energy_list[i]}', f'{energy_min_unc_list[i]}', f'{energy_plus_unc_list[i]}', f'{xs_list[i]}', f'{xs_unc_list[i]}'])
 
-    plt.plot(energy_array, splev(energy_array, talys_spline), color='gold', label='TALYS')
+    #Get data from talys
+    talys_file = f'rp0{Z}0{A}.tot'
+    E_talys, xs_talys = get_talys_data(talys_file, foil_list[0])
+    talys_spline = splrep(E_talys, xs_talys)
+    energy_array = np.linspace(0,30,300)
 
-    plt.errorbar(energy_list[0:len(foil_list)], xs_list, xerr=[energy_min_unc_list[0:len(foil_list)], energy_plus_unc_list[0:len(foil_list)]], yerr=xs_unc_list, marker='d', markersize=5, linestyle='', color='hotpink', label='This work')
+    #Get data from exfor
+    product = reaction_product[2:]+'-'+reaction_product[0:2]
+
+    if foil_list[0][0:2]=='Ti':
+        target = 'TI-0'
+    elif foil_list[0][0:2]=='Zr':
+        target = 'ZR-0'
+    elif foil_list[0][0:2]=='Ni':
+        target = 'NI-0'
+
+    exfor_dict = get_exfor_data(target, 'D,*', product)
+
+
+    #Plot results
+    markers = ['.', '*', 'v', '^', '+', '<', '>', 's', 'h']
+    grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver']
+    k=0
+    for index in exfor_dict:
+        # Need to set up list of marker sizes to iterate over with k
+        # print(k)
+        if exfor_dict[index][2].shape[1] == 4:
+            plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=1E3*exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+
+        elif exfor_dict[index][2].shape[1] == 3:
+            plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], yerr=1E3*exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+
+        elif exfor_dict[index][2].shape[1] >= 5:
+            print('WARNING: Plotting',str(exfor_dict[index][2].shape[1])+'-column EXFOR data retrieved for subentry', exfor_dict[index][3]+', please make sure data look reasonable - column formatting is inconsistent for >4 columns.')
+            plt.errorbar(exfor_dict[index][2][:,4],exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+        k=k+1
+
+    plt.plot(energy_array, splev(energy_array, talys_spline), linewidth=1, color='gold', label='TALYS')
+    plt.plot(energy_array, splev(energy_array, talys_spline)*0.75, linewidth=1, color='gold', label='TEST')
+    plt.plot(energy_array, splev(energy_array, talys_spline)*1.2, linewidth=1, color='skyblue', label='Test')
+    plt.plot(energy_array, splev(energy_array, talys_spline)*0.9, linewidth=1, color='mediumseagreen', label='test')
+    plt.plot(energy_array, splev(energy_array, talys_spline)*1.1, linewidth=1, color='gold', label='test.')
+
+
+    plt.errorbar(energy_list[0:len(foil_list)], xs_list, xerr=[energy_min_unc_list[0:len(foil_list)], energy_plus_unc_list[0:len(foil_list)]], yerr=xs_unc_list, marker='D', markersize=5, linewidth=2, linestyle='', color='deeppink', label='This work')
     plt.xlabel('Beam energy (MeV)')
     plt.ylabel('Cross section (mb)')
     plt.title(reaction_product)
@@ -101,8 +188,18 @@ def plot_xs(reaction_product, Z, A, foil_list):
 
 #_________________________________Running the code_______________________________________
 
-plot_xs('96NB', 41, 96, ['Zr01', 'Zr02', 'Zr03', 'Zr04'])
+# plot_xs('96NB', 41, 96, ['Zr01', 'Zr02', 'Zr03', 'Zr04'])
 plot_xs('90NB', 41, 90, ['Zr01', 'Zr02', 'Zr03', 'Zr04'])
+# plot_xs('47SC', 21, 47, ['Ti01', 'Ti02', 'Ti03'])
+# plot_xs('46SC', 21, 46, ['Ti01', 'Ti02', 'Ti03', 'Ti04'])
+# plot_xs('48V', 23, 48, ['Ti01', 'Ti02', 'Ti03', 'Ti04'])
+# plot_xs('52MN', 25, 52, ['Ni01', 'Ni02'])
+# plot_xs('65NI', 28, 65, ['Ni01', 'Ni02', 'Ni03', 'Ni04'])
+# plot_xs('57CO', 27, 57, ['Ni01', 'Ni02', 'Ni03'])
+# plot_xs('60CU', 29, 60, ['Ni02', 'Ni03'])
+
+
+
 
 
 

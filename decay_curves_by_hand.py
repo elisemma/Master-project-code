@@ -204,7 +204,7 @@ df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['
 
 
 # isotopes_Zr = ['96NB', '90NB']
-isotopes_Zr = ['90NB']
+# isotopes_Zr = ['90NB']
 
 # isotopes_Zr = ['87NB','89NB', '90NB', '95NB']
 # isotopes_Zr = ['87NB']
@@ -213,7 +213,7 @@ isotopes_Zr = ['90NB']
 
 
 # foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
-foil_list_Zr = ['Zr04']
+# foil_list_Zr = ['Zr04']
 
 
 
@@ -223,14 +223,14 @@ foil_list_Zr = ['Zr04']
 
 #Running the code______________________________________________________________________________________
 # decay_chain(decay_constant, df_48V)
-# foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
+foil_list_Ni = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
 # isotope_list = ['56CO', '58CO', '61CU']
-# isotope_list = ['56CO']
+isotopes_Ni = ['56CO']
 
-foil_list = foil_list_Zr
-isotope_list = isotopes_Zr
-path = path_Zr
-file_concat = file_concat_Zr
+foil_list = foil_list_Ni
+isotope_list = isotopes_Ni
+path = path_Ni
+file_concat = file_concat_Ni
 
 for foil in foil_list:
     csv_file_path = f'./Calculated_A0/{foil}_A0_by_hand.csv'

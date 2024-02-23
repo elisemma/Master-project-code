@@ -112,7 +112,7 @@ df_concat_Ti = pd.concat((df_CJTi01, df_CKTi02, df_CLTi03, df_CMTi04, df_CPTi05,
 df_concat_Ti.to_csv(path_Ti+file_concat_Ti)
 
 isotopes_Ti = ['48V', '46SC']
-# isotopes_Ti = ['48V']
+# isotopes_Ti = ['48SC']
 
 foil_list_Ti = ['Ti01', 'Ti02','Ti03', 'Ti04', 'Ti05']
 # foil_list_Ti = ['Ti02']
@@ -175,11 +175,12 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 
 
-# isotopes_Ni = ['56CO', '58CO', '61CU']
 isotopes_Ni = ['58CO', '61CU']
-# isotopes_Ni = ['58CO']
 
-foil_list_Ni = ['Ni01', 'Ni02','Ni03', 'Ni04', 'Ni05']
+# isotopes_Ni = ['52MN', '58CO', '61CU']
+# isotopes_Ni = ['60CU']
+
+foil_list_Ni = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
 # foil_list_Ni = ['Ni05']
 
 
@@ -200,7 +201,10 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 
 
 
-# print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti02') & (df_concat_Ti['isotope'] == '48V')])
+# print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti02') & (df_concat_Ti['isotope'] == '47SC')])
+# print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti03') & (df_concat_Ti['isotope'] == '47SC')])
+# print(df_concat_Ti[df_concat_Ti['filename'].str.contains('Ti05') & (df_concat_Ti['isotope'] == '47SC')])
+
 # print(df_concat_Ni[df_concat_Ni['filename'].str.contains('Ni01') & (df_concat_Ni['isotope'] == '56CO')])
 
 
@@ -290,11 +294,9 @@ foil_list_Zr = ['Zr04']
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
 # generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
-# generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+# generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)
 
-generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)
 
-
-# ./Calculated_A0
 
 

@@ -138,6 +138,12 @@ class Foil:
             xs_unc_norm = xs_unc_un_norm/np.trapz(flux_from_stack_calc, x= energy_from_stack_calc)
             self.xs_mon_unc_list.append(xs_unc_norm)
 
+            # print('_________________________________________')
+            # print({self.foil_name}, {reaction_product})
+            # print('reaction integral: ', xs_norm)
+            # print('reaction integral unc: ', xs_unc_norm)
+            # print('_________________________________________\n')
+
 
 
 
@@ -153,7 +159,6 @@ class Foil:
         molar_dens = areal_dens/self.molar_mass # mol/cm2
 
         N_T_per_cm2 = N_A*molar_dens # nuclei / cm2 
-
         # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
         N_T = N_T_per_cm2*1.0e4 #[nuclei/m^2]
 
@@ -165,7 +170,14 @@ class Foil:
 
             areal_dens_unc = areal_dens*self.areal_dens_unc_percent/100
             N_T_unc = N_T*np.sqrt((areal_dens_unc/areal_dens)**2 + (self.molar_mass_unc/self.molar_mass)**2) #[nuclei/m^2]
-        
+
+            # print('\n')
+            # print(self.foil_name)
+            # print(self.reaction_list[i])
+            # print('N_T_per_cm2: ', N_T_per_cm2)
+            # print('N_T_unc_per_cm2: ',N_T_unc/1.0e4)
+            # print('\n')
+            
             dfdx_list = [] #Jacobian
             unc_list = []
         
