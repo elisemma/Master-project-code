@@ -246,12 +246,12 @@ def calibration_50cm():
 
 if __name__ == '__main__':
 
-    calibration_10cm()
+    # calibration_10cm()
     # calibration_15cm()
     # calibration_18cm()
     # calibration_18cm_new()
     # calibration_22cm()
-    # calibration_40cm()
+    calibration_40cm()
     # calibration_50cm()
 
 

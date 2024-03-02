@@ -120,6 +120,7 @@ isotopes, R, cov_R = fit_prod_rate(['87NB', '87Ym', '87Y'], '87NB', 'Zr01', path
 
 
 
+
 # t_irr_h = 0.33
 # R = {'87NB':[[1E4,1]],
 #          '87Y':[[1E2,1]],

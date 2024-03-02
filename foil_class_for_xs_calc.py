@@ -6,11 +6,13 @@ import pandas as pd
 
 class Foil: 
     #wclass hich returns the beam current with unc for one foil
-    def __init__(self, foil_name, reaction_product, A0, A0_unc):
+    def __init__(self, foil_name, reaction_product, R, R_unc):
         self.foil_name = foil_name
         self.reaction_product = reaction_product
-        self.A0 = A0
-        self.A0_unc = A0_unc
+        # self.A0 = A0
+        # self.A0_unc = A0_unc
+        self.R = R 
+        self.R_unc = R_unc
         self.areal_dens = None
         self.areal_dens_unc_percent = None
         self.decay_const = None
@@ -86,7 +88,47 @@ class Foil:
         self.beam_current_unc = beam_current_dict[self.foil_name]['beam_current_unc']
 
 
+
+
+
+
     def calculate_xs_w_unc(self):
+
+        N_A = 6.0221408e+23
+        t_irr = 1200 #[s]
+        t_irr_unc = 3 #[s]
+        # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
+        
+        areal_dens = float(self.areal_dens)/1000.0 # g/cm2
+        molar_dens = areal_dens/self.molar_mass # mol/cm2
+
+        N_T_per_cm2 = N_A*molar_dens # nuclei / cm2 
+
+        # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
+        N_T = N_T_per_cm2*1.0e4 #[nuclei/m^2]
+        N_T_unc = N_T*np.sqrt((areal_dens_unc/areal_dens)**2 + (self.molar_mass_unc/self.molar_mass)**2) #[nuclei/m^2]
+
+        beam_current_in_d_per_s = self.beam_current/(1.60217634e-19*1.0e9)
+        beam_current_in_d_per_s_unc = self.beam_current_unc/(1.60217634e-19*1.0e9)
+
+        xs = self.R/(beam_current_in_d_per_s * N_T)
+        self.calc_xs = xs
+
+        xs_unc = xs * np.sqrt( (self.R_unc/self.R)**2 + (beam_current_in_d_per_s_unc/beam_current_in_d_per_s)**2 + (N_T_unc/N_T)**2 )
+        self.calc_xs_unc = xs_unc
+
+
+
+
+
+
+
+
+
+
+
+
+    def calculate_xs_w_unc_old(self): #does not work with production rate as input in the class. Needs A0 w unc
 
         # Calculating the cross section with uncertainty by using the end of beam activity, areal density, molar mass, decay constant and beam current
         N_A = 6.0221408e+23
