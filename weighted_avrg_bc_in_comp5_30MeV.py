@@ -423,5 +423,43 @@ def Average_BeamCurrent(A0, sigma_A0, mass_density, sigma_mass_density, lambda_,
 curr, unc_curr = Average_BeamCurrent(A0, sigma_A0, mass_density, sigma_mass_density, lambda_, reaction_integral, uncertainty_integral, irr_time, sigma_irr_time, csv_filename='averaged_currents.csv', save_csv=False)
 
 
-print(curr)
-print(unc_curr)
+print('before adding std to unc:')
+print('bc: ', curr)
+print('unc_bc: ', unc_curr)
+
+
+
+
+
+
+
+#Adding sqrt(std) to the unc:
+
+
+bc_dict = {'58CO': {'beam_current': [481.99333497949357], 
+                    'beam_current_unc': [111.93272788291921], 
+                    'energy': [2.2266116583208797]}, 
+           '61CU': {'beam_current': [7.3406068653733865], 
+                    'beam_current_unc': [3.526360943135902], 
+                    'energy': [2.2266116583208797]}}
+
+
+
+comp5_list = []
+std_list = []
+
+
+for reaction in bc_dict:
+    comp5_list.append(bc_dict[reaction]['beam_current'][0])
+
+std5 = np.std(comp5_list)
+std_list.append(std5)
+
+final_unc_curr = [np.sqrt(std_dev + other_unc**2) for std_dev, other_unc in zip(std_list, unc_curr)]
+
+
+print('after adding std to unc:')
+print('bc: ', curr)
+print('unc_bc: ', final_unc_curr)
+
+

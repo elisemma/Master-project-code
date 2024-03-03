@@ -2,6 +2,7 @@ import numpy as np
 import csv
 import matplotlib.pyplot as plt
 from scipy.constants import elementary_charge
+from statistics import stdev
 
 #________________________________________________________________________30 MeV ______________________________________________________________________________________________
 number_of_monitor_foils_30MeV = 2
@@ -13,16 +14,14 @@ A0_30MeV = np.array([ # [Bq]
     [261.812792566163,   3736.2259003636364, 220380.49108977473, 301.4362170806085,  12367.810902410458],    # Comp 1 activities for 56Co, 58Co, 61Cu, 46Sc, 48V
     [195.41965991684066, 5709.463064094319,  210769.46467086408, 316.488124679544,   21412.566274580688],    # Comp 2 activities for 56Co, 58Co, 61Cu, 46Sc, 48V
     [507.91693209926547, 4671.642624718161,  350467.27527558757, 423.41359286337206, 10089.357669794123],    # Comp 3 activities for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [642.8379460389074,  1095.00048859536,   700958.7214614445,  20.575417102354017, 600.4512860881874],     # Comp 4 activities for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [1e-50,                  25.452633286057697*12.642, 461.7853246484494*12.642,  1e-50, 1e-50]     # Comp 5 activities for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [642.8379460389074,  1095.00048859536,   700958.7214614445,  20.575417102354017, 600.4512860881874]     # Comp 4 activities for 56Co, 58Co, 61Cu, 46Sc, 48V
 ])  
   
 sigma_A0_30MeV = np.array([ # [Bq]
     [17.582548417585322, 206.45302017891137, 4441.841081947311,  3.434365403830543,  81.7141847549622],      # Comp 1 activities unc for 56Co, 58Co, 61Cu, 46Sc, 48V
     [1.9411697079227395, 831.6135862144428,  3911.559231355066,  3.9123740720603895, 259.47614231008066],    # Comp 2 activities unc for 56Co, 58Co, 61Cu, 46Sc, 48V
     [8.772734507668872,  9.267591691987594,  5684.278089150438,  7.012687689945556,  156.73434909843314],    # Comp 3 activities unc for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [15.030405986416387, 402.40305716671895, 20031.679842941638, 0.6211612800249608, 6.907335400268808],     # Comp 4 activities unc for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [1e12,                  2.465479823966241*12.642,  118.4114034137288*12.642,  1e12, 1e12]     # Comp 5 activities unc for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [15.030405986416387, 402.40305716671895, 20031.679842941638, 0.6211612800249608, 6.907335400268808]      # Comp 4 activities unc for 56Co, 58Co, 61Cu, 46Sc, 48V
 ])  
 
 # mass_density_30MeV = np.array([                       
@@ -45,40 +44,35 @@ mass_density_30MeV = np.array([ # [nuclei/cm^2]
     [2.385836227282795e+20,  2.385836227282795e+20,  2.385836227282795e+20,  1.4512167908580024e+20, 1.4512167908580024e+20], # Comp 1 mass dens for Ni01, Ni01, Ni01, Ti01, Ti01
     [2.3704457213656056e+20, 2.3704457213656056e+20, 2.3704457213656056e+20, 1.4770078131489335e+20, 1.4770078131489335e+20], # Comp 2 mass dens for Ni02, Ni02, Ni02, Ti02, Ti02
     [2.366444189827136e+20,  2.366444189827136e+20,  2.366444189827136e+20,  1.418254606271544e+20,  1.418254606271544e+20],  # Comp 3 mass dens for Ni03, Ni03, Ni03, Ti03, Ti03
-    [2.380500851898169e+20,  2.380500851898169e+20,  2.380500851898169e+20,  1.396363689790461e+20,  1.396363689790461e+20],  # Comp 4 mass dens for Ni04, Ni04, Ni04, Ti04, Ti04
-    [2.333816317282693e+20,  2.333816317282693e+20,  2.333816317282693e+20,  1.423790240324232e+20,  1.423790240324232e+20]   # Comp 5 mass dens for Ni05, Ni05, Ni05, Ti05, Ti05
+    [2.380500851898169e+20,  2.380500851898169e+20,  2.380500851898169e+20,  1.396363689790461e+20,  1.396363689790461e+20]  # Comp 4 mass dens for Ni04, Ni04, Ni04, Ti04, Ti04
 ])  
   
 sigma_mass_density_30MeV = np.array([ # [nuclei/cm^2]  
     [1.5389502640420342e+17, 1.5389502640420342e+17, 1.5389502640420342e+17, 1.1952259940967288e+18, 1.1952259940967288e+18], # Comp 1 mass dens unc for Ni01, Ni01, Ni01, Ti01, Ti01
     [4.0013449889007386e+17, 4.0013449889007386e+17, 4.0013449889007386e+17, 1.1448329143295144e+18, 1.1448329143295144e+18], # Comp 2 mass dens unc for Ni02, Ni02, Ni02, Ti02, Ti02
     [7.080419383273164e+17,  7.080419383273164e+17,  7.080419383273164e+17,  1.081990495922333e+18,  1.081990495922333e+18],  # Comp 3 mass dens unc for Ni03, Ni03, Ni03, Ti03, Ti03
-    [7.079628121784579e+17,  7.079628121784579e+17,  7.079628121784579e+17,  1.1574495386179843e+18, 1.1574495386179843e+18], # Comp 4 mass dens unc for Ni04, Ni04, Ni04, Ti04, Ti04
-    [1.9488015308666957e+17, 1.9488015308666957e+17, 1.9488015308666957e+17, 3.774585126968663e+17,  3.774585126968663e+17]   # Comp 5 mass dens unc for Ni05, Ni05, Ni05, Ti05, Ti05
+    [7.079628121784579e+17,  7.079628121784579e+17,  7.079628121784579e+17,  1.1574495386179843e+18, 1.1574495386179843e+18] # Comp 4 mass dens unc for Ni04, Ni04, Ni04, Ti04, Ti04
 ])   
   
 lambda__30MeV = np.log(2)/np.array([ # [1/s]                                        # each row will be the same
     [77.236*24*3600, 70.86*24*3600, 3.339*3600, 83.79*24*3600, 15.9735*24*3600],    # Comp 1 lambda for 56Co, 58Co, 61Cu, 46Sc, 48V
     [77.236*24*3600, 70.86*24*3600, 3.339*3600, 83.79*24*3600, 15.9735*24*3600],    # Comp 2 lambda for 56Co, 58Co, 61Cu, 46Sc, 48V
     [77.236*24*3600, 70.86*24*3600, 3.339*3600, 83.79*24*3600, 15.9735*24*3600],    # Comp 3 lambda for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [77.236*24*3600, 70.86*24*3600, 3.339*3600, 83.79*24*3600, 15.9735*24*3600],    # Comp 4 lambda for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [77.236*24*3600, 70.86*24*3600, 3.339*3600, 83.79*24*3600, 15.9735*24*3600]     # Comp 5 lambda for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [77.236*24*3600, 70.86*24*3600, 3.339*3600, 83.79*24*3600, 15.9735*24*3600]     # Comp 4 lambda for 56Co, 58Co, 61Cu, 46Sc, 48V
 ])  
   
 reaction_integral_30MeV = 1e4*np.array([ # [cm^2]
     [9.868468789066539e-31, 1.5361098661267076e-29, 1.422638698833147e-30,  2.4190166123842706e-30, 1.8271896436850462e-29],  # Comp 1 int for 56Co, 58Co, 61Cu, 46Sc, 48V
     [7.546457582261141e-31, 2.157347386230939e-29,  1.732476913736326e-30,  2.5656634319791498e-30, 3.2051513865015736e-29],  # Comp 2 int for 56Co, 58Co, 61Cu, 46Sc, 48V
     [2.0114277147898e-30,   1.7671033103200475e-29, 2.6169459389045837e-30, 3.273026664765459e-30,  1.4826991003748955e-29],  # Comp 3 int for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [3.006599245089043e-30, 4.299345718197932e-30,  6.351913050401064e-30,  2.8332737095796377e-31, 8.057275110831515e-31],   # Comp 4 int for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [1,                     3.3735628091502424e-31, 8.16618313949607e-31,   1.203576743075432e-33,  1.9696939409830086e-33]   # Comp 5 int for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [3.006599245089043e-30, 4.299345718197932e-30,  6.351913050401064e-30,  2.8332737095796377e-31, 8.057275110831515e-31]   # Comp 4 int for 56Co, 58Co, 61Cu, 46Sc, 48V
 ])  
   
 uncertainty_integral_30MeV = 1e4*np.array([ # [cm^2]
     [5.574697852499285e-32,  8.295029704286848e-31,  7.600191560063854e-32,  9.981951030650341e-32,  9.462243749256337e-31],  # Comp 1 int unc for 56Co, 58Co, 61Cu, 46Sc, 48V
     [4.6950384114971025e-32, 1.164031694075335e-30,  8.959731837907958e-32,  1.0568544444325924e-31, 1.655751320482127e-30],  # Comp 2 int unc for 56Co, 58Co, 61Cu, 46Sc, 48V
     [1.1823070709015115e-31, 1.0616938940527619e-30, 1.2453802324674207e-31, 1.3928406683925334e-31, 7.981419700271481e-31],  # Comp 3 int unc for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [1.8007222096321475e-31, 3.480855851144396e-31,  3.7336235341067837e-31, 1.7276027933875856e-32, 8.584850901614173e-32],  # Comp 4 int unc for 56Co, 58Co, 61Cu, 46Sc, 48V
-    [1,                      3.916078608773901e-32,  9.173104893466661e-32,  3.0849095349218334e-34, 2.8605518534780288e-34]  # Comp 5 int unc for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [1.8007222096321475e-31, 3.480855851144396e-31,  3.7336235341067837e-31, 1.7276027933875856e-32, 8.584850901614173e-32]  # Comp 4 int unc for 56Co, 58Co, 61Cu, 46Sc, 48V
 ])  
   
 irr_time_30MeV = np.ones((number_of_comp_30MeV, number_of_monitor_reactions_30MeV))*1200 # [s]
@@ -523,6 +517,8 @@ def Average_BeamCurrent(A0, sigma_A0, mass_density, sigma_mass_density, lambda_,
 
 	# Save final results to csv
     outfile = np.stack((np.transpose(output_foil_index),np.transpose(output_mu),np.transpose(output_unc_mu),np.transpose(output_percent_unc)), axis=-1)
+
+
     
 
     
@@ -556,14 +552,14 @@ def Average_BeamCurrent(A0, sigma_A0, mass_density, sigma_mass_density, lambda_,
     for i in range(len(output_foil_index)):
         plt.errorbar(np.ones(len(currents[i,:]))*(0.2+output_foil_index[i]), currents[i,:], markersize=4.0,  yerr=unc_currents[i,:], capsize=5.0,  marker='.', ls=' ',linewidth=0.5, capthick=0.5, color='red')
     plt.legend(['Average Currents', 'Individual Currents'],loc='lower left')
-    plt.ylim(-5,170)
+    # plt.ylim(-5,170)
 	# plt.legend(['Actual Currents', 'Approximate Currents', 'Individual Currents'],loc='lower left')
     plt.show()
     
 
     #output_mu = output_mu.reverse()
 
-    return output_mu[::-1], output_unc_mu[::-1 ] #returning reversed lists
+    return output_mu, output_unc_mu
 
 
 
@@ -573,6 +569,118 @@ def Average_BeamCurrent(A0, sigma_A0, mass_density, sigma_mass_density, lambda_,
 
 curr, unc_curr = Average_BeamCurrent(A0, sigma_A0, mass_density, sigma_mass_density, lambda_, reaction_integral, uncertainty_integral, irr_time, sigma_irr_time, csv_filename='averaged_currents.csv', save_csv=False)
 
+print('before adding std to unc:')
+print('bc: ', curr)
+print('unc_bc: ', unc_curr)
 
-print(curr)
-print(unc_curr)
+
+
+
+
+# Adding sqrt(std) to the unc for 30 MeV stack:
+
+
+bc_dict = {'56CO': {'beam_current': [142.94357895718744, 140.4356732396185, 137.16906671032277, 115.45740940361617], 
+                    'beam_current_unc': [16.1669084292634, 17.49522836920102, 16.161155916519576, 13.859310110622088], 
+                    'energy': [27.337003000000003, 20.392268865, 13.9680305, 8.648899379944393]}, 
+           '58CO': {'beam_current': [120.23148693034973, 131.67191999206304, 131.75266364143582, 126.1803133367875, 481.99333497949357], 
+                    'beam_current_unc': [13.573852227324059, 14.233075670536211, 15.866540603364134, 24.403935636034277, 111.93272788291921], 
+                    'energy': [27.337003000000003, 20.392268865, 13.9680305, 8.648899379944393, 2.2266116583208797]}, 
+           '61CU': {'beam_current': [155.59646977043542, 122.99063987093889, 135.6182994747526, 111.09164503202697, 7.3406068653733865], 
+                    'beam_current_unc': [16.658675796237205, 12.754575896483685, 12.965154905748303, 13.097625213556269, 3.526360943135902], 
+                    'energy': [27.337003000000003, 20.392268865, 13.9680305, 8.648899379944393, 2.2266116583208797]}, 
+           '48V':  {'beam_current': [124.02956425121741, 120.2778569729406, 127.58646137864346, 141.91860731811067], 
+                    'beam_current_unc': [13.022205611149174, 12.580416248317658, 13.888015254093956, 30.341940981048147], 
+                    'energy': [25.518248420000003, 18.058134579999997, 10.706294196000002, 3.6998866038357203]}, 
+           '46SC': {'beam_current': [119.74538210590372, 116.4687543732036, 127.20246828201854, 72.52638945931477], 
+                    'beam_current_unc': [10.095801563466392, 9.781591340171868, 11.017872005073386, 8.933645647750188], 
+                    'energy': [25.518248420000003, 18.058134579999997, 10.706294196000002, 3.6998866038357203]}}
+
+
+
+comp1_list = []
+comp2_list = []
+comp3_list = []
+comp4_list = []
+
+
+for reaction in bc_dict:
+    comp1_list.append(bc_dict[reaction]['beam_current'][0])
+    comp2_list.append(bc_dict[reaction]['beam_current'][1])
+    comp3_list.append(bc_dict[reaction]['beam_current'][2])
+    comp4_list.append(bc_dict[reaction]['beam_current'][3])
+
+
+std1 = np.std(comp1_list)
+std2 = np.std(comp2_list)
+std3 = np.std(comp3_list)
+std4 = np.std(comp4_list)
+std_list = []
+
+std_list.append(std1)
+std_list.append(std2)
+std_list.append(std3)
+std_list.append(std4)
+
+final_unc_curr = [np.sqrt(std_dev + other_unc**2) for std_dev, other_unc in zip(std_list, unc_curr)]
+
+
+print('after adding std to unc:')
+print('bc: ', curr)
+print('unc_bc: ', final_unc_curr)
+
+
+
+
+# #Adding sqrt(std) to the unc for 50 MeV stack:
+
+
+# bc_dict = {'56CO': {'beam_current': [91.11279483618009, 95.48943423201047, 96.67759656591667, 87.90385977930694, 79.76353046504703], 
+#                     'beam_current_unc': [17.764379182058054, 17.550901526554565, 16.71724750021088, 13.273019225954833, 9.946307812204912], 
+#                     'energy': [48.25110370000002, 41.876494533333336, 37.24984646666667, 32.115906233333334, 26.2370075]}, 
+#            '46SC': {'beam_current': [98.38985492917791, 92.43719344140617, 94.87157275894245, 92.64152715822723, 89.76044811394085], 
+#                     'beam_current_unc': [9.06208185316921, 8.211563169758909, 8.188146100794526, 8.695843008929224, 7.418752250751914], 
+#                     'energy': [47.13022093333334, 40.62009246666667, 35.86358033333333, 30.5522245, 24.390982466666664]}, 
+#            '48V':  {'beam_current': [88.69779045350535, 89.04935458091553, 92.2968314456004, 90.59958822021765, 89.8492617019322], 
+#                     'beam_current_unc': [12.20254718194584, 9.989933425556139, 9.93150127659525, 10.305181149242912, 9.318875229511063], 
+#                     'energy': [47.13022093333334, 40.62009246666667, 35.86358033333333, 30.5522245, 24.390982466666664]}}
+
+
+# comp1_list = []
+# comp2_list = []
+# comp3_list = []
+# comp4_list = []
+# comp5_list = []
+
+
+
+# for reaction in bc_dict:
+#     comp1_list.append(bc_dict[reaction]['beam_current'][0])
+#     comp2_list.append(bc_dict[reaction]['beam_current'][1])
+#     comp3_list.append(bc_dict[reaction]['beam_current'][2])
+#     comp4_list.append(bc_dict[reaction]['beam_current'][3])
+#     comp5_list.append(bc_dict[reaction]['beam_current'][4])
+
+
+
+# std1 = np.std(comp1_list)
+# std2 = np.std(comp2_list)
+# std3 = np.std(comp3_list)
+# std4 = np.std(comp4_list)
+# std5 = np.std(comp5_list)
+# std_list = []
+
+# std_list.append(std1)
+# std_list.append(std2)
+# std_list.append(std3)
+# std_list.append(std4)
+# std_list.append(std5)
+
+
+# final_unc_curr = [np.sqrt(std_dev + other_unc**2) for std_dev, other_unc in zip(std_list, unc_curr)]
+
+
+# print('after adding std to unc:')
+# print('bc: ', curr)
+# print('unc_bc: ', final_unc_curr)
+
