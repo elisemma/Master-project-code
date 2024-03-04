@@ -9,7 +9,7 @@ def fit_prod_rate(isotope, foil, path, file):
     R_estimated = 5
     t_irr_h = 0.33
     dc = ci.DecayChain(isotope, units='h', R=[[R_estimated, t_irr_h]])
-    dc.get_counts(foil, '02/13/2017 14:27:00', path+file)
+    dc.get_counts(foil, '02/13/2017 14:47:00', path+file)
 
     isotopes, r, var_r = dc.fit_R()
     R = float(r[0])    
@@ -40,9 +40,9 @@ def generate_prod_rate_csv(foil_type, isotopes, foil_list, path, file_concat):
 
 
 def fit_activity(isotope, foil, path, file):
-    t_irr_h = 0.33
+    # t_irr_h = 0.33
     dc = ci.DecayChain(isotope, units='h', A0=1000)
-    dc.get_counts(foil, '02/13/2017 14:27:00', path+file)
+    dc.get_counts(foil, '02/13/2017 14:47:00', path+file)
 
     isotopes, a0, var_a0 = dc.fit_A0()
     
@@ -269,8 +269,8 @@ df_concat_Zr.to_csv(path_Zr+file_concat_Zr)
 
 
 
-# isotopes_Zr = ['90NB', '96NB']
-isotopes_Zr = ['96NB']
+isotopes_Zr = ['90NB', '96NB']
+# isotopes_Zr = ['96NB']
 
 # isotopes_Zr = ['87NB','89NB', '90NB', '95NB']
 # isotopes_Zr = ['87NB']
@@ -278,8 +278,8 @@ isotopes_Zr = ['96NB']
 # isotopes_Zr = ['88Y', '91Y', '92Y']
 
 
-# foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
-foil_list_Zr = ['Zr04']
+foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
+# foil_list_Zr = ['Zr04']
 
 
 # print(df_concat_Zr[df_concat_Zr['filename'].str.contains('Zr05') & (df_concat_Zr['isotope'] == '90NB')])
@@ -293,7 +293,7 @@ foil_list_Zr = ['Zr04']
 # generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
-# generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 # generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)
 

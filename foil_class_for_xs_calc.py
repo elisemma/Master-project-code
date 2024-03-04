@@ -65,23 +65,43 @@ class Foil:
 
 
     def assign_beam_current_w_unc(self):
-        beam_current_dict = { 'Zr01': {'beam_current': 128.21543781323695, 'beam_current_unc': 12.74029303652092},
-                              'Zr02': {'beam_current': 123.4575028703829, 'beam_current_unc': 7.710074388016526},
-                              'Zr03': {'beam_current': 131.18779932476846, 'beam_current_unc': 4.0835044453116245},
-                              'Zr04': {'beam_current': 96.63429803291486, 'beam_current_unc': 23.282870237984515},
-                              'Zr05': {'beam_current': 7.443715398272095, 'beam_current_unc': 6.995006437642473},
-                              'Ni01': {'beam_current': 136.2920634033693, 'beam_current_unc': 15.088128123068422},
-                              'Ni02': {'beam_current': 129.94732270947284, 'beam_current_unc': 6.838926948100149},
-                              'Ni03': {'beam_current': 134.93337063605304, 'beam_current_unc': 2.1254299196587896},
-                              'Ni04': {'beam_current': 115.47046333281607, 'beam_current_unc': 5.3612072356381315},
-                              'Ni05': {'beam_current': 7.443715398272095, 'beam_current_unc': 6.995006437642473},
-                              'Ti01': {'beam_current': 121.3537108681938 , 'beam_current_unc': 2.074524514096691},
-                              'Ti02': {'beam_current': 117.9039121079045, 'beam_current_unc': 1.8458020844093919},
-                              'Ti03': {'beam_current': 127.3507935992085, 'beam_current_unc': 0.18696389527430857},
-                              'Ti04': {'beam_current': 78.0621294846752, 'beam_current_unc': 18.801405804383073},
-                              'Ti05': {'beam_current': 0, 'beam_current_unc': 0},}
+        # beam_current_dict = { 'Zr01': {'beam_current': 128.21543781323695, 'beam_current_unc': 12.74029303652092},
+        #                       'Zr02': {'beam_current': 123.4575028703829, 'beam_current_unc': 7.710074388016526},
+        #                       'Zr03': {'beam_current': 131.18779932476846, 'beam_current_unc': 4.0835044453116245},
+        #                       'Zr04': {'beam_current': 96.63429803291486, 'beam_current_unc': 23.282870237984515},
+        #                       'Zr05': {'beam_current': 7.443715398272095, 'beam_current_unc': 6.995006437642473},
+        #                       'Ni01': {'beam_current': 136.2920634033693, 'beam_current_unc': 15.088128123068422},
+        #                       'Ni02': {'beam_current': 129.94732270947284, 'beam_current_unc': 6.838926948100149},
+        #                       'Ni03': {'beam_current': 134.93337063605304, 'beam_current_unc': 2.1254299196587896},
+        #                       'Ni04': {'beam_current': 115.47046333281607, 'beam_current_unc': 5.3612072356381315},
+        #                       'Ni05': {'beam_current': 7.443715398272095, 'beam_current_unc': 6.995006437642473},
+        #                       'Ti01': {'beam_current': 121.3537108681938 , 'beam_current_unc': 2.074524514096691},
+        #                       'Ti02': {'beam_current': 117.9039121079045, 'beam_current_unc': 1.8458020844093919},
+        #                       'Ti03': {'beam_current': 127.3507935992085, 'beam_current_unc': 0.18696389527430857},
+        #                       'Ti04': {'beam_current': 78.0621294846752, 'beam_current_unc': 18.801405804383073},
+        #                       'Ti05': {'beam_current': 0, 'beam_current_unc': 0}}
+        beam_current_dict = { 'Zr01': {'beam_current': 125.94248971622208, 'beam_current_unc': 3.9985510638858535},
+                              'Zr02': {'beam_current': 129.10847496934917, 'beam_current_unc': 3.1486251610340217},
+                              'Zr03': {'beam_current': 131.37180938909623, 'beam_current_unc': 2.097187106972314},
+                              'Zr04': {'beam_current': 113.73832236122058, 'beam_current_unc': 5.0486614591625},
+                              'Zr05': {'beam_current': 2.2556448798115443, 'beam_current_unc': 15.512092954286548},
+                              'Zr06': {'beam_current': 90.40077287936163, 'beam_current_unc': 2.327839111192331},
+                              'Zr07': {'beam_current': 90.93641924096387, 'beam_current_unc': 1.914904273219334},
+                              'Zr08': {'beam_current': 94.82509814227382, 'beam_current_unc': 1.5491782774473961},
+                              'Zr09': {'beam_current': 91.51235172180517, 'beam_current_unc': 2.44948286925908},
+                              'Zr10': {'beam_current': 89.92515787653733, 'beam_current_unc': 2.1989658716372884},
 
+                              'Ni01': {'beam_current': 133.93230394113667, 'beam_current_unc': 11.733851818232212},
+                              'Ni02': {'beam_current': 126.03238410288209, 'beam_current_unc': 10.747827837439031},
+                              'Ni03': {'beam_current': 131.63746302701534, 'beam_current_unc': 4.962623163414479},
+                              'Ni04': {'beam_current': 110.71894968109665, 'beam_current_unc': 4.537838585108911},
+                              'Ni05': {'beam_current': 0.6963785878966307, 'beam_current_unc': 2.834434564450914}, #Both 58Co and 61Cu, but this should not be used
 
+                              'Ti01': {'beam_current': 121.40624351092747, 'beam_current_unc': 2.1995864938476406},
+                              'Ti02': {'beam_current': 118.25453712836615, 'beam_current_unc': 1.716130752885589},
+                              'Ti03': {'beam_current': 123.56651302304839, 'beam_current_unc': 2.3284985000035077},
+                              'Ti04': {'beam_current': 765.51551559187187, 'beam_current_unc': 16.02184893105766},
+                              'Ti05': {'beam_current': 108.57835015293583, 'beam_current_unc': 33.36232017668373}}
 
 
         self.beam_current = beam_current_dict[self.foil_name]['beam_current']
@@ -89,32 +109,30 @@ class Foil:
 
 
 
-
-
-
     def calculate_xs_w_unc(self):
 
-        N_A = 6.0221408e+23
+        N_A = 6.0221408e+23 
         t_irr = 1200 #[s]
         t_irr_unc = 3 #[s]
-        # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
         
         areal_dens = float(self.areal_dens)/1000.0 # g/cm2
         molar_dens = areal_dens/self.molar_mass # mol/cm2
 
-        N_T_per_cm2 = N_A*molar_dens # nuclei / cm2 
+        N_T_per_cm2 = N_A*molar_dens #[nuclei/cm^2] when areal_dens is given in mg/cm^2
 
-        # N_T_per_cm2 = float(self.areal_dens/1000)*N_A/self.molar_mass #[nuclei/cm^2] when areal_dens is given in mg/cm^2
         N_T = N_T_per_cm2*1.0e4 #[nuclei/m^2]
+
+        areal_dens_unc = areal_dens*self.areal_dens_unc_percent/100
         N_T_unc = N_T*np.sqrt((areal_dens_unc/areal_dens)**2 + (self.molar_mass_unc/self.molar_mass)**2) #[nuclei/m^2]
 
         beam_current_in_d_per_s = self.beam_current/(1.60217634e-19*1.0e9)
         beam_current_in_d_per_s_unc = self.beam_current_unc/(1.60217634e-19*1.0e9)
 
-        xs = self.R/(beam_current_in_d_per_s * N_T)
+        xs = self.R/(beam_current_in_d_per_s * N_T)*1e+28*1e3 #[mb]
+
         self.calc_xs = xs
 
-        xs_unc = xs * np.sqrt( (self.R_unc/self.R)**2 + (beam_current_in_d_per_s_unc/beam_current_in_d_per_s)**2 + (N_T_unc/N_T)**2 )
+        xs_unc = xs * np.sqrt( (self.R_unc/self.R)**2 + (beam_current_in_d_per_s_unc/beam_current_in_d_per_s)**2 + (N_T_unc/N_T)**2 )#[mb]
         self.calc_xs_unc = xs_unc
 
 

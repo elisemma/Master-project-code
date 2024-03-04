@@ -64,6 +64,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
         foil_beam_cur_unc_list = foil.beam_current_unc_list
         beam_energy_in_foil = foil.beam_energy_in_foil
         avrg_beam_current = foil.weighted_average_beam_current
+        avrg_beam_current_unc = np.sqrt(foil.var_weighted_average_beam_current)
 
         beam_energy_in_foil_array = np.zeros(len(reaction_list))
         beam_energy_in_foil_array.fill(beam_energy_in_foil)
@@ -73,7 +74,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
         beam_energy_in_foil_list_list.append(beam_energy_in_foil_array)
         reaction_list_list.append(reaction_list)
 
-        print(f'Weighted average beam current for foil {foil_name} is {avrg_beam_current}')
+        print(f'Weighted average beam current for foil {foil_name} is {avrg_beam_current} +- {avrg_beam_current_unc}')
 
     return beam_current_list_of_list, beam_current_unc_list_of_list, beam_energy_in_foil_list_list, reaction_list_list
 
@@ -86,7 +87,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 #__________________________Running the function________________________________
 
-dp = 0.977
+dp = 0.972
 beam_current_list_of_list_Ni, beam_current_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_beam_currents_in_foil(dp, 'Ni')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 
@@ -168,7 +169,7 @@ for i in range(len(compartment_separation_energies)+1):
 
 
 
-plt.xlim([lower_energy_compartments[0]-1, upper_energy_compartments[-1]+1])
+# plt.xlim([lower_energy_compartments[0]-1, upper_energy_compartments[-1]+1])
 plt.xlabel('Beam energy (MeV)')
 plt.ylabel('Beam current (nA)')
 plt.title(f'dp = {dp:.3f}')

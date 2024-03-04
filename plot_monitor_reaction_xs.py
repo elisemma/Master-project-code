@@ -131,11 +131,11 @@ foil_energy_data = {'Ni01': {'energy': 27.337003000000003, 'min_unc': 0.60700300
 # calc_xs_list_of_list_Ti, calc_xs_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_xs_in_foil(dp, 'Ti')
 
 # print('_____________p0, dp= 0.988___________________')
-calc_xs_list_of_list_Ni_p0, calc_xs_unc_list_of_list_Ni_p0, beam_energy_in_foil_list_list_Ni_p0, reaction_list_list_Ni_p0 = caclulate_xs_in_foil(0.988, 'Ni')
-calc_xs_list_of_list_Ti_p0, calc_xs_unc_list_of_list_Ti_p0, beam_energy_in_foil_list_list_Ti_p0, reaction_list_list_Ti_p0 = caclulate_xs_in_foil(0.988, 'Ti')
+calc_xs_list_of_list_Ni_p0, calc_xs_unc_list_of_list_Ni_p0, beam_energy_in_foil_list_list_Ni_p0, reaction_list_list_Ni_p0 = caclulate_xs_in_foil(0.986, 'Ni')
+calc_xs_list_of_list_Ti_p0, calc_xs_unc_list_of_list_Ti_p0, beam_energy_in_foil_list_list_Ti_p0, reaction_list_list_Ti_p0 = caclulate_xs_in_foil(0.986, 'Ti')
 # print('_____________p1, dp= 0.977___________________')
-calc_xs_list_of_list_Ni_p1, calc_xs_unc_list_of_list_Ni_p1, beam_energy_in_foil_list_list_Ni_p1, reaction_list_list_Ni_p1 = caclulate_xs_in_foil(0.977, 'Ni')
-calc_xs_list_of_list_Ti_p1, calc_xs_unc_list_of_list_Ti_p1, beam_energy_in_foil_list_list_Ti_p1, reaction_list_list_Ti_p1 = caclulate_xs_in_foil(0.977, 'Ti')
+calc_xs_list_of_list_Ni_p1, calc_xs_unc_list_of_list_Ni_p1, beam_energy_in_foil_list_list_Ni_p1, reaction_list_list_Ni_p1 = caclulate_xs_in_foil(0.972, 'Ni')
+calc_xs_list_of_list_Ti_p1, calc_xs_unc_list_of_list_Ti_p1, beam_energy_in_foil_list_list_Ti_p1, reaction_list_list_Ti_p1 = caclulate_xs_in_foil(0.972, 'Ti')
 
 
 

@@ -39,11 +39,11 @@ start_time_in_sec_Fe05 = (start_time_Fe05 - time_EOB).total_seconds()
 
 
 #                      calc_delta_A0(A0,                 A_t,          delta_A_t, decay_const,       delta_decay_const,     t,                delta_t)
-delta_A0_56Co_foil_1 = calc_delta_A0(655.9564121176588, 633.336787, 44.732989, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe01, 2)
-delta_A0_56Co_foil_2 = calc_delta_A0(861.0750687694533, 830.5102,  59.424274, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe02, 2)
-delta_A0_56Co_foil_3 = calc_delta_A0(1093.8536247846293, 1054.180513 , 75.49398, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe03, 2)
-delta_A0_56Co_foil_4 = calc_delta_A0(1394.464457609836, 1322.51407, 92.508566, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe04, 2)
-delta_A0_56Co_foil_5 = calc_delta_A0(2153.831008503944, 2041.734886, 141.361613, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe05, 2)
+delta_A0_56Co_foil_1 = calc_delta_A0(660.6582922597377, 633.336787, 44.732989, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe01, 2)
+delta_A0_56Co_foil_2 = calc_delta_A0(867.2472346205243, 830.5102,  59.424274, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe02, 2)
+delta_A0_56Co_foil_3 = calc_delta_A0(1101.694341853326, 1054.180513 , 75.49398, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe03, 2)
+delta_A0_56Co_foil_4 = calc_delta_A0(1404.4599460617442, 1322.51407, 92.508566, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe04, 2)
+delta_A0_56Co_foil_5 = calc_delta_A0(2169.269618542412, 2041.734886, 141.361613, decay_const_56Co, delta_decay_const_56Co, start_time_in_sec_Fe05, 2)
 
 
 print(f'56Co, Foil 1: delta_A0 = {delta_A0_56Co_foil_1}')

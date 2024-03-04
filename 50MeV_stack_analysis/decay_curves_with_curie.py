@@ -7,7 +7,7 @@ import csv
 def fit_activity(isotope, foil, path, file):
     t_irr_h = 0.33
     dc = ci.DecayChain(isotope, units='h', A0=1000)
-    dc.get_counts(foil, '02/13/2017 14:27:00', path+file)
+    dc.get_counts(foil, '02/12/2017 19:21:00', path+file)
 
     isotopes, a0, var_a0 = dc.fit_A0()
     

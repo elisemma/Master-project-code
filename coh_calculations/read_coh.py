@@ -1,14 +1,15 @@
 import matplotlib.pylab as plt
 
 # A list of all isotopes you want extracted for plotting
-products= ['052-116Te', '052-117Te', '052-118Te', '052-119Te', '052-120Te', '052-121Te','052-122Te',
-           '051-115Sb', '051-116Sb', '051-117Sb', '051-118Sb', '051-119Sb', '051-120Sb', '051-121Sb', 
-           '050-112Sn', '050-113Sn', '050-114Sn', '050-115Sn', '050-116Sn', '050-117Sn', '050-118Sn', '050-119Sn', '050-120Sn' #, 
-           # etc etc
-           ]
+# products= ['052-116Te', '052-117Te', '052-118Te', '052-119Te', '052-120Te', '052-121Te','052-122Te',
+#            '051-115Sb', '051-116Sb', '051-117Sb', '051-118Sb', '051-119Sb', '051-120Sb', '051-121Sb', 
+#            '050-112Sn', '050-113Sn', '050-114Sn', '050-115Sn', '050-116Sn', '050-117Sn', '050-118Sn', '050-119Sn', '050-120Sn' #, 
+#            # etc etc
+#            ]
+products= ['041-90Nb', '041-96Nb']
 
 # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-target = '121Sb'
+target = '94Zr'
 
 # Run 'cat out_coh_*_MeV.dat > out_coh_merged.dat' in the ./output directory to unify files for parsing
 with open('./'+target+'/output/out_coh_merged.dat','r') as f:

@@ -112,11 +112,11 @@ foil_energy_data ={'Fe01': {'energy': 48.25110370000002, 'min_unc': 0.9011037000
 # calc_xs_list_of_list_Ti, calc_xs_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_xs_in_foil(dp, 'Ti')
 
 
-calc_xs_list_of_list_Fe_p0, calc_xs_unc_list_of_list_Fe_p0, beam_energy_in_foil_list_list_Fe_p0, reaction_list_list_Fe_p0 = caclulate_xs_in_foil(0.965, 'Fe')
-calc_xs_list_of_list_Ti_p0, calc_xs_unc_list_of_list_Ti_p0, beam_energy_in_foil_list_list_Ti_p0, reaction_list_list_Ti_p0 = caclulate_xs_in_foil(0.965, 'Ti')
+calc_xs_list_of_list_Fe_p0, calc_xs_unc_list_of_list_Fe_p0, beam_energy_in_foil_list_list_Fe_p0, reaction_list_list_Fe_p0 = caclulate_xs_in_foil(0.969, 'Fe')
+calc_xs_list_of_list_Ti_p0, calc_xs_unc_list_of_list_Ti_p0, beam_energy_in_foil_list_list_Ti_p0, reaction_list_list_Ti_p0 = caclulate_xs_in_foil(0.969, 'Ti')
 
-calc_xs_list_of_list_Fe_p1, calc_xs_unc_list_of_list_Fe_p1, beam_energy_in_foil_list_list_Fe_p1, reaction_list_list_Fe_p1 = caclulate_xs_in_foil(0.979, 'Fe')
-calc_xs_list_of_list_Ti_p1, calc_xs_unc_list_of_list_Ti_p1, beam_energy_in_foil_list_list_Ti_p1, reaction_list_list_Ti_p1 = caclulate_xs_in_foil(0.979, 'Ti')
+calc_xs_list_of_list_Fe_p1, calc_xs_unc_list_of_list_Fe_p1, beam_energy_in_foil_list_list_Fe_p1, reaction_list_list_Fe_p1 = caclulate_xs_in_foil(0.990, 'Fe')
+calc_xs_list_of_list_Ti_p1, calc_xs_unc_list_of_list_Ti_p1, beam_energy_in_foil_list_list_Ti_p1, reaction_list_list_Ti_p1 = caclulate_xs_in_foil(0.990, 'Ti')
 
 # calc_xs_list_of_list_Fe_avrg, calc_xs_unc_list_of_list_Fe_avrg, beam_energy_in_foil_list_list_Fe_avrg, reaction_list_list_Fe_avrg = caclulate_xs_in_foil(0.972, 'Fe')
 # calc_xs_list_of_list_Ti_avrg, calc_xs_unc_list_of_list_Ti_avrg, beam_energy_in_foil_list_list_Ti_avrg, reaction_list_list_Ti_avrg = caclulate_xs_in_foil(0.972, 'Ti')

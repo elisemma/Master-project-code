@@ -4,42 +4,98 @@ import matplotlib.pyplot as plt
 from scipy.constants import elementary_charge
 
 #________________________________________________________________________30 MeV ______________________________________________________________________________________________
-number_of_monitor_foils_30MeV = 1
-monitor_reactions_per_foil_30MeV = np.array([2]) 
+# number_of_monitor_foils_30MeV = 2
+# monitor_reactions_per_foil_30MeV = np.array([2,2]) 
+# number_of_comp_30MeV = 1
+# number_of_monitor_reactions_30MeV = 4
+
+# A0_30MeV = np.array([ # [Bq]
+#     [25.4491755245494, 430.8579561157332, 1.7688289713292786, 10.472666530798795]     # Comp 5 activities for 58Co, 61Cu, 46Sc, 48V
+# ])  
+  
+
+# sigma_A0_30MeV = np.array([ # [Bq]
+#     [2.4651448864712098, 110.48098008414279, 0.38075939800585357, 0.18100139346918212]     # Comp 5 activities unc for 58Co, 61Cu, 46Sc, 48V
+# ])  
+
+
+# mass_density_30MeV = np.array([ # [nuclei/cm^2]                    
+#     [2.333816317282693e+20,  2.333816317282693e+20, 1.423790240324232e+20, 1.423790240324232e+20]   # Comp 5 mass dens for Ni05, Ni05, Ti05, Ti05
+# ])  
+  
+# sigma_mass_density_30MeV = np.array([ # [nuclei/cm^2]  
+#     [1.9488015308666957e+17, 1.9488015308666957e+17, 3.774585126968663e+17, 3.774585126968663e+17]   # Comp 5 mass dens unc for Ni05, Ni05, Ti05, Ti05
+# ])   
+  
+# lambda__30MeV = np.log(2)/np.array([ # [1/s]                      
+#     [70.86*24*3600, 3.339*3600, 83.79*24*3600, 15.9735*24*3600]     # Comp 5 58Co, 61Cu, , 46Sc, 48V
+# ])  
+  
+# reaction_integral_30MeV = 1e4*np.array([ # [cm^2]
+#     [3.4716488515774284e-31, 9.307200112313489e-31, 5.957129952298866e-33, 1.9087896571380519e-32]   # Comp 5 int for 58Co, 61Cu, 46Sc, 48V
+# ])  
+  
+# uncertainty_integral_30MeV = 1e4*np.array([ # [cm^2]
+#     [4.0192831636593706e-32, 1.0417741142892854e-31, 1.4240080403853065e-33, 2.3698515540996713e-33]  # Comp 5 int unc for 58Co, 61Cu, 46Sc, 48V
+# ])  
+  
+# irr_time_30MeV = np.ones((number_of_comp_30MeV, number_of_monitor_reactions_30MeV))*1200 # [s]
+# sigma_irr_time_30MeV = np.ones((number_of_comp_30MeV, number_of_monitor_reactions_30MeV))*3 # [s]
+
+
+
+
+
+
+number_of_monitor_foils_30MeV = 2
+monitor_reactions_per_foil_30MeV = np.array([1,2]) 
 number_of_comp_30MeV = 1
-number_of_monitor_reactions_30MeV = 2
+number_of_monitor_reactions_30MeV = 3
 
 A0_30MeV = np.array([ # [Bq]
-    [25.452633286057697*12.642, 461.7853246484494*12.642]     # Comp 5 activities for 58Co, 61Cu
+    [25.4491755245494, 1.7688289713292786, 10.472666530798795]     # Comp 5 activities for 58Co, 46Sc, 48V
 ])  
   
+
 sigma_A0_30MeV = np.array([ # [Bq]
-    [2.465479823966241*12.642,  118.4114034137288*12.642]     # Comp 5 activities unc for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [2.4651448864712098, 0.38075939800585357, 0.18100139346918212]     # Comp 5 activities unc for 58Co, 46Sc, 48V
 ])  
 
 
 mass_density_30MeV = np.array([ # [nuclei/cm^2]                    
-    [2.333816317282693e+20,  2.333816317282693e+20]   # Comp 5 mass dens for Ni05, Ni05, Ni05, Ti05, Ti05
+    [2.333816317282693e+20,   1.423790240324232e+20, 1.423790240324232e+20]   # Comp 5 mass dens for Ni05, Ti05, Ti05
 ])  
   
 sigma_mass_density_30MeV = np.array([ # [nuclei/cm^2]  
-    [1.9488015308666957e+17, 1.9488015308666957e+17]   # Comp 5 mass dens unc for Ni05, Ni05, Ni05, Ti05, Ti05
+    [1.9488015308666957e+17,  3.774585126968663e+17, 3.774585126968663e+17]   # Comp 5 mass dens unc for Ni05, Ti05, Ti05
 ])   
   
 lambda__30MeV = np.log(2)/np.array([ # [1/s]                      
-    [70.86*24*3600, 3.339*3600]     # Comp 5 lambda for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [70.86*24*3600, 83.79*24*3600, 15.9735*24*3600]     # Comp 5 58Co, , 46Sc, 48V
 ])  
   
 reaction_integral_30MeV = 1e4*np.array([ # [cm^2]
-    [3.3735628091502424e-31, 8.16618313949607e-31]   # Comp 5 int for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [3.4716488515774284e-31, 5.957129952298866e-33, 1.9087896571380519e-32]   # Comp 5 int for 58Co, 46Sc, 48V
 ])  
   
 uncertainty_integral_30MeV = 1e4*np.array([ # [cm^2]
-    [3.916078608773901e-32,  9.173104893466661e-32]  # Comp 5 int unc for 56Co, 58Co, 61Cu, 46Sc, 48V
+    [4.0192831636593706e-32, 1.4240080403853065e-33, 2.3698515540996713e-33]  # Comp 5 int unc for 58Co, 46Sc, 48V
 ])  
   
 irr_time_30MeV = np.ones((number_of_comp_30MeV, number_of_monitor_reactions_30MeV))*1200 # [s]
 sigma_irr_time_30MeV = np.ones((number_of_comp_30MeV, number_of_monitor_reactions_30MeV))*3 # [s]
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -283,6 +339,7 @@ def Average_BeamCurrent(A0, sigma_A0, mass_density, sigma_mass_density, lambda_,
             # Delete rows and columns in correlation matries of disjoint indices
             # gen = (x for x in xyz if x not in a)
             if len(disjoint_indices) != 1:
+                print(disjoint_indices)
                 loop_corr_lambda = np.delete(corr_lambda,np.array(disjoint_indices),0)
                 loop_corr_lambda = np.delete(loop_corr_lambda,np.array(disjoint_indices),1)
                 loop_corr_areal_density = np.delete(corr_areal_density,np.array(disjoint_indices),0)
@@ -436,12 +493,19 @@ print('unc_bc: ', unc_curr)
 #Adding sqrt(std) to the unc:
 
 
-bc_dict = {'58CO': {'beam_current': [481.99333497949357], 
-                    'beam_current_unc': [111.93272788291921], 
-                    'energy': [2.2266116583208797]}, 
-           '61CU': {'beam_current': [7.3406068653733865], 
-                    'beam_current_unc': [3.526360943135902], 
-                    'energy': [2.2266116583208797]}}
+
+bc_dict = {'58CO': {'beam_current': [468.31173326214855], 
+                    'beam_current_unc': [108.46808283879223], 
+                    'energy': [2.3286219274448703]}, 
+           '61CU': {'beam_current': [6.009329520490208], 
+                    'beam_current_unc': [1.3459110723307477], 
+                    'energy': [2.3286219274448703]}, 
+           '48V': {'beam_current': [102.47112196443523], 
+                    'beam_current_unc': [25.45551112893367], 
+                    'energy': [1.3297790055248617]}, 
+           '46SC': {'beam_current': [290.8286891311535], 
+                    'beam_current_unc': [139.05734096258246], 
+                    'energy': [1.3297790055248617]}}
 
 
 

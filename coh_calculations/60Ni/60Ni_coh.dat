@@ -1,0 +1,25 @@
+BEGIN    :
+DATA     :
+target   :        Ni      60
+incident :         d
+
+# energy => incident-particle energy in MeV
+energy   :    1.0 
+omp_n    : Koning
+omp_p    : Koning
+omp_a    : Avrigeanu2009
+omp_d    : An
+
+beta_rot : 0
+partmax  : 10
+
+option   : internalconversion
+
+ENDDATA  :
+DSD      :
+ENDDSD   :
+PREEQ    :
+ENDPREEQ :
+HFS      :
+ENDHFS   :
+END      :

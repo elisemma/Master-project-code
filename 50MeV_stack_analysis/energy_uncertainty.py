@@ -4,7 +4,7 @@ import pandas as pd
 
 
 
-dp = 0.979
+dp = 0.990
 foil_list = ['Fe01', 'Zr06', 'Ti06', 'Fe02', 'Zr07', 'Ti08', 'Fe03', 'Zr08', 'Ti09', 'Fe04', 'Zr09', 'Ti10', 'Fe05', 'Zr10', 'Ti11']
 
 

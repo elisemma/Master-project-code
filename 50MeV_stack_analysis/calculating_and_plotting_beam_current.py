@@ -68,7 +68,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 
 #______________________Runnig the code____________________________________________
-dp = 0.979
+dp = 0.990
 beam_current_list_of_list_Fe, beam_current_unc_list_of_list_Fe, beam_energy_in_foil_list_list_Fe, reaction_list_list_Fe = caclulate_beam_currents_in_foil(dp, 'Fe')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 

@@ -313,9 +313,11 @@ dp_array = np.union1d(dp_array5, dp_array6)
 
 # plot_chi2(dp_array, ['01', '02', '03', '04'], 'global_xs')
 plot_chi2(dp_array, ['04'], 'p0')
+plot_chi2(dp_array, ['04'], 'p1')
 
 
-print(dp_array)
+
+# print(dp_array)
 
 
 
