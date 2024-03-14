@@ -8,7 +8,7 @@ import csv
 from x4i3 import exfor_manager, exfor_entry
 from urllib.request import urlopen
 from scipy.interpolate import PchipInterpolator
-
+import curie as ci
 
 
 
@@ -85,11 +85,11 @@ def calc_xs_from_A0(foil_name, reaction_product): #fungerer ikke med denne klass
 
 
 
-def calc_xs_from_R(foil_name, reaction_product): #fungerer ikke med denne klassen
+def calc_xs_from_R(foil_name, reaction_product, reaction_product_w_state): #fungerer ikke med denne klassen
     #(foil_name, reaction_product, R, R_unc)
     R_by_curie_df = pd.read_csv(f'./Calculated_R/{foil_name}_R_by_curie.csv')
     print(R_by_curie_df)
-    R_filtered_df = R_by_curie_df[R_by_curie_df['Isotope']==reaction_product]
+    R_filtered_df = R_by_curie_df[R_by_curie_df['Isotope']==reaction_product_w_state]
     R = R_filtered_df['R'].iloc[0]
     R_unc = R_filtered_df['R_unc'].iloc[0]
 
@@ -141,7 +141,35 @@ def get_alice_data(target_material, Z, A):
 
 
 
-def plot_xs(reaction_product, Z, A, foil_list, write_csv=False, save_fig=False, use_R_to_calc_xs=True):
+def get_coh_data(path, filename):
+    E_coh, xs_coh = np.loadtxt(path+filename, unpack = True)
+    E_list = [0]+list(E_coh)
+    xs_list = [0]+list(xs_coh)
+    return E_list, xs_list
+
+
+
+
+
+def plot_xs(reaction_product, state, Z, A, foil_list, title, write_csv=False, save_fig=False, use_R_to_calc_xs=True):
+
+    plt.figure(figsize=(8, 6))
+
+    target_material = foil_list[0][0:2]
+
+    if target_material == 'Zr':
+        target_material_big = 'ZR'
+        target_A_list = [90, 91, 92, 94, 96]
+    elif target_material == 'Ni':
+        target_material_big = 'NI'
+        target_A_list = [58, 60, 61, 62, 64]
+    elif target_material == 'Ti':
+        target_material_big = 'TI'
+        target_A_list = [46, 47, 48, 49, 50]
+    elif target_material == 'Fe':
+        target_material_big = 'FE'
+        target_A_list = [54, 56, 57, 58]
+
 
     energy_data = {'Ni01': {'energy': 27.35133924, 'min_unc': 0.6213392400000011, 'plus_unc': 0.6386607599999969}, 
                    'Zr01': {'energy': 26.395312639999993, 'min_unc': 0.6253126399999935, 'plus_unc': 0.634687360000008}, 
@@ -157,7 +185,24 @@ def plot_xs(reaction_product, Z, A, foil_list, write_csv=False, save_fig=False, 
                    'Ti04': {'energy': 3.9274296448168275, 'min_unc': 2.1574296448168275, 'plus_unc': 2.1625703551831723}, 
                    'Ni05': {'energy': 2.3286219274448703, 'min_unc': 1.9986219274448704, 'plus_unc': 1.4813780725551298}, 
                    'Zr05': {'energy': 1.6333420201661875, 'min_unc': 1.3033420201661876, 'plus_unc': 0.8566579798338128}, 
-                   'Ti05': {'energy': 1.3297790055248617, 'min_unc': 0.9997790055248619, 'plus_unc': -0.3997790055248617}}
+                   # 'Ti05': {'energy': 1.3297790055248617, 'min_unc': 0.9997790055248619, 'plus_unc': -0.3997790055248617},
+                   'Ti05': {'energy': 1.3297790055248617, 'min_unc': 0.9997790055248619, 'plus_unc': 0},
+                   'Fe01': {'energy': 48.2318781, 'min_unc': 0.8818780999999944, 'plus_unc': 0.9181219000000027},
+                   'Zr06': {'energy': 47.63516853333334, 'min_unc': 0.8851685333333421, 'plus_unc': 0.914831466666655}, 
+                   'Ti06': {'energy': 47.09795026666667, 'min_unc': 0.9479502666666662, 'plus_unc': 0.9520497333333253}, 
+                   'Fe02': {'energy': 41.779047799999994, 'min_unc': 1.0290477999999936, 'plus_unc': 1.070952200000015}, 
+                   'Zr07': {'energy': 41.110509566666664, 'min_unc': 1.060509566666667, 'plus_unc': 1.0394904333333415}, 
+                   'Ti08': {'energy': 40.50592943333334, 'min_unc': 1.0559294333333398, 'plus_unc': 1.0440705666666545}, 
+                   'Fe03': {'energy': 37.08828046666665, 'min_unc': 1.1382804666666502, 'plus_unc': 1.161719533333347}, 
+                   'Zr08': {'energy': 36.351075, 'min_unc': 1.1010750000000016, 'plus_unc': 1.1989249999999956}, 
+                   'Ti09': {'energy': 35.68120613333333, 'min_unc': 1.131206133333336, 'plus_unc': 1.1687938666666682}, 
+                   'Fe04': {'energy': 31.872687066666668, 'min_unc': 1.2226870666666692, 'plus_unc': 1.277312933333338}, 
+                   'Zr09': {'energy': 31.041554066666667, 'min_unc': 1.2915540666666665, 'plus_unc': 1.308445933333335}, 
+                   'Ti10': {'energy': 30.28116373333334, 'min_unc': 1.3311637333333373, 'plus_unc': 1.3688362666666585}, 
+                   'Fe05': {'energy': 25.879117466666663, 'min_unc': 1.4291174666666606, 'plus_unc': 1.470882533333338}, 
+                   'Zr10': {'energy': 24.896101700000006, 'min_unc': 1.5461017000000048, 'plus_unc': 1.5538982999999966}, 
+                   'Ti11': {'energy': 23.99016156666667, 'min_unc': 1.5401615666666686, 'plus_unc': 1.5598384333333293}
+                   }
 
     energy_list = [energy_data[foil]['energy'] for foil in foil_list]
     energy_min_unc_list = [energy_data[foil]['min_unc'] for foil in foil_list]
@@ -168,7 +213,15 @@ def plot_xs(reaction_product, Z, A, foil_list, write_csv=False, save_fig=False, 
 
     for foil in foil_list:
         if use_R_to_calc_xs==True:
-            xs, xs_unc = calc_xs_from_R(foil, reaction_product)
+
+            if state == 'ground_state':
+                xs_state = 'g'
+            elif state == 'isomeric_state':
+                xs_state = 'm1'
+
+            reaction_product_w_state = reaction_product+xs_state
+
+            xs, xs_unc = calc_xs_from_R(foil, reaction_product, reaction_product_w_state)
             xs_list.append(xs)
             xs_unc_list.append(xs_unc)
         else:
@@ -190,19 +243,52 @@ def plot_xs(reaction_product, Z, A, foil_list, write_csv=False, save_fig=False, 
     talys_file = f'rp0{Z}0{A}.tot'
     E_talys, xs_talys = get_talys_data(talys_file, foil_list[0])
     talys_spline = splrep(E_talys, xs_talys)
-    energy_array = np.linspace(0,30,300)
+    energy_array = np.linspace(0,50,500)
 
 
     #Get data from alice
-    target_material = foil_list[0][0:2]
     E_alice, xs_alice = get_alice_data(target_material, Z, A)
     E_alice = [0]+E_alice
     xs_alice = [0]+xs_alice
-
-    # alice_spline = splrep(E_alice, xs_alice)
     alice_spline = PchipInterpolator(E_alice, xs_alice)
 
-    energy_array = np.linspace(0,30,300)
+
+    #Get data from coh
+    E_coh_list = []
+    xs_coh_list = []
+    abundances_coh_list = []
+
+    el = ci.Element(target_material)
+    abundances_df = el.abundances
+   
+    if state == 'ground_state':
+        coh_state = 'G'
+    elif state == 'isomeric_state':
+        coh_state = 'M'
+
+    for i in range(len(target_A_list)):
+        coh_path = f'./coh_calculations/{target_A_list[i]}{target_material}/'
+        coh_file = f'0{Z}-0{A}{reaction_product[2:]}{coh_state}_coh.txt'
+        # Check if the file exists:
+        if os.path.exists(coh_path + coh_file):
+            E_coh_partial, xs_coh_partial = get_coh_data(coh_path, coh_file)
+            E_coh_list.append(E_coh_partial)
+            xs_coh_list.append(xs_coh_partial)
+
+            isotope = f'{target_A_list[i]}{target_material_big}'
+            ab = abundances_df[abundances_df['isotope'] == isotope]['abundance'].values[0]
+            abundances_coh_list.append(ab)
+
+    xs_coh = [0] * len(xs_coh_list[0])
+    # Loop through each sublist and multiply it with the corresponding abundance, then sum them up
+    for i, sublist in enumerate(xs_coh_list):
+        abundance = abundances_coh_list[i]
+        weighted_sublist = [value * abundance/100 for value in sublist]
+        xs_coh = [x + y for x, y in zip(xs_coh, weighted_sublist)]
+
+    E_coh = E_coh_list[0]
+
+    coh_spline = PchipInterpolator(E_coh, xs_coh)
 
 
 
@@ -215,64 +301,147 @@ def plot_xs(reaction_product, Z, A, foil_list, write_csv=False, save_fig=False, 
         target = 'ZR-0'
     elif foil_list[0][0:2]=='Ni':
         target = 'NI-0'
+    elif foil_list[0][0:2]=='Fe':
+        target = 'FE-0'
 
-    exfor_dict = get_exfor_data(target, 'D,*', product)
+    try:
+        exfor_dict = get_exfor_data(target, 'D,*', product)
+         #Plot results
+        markers = ['.', '*', 'v', '^', '+', '<', '>', 's', 'h']
+        grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver']
+        k=0
+        for index in exfor_dict:
+            # Need to set up list of marker sizes to iterate over with k
+            # print(k)
+            if exfor_dict[index][2].shape[1] == 4:
+                plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=1E3*exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+
+            elif exfor_dict[index][2].shape[1] == 3:
+                plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], yerr=1E3*exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+
+            elif exfor_dict[index][2].shape[1] >= 5:
+                print('WARNING: Plotting',str(exfor_dict[index][2].shape[1])+'-column EXFOR data retrieved for subentry', exfor_dict[index][3]+', please make sure data look reasonable - column formatting is inconsistent for >4 columns.')
+                plt.errorbar(exfor_dict[index][2][:,4],exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+            k=k+1
+
+    except UnboundLocalError:
+        print('Warning: Not able to plot exfor data!')
 
 
-    #Plot results
-    markers = ['.', '*', 'v', '^', '+', '<', '>', 's', 'h']
-    grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver']
-    k=0
-    for index in exfor_dict:
-        # Need to set up list of marker sizes to iterate over with k
-        # print(k)
-        if exfor_dict[index][2].shape[1] == 4:
-            plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=1E3*exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
-
-        elif exfor_dict[index][2].shape[1] == 3:
-            plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], yerr=1E3*exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
-
-        elif exfor_dict[index][2].shape[1] >= 5:
-            print('WARNING: Plotting',str(exfor_dict[index][2].shape[1])+'-column EXFOR data retrieved for subentry', exfor_dict[index][3]+', please make sure data look reasonable - column formatting is inconsistent for >4 columns.')
-            plt.errorbar(exfor_dict[index][2][:,4],exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
-        k=k+1
+    
 
     # plt.plot(energy_array, splev(energy_array, talys_spline), linewidth=1, color='gold', label='TALYS')
     # plt.plot(energy_array, splev(energy_array, alice_spline), linewidth=1, color='plum', linestyle='--', label='ALICE')
     # plt.plot(energy_array, splev(energy_array, talys_spline)*1.2, linewidth=1, color='skyblue', label='Test')
     # plt.plot(energy_array, splev(energy_array, talys_spline)*0.9, linewidth=1, color='mediumaquamarine', linestyle='-.', label='test')
     # plt.plot(energy_array, splev(energy_array, talys_spline)*1.1, linewidth=2, color='mediumpurple', linestyle=':', label='test.')
-    plt.plot(energy_array, splev(energy_array, talys_spline), linewidth=1, color='mediumaquamarine', label='TALYS')
-    plt.plot(energy_array, alice_spline(energy_array), linewidth=1, color='deepskyblue', linestyle='--', label='ALICE')
-    # plt.plot(energy_array, splev(energy_array, talys_spline)*1.2, linewidth=1, color='skyblue', label='Test')
+
+    plt.plot(energy_array, splev(energy_array, talys_spline), linewidth=1, color='mediumaquamarine', label='TALYS-2.0')
+    plt.plot(energy_array, alice_spline(energy_array), linewidth=1, color='deepskyblue', linestyle='--', label='ALICE-2020')
+    plt.plot(energy_array, coh_spline(energy_array), linewidth=1, color='skyblue', label='CoH-3.5.3')
     # plt.plot(energy_array, splev(energy_array, talys_spline)*0.9, linewidth=1, color='darkturquoise', linestyle='-.', label='test')
     # plt.plot(energy_array, splev(energy_array, talys_spline)*1.1, linewidth=2, color='cornflowerblue', linestyle=':', label='test.')
 
 
-    plt.errorbar(energy_list[0:len(foil_list)], xs_list, xerr=[energy_min_unc_list[0:len(foil_list)], energy_plus_unc_list[0:len(foil_list)]], yerr=xs_unc_list, marker='D', markersize=5, linewidth=3, linestyle='', color='hotpink', label='This work')
-    plt.xlabel('Beam energy (MeV)')
-    plt.ylabel('Cross section (mb)')
-    plt.title(reaction_product)
-    plt.legend()
-    plt.xlim(0,30)
-    plt.show()
+    # plt.errorbar(energy_list[0:len(foil_list)], xs_list, xerr=[energy_min_unc_list[0:len(foil_list)], energy_plus_unc_list[0:len(foil_list)]], yerr=xs_unc_list, marker='D', markersize=5, linewidth=3, linestyle='', color='hotpink', label='This work')
+    plt.errorbar(energy_list, xs_list, xerr=[energy_min_unc_list, energy_plus_unc_list], yerr=xs_unc_list, marker='D', markersize=5, linewidth=3, linestyle='', color='hotpink', label='This work')
 
+    plt.xlabel('Deuteron Energy (MeV)', fontsize=14)
+    plt.ylabel('Cross Section (mb)', fontsize=14)
+    plt.title(title, fontsize=14)
+    plt.legend(fontsize=14)
+    plt.ylim((0))
+    plt.xlim(0,50)
+    if save_fig==True:
+        plt.savefig(f'./Figures/xs_plots/{target_material}_dx_{reaction_product}.pdf', dpi=600)
+    plt.show()
+    
 
 
 
 #_________________________________Running the code_______________________________________
 
-# Need to change the function to R 
 
-plot_xs('96NB', 41, 96, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05'])
-plot_xs('90NB', 41, 90, ['Zr01', 'Zr02', 'Zr03', 'Zr04'])
-# plot_xs('47SC', 21, 47, ['Ti01', 'Ti02', 'Ti03'])
-# plot_xs('46SC', 21, 46, ['Ti01', 'Ti02', 'Ti03', 'Ti04'])
-# plot_xs('48V', 23, 48, ['Ti01', 'Ti02', 'Ti03', 'Ti04'])
-# plot_xs('52MN', 25, 52, ['Ni01', 'Ni02'])
-# plot_xs('65NI', 28, 65, ['Ni01', 'Ni02', 'Ni03', 'Ni04'])
-# plot_xs('57CO', 27, 57, ['Ni01', 'Ni02', 'Ni03'])
-# plot_xs('60CU', 29, 60, ['Ni02', 'Ni03'])
+#_______________________________Zr-foils________________________________________________
+plot_xs('86Y', 'ground_state', 39, 86, ['Zr06', 'Zr07', 'Zr08', 'Zr09'], r'$^{nat}$Zr(d,x)$^{86}$Y - Cumulative', save_fig=True)
+
+# plot_xs('87Y', '87Yg', 39, 87, ['Zr01', 'Zr02', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('87Ym', '87Ym1', 39, 87, ['Zr01', 'Zr02', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+
+# plot_xs('88Y', '88Yg', 39, 88, ['Zr01', 'Zr03', 'Zr04', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('88ZR', '88ZRg', 40, 88, ['Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('88NB', '88NBg', 41, 88, ['Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('88Y', '88Yg', 39, 88, ['Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+
+# plot_xs('89NB', '89NBg', 41, 89, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('89ZR', '89ZRg', 40, 89, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('89Ym', '89Ym1', 39, 89, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+
+# plot_xs('90NB', '90NBg', 41, 90, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+
+# plot_xs('90Ym', '90Ym1', 39, 90, ['Zr01', 'Zr03', 'Zr06', 'Zr07', 'Zr08', 'Zr10'])
+
+# plot_xs('91Y', '91Yg', 39, 91, ['Zr03', 'Zr04', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+
+# plot_xs('92Y', '92Yg', 39, 92, ['Zr01', 'Zr03', 'Zr06', 'Zr07', 'Zr08'])
+
+# plot_xs('95ZR', '95ZRg', 40, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('95NBm', '95NBm1', 41, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('95NB', '95NBg', 41, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+
+# plot_xs('96NB', '96NBg', 41, 96, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+
+
+
+#_______________________________Ni-foils________________________________________________
+
+# plot_xs('52MN', '52MNg', 25, 52, ['Ni01', 'Ni02'])
+
+# plot_xs('54MN', '54MNg', 25, 54, ['Ni01'])
+
+# plot_xs('55CO', '55COg', 27, 55, ['Ni01', 'Ni02', 'Ni03', 'Ni05'])
+
+# plot_xs('56CO', '56COg', 27, 56, ['Ni01', 'Ni02', 'Ni03', 'Ni04'])
+
+# plot_xs('57NI', '57NIg', 28, 57, ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05'])
+# plot_xs('57CO', '57COg', 27, 57, ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05'])
+
+# plot_xs('58CO', '58COg', 27, 58, ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05'])
+
+# plot_xs('60CO', '60COg', 27, 60, ['Ni01', 'Ni04'])
+
+# plot_xs('60CU', '60CUg', 29, 60, ['Ni02', 'Ni03'])
+
+# plot_xs('61CU', '61CUg', 29, 61, ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05'])
+
+# plot_xs('64CU', '64CUg', 29, 64, ['Ni02', 'Ni03', 'Ni04'])
+
+# plot_xs('65NI', '65NIg', 28, 65, ['Ni01', 'Ni02', 'Ni03', 'Ni04'])
+
+
+
+
+
+#_______________________________Ti-foils________________________________________________
+
+# plot_xs('46SC', '46SCg', 21, 46, ['Ti01', 'Ti02', 'Ti03', 'Ti04', 'Ti05', 'Ti06', 'Ti08', 'Ti09', 'Ti10', 'Ti11'])
+
+# plot_xs('47SC', '47SCg', 21, 47, ['Ti01', 'Ti02', 'Ti03', 'Ti06', 'Ti08', 'Ti09', 'Ti10', 'Ti11'])
+
+# plot_xs('48SC', '48SCg', 21, 48, ['Ti06', 'Ti08', 'Ti09', 'Ti10'])
+
+# plot_xs('48V', '48Vg', 23, 48, ['Ti01', 'Ti02', 'Ti03', 'Ti04', 'Ti05', 'Ti06', 'Ti08', 'Ti09', 'Ti10', 'Ti11'])
+
+
+
+
+
+
+
+
+
+
+
 
 
 

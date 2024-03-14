@@ -40,12 +40,13 @@ def caclulate_beam_currents_in_foil(dp, compound):
         foil.calculate_decay_constant()
         foil.find_monitor_cross_section()
         foil.calculate_beam_currents_w_unc()
-        # foil.calculate_weighted_average_beam_current()
+        foil.calculate_weighted_average_beam_current()
 
         foil_beam_cur_list = foil.beam_current_list
         foil_beam_cur_unc_list = foil.beam_current_unc_list
         beam_energy_in_foil = foil.beam_energy_in_foil
         avrg_beam_current = foil.weighted_average_beam_current
+        avrg_beam_current_unc = np.sqrt(foil.var_weighted_average_beam_current)
 
         beam_energy_in_foil_array = np.zeros(len(reaction_list))
         beam_energy_in_foil_array.fill(beam_energy_in_foil)
@@ -55,7 +56,10 @@ def caclulate_beam_currents_in_foil(dp, compound):
         beam_energy_in_foil_list_list.append(beam_energy_in_foil_array)
         reaction_list_list.append(reaction_list)
 
-        # print(f'Weighted average beam current for foil {foil_name} is {avrg_beam_current}')
+        print(' ')
+        print(f'Weighted average beam current for foil {foil_name} is {avrg_beam_current} +- {avrg_beam_current_unc}')
+        print(' ')
+        
         # print(foil_beam_cur_list)
 
     return beam_current_list_of_list, beam_current_unc_list_of_list, beam_energy_in_foil_list_list, reaction_list_list
@@ -69,6 +73,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 
 #______________________Runnig the code____________________________________________
 dp = 0.990
+# dp=1.00
 beam_current_list_of_list_Fe, beam_current_unc_list_of_list_Fe, beam_energy_in_foil_list_list_Fe, reaction_list_list_Fe = caclulate_beam_currents_in_foil(dp, 'Fe')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 
@@ -122,6 +127,7 @@ color_list = ['deepskyblue', 'gold', 'hotpink']
 
 
 # Loop over every reaction
+plt.figure(figsize=(10, 6))
 for i, (reaction, data) in enumerate(data_by_reaction.items()):
     beam_currents = data['beam_current']
     beam_currents_unc = data['beam_current_unc']
@@ -145,10 +151,15 @@ for i, (reaction, data) in enumerate(data_by_reaction.items()):
 
 
 # plt.xlim([lower_energy_compartments[0]-1, upper_energy_compartments[-1]+1])
-plt.xlabel('Beam energy (MeV)')
-plt.ylabel('Beam current (nA)')
+plt.xlabel('Deuteron Energy (MeV)', fontsize=14)
+plt.ylabel('Beam Current (nA)', fontsize=14)
 plt.title(f'dp = {dp:.3f}')
+# plt.title(f'Compartment 5 in the 50 MeV stack after variance minimization', fontsize=14)
+# plt.title(f'The 50 MeV stack after variance minimization', fontsize=14)
+# plt.xlim((20,30))
+plt.ylim((0))
 plt.legend()
+# plt.savefig(f'/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/Figures/beam_currents_50MeV_comp5_after_var_min.pdf', dpi=600)
 plt.show()
 
 

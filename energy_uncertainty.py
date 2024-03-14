@@ -6,11 +6,11 @@ import pandas as pd
 
 dp = 0.972
 # foil_name = 'Ni01'
-foil_list = ['Ni01', 'Zr01', 'Ti01', 'Ni02', 'Zr02', 'Ti02', 'Ni03', 'Zr03', 'Ti03', 'Ni04', 'Zr04', 'Ti04', 'Ni05', 'Zr05', 'Ti05']
+# foil_list = ['Ni01', 'Zr01', 'Ti01', 'Ni02', 'Zr02', 'Ti02', 'Ni03', 'Zr03', 'Ti03', 'Ni04', 'Zr04', 'Ti04', 'Ni05', 'Zr05', 'Ti05']
 # foil_list = ['Ti05']
 # foil_list = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
 # foil_list = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
-# foil_list = ['Ti01', 'Ti02', 'Ti03', 'Ti04', 'Ti05']
+foil_list = ['Ti01', 'Ti02', 'Ti03', 'Ti04', 'Ti05']
 
 
 

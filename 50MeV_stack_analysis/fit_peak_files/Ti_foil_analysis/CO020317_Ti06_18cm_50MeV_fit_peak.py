@@ -20,7 +20,8 @@ def fit_peaks(spectrumName, position):
     sp = ci.Spectrum(spectrumFile)
     sp.cb = cb 
  
-    sp.isotopes = ['46SC', '48V']
+    sp.isotopes = ['43SC', '44SC', '44SCm', '46SC', '47SC', '47CA', '48V', '48SC']
+
     # sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0, 'skew_fit':True}
     sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0}
 

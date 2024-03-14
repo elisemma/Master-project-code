@@ -25,9 +25,10 @@ def average_beam_cur_func(times, integrated_beam_cur):
 times_sec, average_beam_cur = average_beam_cur_func(times, integrated_beam_cur)
 
 plt.plot(times_sec, average_beam_cur*1e9, color = 'hotpink', marker = 'o')
-plt.xlabel('Time since start of irradiation (s)')
-plt.ylabel('Average beam current since start of irradiation (nA)')
+plt.xlabel('Time since start of irradiation (s)', fontsize=10)
+plt.ylabel(r'I$(\Delta t_{irr})$ (nA)' , fontsize = 10)
+plt.title('The average beam current from the beam integrator', fontsize=10)
 plt.ylim(0, 140)
 plt.xlim(0)
-# plt.savefig('./Figures/beam_current.pdf')
+plt.savefig('./Figures/beam_current_30MeV.pdf', dpi=600)
 plt.show()

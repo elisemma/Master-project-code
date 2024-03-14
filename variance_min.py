@@ -291,10 +291,14 @@ def plot_chi2(dp_list, compartment_list, method):
     min_dp = dp_list[min_index]
 
 
-    plt.plot(dp_list, red_chi2_list)
-    plt.xlabel('dp')
-    plt.ylabel('reduced chi2')
+    plt.figure(figsize=(10, 4))
+    plt.plot(dp_list, red_chi2_list, color='hotpink')
+    plt.xlabel('dp', fontsize=14)
+    plt.ylabel(r'Reduced $\chi ^2$', fontsize=14)
     plt.title(f'Compartment {compartment_list}, method: {method}, minimized when dp = {min_dp:.3f}')
+    # plt.title(f'Variance minimization of compartment 4 in the 30 MeV stack using the p1-method', fontsize = 14)
+    # plt.savefig('./Figures/var_min_30MeV_p1.pdf', dpi=600)
+
     plt.show()
     print(monitor_stack_df)
 
@@ -312,7 +316,7 @@ dp_array6 = np.arange(0.94, 0.96, 0.001)
 dp_array = np.union1d(dp_array5, dp_array6)
 
 # plot_chi2(dp_array, ['01', '02', '03', '04'], 'global_xs')
-plot_chi2(dp_array, ['04'], 'p0')
+# plot_chi2(dp_array, ['04'], 'p0')
 plot_chi2(dp_array, ['04'], 'p1')
 
 

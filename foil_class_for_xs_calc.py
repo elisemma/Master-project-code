@@ -26,22 +26,41 @@ class Foil:
         self.calc_xs_unc = None
 
 
-    def assign_areal_dens_w_unc_percent(self):
-        areal_dens_dict = { 'Zr01': {'areal_dens': 16.142, 'areal_dens_unc_percent': 0.6381},
+    def assign_areal_dens_w_unc_percent(self): #[mg/cm2]
+        areal_dens_dict = { 'Zr01': {'areal_dens': 16.142, 'areal_dens_unc_percent': 0.6381}, 
                             'Zr02': {'areal_dens': 16.378, 'areal_dens_unc_percent': 0.2992},
                             'Zr03': {'areal_dens': 16.140, 'areal_dens_unc_percent': 0.2478},
                             'Zr04': {'areal_dens': 16.195, 'areal_dens_unc_percent': 0.5619},
                             'Zr05': {'areal_dens': 16.400, 'areal_dens_unc_percent': 0.2195},
+                            'Zr06': {'areal_dens': 16.177, 'areal_dens_unc_percent': 1.0571},
+                            'Zr07': {'areal_dens': 16.009, 'areal_dens_unc_percent': 0.1124},
+                            'Zr08': {'areal_dens': 16.246, 'areal_dens_unc_percent': 0.1662},
+                            'Zr09': {'areal_dens': 16.225, 'areal_dens_unc_percent': 0.4253},
+                            'Zr10': {'areal_dens': 16.237, 'areal_dens_unc_percent': 0.1478},
+
                             'Ti01': {'areal_dens': 11.535, 'areal_dens_unc_percent': 0.8236},
                             'Ti02': {'areal_dens': 11.740, 'areal_dens_unc_percent': 0.7751},
                             'Ti03': {'areal_dens': 11.273, 'areal_dens_unc_percent': 0.7629},
                             'Ti04': {'areal_dens': 11.099, 'areal_dens_unc_percent': 0.8289},
                             'Ti05': {'areal_dens': 11.317, 'areal_dens_unc_percent': 0.2651},
+                            'Ti06': {'areal_dens': 10.990, 'areal_dens_unc_percent': 0.7734},
+                            'Ti08': {'areal_dens': 11.169, 'areal_dens_unc_percent': 0.9319},
+                            'Ti09': {'areal_dens': 11.234, 'areal_dens_unc_percent': 0.7655},
+                            'Ti10': {'areal_dens': 11.239, 'areal_dens_unc_percent': 2.1443},
+                            'Ti11': {'areal_dens': 11.001, 'areal_dens_unc_percent': 0.1364},
+
                             'Ni01': {'areal_dens': 23.253, 'areal_dens_unc_percent': 0.0645},
                             'Ni02': {'areal_dens': 23.103, 'areal_dens_unc_percent': 0.1688},
                             'Ni03': {'areal_dens': 23.064, 'areal_dens_unc_percent': 0.2992},
                             'Ni04': {'areal_dens': 23.201, 'areal_dens_unc_percent': 0.2974},
-                            'Ni05': {'areal_dens': 22.746, 'areal_dens_unc_percent': 0.0835}}
+                            'Ni05': {'areal_dens': 22.746, 'areal_dens_unc_percent': 0.0835},
+
+                            'Fe01': {'areal_dens': 20.061, 'areal_dens_unc_percent': 0.1495},
+                            'Fe02': {'areal_dens': 20.061, 'areal_dens_unc_percent': 0.1538},
+                            'Fe03': {'areal_dens': 20.187, 'areal_dens_unc_percent': 0.5548},
+                            'Fe04': {'areal_dens': 20.100, 'areal_dens_unc_percent': 0.2488},
+                            'Fe05': {'areal_dens': 20.108, 'areal_dens_unc_percent': 0.5570},}
+
 
         self.areal_dens = areal_dens_dict[self.foil_name]['areal_dens']
         self.areal_dens_unc_percent = areal_dens_dict[self.foil_name]['areal_dens_unc_percent']
@@ -51,7 +70,9 @@ class Foil:
         # Assigning the molar mass 
         molar_mass_dict = {'Zr': {'molar_mass': 91.2235, 'molar_mass_unc': 0.0005},
                            'Ni': {'molar_mass': 58.6934, 'molar_mass_unc': 0.0004},
-                           'Ti': {'molar_mass': 47.867, 'molar_mass_unc': 0.001}}
+                           'Ti': {'molar_mass': 47.867, 'molar_mass_unc': 0.001},
+                           'Fe': {'molar_mass': 55.845, 'molar_mass_unc': 0.002}}
+
         self.molar_mass  = molar_mass_dict[self.foil_name[0:2]]['molar_mass']
         self.molar_mass_unc = molar_mass_dict[self.foil_name[0:2]]['molar_mass_unc']
 
@@ -65,7 +86,7 @@ class Foil:
 
 
     def assign_beam_current_w_unc(self):
-        # beam_current_dict = { 'Zr01': {'beam_current': 128.21543781323695, 'beam_current_unc': 12.74029303652092},
+        # beam_current_dict = { 'Zr01': {'beam_current': 128.21543781323695, 'beam_current_unc': 12.74029303652092}, 
         #                       'Zr02': {'beam_current': 123.4575028703829, 'beam_current_unc': 7.710074388016526},
         #                       'Zr03': {'beam_current': 131.18779932476846, 'beam_current_unc': 4.0835044453116245},
         #                       'Zr04': {'beam_current': 96.63429803291486, 'beam_current_unc': 23.282870237984515},
@@ -85,11 +106,11 @@ class Foil:
                               'Zr03': {'beam_current': 131.37180938909623, 'beam_current_unc': 2.097187106972314},
                               'Zr04': {'beam_current': 113.73832236122058, 'beam_current_unc': 5.0486614591625},
                               'Zr05': {'beam_current': 2.2556448798115443, 'beam_current_unc': 15.512092954286548},
-                              'Zr06': {'beam_current': 90.40077287936163, 'beam_current_unc': 2.327839111192331},
-                              'Zr07': {'beam_current': 90.93641924096387, 'beam_current_unc': 1.914904273219334},
-                              'Zr08': {'beam_current': 94.82509814227382, 'beam_current_unc': 1.5491782774473961},
-                              'Zr09': {'beam_current': 91.51235172180517, 'beam_current_unc': 2.44948286925908},
-                              'Zr10': {'beam_current': 89.92515787653733, 'beam_current_unc': 2.1989658716372884},
+                              'Zr06': {'beam_current': 90.40077287936163,  'beam_current_unc': 2.327839111192331},
+                              'Zr07': {'beam_current': 90.93641924096387,  'beam_current_unc': 1.914904273219334},
+                              'Zr08': {'beam_current': 94.82509814227382,  'beam_current_unc': 1.5491782774473961},
+                              'Zr09': {'beam_current': 91.51235172180517,  'beam_current_unc': 2.44948286925908},
+                              'Zr10': {'beam_current': 89.92515787653733,  'beam_current_unc': 2.1989658716372884},
 
                               'Ni01': {'beam_current': 133.93230394113667, 'beam_current_unc': 11.733851818232212},
                               'Ni02': {'beam_current': 126.03238410288209, 'beam_current_unc': 10.747827837439031},
@@ -101,8 +122,18 @@ class Foil:
                               'Ti02': {'beam_current': 118.25453712836615, 'beam_current_unc': 1.716130752885589},
                               'Ti03': {'beam_current': 123.56651302304839, 'beam_current_unc': 2.3284985000035077},
                               'Ti04': {'beam_current': 765.51551559187187, 'beam_current_unc': 16.02184893105766},
-                              'Ti05': {'beam_current': 108.57835015293583, 'beam_current_unc': 33.36232017668373}}
+                              'Ti05': {'beam_current': 108.57835015293583, 'beam_current_unc': 33.36232017668373},
+                              'Ti06': {'beam_current': 96.60791103979946,  'beam_current_unc': 3.508512656191025},
+                              'Ti08': {'beam_current': 93.07819175880893,  'beam_current_unc': 1.0660775372399667},
+                              'Ti09': {'beam_current': 95.97313899866144,  'beam_current_unc': 1.0109998126930624},
+                              'Ti10': {'beam_current': 92.89981297143379,  'beam_current_unc': 0.821473240005668},
+                              'Ti11': {'beam_current': 90.22608281896498,  'beam_current_unc': 0.5246886893150025},
 
+                              'Fe01': {'beam_current': 91.71868901291089,  'beam_current_unc': 17.891687001061534},
+                              'Fe02': {'beam_current': 95.78064880345202,  'beam_current_unc': 17.586591409360715},
+                              'Fe03': {'beam_current': 96.48332515195193,  'beam_current_unc': 16.633314233940332},
+                              'Fe04': {'beam_current': 86.86262139072429,  'beam_current_unc': 13.01251633646137},
+                              'Fe05': {'beam_current': 77.50784615270966,  'beam_current_unc': 9.55268221176066}}
 
         self.beam_current = beam_current_dict[self.foil_name]['beam_current']
         self.beam_current_unc = beam_current_dict[self.foil_name]['beam_current_unc']
@@ -134,11 +165,6 @@ class Foil:
 
         xs_unc = xs * np.sqrt( (self.R_unc/self.R)**2 + (beam_current_in_d_per_s_unc/beam_current_in_d_per_s)**2 + (N_T_unc/N_T)**2 )#[mb]
         self.calc_xs_unc = xs_unc
-
-
-
-
-
 
 
 

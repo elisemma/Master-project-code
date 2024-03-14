@@ -88,6 +88,7 @@ def caclulate_beam_currents_in_foil(dp, compound):
 #__________________________Running the function________________________________
 
 dp = 0.972
+# dp = 1.00
 beam_current_list_of_list_Ni, beam_current_unc_list_of_list_Ni, beam_energy_in_foil_list_list_Ni, reaction_list_list_Ni = caclulate_beam_currents_in_foil(dp, 'Ni')
 beam_current_list_of_list_Ti, beam_current_unc_list_of_list_Ti, beam_energy_in_foil_list_list_Ti, reaction_list_list_Ti = caclulate_beam_currents_in_foil(dp, 'Ti')
 
@@ -147,6 +148,7 @@ compartment_separation_energies = (np.array(upper_energy_compartments[:-1]) + np
 
 
 # Loop over every reaction
+plt.figure(figsize=(10, 6))
 for i, (reaction, data) in enumerate(data_by_reaction.items()):
     beam_currents = data['beam_current']
     beam_currents_unc = data['beam_current_unc']
@@ -154,26 +156,33 @@ for i, (reaction, data) in enumerate(data_by_reaction.items()):
 
     plt.errorbar(energies, beam_currents, yerr=beam_currents_unc, marker=marker_list[i], markersize=5, linestyle='', color=color_list[i], label=reaction)
 
-# Plot shaded regions
-for i in range(len(compartment_separation_energies)+1):
-    if i == 0:
-        lower_bound = 0
-    else:
-        lower_bound = compartment_separation_energies[i-1]
-    if i == len(compartment_separation_energies):
-        upper_bound = upper_energy_compartments[-1]+1
-    else:
-        upper_bound = compartment_separation_energies[i]
+# # Plot shaded regions
+# for i in range(len(compartment_separation_energies)+1):
+#     if i == 0:
+#         lower_bound = 0
+#     else:
+#         lower_bound = compartment_separation_energies[i-1]
+#     if i == len(compartment_separation_energies):
+#         upper_bound = upper_energy_compartments[-1]+1
+#     else:
+#         upper_bound = compartment_separation_energies[i]
 
-    plt.axvspan(lower_bound, upper_bound, facecolor=color_background_list[i], alpha=0.4)
+#     plt.axvspan(lower_bound, upper_bound, facecolor=color_background_list[i], alpha=0.4)
 
 
 
 # plt.xlim([lower_energy_compartments[0]-1, upper_energy_compartments[-1]+1])
-plt.xlabel('Beam energy (MeV)')
-plt.ylabel('Beam current (nA)')
-plt.title(f'dp = {dp:.3f}')
+plt.xlabel('Deuteron Energy (MeV)', fontsize=14)
+plt.ylabel('Beam Current (nA)', fontsize=14)
+# plt.title(f'Compartment 3 in the 30 MeV stack after variance minimization', fontsize=14)
+# plt.title(f'The 30 MeV stack after variance minimization', fontsize=14)
+
+plt.xlim((0,30))
+plt.ylim((0))
+# plt.xlim((9.5,14.5))
+# plt.ylim((0,200))
 plt.legend()
+# plt.savefig(f'./Figures/beam_currents_30MeV_comp3_after_var_min.pdf', dpi=600)
 plt.show()
 
 print(data_by_reaction)
