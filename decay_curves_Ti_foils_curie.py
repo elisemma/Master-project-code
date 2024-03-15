@@ -31,30 +31,30 @@ file_COTi06 = 'CO020317_Ti06_18cm_50MeV/CO020317_Ti06_18cm_50MeV_peak_data.csv'
 
 file_concat_Ti = 'combined_peak_data_Ti.csv'
 
-# df_CJTi01 = pd.read_csv(path_Ti+file_CJTi01)
-# df_CKTi02 = pd.read_csv(path_Ti+file_CKTi02)
-# df_CLTi03 = pd.read_csv(path_Ti+file_CLTi03)
-# df_CMTi04 = pd.read_csv(path_Ti+file_CMTi04)
-# df_CPTi05 = pd.read_csv(path_Ti+file_CPTi05)
-# df_CQTi04 = pd.read_csv(path_Ti+file_CQTi04)
-# df_CSTi01 = pd.read_csv(path_Ti+file_CSTi01)
-# df_CTTi02 = pd.read_csv(path_Ti+file_CTTi02)
-# df_CUTi03 = pd.read_csv(path_Ti+file_CUTi03)
+df_CJTi01 = pd.read_csv(path_Ti+file_CJTi01)
+df_CKTi02 = pd.read_csv(path_Ti+file_CKTi02)
+df_CLTi03 = pd.read_csv(path_Ti+file_CLTi03)
+df_CMTi04 = pd.read_csv(path_Ti+file_CMTi04)
+df_CPTi05 = pd.read_csv(path_Ti+file_CPTi05)
+df_CQTi04 = pd.read_csv(path_Ti+file_CQTi04)
+df_CSTi01 = pd.read_csv(path_Ti+file_CSTi01)
+df_CTTi02 = pd.read_csv(path_Ti+file_CTTi02)
+df_CUTi03 = pd.read_csv(path_Ti+file_CUTi03)
 
-# df_CCTi06 = pd.read_csv(path_Ti+file_CCTi06)
-# df_CETi08 = pd.read_csv(path_Ti+file_CETi08)
-# df_CFTi09 = pd.read_csv(path_Ti+file_CFTi09)
-# df_CGTi10 = pd.read_csv(path_Ti+file_CGTi10)
-# df_CITi11 = pd.read_csv(path_Ti+file_CITi11)
-# df_COTi06 = pd.read_csv(path_Ti+file_COTi06)
-# # df_CWTi11 = pd.read_csv(path_Ti+file_CWTi11)
+df_CCTi06 = pd.read_csv(path_Ti+file_CCTi06)
+df_CETi08 = pd.read_csv(path_Ti+file_CETi08)
+df_CFTi09 = pd.read_csv(path_Ti+file_CFTi09)
+df_CGTi10 = pd.read_csv(path_Ti+file_CGTi10)
+df_CITi11 = pd.read_csv(path_Ti+file_CITi11)
+df_COTi06 = pd.read_csv(path_Ti+file_COTi06)
+# df_CWTi11 = pd.read_csv(path_Ti+file_CWTi11)
 
 
 
-# df_concat_Ti = pd.concat((df_CJTi01, df_CKTi02, df_CLTi03, df_CMTi04, df_CPTi05, df_CQTi04, df_CSTi01, df_CTTi02, df_CUTi03, df_CCTi06, df_CETi08, df_CFTi09, df_CGTi10, df_CITi11, df_COTi06), axis = 0)
-# df_concat_Ti = df_concat_Ti[~((df_concat_Ti['isotope'] == '48V') & (~df_concat_Ti['energy'].isin([944.130, 983.525, 1312.106])))]
+df_concat_Ti = pd.concat((df_CJTi01, df_CKTi02, df_CLTi03, df_CMTi04, df_CPTi05, df_CQTi04, df_CSTi01, df_CTTi02, df_CUTi03, df_CCTi06, df_CETi08, df_CFTi09, df_CGTi10, df_CITi11, df_COTi06), axis = 0)
+df_concat_Ti = df_concat_Ti[~((df_concat_Ti['isotope'] == '48V') & (~df_concat_Ti['energy'].isin([944.130, 983.525, 1312.106])))]
 
-# df_concat_Ti.to_csv(path_Ti+file_concat_Ti)
+df_concat_Ti.to_csv(path_Ti+file_concat_Ti)
 
 
 
@@ -118,6 +118,21 @@ def calc_prod_rates_in_foil(isotope_list_list, isotope_chain_parent_list, foil, 
        
 
 
+# isotope_list_list_Ti06 = [['44SC']]
+# isotope_chain_parent_list_Ti06 = ['44SC']
+
+# isotope_list_list_Ti08 = [['44SC']]
+# isotope_chain_parent_list_Ti08 = ['44SC']
+
+# isotope_list_list_Ti09 = [['44SC']]
+# isotope_chain_parent_list_Ti09 = ['44SC']
+
+# isotope_list_list_Ti10 = [['44SC']]
+# isotope_chain_parent_list_Ti10 = ['44SC']
+
+
+
+
 
 # isotope_list_list_Ti01 = [['46SC']]
 # isotope_chain_parent_list_Ti01 = ['46SC']
@@ -161,9 +176,6 @@ def calc_prod_rates_in_foil(isotope_list_list, isotope_chain_parent_list, foil, 
 # isotope_list_list_Ti03 = [['47SC']]
 # isotope_chain_parent_list_Ti03 = ['47SC']
 
-# isotope_list_list_Ti04 = [['47SC']]
-# isotope_chain_parent_list_Ti04 = ['47SC']
-
 # isotope_list_list_Ti06 = [['47SC']]
 # isotope_chain_parent_list_Ti06 = ['47SC']
 
@@ -181,37 +193,32 @@ def calc_prod_rates_in_foil(isotope_list_list, isotope_chain_parent_list, foil, 
 
 
 
+# isotope_list_list_Ti01 = [['48SC']]
+# isotope_chain_parent_list_Ti01 = ['48SC']
 
-isotope_list_list_Ti01 = [['48SC']]
-isotope_chain_parent_list_Ti01 = ['48SC']
+# isotope_list_list_Ti02 = [['48SC']]
+# isotope_chain_parent_list_Ti02 = ['48SC']
 
-isotope_list_list_Ti02 = [['48SC']]
-isotope_chain_parent_list_Ti02 = ['48SC']
+# isotope_list_list_Ti03 = [['48SC']]
+# isotope_chain_parent_list_Ti03 = ['48SC']
 
-isotope_list_list_Ti03 = [['48SC']]
-isotope_chain_parent_list_Ti03 = ['48SC']
+# isotope_list_list_Ti04 = [['48SC']]
+# isotope_chain_parent_list_Ti04 = ['48SC']
 
-isotope_list_list_Ti04 = [['48SC']]
-isotope_chain_parent_list_Ti04 = ['48SC']
+# isotope_list_list_Ti06 = [['48SC']]
+# isotope_chain_parent_list_Ti06 = ['48SC']
 
-isotope_list_list_Ti05 = [['48SC']]
-isotope_chain_parent_list_Ti05 = ['48SC']
+# isotope_list_list_Ti08 = [['48SC']]
+# isotope_chain_parent_list_Ti08 = ['48SC']
 
-isotope_list_list_Ti06 = [['48SC']]
-isotope_chain_parent_list_Ti06 = ['48SC']
+# isotope_list_list_Ti09 = [['48SC']]
+# isotope_chain_parent_list_Ti09 = ['48SC']
 
-isotope_list_list_Ti08 = [['48SC']]
-isotope_chain_parent_list_Ti08 = ['48SC']
+# isotope_list_list_Ti10 = [['48SC']]
+# isotope_chain_parent_list_Ti10 = ['48SC']
 
-isotope_list_list_Ti09 = [['48SC']]
-isotope_chain_parent_list_Ti09 = ['48SC']
-
-isotope_list_list_Ti10 = [['48SC']]
-isotope_chain_parent_list_Ti10 = ['48SC']
-
-isotope_list_list_Ti11 = [['48SC']]
-isotope_chain_parent_list_Ti11 = ['48SC']
-
+# isotope_list_list_Ti11 = [['48SC']]
+# isotope_chain_parent_list_Ti11 = ['48SC']
 
 
 
@@ -242,6 +249,35 @@ isotope_chain_parent_list_Ti11 = ['48SC']
 
 
 
+isotope_list_list_Ti01 = [['46SC'], ['47SC'], ['48V']]
+isotope_chain_parent_list_Ti01 = ['46SC', '47SC', '48V']
+
+isotope_list_list_Ti02 = [['46SC'], ['47SC'], ['48V']]
+isotope_chain_parent_list_Ti02 = ['46SC', '47SC', '48V']
+
+isotope_list_list_Ti03 = [['46SC'], ['47SC'], ['48V']]
+isotope_chain_parent_list_Ti03 = ['46SC', '47SC', '48V']
+
+isotope_list_list_Ti04 = [['46SC'], ['48V']]
+isotope_chain_parent_list_Ti04 = ['46SC', '48V']
+
+isotope_list_list_Ti05 = [['46SC'], ['48V']]
+isotope_chain_parent_list_Ti05 = ['46SC', '48V']
+
+isotope_list_list_Ti06 = [['44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
+isotope_chain_parent_list_Ti06 = ['44SC', '46SC', '47SC', '48SC', '48V']
+
+isotope_list_list_Ti08 = [['44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
+isotope_chain_parent_list_Ti08 = ['44SC', '46SC', '47SC', '48SC', '48V']
+
+isotope_list_list_Ti09 = [['44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
+isotope_chain_parent_list_Ti09 = ['44SC', '46SC', '47SC', '48SC', '48V']
+
+isotope_list_list_Ti10 = [['44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
+isotope_chain_parent_list_Ti10 = ['44SC', '46SC', '47SC', '48SC', '48V']
+
+isotope_list_list_Ti11 = [['46SC'], ['47SC'], ['48V']]
+isotope_chain_parent_list_Ti11 = ['46SC', '47SC', '48V']
 
 
 
@@ -251,16 +287,17 @@ isotope_chain_parent_list_Ti11 = ['48SC']
 
 
 
-# calc_prod_rates_in_foil(isotope_list_list_Ti01, isotope_chain_parent_list_Ti01, 'Ti01', '30MeV', write_to_file=True, show_plot=True)
-# calc_prod_rates_in_foil(isotope_list_list_Ti02, isotope_chain_parent_list_Ti02, 'Ti02', '30MeV', write_to_file=True, show_plot=True)
-# calc_prod_rates_in_foil(isotope_list_list_Ti03, isotope_chain_parent_list_Ti03, 'Ti03', '30MeV', write_to_file=True, show_plot=True)
-# calc_prod_rates_in_foil(isotope_list_list_Ti04, isotope_chain_parent_list_Ti04, 'Ti04', '30MeV', write_to_file=True, show_plot=True)
-# calc_prod_rates_in_foil(isotope_list_list_Ti05, isotope_chain_parent_list_Ti05, 'Ti05', '30MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Ti06, isotope_chain_parent_list_Ti06, 'Ti06', '50MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Ti08, isotope_chain_parent_list_Ti08, 'Ti08', '50MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Ti09, isotope_chain_parent_list_Ti09, 'Ti09', '50MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Ti10, isotope_chain_parent_list_Ti10, 'Ti10', '50MeV', write_to_file=True, show_plot=True)
-# calc_prod_rates_in_foil(isotope_list_list_Ti11, isotope_chain_parent_list_Ti11, 'Ti11', '50MeV', write_to_file=True, show_plot=True)
+
+calc_prod_rates_in_foil(isotope_list_list_Ti01, isotope_chain_parent_list_Ti01, 'Ti01', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti02, isotope_chain_parent_list_Ti02, 'Ti02', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti03, isotope_chain_parent_list_Ti03, 'Ti03', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti04, isotope_chain_parent_list_Ti04, 'Ti04', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti05, isotope_chain_parent_list_Ti05, 'Ti05', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti06, isotope_chain_parent_list_Ti06, 'Ti06', '50MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti08, isotope_chain_parent_list_Ti08, 'Ti08', '50MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti09, isotope_chain_parent_list_Ti09, 'Ti09', '50MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti10, isotope_chain_parent_list_Ti10, 'Ti10', '50MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Ti11, isotope_chain_parent_list_Ti11, 'Ti11', '50MeV', write_to_file=True, show_plot=False)
 
 
 

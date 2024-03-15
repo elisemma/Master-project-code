@@ -8,9 +8,9 @@ import matplotlib.pylab as plt
 #            # etc etc
 #            ]
 
-products = ['039-086Y']
+products = ['039-086Y', '039-088Y']
 # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-target = '90Zr'
+target = '96Zr'
 
 # Run 'cat out_coh_*_MeV.dat > out_coh_merged.dat' in the ./output directory to unify files for parsing
 with open('./'+target+'/output/out_coh_merged.dat','r') as f:
