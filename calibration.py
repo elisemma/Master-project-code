@@ -14,43 +14,12 @@ import pickle as pl
 
 
 
-def calibration_10cm():
-    cb = ci.Calibration()
-
-    sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/calibration/Eu152_090317_10cm.Spe')
-    sp_Eu152.isotopes = ['152EU']
-    sp_Eu152.plot()
-
-    sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
-               {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
-               {'isotope':'152EU', 'A0':370000, 'ref_date':'11/01/1984 12:00:00'},
-               {'isotope':'56CO', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
-    sources = pd.DataFrame(sources)
-
-    cb.calibrate([sp_Eu152], sources=sources)
-    cb.plot(show=False, saveas = './MyGeneratedFiles/Calibration/Figures/calibration_plots_10cm.pdf')
-    cb.saveas('./MyGeneratedFiles/Calibration/json_files/calibration_10cm.json')
-
-
-
 # def calibration_10cm():
 #     cb = ci.Calibration()
 
-#     sp_Ba133 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/ExtraCalibrationData/calibration/Ba133/new-gain/BE172501_10cm.Spe')
-#     sp_Ba133.isotopes = ['133BA'] 
-#     # sp_Ba133.plot()
-
-#     sp_Co56 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/ExtraCalibrationData/calibration/Co56/new-gain/CH170202_10cm.Spe')
-#     sp_Co56.isotopes = ['56CO'] 
-#     # sp_Co56.plot()
-
-#     sp_Cs137 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/ExtraCalibrationData/calibration/Cs137/new-gain/BG172501_10cm.Spe')
-#     sp_Cs137.isotopes = ['137CS'] 
-#     # sp_Cs137_2.plot()
-
-#     sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/ExtraCalibrationData/calibration/Eu152/new-gain/AV172401_10cm.Spe')
+#     sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/2017_Feb_Zr/calibration/Eu152_090317_10cm.Spe')
 #     sp_Eu152.isotopes = ['152EU']
-#     # sp_Eu152.plot()
+#     sp_Eu152.plot()
 
 #     sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
 #                {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
@@ -58,9 +27,40 @@ def calibration_10cm():
 #                {'isotope':'56CO', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
 #     sources = pd.DataFrame(sources)
 
-#     cb.calibrate([sp_Ba133, sp_Cs137, sp_Eu152, sp_Co56], sources=sources)
-#     cb.plot(show=True, saveas = './MyGeneratedFiles/Calibration/Figures/calibration_plots_10cm.pdf')
+#     cb.calibrate([sp_Eu152], sources=sources)
+#     cb.plot(show=False, saveas = './MyGeneratedFiles/Calibration/Figures/calibration_plots_10cm.pdf')
 #     cb.saveas('./MyGeneratedFiles/Calibration/json_files/calibration_10cm.json')
+
+
+
+def calibration_10cm():
+    cb = ci.Calibration()
+
+    sp_Ba133 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/ExtraCalibrationData/calibration/Ba133/new-gain/BE172501_10cm.Spe')
+    sp_Ba133.isotopes = ['133BA'] 
+    # sp_Ba133.plot()
+
+    sp_Co56 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/ExtraCalibrationData/calibration/Co56/new-gain/CH170202_10cm.Spe')
+    sp_Co56.isotopes = ['56CO'] 
+    # sp_Co56.plot()
+
+    sp_Cs137 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/ExtraCalibrationData/calibration/Cs137/new-gain/BG172501_10cm.Spe')
+    sp_Cs137.isotopes = ['137CS'] 
+    # sp_Cs137_2.plot()
+
+    sp_Eu152 = ci.Spectrum('/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/FilerFraAndrew/ExtraCalibrationData/calibration/Eu152/new-gain/AV172401_10cm.Spe')
+    sp_Eu152.isotopes = ['152EU']
+    # sp_Eu152.plot()
+
+    sources = [{'isotope':'133BA', 'A0':3.989E4, 'ref_date':'01/01/2009 12:00:00'},
+               {'isotope':'137CS', 'A0':3.855E4, 'ref_date':'01/01/2009 12:00:00'},
+               {'isotope':'152EU', 'A0':370000, 'ref_date':'11/01/1984 12:00:00'},
+               {'isotope':'56CO', 'A0':3.929E4, 'ref_date':'01/01/2009 12:00:00'}]
+    sources = pd.DataFrame(sources)
+
+    cb.calibrate([sp_Ba133, sp_Cs137, sp_Eu152, sp_Co56], sources=sources)
+    cb.plot(show=True, saveas = './MyGeneratedFiles/Calibration/Figures/calibration_plots_10cm.pdf')
+    cb.saveas('./MyGeneratedFiles/Calibration/json_files/calibration_10cm.json')
 
 
 
@@ -251,7 +251,7 @@ if __name__ == '__main__':
     # calibration_18cm()
     # calibration_18cm_new()
     # calibration_22cm()
-    calibration_40cm()
+    # calibration_40cm()
     # calibration_50cm()
 
 

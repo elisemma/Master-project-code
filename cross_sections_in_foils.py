@@ -13,6 +13,7 @@ import curie as ci
 
 
 
+
 def get_exfor_data(target, reaction, product): #f.exs: ('ZR-0', 'D,*', 'NB-90')
     # Pull data from EXFOR
     db = exfor_manager.X4DBManagerDefault()
@@ -273,42 +274,47 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, write_csv=False, sa
     alice_spline = PchipInterpolator(E_alice, xs_alice)
 
 
-    # #Get data from coh
-    # E_coh_list = []
-    # xs_coh_list = []
-    # abundances_coh_list = []
+    #Get data from coh
+    E_coh_list = []
+    xs_coh_list = []
+    abundances_coh_list = []
 
-    # el = ci.Element(target_material)
-    # abundances_df = el.abundances
+    el = ci.Element(target_material)
+    abundances_df = el.abundances
    
-    # if state == 'ground_state':
-    #     coh_state = 'G'
-    # elif state == 'isomeric_state':
-    #     coh_state = 'M'
+    if state == 'ground_state':
+        coh_state = 'G'
+    elif state == 'isomeric_state':
+        coh_state = 'M'
 
-    # for i in range(len(target_A_list)):
-    #     coh_path = f'./coh_calculations/{target_A_list[i]}{target_material}/'
-    #     coh_file = f'0{Z}-0{A}{reaction_product[2:]}{coh_state}_coh.txt'
-    #     # Check if the file exists:
-    #     if os.path.exists(coh_path + coh_file):
-    #         E_coh_partial, xs_coh_partial = get_coh_data(coh_path, coh_file)
-    #         E_coh_list.append(E_coh_partial)
-    #         xs_coh_list.append(xs_coh_partial)
+    for i in range(len(target_A_list)):
+        coh_path = f'./coh_calculations/{target_A_list[i]}{target_material}/'
+        if state == 'isomeric_state':
+            product = reaction_product[:-1]
+        else:
+            product = reaction_product
 
-    #         isotope = f'{target_A_list[i]}{target_material_big}'
-    #         ab = abundances_df[abundances_df['isotope'] == isotope]['abundance'].values[0]
-    #         abundances_coh_list.append(ab)
+        coh_file = f'0{Z}-0{A}{product[2:]}{coh_state}_coh.txt'
+        # Check if the file exists:
+        if os.path.exists(coh_path + coh_file):
+            E_coh_partial, xs_coh_partial = get_coh_data(coh_path, coh_file)
+            E_coh_list.append(E_coh_partial)
+            xs_coh_list.append(xs_coh_partial)
 
-    # xs_coh = [0] * len(xs_coh_list[0])
-    # # Loop through each sublist and multiply it with the corresponding abundance, then sum them up
-    # for i, sublist in enumerate(xs_coh_list):
-    #     abundance = abundances_coh_list[i]
-    #     weighted_sublist = [value * abundance/100 for value in sublist]
-    #     xs_coh = [x + y for x, y in zip(xs_coh, weighted_sublist)]
+            isotope = f'{target_A_list[i]}{target_material_big}'
+            ab = abundances_df[abundances_df['isotope'] == isotope]['abundance'].values[0]
+            abundances_coh_list.append(ab)
 
-    # E_coh = E_coh_list[0]
+    xs_coh = [0] * len(xs_coh_list[0])
+    # Loop through each sublist and multiply it with the corresponding abundance, then sum them up
+    for i, sublist in enumerate(xs_coh_list):
+        abundance = abundances_coh_list[i]
+        weighted_sublist = [value * abundance/100 for value in sublist]
+        xs_coh = [x + y for x, y in zip(xs_coh, weighted_sublist)]
 
-    # coh_spline = PchipInterpolator(E_coh, xs_coh)
+    E_coh = E_coh_list[0]
+
+    coh_spline = PchipInterpolator(E_coh, xs_coh)
 
 
 
@@ -365,7 +371,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, write_csv=False, sa
 
     plt.plot(energy_array, splev(energy_array, talys_spline), linewidth=1, color='mediumaquamarine', label='TALYS-2.0')
     plt.plot(energy_array, alice_spline(energy_array), linewidth=1, color='deepskyblue', linestyle='--', label='ALICE-2020')
-    # plt.plot(energy_array, coh_spline(energy_array), linewidth=1, color='skyblue', label='CoH-3.5.3')
+    plt.plot(energy_array, coh_spline(energy_array), linewidth=1, color='skyblue', label='CoH-3.5.3')
     # plt.plot(energy_array, splev(energy_array, talys_spline)*0.9, linewidth=1, color='darkturquoise', linestyle='-.', label='test')
     # plt.plot(energy_array, splev(energy_array, talys_spline)*1.1, linewidth=2, color='cornflowerblue', linestyle=':', label='test.')
 
@@ -380,7 +386,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, write_csv=False, sa
     plt.ylim((0))
     plt.xlim(0,50)
     if save_fig==True:
-        plt.savefig(f'./Figures/xs_plots/{target_material}_dx_{reaction_product}.pdf', dpi=600)
+        plt.savefig(f'./Figures/xs_plots/{target_material}_dx_{reaction_product}_{title}.pdf', dpi=600)
     plt.show()
     
 
@@ -405,35 +411,35 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, write_csv=False, sa
 #_______________________________Zr-foils________________________________________________
 # plot_xs('86Y', 'ground_state', 39, 86, ['Zr06', 'Zr07', 'Zr08', 'Zr09'], r'$^{nat}$Zr(d,x)$^{86}$Y - Cumulative', save_fig=True)
 
-# plot_xs('87Y', '87Yg', 39, 87, ['Zr01', 'Zr02', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
-# plot_xs('87Ym', '87Ym1', 39, 87, ['Zr01', 'Zr02', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# # plot_xs('87Y', '87Yg', 39, 87, ['Zr01', 'Zr02', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# # plot_xs('87Ym', '87Ym1', 39, 87, ['Zr01', 'Zr02', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
 
-# plot_xs('88Y', '88Yg', 39, 88, ['Zr01', 'Zr03', 'Zr04', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
-# plot_xs('88ZR', '88ZRg', 40, 88, ['Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
-# plot_xs('88NB', '88NBg', 41, 88, ['Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('88Y', 'ground_state', 39, 88, ['Zr01', 'Zr02', 'Zr03', 'Zr04'], r'$^{nat}$Zr(d,x)$^{88}$Y - Cumulative', save_fig=True)
 # plot_xs('88Y', 'ground_state', 39, 88, ['Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{88}$Y - Independent', save_fig=True)
+# plot_xs('88ZR', 'ground_state', 40, 88, ['Zr06', 'Zr07'], r'$^{nat}$Zr(d,x)$^{88}$Zr - Independent', save_fig=True)
+# plot_xs('88ZR', 'ground_state', 40, 88, ['Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{88}$Zr - Cumulative', save_fig=True)
+# plot_xs('88NB', 'ground_state', 41, 88, ['Zr06', 'Zr07'], r'$^{nat}$Zr(d,x)$^{88}$Nb - Independent', save_fig=True)
 
-# plot_xs('89NB', '89NBg', 41, 89, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
-# plot_xs('89ZR', '89ZRg', 40, 89, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
-# plot_xs('89Ym', '89Ym1', 39, 89, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('89NB', 'ground_state', 41, 89, ['Zr01', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{89}$Nb - Independent', save_fig=True)
+# plot_xs('89ZR', 'ground_state', 40, 89, ['Zr01', 'Zr02', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{89}$Zr - Independent', save_fig=True)
 
-# plot_xs('90NB', '90NBg', 41, 90, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('90NB', 'ground_state', 41, 90, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{90}$Nb - Independent', save_fig=True)
 
-# plot_xs('90Ym', '90Ym1', 39, 90, ['Zr01', 'Zr03', 'Zr06', 'Zr07', 'Zr08', 'Zr10'])
-
-# plot_xs('91Y', '91Yg', 39, 91, ['Zr03', 'Zr04', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('90Ym', 'isomeric_state', 39, 90, ['Zr01', 'Zr03', 'Zr06', 'Zr07', 'Zr08', 'Zr10'], r'$^{nat}$Zr(d,x)$^{90m}$Y - Cumulative', save_fig=True)
 
 # plot_xs('92NBm', 'isomeric_state', 41, 92, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{92m}$Nb - Independent', save_fig=True)
 
-# plot_xs('95ZR', '95ZRg', 40, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
-# plot_xs('95NBm', '95NBm1', 41, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
-# plot_xs('95NB', '95NBg', 41, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+plot_xs('95ZR', 'ground_state', 40, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{95}$Zr - Cumulative', save_fig=True)
+# plot_xs('95NBm', 'isomeric_state', 41, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{95m}$Nb - Independent', save_fig=True)
+# plot_xs('95NB', 'ground_state', 41, 95, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{95}$Nb - Independent', save_fig=True)
 
-# plot_xs('96NB', '96NBg', 41, 96, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'])
+# plot_xs('96NB', 'ground_state', 41, 96, ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr06', 'Zr07', 'Zr08', 'Zr09', 'Zr10'], r'$^{nat}$Zr(d,x)$^{96}$Nb - Independent', save_fig=True)
 
 
 
-#_______________________________Ni-foils________________________________________________
+
+
+# #_______________________________Ni-foils________________________________________________
 
 # plot_xs('52MN', 'ground_state', 25, 52, ['Ni01', 'Ni02'], r'$^{nat}$Ni(d,x)$^{52}$Mn - Cumulative', save_fig=True)
 # plot_xs('54MN', 'ground_state', 25, 54, ['Ni01'], r'$^{nat}$Ni(d,x)$^{54}$Mn - Independent', save_fig=True)
@@ -443,7 +449,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, write_csv=False, sa
 # plot_xs('57CO', 'ground_state', 27, 57, ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05'], r'$^{nat}$Ni(d,x)$^{57}$Co - Independent', save_fig=True)
 # plot_xs('58CO', 'ground_state', 27, 58, ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05'], r'$^{nat}$Ni(d,x)$^{58}$Co - Independent', save_fig=True)
 # plot_xs('60CO', 'ground_state', 27, 60, ['Ni01',  'Ni03', 'Ni04'], r'$^{nat}$Ni(d,x)$^{60}$Co - Independent', save_fig=True)
-# plot_xs('61CU', 'ground_state', 29, 61, ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05'], r'$^{nat}$Ni(d,x)$^{61}$Cu - Independent', save_fig=True)
+# # plot_xs('61CU', 'ground_state', 29, 61, ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05'], r'$^{nat}$Ni(d,x)$^{61}$Cu - Independent', save_fig=True)
 # plot_xs('64CU', 'ground_state', 29, 64, ['Ni02', 'Ni03', 'Ni04'], r'$^{nat}$Ni(d,x)$^{64}$Cu - Independent', save_fig=True)
 # plot_xs('65NI', 'ground_state', 28, 65, ['Ni01', 'Ni02', 'Ni03', 'Ni04'], r'$^{nat}$Ni(d,x)$^{65}$Ni - Independent', save_fig=True)
 
@@ -451,19 +457,19 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, write_csv=False, sa
 
 
 
-#_______________________________Ti-foils________________________________________________
+# #_______________________________Ti-foils________________________________________________
 
-# plot_xs('44SC', 'ground_state', 21, 44, ['Ti06', 'Ti08', 'Ti09', 'Ti10'], r'$^{nat}$Ti(d,x)$^{44}$Sc - Cumulative', save_fig=True)
+# plot_xs('44SC', 'ground_state', 21, 44, ['Ti06', 'Ti08', 'Ti09', 'Ti10'], r'$^{nat}$Ti(d,x)$^{44}$Sc - Independent', save_fig=True)
+# plot_xs('44SCm', 'isomeric_state', 21, 44, ['Ti06', 'Ti08', 'Ti09', 'Ti10'], r'$^{nat}$Ti(d,x)$^{44m}$Sc - Cumulative', save_fig=True)
 # plot_xs('46SC', 'ground_state', 21, 46, ['Ti01', 'Ti02', 'Ti03', 'Ti04', 'Ti05', 'Ti06', 'Ti08', 'Ti09', 'Ti10', 'Ti11'], r'$^{nat}$Ti(d,x)$^{46}$Sc - Independent', save_fig=True)
-plot_xs('47SC', 'ground_state', 21, 47, ['Ti01', 'Ti02', 'Ti03', 'Ti06', 'Ti08', 'Ti09', 'Ti10', 'Ti11'], r'$^{nat}$Ti(d,x)$^{47}$Sc - Independent', save_fig=True)
-# plot_xs('48SC', 'ground_state', 21, 48, ['Ti06', 'Ti08', 'Ti09', 'Ti10'], r'$^{nat}$Ti(d,x)$^{48}$Sc - Independent', save_fig=True)
+# plot_xs('47SC', 'ground_state', 21, 47, ['Ti01', 'Ti02', 'Ti03', 'Ti06', 'Ti08', 'Ti09', 'Ti10', 'Ti11'], r'$^{nat}$Ti(d,x)$^{47}$Sc - Independent', save_fig=True)
+# # plot_xs('48SC', 'ground_state', 21, 48, ['Ti06', 'Ti08', 'Ti09', 'Ti10'], r'$^{nat}$Ti(d,x)$^{48}$Sc - Independent', save_fig=True)
 # plot_xs('48V', 'ground_state', 23, 48, ['Ti01', 'Ti02', 'Ti03', 'Ti04', 'Ti05', 'Ti06', 'Ti08', 'Ti09', 'Ti10', 'Ti11'], r'$^{nat}$Ti(d,x)$^{48}$V - Independent', save_fig=True)
 
 
 
 
-
-#_______________________________Fe-foils________________________________________________
+# #_______________________________Fe-foils________________________________________________
 
 # plot_xs('52MN', 'ground_state', 25, 52, ['Fe01', 'Fe02', 'Fe03', 'Fe04', 'Fe05'], r'$^{nat}$Fe(d,x)$^{52}$Mn - Cumulative', save_fig=True)
 # plot_xs('54MN', 'ground_state', 25, 54, ['Fe01', 'Fe02', 'Fe03', 'Fe04', 'Fe05'], r'$^{nat}$Fe(d,x)$^{54}$Mn - Independent', save_fig=True)

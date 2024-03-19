@@ -261,7 +261,7 @@ isotope_list_list_Ni01 = [['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57NI', '57CO
 isotope_chain_parent_list_Ni01 = ['52MN', '54MN', '55CO', '56CO', '57NI', '58CO', '60CO', '61CU', '65NI']
 
 isotope_list_list_Ni02 = [['52MN'], ['55CO'], ['56CO'], ['57NI', '57CO'], ['58CO'], ['61CU'], ['64CU'], ['65NI']]
-isotope_chain_parent_list_Ni02 = ['52MN', '55CO', '56CO', '57NI', '58CO', '60CU', '64CU', '65NI']
+isotope_chain_parent_list_Ni02 = ['52MN', '55CO', '56CO', '57NI', '58CO', '61CU', '64CU', '65NI']
 
 isotope_list_list_Ni03 = [['55CO'], ['56CO'], ['57NI', '57CO'], ['58CO'], ['60CO'], ['61CU'], ['64CU'], ['65NI']]
 isotope_chain_parent_list_Ni03 = ['55CO', '56CO', '57NI', '58CO', '60CO', '61CU', '64CU', '65NI']

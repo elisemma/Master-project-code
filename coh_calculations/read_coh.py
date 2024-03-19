@@ -6,10 +6,10 @@ import matplotlib.pylab as plt
 #            '050-112Sn', '050-113Sn', '050-114Sn', '050-115Sn', '050-116Sn', '050-117Sn', '050-118Sn', '050-119Sn', '050-120Sn' #, 
 #            # etc etc
 #            ]
-products= ['041-90Nb', '041-96Nb']
+products= ['021-048Sc']
 
 # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-target = '96Zr'
+target = '46Ti'
 
 # Run 'cat out_coh_*_MeV.dat > out_coh_merged.dat' in the ./output directory to unify files for parsing
 with open('./'+target+'/output/out_coh_merged.dat','r') as f:
@@ -70,12 +70,13 @@ for isotope in products:
         plt.xlabel('Proton Energy (MeV)')
         plt.ylabel('Cross Section (mb)')
         plt.title(isotope)
-        plt.savefig('./'+target+'/plots/'+isotope+"_coh.png")
+        plt.show()
+        # plt.savefig('./'+target+'/plots/'+isotope+"_coh.png")
         plt.close()
     except ValueError:
         print('ValueError!')
         continue
-    with open('./'+target+'/plots/'+isotope+"_coh.txt",'w') as f:
+    with open('./'+target+'/'+isotope+'G_coh.txt','w') as f:
     # with open('files/'+isotope+"_coh.txt",'w') as f:
         for i in range(len(energies)):
             f.write(str(energies[i])+"\t"+str(cross_sections[isotope][i])+"\n")

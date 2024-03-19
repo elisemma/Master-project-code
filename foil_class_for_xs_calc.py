@@ -166,6 +166,12 @@ class Foil:
         xs_unc = xs * np.sqrt( (self.R_unc/self.R)**2 + (beam_current_in_d_per_s_unc/beam_current_in_d_per_s)**2 + (N_T_unc/N_T)**2 )#[mb]
         self.calc_xs_unc = xs_unc
 
+        # print(self.foil_name, self.reaction_product)
+        # print(f'R unc %: {self.R_unc/self.R*100}')
+        # print(f'bc unc %: {beam_current_in_d_per_s_unc/beam_current_in_d_per_s*100}')
+        # print(f'N_T unc %: {N_T_unc/N_T*100}')
+        # print(f'xs: {xs} +- {xs_unc}\n')
+
 
 
 

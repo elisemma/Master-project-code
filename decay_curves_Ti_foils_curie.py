@@ -264,17 +264,17 @@ isotope_chain_parent_list_Ti04 = ['46SC', '48V']
 isotope_list_list_Ti05 = [['46SC'], ['48V']]
 isotope_chain_parent_list_Ti05 = ['46SC', '48V']
 
-isotope_list_list_Ti06 = [['44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
-isotope_chain_parent_list_Ti06 = ['44SC', '46SC', '47SC', '48SC', '48V']
+isotope_list_list_Ti06 = [['44SCm', '44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
+isotope_chain_parent_list_Ti06 = ['44SCm', '46SC', '47SC', '48SC', '48V']
 
-isotope_list_list_Ti08 = [['44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
-isotope_chain_parent_list_Ti08 = ['44SC', '46SC', '47SC', '48SC', '48V']
+isotope_list_list_Ti08 = [['44SCm', '44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
+isotope_chain_parent_list_Ti08 = ['44SCm', '46SC', '47SC', '48SC', '48V']
 
-isotope_list_list_Ti09 = [['44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
-isotope_chain_parent_list_Ti09 = ['44SC', '46SC', '47SC', '48SC', '48V']
+isotope_list_list_Ti09 = [['44SCm', '44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
+isotope_chain_parent_list_Ti09 = ['44SCm', '46SC', '47SC', '48SC', '48V']
 
-isotope_list_list_Ti10 = [['44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
-isotope_chain_parent_list_Ti10 = ['44SC', '46SC', '47SC', '48SC', '48V']
+isotope_list_list_Ti10 = [['44SCm', '44SC'], ['46SC'], ['47SC'],['48SC'], ['48V']]
+isotope_chain_parent_list_Ti10 = ['44SCm', '46SC', '47SC', '48SC', '48V']
 
 isotope_list_list_Ti11 = [['46SC'], ['47SC'], ['48V']]
 isotope_chain_parent_list_Ti11 = ['46SC', '47SC', '48V']

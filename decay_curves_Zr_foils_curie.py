@@ -284,32 +284,26 @@ def calc_prod_rates_in_foil(isotope_list_list, isotope_chain_parent_list, foil, 
 # isotope_list_list_Zr01 = [['88Y']]
 # isotope_chain_parent_list_Zr01 = ['88Y']
 
-# isotope_list_list_Zr02 = [['88Y']]
-# isotope_chain_parent_list_Zr02 = ['88Y']
-
 # isotope_list_list_Zr03 = [['88Y']]
 # isotope_chain_parent_list_Zr03 = ['88Y']
 
 # isotope_list_list_Zr04 = [['88Y']]
 # isotope_chain_parent_list_Zr04 = ['88Y']
 
-# isotope_list_list_Zr05 = [['88Y']]
-# isotope_chain_parent_list_Zr05 = ['88Y']
+# isotope_list_list_Zr06 = [['88NB', '88ZR', '88Y']]
+# isotope_chain_parent_list_Zr06 = ['88NB']
 
-isotope_list_list_Zr06 = [['88NB', '88ZR', '88Y']]
-isotope_chain_parent_list_Zr06 = ['88NB']
+# isotope_list_list_Zr07 = [['88NB', '88ZR', '88Y']]
+# isotope_chain_parent_list_Zr07 = ['88NB']
 
-isotope_list_list_Zr07 = [['88NB', '88ZR', '88Y']]
-isotope_chain_parent_list_Zr07 = ['88NB']
+# isotope_list_list_Zr08 = [['88ZR', '88Y']]
+# isotope_chain_parent_list_Zr08 = ['88ZR']
 
-isotope_list_list_Zr08 = [['88NB', '88ZR', '88Y']]
-isotope_chain_parent_list_Zr08 = ['88NB']
+# isotope_list_list_Zr09 = [['88ZR', '88Y']]
+# isotope_chain_parent_list_Zr09 = ['88ZR']
 
-isotope_list_list_Zr09 = [['88NB', '88ZR', '88Y']]
-isotope_chain_parent_list_Zr09 = ['88NB']
-
-isotope_list_list_Zr10 = [['88NB', '88ZR', '88Y']]
-isotope_chain_parent_list_Zr10 = ['88NB']
+# isotope_list_list_Zr10 = [['88ZR', '88Y']]
+# isotope_chain_parent_list_Zr10 = ['88ZR']
 
 
 
@@ -347,8 +341,12 @@ isotope_chain_parent_list_Zr10 = ['88NB']
 
 
 
+
 # isotope_list_list_Zr01 = [['90Ym']]
 # isotope_chain_parent_list_Zr01 = ['90Ym']
+
+# # isotope_list_list_Zr02 = [['90Ym']]
+# # isotope_chain_parent_list_Zr02 = ['90Ym']
 
 # isotope_list_list_Zr03 = [['90Ym']]
 # isotope_chain_parent_list_Zr03 = ['90Ym']
@@ -362,9 +360,12 @@ isotope_chain_parent_list_Zr10 = ['88NB']
 # isotope_list_list_Zr08 = [['90Ym']]
 # isotope_chain_parent_list_Zr08 = ['90Ym']
 
+# # isotope_list_list_Zr09 = [['90Ym']]
+# # isotope_chain_parent_list_Zr09 = ['90Ym']
 
 # isotope_list_list_Zr10 = [['90Ym']]
 # isotope_chain_parent_list_Zr10 = ['90Ym']
+
 
 
 
@@ -457,16 +458,56 @@ isotope_chain_parent_list_Zr10 = ['88NB']
 
 
 
-calc_prod_rates_in_foil(isotope_list_list_Zr01, isotope_chain_parent_list_Zr01, 'Zr01', '30MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr02, isotope_chain_parent_list_Zr02, 'Zr02', '30MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr03, isotope_chain_parent_list_Zr03, 'Zr03', '30MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr04, isotope_chain_parent_list_Zr04, 'Zr04', '30MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr05, isotope_chain_parent_list_Zr05, 'Zr05', '30MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr06, isotope_chain_parent_list_Zr06, 'Zr06', '50MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr07, isotope_chain_parent_list_Zr07, 'Zr07', '50MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr08, isotope_chain_parent_list_Zr08, 'Zr08', '50MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr09, isotope_chain_parent_list_Zr09, 'Zr09', '50MeV', write_to_file=True, show_plot=True)
-calc_prod_rates_in_foil(isotope_list_list_Zr10, isotope_chain_parent_list_Zr10, 'Zr10', '50MeV', write_to_file=True, show_plot=True)
+
+
+
+
+
+
+
+
+isotope_list_list_Zr01 = [['88Y'], ['89NB', '89ZR'], ['90Ym'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr01 = ['88Y', '89NB', '90Ym', '90NB', '92NBm', '95ZR', '96NB']
+
+isotope_list_list_Zr02 = [['88Y'], ['89ZR'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr02 = ['88Y', '89ZR', '90NB', '92NBm', '95ZR', '96NB']
+
+isotope_list_list_Zr03 = [['88Y'], ['89ZR'], ['90Ym'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr03 = ['88Y', '89ZR', '90Ym', '90NB', '92NBm', '95ZR', '96NB']
+
+isotope_list_list_Zr04 = [['88Y'], ['89ZR'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr04 = ['88Y', '89ZR', '90NB', '92NBm', '95ZR', '96NB']
+
+isotope_list_list_Zr05 = [['90NB'], ['92NBm']]
+isotope_chain_parent_list_Zr05 = ['90NB', '92NBm']
+
+isotope_list_list_Zr06 = [['86Y'], ['87Ym', '87Y'], ['88NB', '88ZR', '88Y'], ['89NB', '89ZR'], ['90Ym'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr06 = ['86Y', '87Ym', '88NB', '89NB', '90Ym', '90NB', '92NBm', '95ZR', '96NB']
+
+isotope_list_list_Zr07 = [['86Y'], ['87Ym', '87Y'], ['88NB', '88ZR', '88Y'], ['89NB', '89ZR'], ['90Ym'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr07 = ['86Y', '87Ym', '88NB', '89NB', '90Ym', '90NB', '92NBm', '95ZR', '96NB']
+
+isotope_list_list_Zr08 = [['86Y'], ['87Ym', '87Y'], ['88ZR', '88Y'], ['89NB', '89ZR'], ['90Ym'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr08 = ['86Y', '87Ym', '88ZR', '89NB', '90Ym', '90NB', '92NBm', '95ZR', '96NB']
+
+isotope_list_list_Zr09 = [['86Y'], ['87Ym', '87Y'], ['88ZR', '88Y'], ['89NB', '89ZR'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr09 = ['86Y', '87Ym', '88ZR', '89NB', '90NB', '92NBm', '95ZR', '96NB']
+
+isotope_list_list_Zr10 = [['87Ym', '87Y'], ['88ZR', '88Y'], ['89NB', '89ZR'], ['90Ym'], ['90NB'], ['92NBm'], ['95ZR', '95NBm', '95NB'], ['96NB']]
+isotope_chain_parent_list_Zr10 = ['87Ym', '88ZR', '89NB', '90Ym', '90NB', '92NBm', '95ZR', '96NB']
+
+
+
+calc_prod_rates_in_foil(isotope_list_list_Zr01, isotope_chain_parent_list_Zr01, 'Zr01', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr02, isotope_chain_parent_list_Zr02, 'Zr02', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr03, isotope_chain_parent_list_Zr03, 'Zr03', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr04, isotope_chain_parent_list_Zr04, 'Zr04', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr05, isotope_chain_parent_list_Zr05, 'Zr05', '30MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr06, isotope_chain_parent_list_Zr06, 'Zr06', '50MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr07, isotope_chain_parent_list_Zr07, 'Zr07', '50MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr08, isotope_chain_parent_list_Zr08, 'Zr08', '50MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr09, isotope_chain_parent_list_Zr09, 'Zr09', '50MeV', write_to_file=True, show_plot=False)
+calc_prod_rates_in_foil(isotope_list_list_Zr10, isotope_chain_parent_list_Zr10, 'Zr10', '50MeV', write_to_file=True, show_plot=False)
 
 
 

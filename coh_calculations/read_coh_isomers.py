@@ -8,9 +8,26 @@ import matplotlib.pylab as plt
 #            # etc etc
 #            ]
 
-products = ['039-086Y', '039-088Y']
+# products = ['039-086Y', '039-087Y', '040-087Zr', '039-088Y', '041-088Nb', '040-088Zr', '041-089Nb', '040-089Zr', '039-090Y', '041-090Nb', '041-091Nb', '041-092Nb', '041-095Nb', '040-095Zr', '041-096Nb']
+# products = ['039-086Y', '039-087Y', '040-087Zr', '039-088Y', '040-088Zr', '041-089Nb', '040-089Zr', '039-090Y', '041-090Nb', '041-091Nb', '041-092Nb', '041-095Nb', '040-095Zr', '041-096Nb'] #94Zr
+# products = ['039-086Y', '039-087Y', '039-090Y', '041-091Nb', '041-092Nb', '041-095Nb', '040-095Zr', '041-096Nb'] #96Zr
 # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-target = '96Zr'
+# target = '90Zr'
+
+
+# products = ['025-052Mn', '025-054Mn', '027-055Co', '027-056Co', '028-057Ni', '027-057Co', '027-058Co', '027-060Co', '029-061Cu', '029-064Cu', '028-065Ni'] 
+# products = ['025-054Mn', '027-056Co', '027-057Co', '027-058Co', '027-060Co', '029-061Cu', '029-064Cu', '028-065Ni'] 
+# target = '64Ni'
+
+
+# products = ['021-044Sc', '021-046Sc', '021-047Sc', '023-048V', '021-48Sc'] 
+# target = '50Ti'
+
+
+products = ['023-048V', '025-052Mn', '025-054Mn', '027-055Co', '027-056Co', '027-057Co', '027-058Co'] 
+target = '54Fe'
+
+
 
 # Run 'cat out_coh_*_MeV.dat > out_coh_merged.dat' in the ./output directory to unify files for parsing
 with open('./'+target+'/output/out_coh_merged.dat','r') as f:
