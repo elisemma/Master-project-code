@@ -1,0 +1,51 @@
+1.0                ;INCIDENT ENERGY
+60.   28.         ;TARGET
+ 2.     1.         ;PROJECTILE
+6                  ;NUMBER OF NEUTRONS  TO BE EMITTED
+3                  ;NUMBER OF PROTONS   TO BE EMITTED
+3                  ;NUMBER OF ALPHAS    TO BE EMITTED
+2                  ;NUMBER OF DEUTERONS TO BE EMITTED
+2                  ;NUMBER OF TRITONS   TO BE EMITTED
+2                  ;NUMBER OF He-3      TO BE EMITTED
+0  0.  0.          ;RESERVED
+*********************************************************************************
+*  Optional input starts here
+*  Set formatting - A6,G10.5,4I5
+*  Title just shows up in the output file
+@ TITLE: Deuterons on 60Ni
+IOUT     3.                         !Used for level density plots
+NEX     80.                         !Number of points on outgoing energy grid
+ENDF     0.                         !Turns off endf formatting (faster)
+LEVDEN   0.                         ! 0= Empire-specific level densities
+RECOIL   0.                         !Turns off recoil calcs (faster)
+FITLEV   0.                         ! Set to 1 to match level densities
+FISBAR   1.
+*
+* DEFNUC  0                       ! http://dx.doi.org/10.1016/j.adt.2015.10.002
+*
+*
+GO                                  !Starts the run. Additional energies below
+* 2
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+25
+27
+29
+32
+35
+38
+41
+44
+48
+52
+56
+-1
