@@ -1,0 +1,18 @@
+                                        
+ ANG_MU - Add mu-bar to a C4 file       
+ ================================       
+                                        
+                                        
+ Source C4 filename                   : C4.DAT                                  
+ Output C4 filename                   : C4.TMP                                  
+ WARNING - Large error fitting ang.dist. for  E 1.18E+1MeV W.Fitz,ET.AL. (7
+           first 2 coeff.-9.525E-01-2.670E+00 er 1.662E-01
+ WARNING -   1 out of    1 distrib. not fitted for E 1.20E+1MeV H.R.Burgi,ET.AL.
+ WARNING -   1 out of    1 distrib. not fitted for E 1.20E+1MeV H.R.Burgi,ET.AL.
+ WARNING -   1 out of    1 distrib. not fitted for E 1.20E+1MeV H.R.Burgi,ET.AL.
+ WARNING - Large error fitting ang.dist. for  E 1.18E+1MeV G.Igo,ET.AL. (61
+           first 2 coeff.-1.383E-01-3.067E-01 er 7.000E-02
+ WARNING - Large error fitting ang.dist. for  E 1.28E+1MeV A.Strzalkowski (
+           first 2 coeff.-3.632E-01-1.008E+00 er 8.191E-02
+ WARNING -   1 out of    1 distrib. not fitted for E 1.28E+1MeV A.Strzalkowski (
+ WARNING -   1 out of    1 distrib. not fitted for E 1.28E+1MeV A.Strzalkowski (

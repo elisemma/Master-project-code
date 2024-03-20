@@ -1,0 +1,421 @@
+  WARNING!!!! HRTW has been turned off 
+  WARNING!!!! (It is not allowed for charged
+  WARNING!!!! particle induced reactions)
+  WARNING: NDEX in dimension.h is  101  recommended value is  160
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of   1.000000  by 0.136602 to   0.863398 MeV
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.   7 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  10 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  11 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  13 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  14 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  16 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 40Sc  Z= 21
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 40Sc  Z= 21
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 40Sc  Z= 21
+  WARNING: excited state No.   8 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 40Sc  Z= 21
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 36K   Z= 19
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 36K   Z= 19
+  WARNING: excited state No.  10 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 36K   Z= 19
+  WARNING: excited state No.  11 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 34Ar  Z= 18
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 34Ar  Z= 18
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 34Ar  Z= 18
+  WARNING: excited state No.   8 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 34Ar  Z= 18
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING: Element = 38P   Z= 15
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING: Element = 31Si  Z= 14
+  WARNING: Excited state  38 is above neutron binding energy  6.587 MeV
+  WARNING: Total # of levels set to  37
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.   7 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.  10 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   4 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   7 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   8 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  10 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  11 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  12 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  13 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  14 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  15 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  16 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  17 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING: Element = 23Ne  Z= 10
+  WARNING: Excited state  22 is above neutron binding energy  5.201 MeV
+  WARNING: Total # of levels set to  21
+  WARNING: Element = 21Ne  Z= 10
+  WARNING: Excited state  34 is above neutron binding energy  6.761 MeV
+  WARNING: Total # of levels set to  33
+  WARNING: Element = 24F   Z=  9
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING:
+  WARNING: Element = 22F   Z=  9
+  WARNING: excited state No.   2 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING: Element = 19O   Z=  8
+  WARNING: Excited state  10 is above neutron binding energy  3.956 MeV
+  WARNING: Total # of levels set to   9
+  WARNING: Element = 18O   Z=  8
+  WARNING: Excited state  22 is above neutron binding energy  8.045 MeV
+  WARNING: Total # of levels set to  21
+  WARNING: Element = 17O   Z=  8
+  WARNING: Excited state   5 is above neutron binding energy  4.143 MeV
+  WARNING: Total # of levels set to   4
+  WARNING:
+  WARNING: Element = 16O   Z=  8
+  WARNING: first excited state  has energy of  6.049 MeV
+  WARNING:
+  WARNING: Element = 15O   Z=  8
+  WARNING: first excited state  has energy of  5.183 MeV
+  WARNING: Element = 25O   Z=  8
+  WARNING: Excited state   1 is above neutron binding energy -0.776 MeV
+  WARNING: Total # of levels set to   0
+  WARNING: Element = 22N   Z=  7
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING: Element = 20N   Z=  7
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING: Element = 17N   Z=  7
+  WARNING: Excited state  18 is above neutron binding energy  5.885 MeV
+  WARNING: Total # of levels set to  17
+  WARNING: Element = 16N   Z=  7
+  WARNING: Excited state   5 is above neutron binding energy  2.489 MeV
+  WARNING: Total # of levels set to   4
+  WARNING:
+  WARNING: Element = 15N   Z=  7
+  WARNING: first excited state  has energy of  5.270 MeV
+  WARNING: Element = 15N   Z=  7
+  WARNING: Excited state  23 is above neutron binding energy 10.833 MeV
+  WARNING: Total # of levels set to  22
+  WARNING: Element = 14N   Z=  7
+  WARNING: Excited state  29 is above neutron binding energy 10.553 MeV
+  WARNING: Total # of levels set to  28
+  WARNING: Element = 15C   Z=  6
+  WARNING: Excited state   3 is above neutron binding energy  1.218 MeV
+  WARNING: Total # of levels set to   2
+  WARNING:
+  WARNING: Element = 14C   Z=  6
+  WARNING: first excited state  has energy of  6.094 MeV
+  WARNING: Element = 14C   Z=  6
+  WARNING: Excited state   8 is above neutron binding energy  8.176 MeV
+  WARNING: Total # of levels set to   7
+  WARNING: Element = 13C   Z=  6
+  WARNING: Excited state   5 is above neutron binding energy  4.946 MeV
+  WARNING: Total # of levels set to   4
+  WARNING:
+  WARNING: Element = 12C   Z=  6
+  WARNING: first excited state  has energy of  4.439 MeV
+  WARNING: Element = 40P   Z= 15
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING: Element = 36Al  Z= 13
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING: Element = 28F   Z=  9
+  WARNING: Excited state   1 is above neutron binding energy -0.220 MeV
+  WARNING: Total # of levels set to   0
+  WARNING: Element = 24N   Z=  7
+  WARNING: Excited state   1 is above neutron binding energy -0.545 MeV
+  WARNING: Total # of levels set to   0
+  WARNING: Element = 21C   Z=  6
+  WARNING: Excited state   1 is above neutron binding energy -0.014 MeV
+  WARNING: Total # of levels set to   0
+  WARNING: Element = 18B   Z=  5
+  WARNING: Excited state   1 is above neutron binding energy -0.005 MeV
+  WARNING: Total # of levels set to   0
+  WARNING: Element = 16B   Z=  5
+  WARNING: Excited state   1 is above neutron binding energy -0.083 MeV
+  WARNING: Total # of levels set to   0
+  WARNING:
+  WARNING: Element = 13B   Z=  5
+  WARNING: excited state No.   2 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 13B   Z=  5
+  WARNING: excited state No.   3 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 13B   Z=  5
+  WARNING: excited state No.   4 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 13B   Z=  5
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 13B   Z=  5
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 13B   Z=  5
+  WARNING: excited state No.   7 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING: Element = 13B   Z=  5
+  WARNING: Excited state   8 is above neutron binding energy  4.879 MeV
+  WARNING: Total # of levels set to   7
+  WARNING: Element = 12B   Z=  5
+  WARNING: Excited state   6 is above neutron binding energy  3.370 MeV
+  WARNING: Total # of levels set to   5
+  WARNING: Element = 11B   Z=  5
+  WARNING: Excited state  21 is above neutron binding energy 11.454 MeV
+  WARNING: Total # of levels set to  20
+  WARNING: Element = 11C   Z=  6
+  WARNING: Excited state  27 is above neutron binding energy 13.120 MeV
+  WARNING: Total # of levels set to  26
+  WARNING: Element = 15Be  Z=  4
+  WARNING: Excited state   1 is above neutron binding energy -1.735 MeV
+  WARNING: Total # of levels set to   0
+  WARNING: Element = 13Be  Z=  4
+  WARNING: Excited state   1 is above neutron binding energy -0.510 MeV
+  WARNING: Total # of levels set to   0
+  WARNING: Element = 11Be  Z=  4
+  WARNING: Excited state   3 is above neutron binding energy  0.502 MeV
+  WARNING: Total # of levels set to   2
+  WARNING: Element = 10Be  Z=  4
+  WARNING: Excited state   7 is above neutron binding energy  6.812 MeV
+  WARNING: Total # of levels set to   6
+  WARNING: Element =  9Be  Z=  4
+  WARNING: Excited state   2 is above neutron binding energy  1.665 MeV
+  WARNING: Total # of levels set to   1
+WARNING: Incident energy (CMS)   0.96 below Bn   2.225; d -2 breakup into n  suppressed
+WARNING: Incident energy (CMS)   0.96 below Bn   2.225; d -2 breakup into p  suppressed
+    WARNING: Transfer reactions exhausted reaction cross section!!
+  WARNING: Branching ratios for level           21  in           50 -V  are missing
+  WARNING: Branching ratios for level           22  in           50 -V  are missing
+  WARNING: Branching ratios for level           26  in           50 -V  are missing
+  WARNING: Branching ratios for level           27  in           50 -V  are missing
+  WARNING: Branching ratios for level           28  in           50 -V  are missing
+  WARNING: Branching ratios for level           29  in           50 -V  are missing
+  WARNING: Branching ratios for level           30  in           50 -V  are missing
+  WARNING: Branching ratios for level           31  in           50 -V  are missing
+  WARNING: Branching ratios for level           33  in           50 -V  are missing
+  WARNING: Branching ratios for level           34  in           50 -V  are missing
+  WARNING: Branching ratios for level           35  in           50 -V  are missing
+  WARNING: Branching ratios for level           37  in           50 -V  are missing
+  WARNING: Branching ratios for level           39  in           50 -V  are missing
+  WARNING: Branching ratios for level           40  in           50 -V  are missing
+  WARNING: Conversion coeff for level           21  in           50 -V  are missing
+  WARNING: Conversion coeff for level           22  in           50 -V  are missing
+  WARNING: Conversion coeff for level           26  in           50 -V  are missing
+  WARNING: Conversion coeff for level           27  in           50 -V  are missing
+  WARNING: Conversion coeff for level           28  in           50 -V  are missing
+  WARNING: Conversion coeff for level           29  in           50 -V  are missing
+  WARNING: Conversion coeff for level           30  in           50 -V  are missing
+  WARNING: Conversion coeff for level           31  in           50 -V  are missing
+  WARNING: Conversion coeff for level           32  in           50 -V  are missing
+  WARNING: Conversion coeff for level           33  in           50 -V  are missing
+  WARNING: Conversion coeff for level           34  in           50 -V  are missing
+  WARNING: Conversion coeff for level           35  in           50 -V  are missing
+  WARNING: Conversion coeff for level           37  in           50 -V  are missing
+  WARNING: Conversion coeff for level           39  in           50 -V  are missing
+  WARNING: Conversion coeff for level           40  in           50 -V  are missing
+  WARNING: Branching ratios for level            8  in           49 -V  are missing
+  WARNING: Branching ratios for level           11  in           49 -V  are missing
+  WARNING: Branching ratios for level           18  in           49 -V  are missing
+  WARNING: Branching ratios for level           22  in           49 -V  are missing
+  WARNING: Conversion coeff for level            8  in           49 -V  are missing
+  WARNING: Conversion coeff for level           11  in           49 -V  are missing
+  WARNING: Conversion coeff for level           18  in           49 -V  are missing
+  WARNING: Conversion coeff for level           22  in           49 -V  are missing
+  WARNING: Branching ratios for level            5  in           49 -Ti are missing
+  WARNING: Branching ratios for level           15  in           49 -Ti are missing
+  WARNING: Branching ratios for level           25  in           49 -Ti are missing
+  WARNING: Branching ratios for level           27  in           49 -Ti are missing
+  WARNING: Branching ratios for level           28  in           49 -Ti are missing
+  WARNING: Branching ratios for level           30  in           49 -Ti are missing
+  WARNING: Branching ratios for level           32  in           49 -Ti are missing
+  WARNING: Branching ratios for level           33  in           49 -Ti are missing
+  WARNING: Branching ratios for level           35  in           49 -Ti are missing
+  WARNING: Branching ratios for level           36  in           49 -Ti are missing
+  WARNING: Branching ratios for level           38  in           49 -Ti are missing
+  WARNING: Branching ratios for level           40  in           49 -Ti are missing
+  WARNING: Conversion coeff for level            5  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           15  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           25  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           27  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           28  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           30  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           32  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           33  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           35  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           36  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           38  in           49 -Ti are missing
+  WARNING: Conversion coeff for level           40  in           49 -Ti are missing
+  WARNING: Branching ratios for level           12  in           46 -Sc are missing
+  WARNING: Branching ratios for level           14  in           46 -Sc are missing
+  WARNING: Branching ratios for level           16  in           46 -Sc are missing
+  WARNING: Branching ratios for level           18  in           46 -Sc are missing
+  WARNING: Branching ratios for level           20  in           46 -Sc are missing
+  WARNING: Branching ratios for level           21  in           46 -Sc are missing
+  WARNING: Branching ratios for level           25  in           46 -Sc are missing
+  WARNING: Branching ratios for level           26  in           46 -Sc are missing
+  WARNING: Branching ratios for level           29  in           46 -Sc are missing
+  WARNING: Branching ratios for level           32  in           46 -Sc are missing
+  WARNING: Branching ratios for level           35  in           46 -Sc are missing
+  WARNING: Branching ratios for level           36  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           12  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           14  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           16  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           18  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           20  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           21  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           25  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           26  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           29  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           32  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           35  in           46 -Sc are missing
+  WARNING: Conversion coeff for level           36  in           46 -Sc are missing
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of   9.000000  by 0.181059 to   8.818941 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  13.000000  by 0.266548 to  12.733452 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  17.000000  by 0.354577 to  16.645423 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  19.000000  by 0.312385 to  18.687615 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  25.000000  by 0.366266 to  24.633734 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  27.000000  by 0.355987 to  26.644013 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  32.000000  by 0.428835 to  31.571165 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  35.000000  by 0.554646 to  34.445354 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  38.000000  by 0.606082 to  37.393918 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  38.000000  by 0.524915 to  37.475085 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  41.000000  by 0.583142 to  40.416858 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  41.000000  by 0.516220 to  40.483780 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  44.000000  by 0.485828 to  43.514172 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  52.000000  by 0.621437 to  51.378563 MeV
+ WARNING: Large continuum bin correction
+ WARNING: You may reduce your incident energy of  56.000000  by 0.764811 to  55.235189 MeV
