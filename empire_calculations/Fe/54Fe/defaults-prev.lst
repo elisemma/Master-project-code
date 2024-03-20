@@ -1,0 +1,1230 @@
+
+                      Start time: 17:08.37 (22-02-2024)
+
+                         __________________________
+                        |                          |
+                        |    E M P I R E  - 3.2.3  |
+                        |                          |
+                        |        Malta             |
+                        |                          |
+                        | SVN empire    rev. 5094  |
+                        |                          |
+                        |__________________________|
+
+  TITLE: Deuterons on 54Fe
+  
+ Following options/parameters have been used
+ -------------------------------------------
+  
+ Main calculations output control set to  3
+ Number of energy steps in the integration set to   80
+ ENDF formatting disabled
+ EMPIRE-specific level densities (J>>K aprox.) selected 
+ Recoils are not calculated
+ RIPL empirical fission barriers used for all nuclei
+ Collective levels up to   4.2 MeV used in DWBA
+ Maximum spin of retrieved DWBA collective levels J < 5
+ CN decay and Direct cross sections added incoherently
+ CN angular distribution assumed isotropic
+ Traditional Hauser-Feschbach Tlj_{CC}(E)=Tlj_{GS}(E-Egs)
+  
+ Using RIPL split files
+====== GDR options =====
+ E1 strength function set to RIPL MLO1
+ GDR parameters from RIPL/Exp.data+Plujko systematics
+ Gamma-transition multipolarity set to    2
+  
+=============================================================
+ Reaction p +  54Fe at incident energy  1.000D+00 MeV (LAB)
+=============================================================
+
+  RIPL GDR parameters used
+  -----------------------------------------
+  TARGET GDR DATA:
+  -----------------------------------------
+  GDR parameters from RIPL database
+  -----------------------------------------
+  Gamma transitions parameters of  26-Fe- 54
+
+ Multip->  E1            E2            M1 
+  Er1     18.85        16.67        10.85
+  Wr1      7.09         5.46         4.00
+  Sr1     87.12         1.36         1.00
+
+  TE       1.00         1.00         1.00
+  CE      0.010        0.100        0.100
+
+  (1-TE)*Weiss. + TE*GiR (i=D,Q,M) D=E1; Q=E2; M=M1
+  TE - mixing coeff. of s.p. Weisskopf & GiR, TE=1 pure resonance
+  CE - s.p. Weisskopf scaling coefficient (default: 0.01,0.1,0.1)
+
+  -----------------------------------------
+  -----------------------------------------
+
+
+  
+  WARNING!!!! HRTW has been turned off 
+  WARNING!!!! (It is not allowed for charged
+  WARNING!!!! particle induced reactions)
+  
+ Primary gammas not stored: ENDF formatting is turned off
+ Recoils are not calculated as ENDF formatting is turned off
+  
+            Use of direct and preequilibrium models 
+            --------------------------------------- 
+   Note: PCROSS includes break-up and transfer reactions
+  
+ Exit channel    ECIS    MSD    MSC    HMS   PCROSS
+  
+ neut. disc.       0      0      0      0      1
+ neut. cont.       0      0      0      0      1
+ prot. disc.       0      0      0      0      1
+ prot. cont.       0      0      0      0      1
+ gammas            0      0      0      0      1
+ alpha cont.       0      0      0      0      1
+ deut. cont.       0      0      0      0      1
+ trit. cont.       0      0      0      0      1
+ He-3  cont.       0      0      0      0      1
+ LI    cont.       0      0      0      0      0
+ alpha disc.       0      0      0      0      1
+ deut. disc.       0      0      0      0      1
+ trit. disc.       0      0      0      0      1
+ He-3  disc.       0      0      0      0      1
+  
+ Static deformation of the target nucleus set to    0.0000 (RIPL default = FRDM)
+ Nobre param. (PRC76(2007)024605) dyn. deform. is   0.2210
+
+
+    L e v e l  d e n s i t y  p a r a m e t e r s  f i t
+    ------------------------------------------------------
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 11-Na- 24   1.92970   1.93027   0.99971   1.00000   1.92970
+  SHC=  0.546999991      U=   10.0511217    
+  DELTA=   4.89897966      Dobs=   100.000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 12-Mg- 25   2.01260   2.16423   0.92994   1.00000   2.01260
+  SHC=  -8.50000009E-02  U=   7.84205246    
+  DELTA=   2.40000010      Dobs=   480.000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 12-Mg- 26   2.37460   2.40821   0.98604   1.00000   2.37460
+  SHC=  0.671000004      U=   9.01843929    
+  DELTA=   0.00000000      Dobs=   50.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 12-Mg- 27   2.73030   2.52509   1.08127   1.00000   2.73030
+  SHC=  0.666999996      U=   6.68208122    
+  DELTA=   2.30940104      Dobs=   210.000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 13-Al- 28   2.06380   2.06275   1.00051   1.00000   2.06380
+  SHC= -0.771000028      U=   10.7258863    
+  DELTA=   4.53557348      Dobs=   55.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 14-Si- 29   1.99790   1.91238   1.04472   1.00000   1.99790
+  SHC=  -2.46700001      U=   9.53258610    
+  DELTA=   2.22834396      Dobs=   332.000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 14-Si- 30   2.03200   2.30638   0.88104   1.00000   2.03200
+  SHC= -0.930000007      U=   9.00459385    
+  DELTA=   0.00000000      Dobs=   193.000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 14-Si- 31   2.69260   2.49660   1.07851   1.00000   2.69260
+  SHC= -0.386000007      U=   7.00019741    
+  DELTA=   2.15526366      Dobs=   225.000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 15-P - 32   2.43420   2.42963   1.00188   1.00000   2.43420
+  SHC=  -1.51999998      U=   10.6781979    
+  DELTA=   4.24264050      Dobs=   50.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 16-S - 33   2.36630   2.47274   0.95696   1.00000   2.36630
+  SHC=  -1.16799998      U=   9.18973637    
+  DELTA=   2.08893180      Dobs=   190.000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 16-S - 34   2.81600   2.79095   1.00898   1.00000   2.81600
+  SHC= -0.187999994      U=   9.63524437    
+  DELTA=   0.00000000      Dobs=   21.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 16-S - 35   3.18170   3.07417   1.03498   1.00000   3.18170
+  SHC=  0.533999979      U=   7.06903744    
+  DELTA=   2.02837014      Dobs=   110.000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 17-Cl- 36   2.54890   2.64208   0.96473   1.00000   2.54890
+  SHC= -0.483999997      U=   11.0167475    
+  DELTA=   4.00000000      Dobs=   23.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 17-Cl- 38   3.52900   3.40868   1.03530   1.00000   3.52900
+  SHC=   1.91400003      U=   7.95381546    
+  DELTA=   3.89331412      Dobs=   15.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 18-Ar- 41   4.35200   4.34894   1.00070   1.00000   4.35200
+  SHC=   4.09600019      U=   5.62030840    
+  DELTA=   1.87408519      Dobs=   52.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 19-K - 40   3.15370   3.02537   1.04242   1.00000   3.15370
+  SHC=   1.27300000      U=   9.85938644    
+  DELTA=   3.79473329      Dobs=   13.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 19-K - 42   3.51520   3.66006   0.96042   1.00000   3.51520
+  SHC=   3.22399998      U=   9.17693520    
+  DELTA=   3.70328045      Dobs=   10.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 20-Ca- 41   3.50450   3.54748   0.98789   1.00000   3.50450
+  SHC=   1.02699995      U=   8.29132843    
+  DELTA=   1.87408519      Dobs=   45.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 20-Ca- 43   4.35610   4.37548   0.99557   1.00000   4.35610
+  SHC=   3.03500009      U=   7.44469023    
+  DELTA=   1.82998288      Dobs=   20.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 20-Ca- 44   4.59820   4.42247   1.03974   1.00000   4.59820
+  SHC=   3.13400006      U=   8.79800320    
+  DELTA=   0.00000000      Dobs=   1.79999995    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 20-Ca- 45   4.43940   4.57021   0.97138   1.00000   4.43940
+  SHC=   2.93000007      U=   6.90940142    
+  DELTA=   1.78885436      Dobs=   24.1000004    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 21-Sc- 46   4.32350   4.32829   0.99889   1.00000   4.32350
+  SHC=   2.41700006      U=   10.1039381    
+  DELTA=   3.53860688      Dobs=   1.29999995    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 22-Ti- 47   3.86960   4.26313   0.90769   1.00000   3.86960
+  SHC=   1.73199999      U=   8.56476307    
+  DELTA=   1.75037992      Dobs=   25.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 22-Ti- 48   4.32830   4.27959   1.01138   1.00000   4.32830
+  SHC=   1.60399997      U=   9.58671761    
+  DELTA=   0.00000000      Dobs=   1.75000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 22-Ti- 49   4.23430   4.25442   0.99527   1.00000   4.23430
+  SHC=   1.12199998      U=   7.90798759    
+  DELTA=   1.71428573      Dobs=   20.7999992    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 22-Ti- 50   3.89910   4.06396   0.95943   1.00000   3.89910
+  SHC=  0.358000010      U=   9.13953781    
+  DELTA=   0.00000000      Dobs=   4.00000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 23-V - 51   3.95230   3.93298   1.00491   1.00000   3.95230
+  SHC=  0.211999997      U=   11.0284281    
+  DELTA=   1.68033612      Dobs=   2.00000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 23-V - 52   3.98810   4.00824   0.99497   1.00000   3.98810
+  SHC=  0.182999998      U=   8.94205666    
+  DELTA=   3.32820129      Dobs=   4.00000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 24-Cr- 51   4.16500   3.86644   1.07722   1.00000   4.16500
+  SHC= -0.118000001      U=   9.28931332    
+  DELTA=   1.68033612      Dobs=   12.5000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 24-Cr- 53   3.97740   3.95106   1.00667   1.00000   3.97740
+  SHC= -0.298999995      U=   7.97065783    
+  DELTA=   1.64832675      Dobs=   32.0000000    
+
+ ========================
+  
+  
+   Nucleus    a_exp     a_sys.   int. nor.  ext. nor. a_final
+ 26-Fe- 55   3.76750   3.61608   1.04187   1.00000   3.76750
+  SHC=  -2.03999996      U=   9.62642574    
+  DELTA=   1.61807966      Dobs=   20.5000000    
+
+ ========================
+
+   Nucleus                   final  norm.
+
+ 27-Co- 56                       1.04380
+ 27-Co- 55                       1.04380
+ 27-Co- 54                       1.04380
+ 27-Co- 53                       1.04380
+ 27-Co- 52                       1.04380
+ 27-Co- 51                       1.04380
+ 27-Co- 50                       1.04380
+ 26-Fe- 55                       1.04187
+ 26-Fe- 54                       1.04700
+ 26-Fe- 53                       1.04700
+ 26-Fe- 52                       1.04700
+ 26-Fe- 51                       1.04700
+ 26-Fe- 50                       1.04700
+ 26-Fe- 49                       1.04700
+ 25-Mn- 54                       1.06520
+ 25-Mn- 53                       1.06520
+ 25-Mn- 52                       1.06520
+ 25-Mn- 51                       1.06520
+ 25-Mn- 50                       1.06520
+ 25-Mn- 49                       1.06520
+ 25-Mn- 48                       1.06520
+ 24-Cr- 53                       1.00667
+ 24-Cr- 52                       1.02310
+ 24-Cr- 51                       1.07722
+ 24-Cr- 50                       1.02310
+ 24-Cr- 49                       1.02310
+ 24-Cr- 48                       1.02310
+ 24-Cr- 47                       1.02310
+ 25-Mn- 47                       1.06520
+ 25-Mn- 46                       1.06520
+ 24-Cr- 46                       1.02310
+ 24-Cr- 45                       1.02310
+ 23-V - 50                       1.01490
+ 23-V - 49                       1.01490
+ 23-V - 48                       1.01490
+ 23-V - 47                       1.01490
+ 23-V - 46                       1.01490
+ 23-V - 45                       1.01490
+ 23-V - 44                       1.01490
+ 22-Ti- 49                       0.99527
+ 22-Ti- 48                       1.01138
+ 22-Ti- 47                       0.90769
+ 22-Ti- 46                       1.05530
+ 22-Ti- 45                       1.05530
+ 22-Ti- 44                       1.05530
+ 22-Ti- 43                       1.05530
+ 23-V - 43                       1.01490
+ 23-V - 42                       1.01490
+ 22-Ti- 42                       1.05530
+ 22-Ti- 41                       1.05530
+ 21-Sc- 46                       0.99889
+ 21-Sc- 45                       1.05680
+ 21-Sc- 44                       1.05680
+ 21-Sc- 43                       1.05680
+ 21-Sc- 42                       1.05680
+ 21-Sc- 41                       1.05680
+ 21-Sc- 40                       1.05680
+ 20-Ca- 45                       0.97138
+ 20-Ca- 44                       1.03974
+ 20-Ca- 43                       0.99557
+ 20-Ca- 42                       1.05930
+ 20-Ca- 41                       0.98789
+ 20-Ca- 40                       1.05930
+ 20-Ca- 39                       1.05930
+ 21-Sc- 39                       1.05680
+ 21-Sc- 38                       1.05680
+ 20-Ca- 38                       1.05930
+ 20-Ca- 37                       1.05930
+ 19-K - 42                       0.96042
+ 19-K - 41                       0.91610
+ 19-K - 40                       1.04242
+ 19-K - 39                       0.91610
+ 19-K - 38                       0.91610
+ 19-K - 37                       0.91610
+ 19-K - 36                       0.91610
+ 18-Ar- 41                       1.00070
+ 18-Ar- 40                       0.98680
+ 18-Ar- 39                       0.98680
+ 18-Ar- 38                       0.98680
+ 18-Ar- 37                       0.98680
+ 18-Ar- 36                       0.98680
+ 18-Ar- 35                       0.98680
+ 26-Fe- 48                       1.04700
+ 23-V - 51                       1.00491
+ 24-Cr- 44                       1.02310
+ 21-Sc- 47                       1.05680
+ 22-Ti- 40                       1.05530
+ 19-K - 43                       0.91610
+ 20-Ca- 36                       1.05930
+ 19-K - 35                       0.91610
+ 18-Ar- 34                       0.98680
+ 17-Cl- 39                       1.01880
+ 17-Cl- 38                       1.03530
+ 17-Cl- 37                       1.01880
+ 17-Cl- 36                       0.96473
+ 17-Cl- 35                       1.01880
+ 17-Cl- 34                       1.01880
+ 17-Cl- 33                       1.01880
+ 19-K - 34                       0.91610
+ 18-Ar- 33                       0.98680
+ 17-Cl- 32                       1.01880
+ 16-S - 37                       1.11480
+ 16-S - 36                       1.11480
+ 16-S - 35                       1.03498
+ 16-S - 34                       1.00898
+ 16-S - 33                       0.95696
+ 16-S - 32                       1.11480
+ 16-S - 31                       1.11480
+ 26-Fe- 47                       1.04700
+ 24-Cr- 43                       1.02310
+ 22-Ti- 39                       1.05530
+ 20-Ca- 35                       1.05930
+ 25-Mn- 45                       1.06520
+ 23-V - 41                       1.01490
+ 21-Sc- 37                       1.05680
+ 19-K - 33                       0.91610
+ 18-Ar- 32                       0.98680
+ 17-Cl- 31                       1.01880
+ 16-S - 30                       1.11480
+ 18-Ar- 31                       0.98680
+ 17-Cl- 30                       1.01880
+ 16-S - 29                       1.11480
+ 15-P - 34                       1.15420
+ 15-P - 33                       1.15420
+ 15-P - 32                       1.00188
+ 15-P - 31                       1.15420
+ 15-P - 30                       1.15420
+ 15-P - 29                       1.15420
+ 15-P - 28                       1.15420
+ 25-Mn- 44                       1.06520
+ 23-V - 40                       1.01490
+ 21-Sc- 36                       1.05680
+ 19-K - 32                       0.91610
+ 24-Cr- 42                       1.02310
+ 22-Ti- 38                       1.05530
+ 20-Ca- 34                       1.05930
+ 18-Ar- 30                       0.98680
+ 17-Cl- 29                       1.01880
+ 16-S - 28                       1.11480
+ 15-P - 27                       1.15420
+ 17-Cl- 28                       1.01880
+ 16-S - 27                       1.11480
+ 15-P - 26                       1.15420
+ 14-Si- 31                       1.07851
+ 14-Si- 30                       0.88104
+ 14-Si- 29                       1.04472
+ 14-Si- 28                       1.12050
+ 14-Si- 27                       1.12050
+ 14-Si- 26                       1.12050
+ 14-Si- 25                       1.12050
+ 22-Ti- 50                       0.95943
+ 20-Ca- 46                       1.05930
+ 18-Ar- 42                       0.98680
+ 16-S - 38                       1.11480
+ 21-Sc- 48                       1.05680
+ 19-K - 44                       0.91610
+ 17-Cl- 40                       1.01880
+ 15-P - 36                       1.15420
+ 15-P - 35                       1.15420
+ 14-Si- 34                       1.12050
+ 14-Si- 33                       1.12050
+ 14-Si- 32                       1.12050
+ 13-Al- 31                       1.04970
+ 13-Al- 30                       1.04970
+ 13-Al- 29                       1.04970
+ 13-Al- 28                       1.00051
+ 13-Al- 27                       1.04970
+ 13-Al- 26                       1.04970
+ 13-Al- 25                       1.04970
+ 13-Al- 24                       1.04970
+ 15-P - 25                       1.15420
+ 14-Si- 24                       1.12050
+ 13-Al- 23                       1.04970
+ 12-Mg- 28                       1.16690
+ 12-Mg- 27                       1.08127
+ 12-Mg- 26                       0.98604
+ 12-Mg- 25                       0.92994
+ 12-Mg- 24                       1.16690
+ 12-Mg- 23                       1.16690
+ 12-Mg- 22                       1.16690
+ 20-Ca- 47                       1.05930
+ 18-Ar- 43                       0.98680
+ 16-S - 39                       1.11480
+ 14-Si- 35                       1.12050
+ 19-K - 45                       0.91610
+ 17-Cl- 41                       1.01880
+ 15-P - 37                       1.15420
+ 13-Al- 33                       1.04970
+ 13-Al- 32                       1.04970
+ 12-Mg- 31                       1.16690
+ 12-Mg- 30                       1.16690
+ 12-Mg- 29                       1.16690
+ 11-Na- 28                       1.02700
+ 11-Na- 27                       1.02700
+ 11-Na- 26                       1.02700
+ 11-Na- 25                       1.02700
+ 11-Na- 24                       0.99971
+ 11-Na- 23                       1.02700
+ 11-Na- 22                       1.02700
+ 11-Na- 21                       1.02700
+ 13-Al- 22                       1.04970
+ 12-Mg- 21                       1.16690
+ 11-Na- 20                       1.02700
+ 10-Ne- 25                       1.00000
+ 10-Ne- 24                       1.00000
+ 10-Ne- 23                       1.00000
+ 10-Ne- 22                       1.00000
+ 10-Ne- 21                       1.00000
+ 10-Ne- 20                       1.00000
+ 10-Ne- 19                       1.00000
+ 27-Co- 49                       1.04380
+ 23-V - 52                       0.99497
+ 26-Fe- 46                       1.04700
+ 25-Mn- 43                       1.06520
+ 24-Cr- 41                       1.02310
+ 23-V - 39                       1.01490
+ 22-Ti- 37                       1.05530
+ 21-Sc- 35                       1.05680
+ 20-Ca- 33                       1.05930
+ 19-K - 31                       0.91610
+ 18-Ar- 29                       0.98680
+ 16-S - 26                       1.11480
+ 17-Cl- 27                       1.01880
+ 15-P - 24                       1.15420
+ 16-S - 25                       1.11480
+ 14-Si- 23                       1.12050
+ 21-Sc- 49                       1.05680
+ 13-Al- 21                       1.04970
+ 14-Si- 22                       1.12050
+ 12-Mg- 20                       1.16690
+ 11-Na- 19                       1.02700
+ 10-Ne- 18                       1.00000
+ 19-K - 46                       0.91610
+ 18-Ar- 44                       0.98680
+ 17-Cl- 42                       1.01880
+ 16-S - 40                       1.11480
+ 15-P - 38                       1.15420
+ 14-Si- 36                       1.12050
+ 13-Al- 34                       1.04970
+ 12-Mg- 32                       1.16690
+ 11-Na- 29                       1.02700
+ 11-Na- 30                       1.02700
+ 10-Ne- 27                       1.00000
+ 10-Ne- 28                       1.00000
+ 10-Ne- 26                       1.00000
+  9-F - 24                       1.00000
+  9-F - 25                       1.00000
+  9-F - 23                       1.00000
+  9-F - 22                       1.00000
+  9-F - 21                       1.00000
+  9-F - 20                       1.00000
+  9-F - 19                       1.00000
+  9-F - 18                       1.00000
+  9-F - 17                       1.00000
+ 11-Na- 18                       1.02700
+ 12-Mg- 19                       1.16690
+ 10-Ne- 17                       1.00000
+  9-F - 16                       1.00000
+  8-O - 21                       1.00000
+  8-O - 22                       1.00000
+  8-O - 20                       1.00000
+  8-O - 19                       1.00000
+  8-O - 18                       1.00000
+  8-O - 17                       1.00000
+  8-O - 16                       1.00000
+  8-O - 15                       1.00000
+
+  *****************************************************
+  *  Table of Reaction Q-values (Mass inc - Mass out) *
+  *     for the first emitted particle from the CN    *
+  *                                                   *
+  *                    Q(at.mass)  Q(nucl.mass)       *
+  *                      [MeV]        [MeV]           *
+  *                   --------------------------      *
+  *          neutron :   2.8399       2.8404          *
+  *          proton  :   7.0738       7.0738          *
+  *          alpha   :   5.1645       5.1639          *
+  *          deuteron:   0.0000       0.0000          *
+  *          triton  :  -7.1211      -7.1211          *
+  *          He-3    :  -3.3589      -3.3595          *
+  *                                                   *
+  *****************************************************
+
+  
+ -----------------
+ Reaction d +  54Fe
+ Projectile energy    20.000 MeV (LAB)
+ Compound nucleus energy    32.203 MeV
+ Projectile separation energy  12.923 MeV
+ Number of requested energy points =  80   NDEX = 101
+  WARNING: NDEX in dimension.h is  101  recommended value is  160
+ Energy step in calculations  407.6 keV
+  
+  Fitting l.d. to discrete levels
+          32  levels at    3.0759099999999999       MeV
+
+ *****   A=          56  Z=          27  Bn=   10.0824299      LDshif=   0.00000000    
+Ucrt =   3.0531     Ecrt=  1.2242     Econd =  0.98003     DEL =   3.2071    
+It #   1     -1.3783     Final shift =  -1.3783    
+
+
+ *****   A=          56  Z=          27  Bn=   10.0824299      LDshif=   0.00000000    
+Ucrt =   3.0531     Ecrt=  1.5643     Econd =  0.98003     DEL =   3.2071    
+It #   2    -0.34004     Final shift =  -1.7183    
+
+
+ *****   A=          56  Z=          27  Bn=   10.0824299      LDshif=   0.00000000    
+Ucrt =   3.0531     Ecrt=  1.5897     Econd =  0.98003     DEL =   3.2071    
+It #   3    -0.25408E-01 Final shift =  -1.7437    
+
+
+ *****   A=          56  Z=          27  Bn=   10.0824299      LDshif=   0.00000000    
+Ucrt =   3.0531     Ecrt=  1.5912     Econd =  0.98003     DEL =   3.2071    
+It #   4    -0.15438E-02 Final shift =  -1.7453    
+
+  WARNING:
+  WARNING: Element = 51Fe  Z= 26
+  WARNING: excited state No.   4 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 51Fe  Z= 26
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 47Cr  Z= 24
+  WARNING: excited state No.   8 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 47Cr  Z= 24
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.5  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.   7 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  10 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  11 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  13 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  14 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 42Ti  Z= 22
+  WARNING: excited state No.  16 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 40Sc  Z= 21
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 40Sc  Z= 21
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 40Sc  Z= 21
+  WARNING: excited state No.   8 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 40Sc  Z= 21
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 36K   Z= 19
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 36K   Z= 19
+  WARNING: excited state No.  10 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 36K   Z= 19
+  WARNING: excited state No.  11 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 34Ar  Z= 18
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 34Ar  Z= 18
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 34Ar  Z= 18
+  WARNING: excited state No.   8 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 34Ar  Z= 18
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING: Element = 31Si  Z= 14
+  WARNING: Excited state  38 is above neutron binding energy  6.587 MeV
+  WARNING: Total # of levels set to  37
+  WARNING: Element = 36Sc  Z= 21
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.   7 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Si  Z= 14
+  WARNING: excited state No.  10 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   4 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   5 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   6 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   7 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   8 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.   9 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  10 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  11 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  12 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  13 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  14 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  15 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  16 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING:
+  WARNING: Element = 26Na  Z= 11
+  WARNING: excited state No.  17 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING: Element = 23Ne  Z= 10
+  WARNING: Excited state  22 is above neutron binding energy  5.201 MeV
+  WARNING: Total # of levels set to  21
+  WARNING: Element = 21Ne  Z= 10
+  WARNING: Excited state  34 is above neutron binding energy  6.761 MeV
+  WARNING: Total # of levels set to  33
+  WARNING: Element = 38P   Z= 15
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING: Element = 24F   Z=  9
+  WARNING: ground-state has no assigned spin/parity 
+  WARNING: assuming a default 
+  WARNING:
+  WARNING: Element = 22F   Z=  9
+  WARNING: excited state No.   2 has neither parity nor spin 
+  WARNING: assuming spin and parity  0.0  1
+  WARNING: Element = 19O   Z=  8
+  WARNING: Excited state  10 is above neutron binding energy  3.956 MeV
+  WARNING: Total # of levels set to   9
+  WARNING: Element = 18O   Z=  8
+  WARNING: Excited state  22 is above neutron binding energy  8.045 MeV
+  WARNING: Total # of levels set to  21
+  WARNING: Element = 17O   Z=  8
+  WARNING: Excited state   5 is above neutron binding energy  4.143 MeV
+  WARNING: Total # of levels set to   4
+  WARNING:
+  WARNING: Element = 16O   Z=  8
+  WARNING: first excited state  has energy of  6.049 MeV
+  WARNING:
+  WARNING: Element = 15O   Z=  8
+  WARNING: first excited state  has energy of  5.183 MeV
+  
+  Fitting l.d. to discrete levels
+          29  levels at    3.9800000000000000       MeV
+
+ *****   A=          55  Z=          27  Bn=   14.0904303      LDshif=   0.00000000    
+Ucrt =   2.8086     Ecrt=  2.1202     Econd =  0.90153     DEL =   1.6181    
+It #   1    -0.92968     Final shift = -0.92968    
+
+
+ *****   A=          55  Z=          27  Bn=   14.0904303      LDshif=   0.00000000    
+Ucrt =   2.8086     Ecrt=  2.1647     Econd =  0.90153     DEL =   1.6181    
+It #   2    -0.44570E-01 Final shift = -0.97425    
+
+
+ *****   A=          55  Z=          27  Bn=   14.0904303      LDshif=   0.00000000    
+Ucrt =   2.8086     Ecrt=  2.1654     Econd =  0.90153     DEL =   1.6181    
+It #   3    -0.67921E-03 Final shift = -0.97493    
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    3.3068000000000000       MeV
+
+ *****   A=          54  Z=          27  Bn=   13.4374304      LDshif=   0.00000000    
+Ucrt =   2.8481     Ecrt= 0.56584     Econd =  0.91422     DEL =   3.2660    
+It #   1    -0.98375     Final shift = -0.98375    
+
+
+ *****   A=          54  Z=          27  Bn=   13.4374304      LDshif=   0.00000000    
+Ucrt =   2.8481     Ecrt= 0.81697     Econd =  0.91422     DEL =   3.2660    
+It #   2    -0.25113     Final shift =  -1.2349    
+
+
+ *****   A=          54  Z=          27  Bn=   13.4374304      LDshif=   0.00000000    
+Ucrt =   2.8481     Ecrt= 0.84998     Econd =  0.91422     DEL =   3.2660    
+It #   3    -0.33011E-01 Final shift =  -1.2679    
+
+
+ *****   A=          54  Z=          27  Bn=   13.4374304      LDshif=   0.00000000    
+Ucrt =   2.8481     Ecrt= 0.85357     Econd =  0.91422     DEL =   3.2660    
+It #   4    -0.35968E-02 Final shift =  -1.2715    
+
+  
+  Fitting l.d. to discrete levels
+          31  levels at    3.4569000000000001       MeV
+
+ *****   A=          55  Z=          26  Bn=   9.29843044      LDshif=   0.00000000    
+Ucrt =   4.1974     Ecrt=  3.3812     Econd =   1.3473     DEL =   1.6181    
+It #   1    -0.80187     Final shift = -0.80187    
+
+
+ *****   A=          55  Z=          26  Bn=   9.29843044      LDshif=   0.00000000    
+Ucrt =   4.1974     Ecrt=  3.3986     Econd =   1.3473     DEL =   1.6181    
+It #   2    -0.17377E-01 Final shift = -0.81925    
+
+
+ *****   A=          55  Z=          26  Bn=   9.29843044      LDshif=   0.00000000    
+Ucrt =   4.1974     Ecrt=  3.3985     Econd =   1.3473     DEL =   1.6181    
+It #   3     0.41300E-04 Final shift = -0.81921    
+
+  
+  Fitting l.d. to discrete levels
+          25  levels at    4.7819000000000003       MeV
+
+ *****   A=          54  Z=          26  Bn=   13.3784304      LDshif=   0.00000000    
+Ucrt =   3.7905     Ecrt=  4.4721     Econd =   1.2167     DEL =   0.0000    
+It #   1    -0.68161     Final shift = -0.68161    
+
+
+ *****   A=          54  Z=          26  Bn=   13.3784304      LDshif=   0.00000000    
+Ucrt =   3.7905     Ecrt=  4.4721     Econd =   1.2167     DEL =   0.0000    
+It #   2     0.27233E-04 Final shift = -0.68159    
+
+  
+  Fitting l.d. to discrete levels
+          24  levels at    3.1758999999999999       MeV
+
+ *****   A=          53  Z=          26  Bn=   10.6834297      LDshif=   0.00000000    
+Ucrt =   3.8667     Ecrt=  2.8436     Econd =   1.2412     DEL =   1.6483    
+It #   1    -0.62516     Final shift = -0.62516    
+
+
+ *****   A=          53  Z=          26  Bn=   10.6834297      LDshif=   0.00000000    
+Ucrt =   3.8667     Ecrt=  2.8627     Econd =   1.2412     DEL =   1.6483    
+It #   2    -0.19115E-01 Final shift = -0.64427    
+
+
+ *****   A=          53  Z=          26  Bn=   10.6834297      LDshif=   0.00000000    
+Ucrt =   3.8667     Ecrt=  2.8630     Econd =   1.2412     DEL =   1.6483    
+It #   3    -0.30208E-03 Final shift = -0.64458    
+
+  
+  Fitting l.d. to discrete levels
+           9  levels at    4.4560000000000004       MeV
+
+ *****   A=          52  Z=          26  Bn=   16.1834297      LDshif=   0.00000000    
+Ucrt =   3.6849     Ecrt=  4.8848     Econd =   1.1828     DEL =   0.0000    
+It #   1     -1.1999     Final shift =  -1.1999    
+
+
+ *****   A=          52  Z=          26  Bn=   16.1834297      LDshif=   0.00000000    
+Ucrt =   3.6849     Ecrt=  4.8885     Econd =   1.1828     DEL =   0.0000    
+It #   2    -0.36909E-02 Final shift =  -1.2036    
+
+  
+  Fitting l.d. to discrete levels
+          34  levels at    2.3545300000000000       MeV
+
+ *****   A=          54  Z=          25  Bn=   8.93842983      LDshif=   0.00000000    
+Ucrt =   4.5824     Ecrt=  2.3430     Econd =   1.4709     DEL =   3.2660    
+It #   1     -1.0266     Final shift =  -1.0266    
+
+
+ *****   A=          54  Z=          25  Bn=   8.93842983      LDshif=   0.00000000    
+Ucrt =   4.5824     Ecrt=  2.4695     Econd =   1.4709     DEL =   3.2660    
+It #   2    -0.12652     Final shift =  -1.1531    
+
+
+ *****   A=          54  Z=          25  Bn=   8.93842983      LDshif=   0.00000000    
+Ucrt =   4.5824     Ecrt=  2.4767     Econd =   1.4709     DEL =   3.2660    
+It #   3    -0.71922E-02 Final shift =  -1.1603    
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    3.7048999999999999       MeV
+
+ *****   A=          53  Z=          25  Bn=   12.0544300      LDshif=   0.00000000    
+Ucrt =   4.6347     Ecrt=  3.7308     Econd =   1.4877     DEL =   1.6483    
+It #   1    -0.74442     Final shift = -0.74442    
+
+
+ *****   A=          53  Z=          25  Bn=   12.0544300      LDshif=   0.00000000    
+Ucrt =   4.6347     Ecrt=  3.7424     Econd =   1.4877     DEL =   1.6483    
+It #   2    -0.11578E-01 Final shift = -0.75599    
+
+
+ *****   A=          53  Z=          25  Bn=   12.0544300      LDshif=   0.00000000    
+Ucrt =   4.6347     Ecrt=  3.7425     Econd =   1.4877     DEL =   1.6483    
+It #   3    -0.12998E-03 Final shift = -0.75612    
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    3.0770000000000000       MeV
+
+ *****   A=          52  Z=          25  Bn=   10.5354300      LDshif=   0.00000000    
+Ucrt =   4.3126     Ecrt=  2.4977     Econd =   1.3843     DEL =   3.3282    
+It #   1     -1.5134     Final shift =  -1.5134    
+
+
+ *****   A=          52  Z=          25  Bn=   10.5354300      LDshif=   0.00000000    
+Ucrt =   4.3126     Ecrt=  2.6596     Econd =   1.3843     DEL =   3.3282    
+It #   2    -0.16185     Final shift =  -1.6752    
+
+
+ *****   A=          52  Z=          25  Bn=   10.5354300      LDshif=   0.00000000    
+Ucrt =   4.3126     Ecrt=  2.6645     Econd =   1.3843     DEL =   3.3282    
+It #   3    -0.49638E-02 Final shift =  -1.6802    
+
+  
+  Fitting l.d. to discrete levels
+          28  levels at    3.2923000000000000       MeV
+
+ *****   A=          51  Z=          25  Bn=   13.6874304      LDshif=   0.00000000    
+Ucrt =   4.5793     Ecrt=  3.3993     Econd =   1.4699     DEL =   1.6803    
+It #   1    -0.50030     Final shift = -0.50030    
+
+
+ *****   A=          51  Z=          25  Bn=   13.6874304      LDshif=   0.00000000    
+Ucrt =   4.5793     Ecrt=  3.4100     Econd =   1.4699     DEL =   1.6803    
+It #   2    -0.10674E-01 Final shift = -0.51098    
+
+
+ *****   A=          51  Z=          25  Bn=   13.6874304      LDshif=   0.00000000    
+Ucrt =   4.5793     Ecrt=  3.4101     Econd =   1.4699     DEL =   1.6803    
+It #   3    -0.15123E-03 Final shift = -0.51113    
+
+  
+  Fitting l.d. to discrete levels
+          34  levels at    3.7810000000000001       MeV
+
+ *****   A=          53  Z=          24  Bn=   7.93943024      LDshif=   0.00000000    
+Ucrt =   5.0703     Ecrt=  4.3845     Econd =   1.6275     DEL =   1.6483    
+It #   1    -0.96256     Final shift = -0.96256    
+
+
+ *****   A=          53  Z=          24  Bn=   7.93943024      LDshif=   0.00000000    
+Ucrt =   5.0703     Ecrt=  4.3988     Econd =   1.6275     DEL =   1.6483    
+It #   2    -0.14295E-01 Final shift = -0.97685    
+
+
+ *****   A=          53  Z=          24  Bn=   7.93943024      LDshif=   0.00000000    
+Ucrt =   5.0703     Ecrt=  4.3990     Econd =   1.6275     DEL =   1.6483    
+It #   3    -0.13916E-03 Final shift = -0.97699    
+
+  
+  Fitting l.d. to discrete levels
+          17  levels at    4.0999999999999996       MeV
+
+ *****   A=          52  Z=          24  Bn=   12.0394297      LDshif=   0.00000000    
+Ucrt =   4.9610     Ecrt=  5.1722     Econd =   1.5925     DEL =   0.0000    
+It #   1    -0.21113     Final shift = -0.21113    
+
+
+ *****   A=          52  Z=          24  Bn=   12.0394297      LDshif=   0.00000000    
+Ucrt =   4.9610     Ecrt=  5.1728     Econd =   1.5925     DEL =   0.0000    
+It #   2    -0.65396E-03 Final shift = -0.21179    
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    3.3511000000000002       MeV
+
+ *****   A=          51  Z=          24  Bn=   9.26243019      LDshif=   0.00000000    
+Ucrt =   5.5454     Ecrt=  4.1287     Econd =   1.7800     DEL =   1.6803    
+It #   1    -0.26366     Final shift = -0.26366    
+
+
+ *****   A=          51  Z=          24  Bn=   9.26243019      LDshif=   0.00000000    
+Ucrt =   5.5454     Ecrt=  4.1328     Econd =   1.7800     DEL =   1.6803    
+It #   2    -0.40517E-02 Final shift = -0.26771    
+
+  
+  Fitting l.d. to discrete levels
+          38  levels at    4.8010000000000002       MeV
+
+ *****   A=          50  Z=          24  Bn=   13.0004301      LDshif=   0.00000000    
+Ucrt =   5.1121     Ecrt=  5.1965     Econd =   1.6410     DEL =   0.0000    
+It #   1    -0.84374E-01 Final shift = -0.84374E-01
+
+
+ *****   A=          50  Z=          24  Bn=   13.0004301      LDshif=   0.00000000    
+Ucrt =   5.1121     Ecrt=  5.1965     Econd =   1.6410     DEL =   0.0000    
+It #   2     0.96400E-05 Final shift = -0.84364E-01
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    4.1859999999999999       MeV
+
+ *****   A=          49  Z=          24  Bn=   10.5814304      LDshif=   0.00000000    
+Ucrt =   5.0359     Ecrt=  4.2974     Econd =   1.6165     DEL =   1.7143    
+It #   1    -0.97584     Final shift = -0.97584    
+
+
+ *****   A=          49  Z=          24  Bn=   10.5814304      LDshif=   0.00000000    
+Ucrt =   5.0359     Ecrt=  4.3076     Econd =   1.6165     DEL =   1.7143    
+It #   2    -0.10154E-01 Final shift = -0.98600    
+
+
+ *****   A=          49  Z=          24  Bn=   10.5814304      LDshif=   0.00000000    
+Ucrt =   5.0359     Ecrt=  4.3076     Econd =   1.6165     DEL =   1.7143    
+It #   3    -0.74228E-04 Final shift = -0.98607    
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    2.4940000000000002       MeV
+
+ *****   A=          50  Z=          23  Bn=   9.33343029      LDshif=   0.00000000    
+Ucrt =   5.3503     Ecrt=  2.8976     Econd =   1.7174     DEL =   3.3941    
+It #   1    -0.94145     Final shift = -0.94145    
+
+
+ *****   A=          50  Z=          23  Bn=   9.33343029      LDshif=   0.00000000    
+Ucrt =   5.3503     Ecrt=  2.9965     Econd =   1.7174     DEL =   3.3941    
+It #   2    -0.98859E-01 Final shift =  -1.0403    
+
+
+ *****   A=          50  Z=          23  Bn=   9.33343029      LDshif=   0.00000000    
+Ucrt =   5.3503     Ecrt=  3.0017     Econd =   1.7174     DEL =   3.3941    
+It #   3    -0.52432E-02 Final shift =  -1.0456    
+
+  
+  Fitting l.d. to discrete levels
+          36  levels at    2.8614999999999999       MeV
+
+ *****   A=          49  Z=          23  Bn=   11.5524302      LDshif=   0.00000000    
+Ucrt =   5.8373     Ecrt=  3.9510     Econd =   1.8737     DEL =   1.7143    
+It #   1     0.17200     Final shift =  0.17200    
+
+
+ *****   A=          49  Z=          23  Bn=   11.5524302      LDshif=   0.00000000    
+Ucrt =   5.8373     Ecrt=  3.9462     Econd =   1.8737     DEL =   1.7143    
+It #   2     0.47252E-02 Final shift =  0.17673    
+
+  
+  Fitting l.d. to discrete levels
+          33  levels at    2.2892999999999999       MeV
+
+ *****   A=          48  Z=          23  Bn=   10.5424299      LDshif=   0.00000000    
+Ucrt =   5.3805     Ecrt=  2.7204     Econd =   1.7271     DEL =   3.4641    
+It #   1    -0.80397     Final shift = -0.80397    
+
+
+ *****   A=          48  Z=          23  Bn=   10.5424299      LDshif=   0.00000000    
+Ucrt =   5.3805     Ecrt=  2.8248     Econd =   1.7271     DEL =   3.4641    
+It #   2    -0.10448     Final shift = -0.90845    
+
+
+ *****   A=          48  Z=          23  Bn=   10.5424299      LDshif=   0.00000000    
+Ucrt =   5.3805     Ecrt=  2.8327     Econd =   1.7271     DEL =   3.4641    
+It #   3    -0.78342E-02 Final shift = -0.91628    
+
+  
+  Fitting l.d. to discrete levels
+          23  levels at    2.8100399999999999       MeV
+
+ *****   A=          47  Z=          23  Bn=   13.0014296      LDshif=   0.00000000    
+Ucrt =   5.7789     Ecrt=  4.1005     Econd =   1.8550     DEL =   1.7504    
+It #   1    -0.71982E-01 Final shift = -0.71982E-01
+
+
+ *****   A=          47  Z=          23  Bn=   13.0014296      LDshif=   0.00000000    
+Ucrt =   5.7789     Ecrt=  4.1031     Econd =   1.8550     DEL =   1.7504    
+It #   2    -0.25376E-02 Final shift = -0.74520E-01
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    3.0514999999999999       MeV
+
+ *****   A=          47  Z=          22  Bn=   8.87843037      LDshif=   0.00000000    
+Ucrt =   5.8669     Ecrt=  3.9337     Econd =   1.8833     DEL =   1.7504    
+It #   1     0.18285     Final shift =  0.18285    
+
+
+ *****   A=          47  Z=          22  Bn=   8.87843037      LDshif=   0.00000000    
+Ucrt =   5.8669     Ecrt=  3.9292     Econd =   1.8833     DEL =   1.7504    
+It #   2     0.45301E-02 Final shift =  0.18738    
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    4.1914999999999996       MeV
+
+ *****   A=          46  Z=          22  Bn=   13.1894302      LDshif=   0.00000000    
+Ucrt =   6.3754     Ecrt=  5.5670     Econd =   2.0465     DEL =   0.0000    
+It #   1     0.80837     Final shift =  0.80837    
+
+
+ *****   A=          46  Z=          22  Bn=   13.1894302      LDshif=   0.00000000    
+Ucrt =   6.3754     Ecrt=  5.5638     Econd =   2.0465     DEL =   0.0000    
+It #   2     0.32054E-02 Final shift =  0.81158    
+
+  
+  Fitting l.d. to discrete levels
+          40  levels at    1.9030000000000000       MeV
+
+ *****   A=          44  Z=          21  Bn=   9.69943047      LDshif=   0.00000000    
+Ucrt =   6.7607     Ecrt=  3.3715     Econd =   2.1701     DEL =   3.6181    
+It #   1    -0.22901     Final shift = -0.22901    
+
+
+ *****   A=          44  Z=          21  Bn=   9.69943047      LDshif=   0.00000000    
+Ucrt =   6.7607     Ecrt=  3.4063     Econd =   2.1701     DEL =   3.6181    
+It #   2    -0.34726E-01 Final shift = -0.26373    
+
+
+ *****   A=          44  Z=          21  Bn=   9.69943047      LDshif=   0.00000000    
+Ucrt =   6.7607     Ecrt=  3.4109     Econd =   2.1701     DEL =   3.6181    
+It #   3    -0.45932E-02 Final shift = -0.26833    
+
+  
+  
+ Total number of nuclei considered :         266
+
