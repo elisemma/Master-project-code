@@ -1,0 +1,109 @@
+ ***************************************************
+ FAST ENERGY REGION
+ 
+  TITLE: Deuterons on 90Zr
+ ___________________________________________________
+ 
+ Nuclear reaction model code EMPIRE-3.2.3 Malta 
+ (SVN rev. 5094 )
+ by M.W.Herman et al [EMP,EMP-man].
+
+ EMPIRE dimensions (dimension.h):
+  NDNUC= 600  NDEXCLUS= 50  NDEX= 101  NDLW= 120
+  LEVCC= 40  NDLV= 40  NDBR= 40  NDMSCS= 4
+ 
+ CROSS-SECTION EVALUATION PROCEDURE                 
+ 
+ Adopted procedure is based on careful theoretical  
+ analysis utilizing available experimental data and 
+ nuclear reaction model calculations.               
+
+ This code integrates into a single system a number 
+ of important modules and features:                 
+                                                    
+ - Spherical and deformed Optical Model including   
+   coupled-channels code ECIS06 by J. Raynal        
+ - Soft-rotator deformed Optical Model including    
+   coupled-channels code OPTMAN by E.Soukhovitskii  
+   and coworkers                                    
+ - Hauser-Feshbach statistical model including      
+   width fluctuation correction, and the       
+   optical model for fission with partial damping   
+ - Quantum-mechanical MSD TUL model (codes ORION &  
+   TRISTAN by H.Lenske), and MSC NVWY model         
+ - Exciton model with Iwamoto-Harada cluster        
+   emission and Kalbach systematic angular distr.   
+   (code PCROSS by R.Capote et al)                  
+ - Hybrid Monte Carlo preequilibrium model(M.Blann) 
+   (code DDHMS by M.Chadwick, mod. by B.V.Carlson)  
+ - Complete gamma-ray cascade after emission of     
+   each particle, including realistic treatment of  
+   discrete transitions                             
+ - Access to OM segment of the RIPL library [RIPL]  
+ - Built-in input parameter files, such as masses,  
+   level density, discrete levels, fission barriers 
+   and gamma strength functions based on the RIPL   
+   library [RIPL]                                   
+ - Automatic retrieval of experimental data from the
+   EXFOR library                                    
+ - ENDF-6 formatting (code EMPEND by A.Trkov)       
+   coupled to graphical presentation capabilities   
+   (code ZVView by V. Zerkin) through the chain of  
+   PrePro codes by D. Cullen                        
+ - ENDF checking codes (CHECKR, FIZCON, PSYCHE)     
+ - Highly automated fitting of optical model        
+   parameters (by B.V. Carlson)                     
+ - KALMAN code for fitting experimental data and    
+ - generating covariances                           
+ - Support for NJOY                                 
+                                                    
+                                                    
+ PARAMETERIZATIONS                                  
+                                                    
+ Following models and parameters were used in the   
+ current evaluation:                                
+                                                    
+ Discrete levels were taken from the RIPL-3+        
+ library based on the 2015 version of ENSDF.        
+ ENDF formatting disabled
+ EMPIRE-specific level densities (J>>K aprox.)
+ RIPL empirical fission barriers used for all nuclei
+ CN decay and Direct cross sections added incoherently
+ CN angular distribution assumed isotropic
+ Traditional Hauser-Feschbach Tlj_{CC}(E)=Tlj_{GS}(E-Egs)
+ E1 strength function set to RIPL MLO1
+ GDR parameters from RIPL/Exp.data+Plujko systematics
+ Gamma-transition multipolarity set to    2
+  
+=============================================================
+ Reaction   2p + 90Zr at incident energy  1.000D+00 MeV (LAB)
+=============================================================
+  
+
+  RIPL GDR parameters used
+ Primary gammas not stored: ENDF formatting is turned off
+ Recoils are not calculated as ENDF formatting is turned off
+  
+            Use of direct and preequilibrium models 
+            --------------------------------------- 
+   Note: PCROSS includes break-up and transfer reactions
+  
+ Exit channel    ECIS    MSD    MSC    HMS   PCROSS
+  
+ neut. disc.       0      0      0      0      1
+ neut. cont.       0      0      0      0      1
+ prot. disc.       0      0      0      0      1
+ prot. cont.       0      0      0      0      1
+ gammas            0      0      0      0      1
+ alpha cont.       0      0      0      0      1
+ deut. cont.       0      0      0      0      1
+ trit. cont.       0      0      0      0      1
+ He-3  cont.       0      0      0      0      1
+ LI    cont.       0      0      0      0      0
+ alpha disc.       0      0      0      0      1
+ deut. disc.       0      0      0      0      1
+ trit. disc.       0      0      0      0      1
+ He-3  disc.       0      0      0      0      1
+  
+  
+ Total number of nuclei considered :         350
