@@ -2,16 +2,15 @@ import matplotlib.pylab as plt
 
 
 # A list of all isotopes you want extracted for plotting
-products= ['52-Te-116', '52-Te-117', '52-Te-118', '52-Te-119', '52-Te-120', '52-Te-121', '52-Te-122', 
-           '51-Sb-115', '51-Sb-116', '51-Sb-117', '51-Sb-118', '51-Sb-119', '51-Sb-120', '51-Sb-121', 
-           '50-Sn-112', '50-Sn-113', '50-Sn-114', '50-Sn-115', '50-Sn-116', '50-Sn-117', '50-Sn-118', '50-Sn-119', '50-Sn-120' #, 
-           # etc etc
-           ]
+products= ['40-Zr-87', '39-Y-88', '41-Nb-88', '40-Zr-88', '40-Zr-95', '41-Nb-96']
+products= ['39-Y-86']
+target = '90Zr'
+
 
 # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-target = '123Sb'
+target = '90Zr'
 
-with open('./'+target+'/defaults.lst', 'r') as f:
+with open('./'+target[-2:]+'/'+target+'/defaults.lst', 'r') as f:
 
     # energies = [2.0]
     energies = []
@@ -59,11 +58,12 @@ for isotope in products:
         plt.xlabel('Proton Energy (MeV)')
         plt.ylabel('Cross Section (mb)')
         plt.title(isotope)
-        plt.savefig(target+'/plots/'+isotope+"_empire.png")
+        # plt.savefig(target+'/plots/'+isotope+"_empire.png")
+        plt.show()
         plt.close()
     except ValueError:
         continue
     # with open('.plots/'+isotope.replace(" ","")+"_empire.txt",'w') as f:
-    with open('./'+target+'/plots/'+isotope.replace("-","")+"_empire.txt",'w') as f:
+    with open('./'+target[-2:]+'/'+target+'/plots/'+isotope.replace("-","")+"_empire.txt",'w') as f:
         for i in range(len(energies)):
             f.write(str(energies[i])+"\t"+str(cross_sections[isotope][i])+"\n")

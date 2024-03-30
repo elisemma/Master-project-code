@@ -1,0 +1,15 @@
+#ZVView-data-copy:  29-Mar-2024 14:14:37
+#=======================================
+#
+#name:   40-ZR-0(D,X)41-NB-89-M,IND,SIG
+#X.axis: Incident Energy
+#Y.axis: Cross Section
+#wdata:  3
+#ldata:  2
+#data...
+#            X         +-dX            Y  # Comments...
+#          MeV          MeV        barns  # Year,Author(s)           ## EXFOR-ID
+          23.5         0.15       0.0018            0  # 1993,A.V.Gonchar+        ## A0565011             
+          28.5         0.15        0.013            0  # 1993,A.V.Gonchar+        ## A0565011             
+//
+#-------------------------------------------------------------------------------

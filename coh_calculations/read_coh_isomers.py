@@ -8,7 +8,7 @@ import matplotlib.pylab as plt
 #            # etc etc
 #            ]
 
-# products = ['039-086Y', '039-087Y', '040-087Zr', '039-088Y', '041-088Nb', '040-088Zr', '041-089Nb', '040-089Zr', '039-090Y', '041-090Nb', '041-091Nb', '041-092Nb', '041-095Nb', '040-095Zr', '041-096Nb']
+products = ['039-086Y', '039-087Y', '040-087Zr', '039-088Y', '041-088Nb', '040-088Zr', '041-089Nb', '040-089Zr', '039-090Y', '041-090Nb', '041-091Nb', '041-092Nb', '041-095Nb', '040-095Zr', '041-096Nb']
 # products = ['039-086Y', '039-087Y', '040-087Zr', '039-088Y', '040-088Zr', '041-089Nb', '040-089Zr', '039-090Y', '041-090Nb', '041-091Nb', '041-092Nb', '041-095Nb', '040-095Zr', '041-096Nb'] #94Zr
 # products = ['039-086Y', '039-087Y', '039-090Y', '041-091Nb', '041-092Nb', '041-095Nb', '040-095Zr', '041-096Nb'] #96Zr
 # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
@@ -24,8 +24,8 @@ import matplotlib.pylab as plt
 # target = '50Ti'
 
 
-products = ['023-048V', '025-052Mn', '025-054Mn', '027-055Co', '027-056Co', '027-057Co', '027-058Co'] 
-target = '54Fe'
+# products = ['023-048V', '025-052Mn', '025-054Mn', '027-055Co', '027-056Co', '027-057Co', '027-058Co'] 
+# target = '54Fe'
 
 
 
