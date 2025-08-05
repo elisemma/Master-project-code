@@ -19,21 +19,21 @@ def combined_function(x, A, mu, sigma, a, b, c):
 
 path = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/fit_peak_files/Ni_foils_analysis/peaks_fitted_manually/'
 
-channel_array_daNi01 = np.array([1771]) #Using these values to makea calibration for all the Ni foils (DF and DG)
+channel_array_daNi01 = np.array([1771]) #Using these values to make a calibration for all the Ni foils (DF and DG)
 energy_array_daNi01 = np.array([1771])
 energy_unc_array_daNi01 = np.array([0.002])
 subset_params_daNi01 = np.array([50])
 daNi01 = "DA200317_Ni01_18cm_30MeV_peak_data_NO_PEAK_FITTED.Spe"
 
 
-channel_array_dbNi02 = np.array([1771]) #Using these values to makea calibration for all the Ni foils (DF and DG)
+channel_array_dbNi02 = np.array([1771]) #Using these values to make a calibration for all the Ni foils (DF and DG)
 energy_array_dbNi02 = np.array([1771])
 energy_unc_array_dbNi02 = np.array([0.002])
 subset_params_dbNi02 = np.array([50])
 dbNi02 = "DB200317_Ni02_18cm_30MeV_peak_data_NO_PEAK_FITTED.Spe"
 
 
-channel_array_beNi05 = np.array([1332, 2114]) #Using these values to makea calibration for all the Ni foils (DF and DG)
+channel_array_beNi05 = np.array([1332, 2114]) #Using these values to make a calibration for all the Ni foils (DF and DG)
 energy_array_beNi05 = np.array([511, 810])
 energy_unc_array_beNi05 = np.array([1, 1])
 subset_params_beNi05 = np.array([50,50])

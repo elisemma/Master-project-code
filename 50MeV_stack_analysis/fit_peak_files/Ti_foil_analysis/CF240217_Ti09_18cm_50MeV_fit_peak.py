@@ -19,7 +19,7 @@ def fit_peaks(spectrumName, position):
     sp = ci.Spectrum(spectrumFile)
     sp.cb = cb 
  
-    sp.isotopes = ['43SC', '44SC', '44SCm', '46SC', '47SC', '47CA', '48V', '48SC']
+    sp.isotopes = ['43SC', '44SCm', '46SC', '47SC', '47CA', '48V', '48SC']
 
     # sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0, 'skew_fit':True}
     sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0}
@@ -30,6 +30,8 @@ def fit_peaks(spectrumName, position):
     sp.plot()
     
     sp.saveas(f'../../MyGeneratedFiles/Ti_foils/{spectrumName}/{spectrumName}_peak_data.csv')
+    # sp.saveas('../../MyGeneratedFiles/Ti_foils/CF240217_Ti09_18cm_50MeV/CF240217_Ti09_18cm_50MeV_peak_data.csv')
+
 
    
 

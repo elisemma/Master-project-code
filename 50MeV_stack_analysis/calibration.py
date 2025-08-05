@@ -130,7 +130,7 @@ def calibration_18cm():
     # cb.plot()
     # print(cb.rescal)
     cb.plot(show=False, saveas = './MyGeneratedFiles/Calibration/Figures/calibration_plots_18cm.pdf')
-    cb.saveas('./MyGeneratedFiles/Calibration/json_files/calibration_18cm.json')
+    # cb.saveas('./MyGeneratedFiles/Calibration/json_files/calibration_18cm.json')
 
 
 

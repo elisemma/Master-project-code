@@ -109,7 +109,7 @@ def decay_chain(foil, isotope, decay_const_p, decay_const_d, path, file_concat):
         plt.title(f'{foil}, {isotope}')
         # plt.ylim([0,5000])
         plt.legend()
-        # plt.show()
+        plt.show()
 
         return optimized_A0_d, optimized_A0_unc
 

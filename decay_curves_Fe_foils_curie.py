@@ -39,6 +39,26 @@ df_concat_Fe.to_csv(path_Fe+file_concat_Fe)
 
 
 
+
+pd.set_option('display.max_rows', None)
+df_57CO=df_concat_Fe[df_concat_Fe['isotope']=='57CO']
+
+
+
+# Get unique energy values and sort them
+sorted_unique_energies = df_57CO['energy'].drop_duplicates().sort_values()
+# Optionally convert to a list
+sorted_unique_energies_list = sorted_unique_energies.tolist()
+# Print them
+print(sorted_unique_energies_list)
+
+
+
+
+
+
+
+
 def fit_prod_rate(isotope_list, isotope_chain_parent, foil, path, file, stack, plot=False):
     t_irr_h = 0.33
 
@@ -207,29 +227,36 @@ def calc_prod_rates_in_foil(isotope_list_list, isotope_chain_parent_list, foil, 
 
 
 
-isotope_list_list_Fe01 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO']]
-isotope_chain_parent_list_Fe01 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO']
-
-isotope_list_list_Fe02 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO']]
-isotope_chain_parent_list_Fe02 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO']
-
-isotope_list_list_Fe03 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO'], ['58CO']]
-isotope_chain_parent_list_Fe03 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO', '58CO']
-
-isotope_list_list_Fe04 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO'], ['58CO']]
-isotope_chain_parent_list_Fe04 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO', '58CO']
-
-isotope_list_list_Fe05 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO'], ['58CO']]
-isotope_chain_parent_list_Fe05 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO', '58CO']
 
 
 
 
-calc_prod_rates_in_foil(isotope_list_list_Fe01, isotope_chain_parent_list_Fe01, 'Fe01', '50MeV', write_to_file=True, show_plot=False)
-calc_prod_rates_in_foil(isotope_list_list_Fe02, isotope_chain_parent_list_Fe02, 'Fe02', '50MeV', write_to_file=True, show_plot=False)
-calc_prod_rates_in_foil(isotope_list_list_Fe03, isotope_chain_parent_list_Fe03, 'Fe03', '50MeV', write_to_file=True, show_plot=False)
-calc_prod_rates_in_foil(isotope_list_list_Fe04, isotope_chain_parent_list_Fe04, 'Fe04', '50MeV', write_to_file=True, show_plot=False)
-calc_prod_rates_in_foil(isotope_list_list_Fe05, isotope_chain_parent_list_Fe05, 'Fe05', '50MeV', write_to_file=True, show_plot=False)
+
+
+
+# isotope_list_list_Fe01 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO']]
+# isotope_chain_parent_list_Fe01 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO']
+
+# isotope_list_list_Fe02 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO']]
+# isotope_chain_parent_list_Fe02 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO']
+
+# isotope_list_list_Fe03 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO'], ['58CO']]
+# isotope_chain_parent_list_Fe03 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO', '58CO']
+
+# isotope_list_list_Fe04 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO'], ['58CO']]
+# isotope_chain_parent_list_Fe04 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO', '58CO']
+
+# isotope_list_list_Fe05 = [['48V'], ['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57CO'], ['58CO']]
+# isotope_chain_parent_list_Fe05 = ['48V', '52MN', '54MN', '55CO', '56CO', '57CO', '58CO']
+
+
+
+
+# calc_prod_rates_in_foil(isotope_list_list_Fe01, isotope_chain_parent_list_Fe01, 'Fe01', '50MeV', write_to_file=True, show_plot=False)
+# calc_prod_rates_in_foil(isotope_list_list_Fe02, isotope_chain_parent_list_Fe02, 'Fe02', '50MeV', write_to_file=True, show_plot=False)
+# calc_prod_rates_in_foil(isotope_list_list_Fe03, isotope_chain_parent_list_Fe03, 'Fe03', '50MeV', write_to_file=True, show_plot=False)
+# calc_prod_rates_in_foil(isotope_list_list_Fe04, isotope_chain_parent_list_Fe04, 'Fe04', '50MeV', write_to_file=True, show_plot=False)
+# calc_prod_rates_in_foil(isotope_list_list_Fe05, isotope_chain_parent_list_Fe05, 'Fe05', '50MeV', write_to_file=True, show_plot=False)
 
 
 

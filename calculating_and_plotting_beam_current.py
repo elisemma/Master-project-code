@@ -131,6 +131,13 @@ data_by_reaction['61CU']['beam_current_unc'][-1] = data_by_reaction['61CU']['bea
 
 
 
+
+print(f'_________________________ dp = {dp} ________________________')
+print(data_by_reaction)
+print(f'____________________________________________________________')
+
+
+
 # ______________________________Plotting________________________________________
 
 marker_list = ['d', '*', 's', '<', 'o']
@@ -185,7 +192,7 @@ plt.legend()
 # plt.savefig(f'./Figures/beam_currents_30MeV_comp3_after_var_min.pdf', dpi=600)
 plt.show()
 
-print(data_by_reaction)
+# print(data_by_reaction)
 
 
 # print('Beam current for 58Co: ', data_by_reaction['58CO'])

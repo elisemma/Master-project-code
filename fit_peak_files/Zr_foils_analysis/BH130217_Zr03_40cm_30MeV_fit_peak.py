@@ -17,11 +17,13 @@ def fit_peaks(spectrumName, position):
     sp = ci.Spectrum(spectrumFile)
     sp.cb = cb 
 
-    sp.isotopes = ['87NB', '87Y', '87Ym', '89NB', '89NBm', '89ZR', '90NB', '90Ym', '90Y',  '92NBm', '96NB', '24NA', '40K', '96NB']
+    sp.isotopes = ['87Y', '87Ym', '89NB', '89NBm', '89ZR', '90NB', '90Ym', '90Y',  '92NBm', '96NB', '24NA', '40K',]
+    # sp.isotopes = ['90Ym']
+
     
     sp.fit_config = {'SNR_min':3.5, 'dE_511':9.0}
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
-    # sp.plot(scale = 'linlin')
+    sp.plot(scale = 'linlin')
     sp.plot()
     sp.saveas(f'../../MyGeneratedFiles/Zr_foils/{spectrumName}/{spectrumName}_peak_data.csv')
    
@@ -31,5 +33,5 @@ def fit_peaks(spectrumName, position):
 if __name__ == '__main__':
 
   
-    fit_peaks('BH130217_Zr03_40cm_30MeV', '40cm') #Date: 02/13/2017 15:07
+    fit_peaks('BH130217_Zr03_40cm_30MeV', '40cm') #Date: 02/13/2017 23:21:58
 

@@ -29,7 +29,9 @@ def fit_peaks(spectrumName, position):
     # sp.fit_config = {'SNR_min':2, 'dE_511':9.0}
     # sp.plot(scale = 'linlin')
     # sp.rebin(4000)
+    # sp.plot(saveas = 'sepctrum_CA_Zr06.pdf', dpi=600)
     sp.plot()
+
     
     sp.saveas(f'../../MyGeneratedFiles/Zr_foils/{spectrumName}/{spectrumName}_peak_data.csv')
 

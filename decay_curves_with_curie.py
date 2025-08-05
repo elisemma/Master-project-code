@@ -213,7 +213,7 @@ df_concat_Ni = df_concat_Ni.drop(columns=['efficiency'])
 
 
 # Zr peak data _____________________________________________________________________________________________________________________
-path_Zr = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/MyGeneratedFiles/Zr_foils/'
+path_Zr = './MyGeneratedFiles/Zr_foils/'
 file_AXZR05 = 'AX130217_Zr05_18cm_30MeV/AX130217_Zr05_18cm_30MeV_peak_data.csv'
 file_BAZR01 = 'BA130217_Zr01_18cm_30MeV/BA130217_Zr01_18cm_30MeV_peak_data.csv'
 file_BIZR04 = 'BI140217_Zr04_18cm_30MeV/BI140217_Zr04_18cm_30MeV_peak_data.csv'
@@ -263,14 +263,16 @@ df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['
 # df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 2318.959)] 
 # df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] !=132.716 )] 
 
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90Ym') | (df_concat_Zr['energy'] != 479.51)] # Exclude rows where isotope is '90NB' and energy is 329.058
 
+# df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90Ym') | (df_concat_Zr['energy'] != 202.53)] # Exclude rows where isotope is '90NB' and energy is 329.058
 
 df_concat_Zr.to_csv(path_Zr+file_concat_Zr)
 
 
 
-isotopes_Zr = ['90NB', '96NB']
-# isotopes_Zr = ['96NB']
+# isotopes_Zr = ['90NB', '96NB']
+isotopes_Zr = ['90Ym']
 
 # isotopes_Zr = ['87NB','89NB', '90NB', '95NB']
 # isotopes_Zr = ['87NB']
@@ -278,11 +280,11 @@ isotopes_Zr = ['90NB', '96NB']
 # isotopes_Zr = ['88Y', '91Y', '92Y']
 
 
-foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
+foil_list_Zr = ['Zr03']
 # foil_list_Zr = ['Zr04']
 
 
-# print(df_concat_Zr[df_concat_Zr['filename'].str.contains('Zr05') & (df_concat_Zr['isotope'] == '90NB')])
+print(df_concat_Zr[df_concat_Zr['filename'].str.contains('Zr03') & (df_concat_Zr['isotope'] == '90Ym')])
 
 
 
@@ -293,9 +295,9 @@ foil_list_Zr = ['Zr01', 'Zr02', 'Zr03', 'Zr04', 'Zr05']
 # generate_prod_rate_csv('Ti', isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
 # generate_prod_rate_csv('Ni', isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
 
-generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
-generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
-# generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)
+# generate_activity_csv(isotopes_Ni, foil_list_Ni, path_Ni, file_concat_Ni)
+# generate_activity_csv(isotopes_Ti, foil_list_Ti, path_Ti, file_concat_Ti)
+generate_activity_csv(isotopes_Zr, foil_list_Zr, path_Zr, file_concat_Zr)
 
 
 

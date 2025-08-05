@@ -63,6 +63,25 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 
 
+
+pd.set_option('display.max_rows', None)
+df_65NI=df_concat_Ni[df_concat_Ni['isotope']=='65NI']
+
+
+# Get unique energy values and sort them
+sorted_unique_energies = df_65NI['energy'].drop_duplicates().sort_values()
+# Optionally convert to a list
+sorted_unique_energies_list = sorted_unique_energies.tolist()
+# Print them
+print(sorted_unique_energies_list)
+
+
+
+
+
+
+
+
 def fit_prod_rate(isotope_list, isotope_chain_parent, foil, path, file, stack, plot=False):
     t_irr_h = 0.33
 
@@ -257,29 +276,38 @@ def calc_prod_rates_in_foil(isotope_list_list, isotope_chain_parent_list, foil, 
 
 
 
-isotope_list_list_Ni01 = [['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57NI', '57CO'], ['58CO'], ['60CO'], ['61CU'], ['65NI']]
-isotope_chain_parent_list_Ni01 = ['52MN', '54MN', '55CO', '56CO', '57NI', '58CO', '60CO', '61CU', '65NI']
-
-isotope_list_list_Ni02 = [['52MN'], ['55CO'], ['56CO'], ['57NI', '57CO'], ['58CO'], ['61CU'], ['64CU'], ['65NI']]
-isotope_chain_parent_list_Ni02 = ['52MN', '55CO', '56CO', '57NI', '58CO', '61CU', '64CU', '65NI']
-
-isotope_list_list_Ni03 = [['55CO'], ['56CO'], ['57NI', '57CO'], ['58CO'], ['60CO'], ['61CU'], ['64CU'], ['65NI']]
-isotope_chain_parent_list_Ni03 = ['55CO', '56CO', '57NI', '58CO', '60CO', '61CU', '64CU', '65NI']
-
-isotope_list_list_Ni04 = [['56CO'], ['57CO'], ['58CO'], ['60CO'], ['61CU'], ['64CU'], ['65NI']]
-isotope_chain_parent_list_Ni04 = ['56CO', '57CO', '58CO', '60CO', '61CU', '64CU', '65NI']
-
-isotope_list_list_Ni05 = [['57CO'], ['58CO'], ['61CU']]
-isotope_chain_parent_list_Ni05 = ['57CO', '58CO', '61CU']
 
 
 
 
-calc_prod_rates_in_foil(isotope_list_list_Ni01, isotope_chain_parent_list_Ni01, 'Ni01', '30MeV', write_to_file=True, show_plot=False)
-calc_prod_rates_in_foil(isotope_list_list_Ni02, isotope_chain_parent_list_Ni02, 'Ni02', '30MeV', write_to_file=True, show_plot=False)
-calc_prod_rates_in_foil(isotope_list_list_Ni03, isotope_chain_parent_list_Ni03, 'Ni03', '30MeV', write_to_file=True, show_plot=False)
-calc_prod_rates_in_foil(isotope_list_list_Ni04, isotope_chain_parent_list_Ni04, 'Ni04', '30MeV', write_to_file=True, show_plot=False)
-calc_prod_rates_in_foil(isotope_list_list_Ni05, isotope_chain_parent_list_Ni05, 'Ni05', '30MeV', write_to_file=True, show_plot=False)
+
+
+
+
+
+# isotope_list_list_Ni01 = [['52MN'], ['54MN'], ['55CO'], ['56CO'], ['57NI', '57CO'], ['58CO'], ['60CO'], ['61CU'], ['65NI']]
+# isotope_chain_parent_list_Ni01 = ['52MN', '54MN', '55CO', '56CO', '57NI', '58CO', '60CO', '61CU', '65NI']
+
+# isotope_list_list_Ni02 = [['52MN'], ['55CO'], ['56CO'], ['57NI', '57CO'], ['58CO'], ['60CU'], ['61CU'], ['64CU'], ['65NI']]
+# isotope_chain_parent_list_Ni02 = ['52MN', '55CO', '56CO', '57NI', '58CO', '60CU', '61CU', '64CU', '65NI']
+
+# isotope_list_list_Ni03 = [['55CO'], ['56CO'], ['57NI', '57CO'], ['58CO'], ['60CO'], ['60CU'], ['61CU'], ['64CU'], ['65NI']]
+# isotope_chain_parent_list_Ni03 = ['55CO', '56CO', '57NI', '58CO', '60CO', '60CU', '61CU', '64CU', '65NI']
+
+# isotope_list_list_Ni04 = [['56CO'], ['57CO'], ['58CO'], ['60CO'], ['61CU'], ['64CU'], ['65NI']]
+# isotope_chain_parent_list_Ni04 = ['56CO', '57CO', '58CO', '60CO', '61CU', '64CU', '65NI']
+
+# isotope_list_list_Ni05 = [['57CO'], ['58CO'], ['61CU']]
+# isotope_chain_parent_list_Ni05 = ['57CO', '58CO', '61CU']
+
+
+
+
+# calc_prod_rates_in_foil(isotope_list_list_Ni01, isotope_chain_parent_list_Ni01, 'Ni01', '30MeV', write_to_file=True, show_plot=False)
+# calc_prod_rates_in_foil(isotope_list_list_Ni02, isotope_chain_parent_list_Ni02, 'Ni02', '30MeV', write_to_file=True, show_plot=False)
+# calc_prod_rates_in_foil(isotope_list_list_Ni03, isotope_chain_parent_list_Ni03, 'Ni03', '30MeV', write_to_file=True, show_plot=False)
+# calc_prod_rates_in_foil(isotope_list_list_Ni04, isotope_chain_parent_list_Ni04, 'Ni04', '30MeV', write_to_file=True, show_plot=False)
+# calc_prod_rates_in_foil(isotope_list_list_Ni05, isotope_chain_parent_list_Ni05, 'Ni05', '30MeV', write_to_file=True, show_plot=False)
 
 
 

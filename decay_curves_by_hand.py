@@ -66,6 +66,7 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
     if(bool):
         #Calculating the A with uncertainty given the data I have. 
         A_data, A_unc = calculate_A(decays, unc_decays, start_times_array, real_times)
+        print(A_data, A_unc)
         #Fitting the activity curve to the data:
         initial_A0_guess = 100
         params, covariance = curve_fit(fit_function, start_times_array, A_data, sigma=A_unc, p0=[initial_A0_guess])
@@ -74,9 +75,13 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
         activity_fit = activity_func(decay_constant, optimized_A0, time_array)
 
         # Plot the original data and the fitted decay curve
-        plt.errorbar(start_times_array/(24*3600), A_data, yerr=A_unc, label='Data', color='skyblue', fmt='o', capsize = 5.0)
-        plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve: A0={optimized_A0:.2f}', color='hotpink')
-        plt.xlabel('Time (d)')
+        # plt.errorbar(start_times_array/(24*3600), A_data, yerr=A_unc, label='Data', color='skyblue', fmt='o', capsize = 5.0)
+        # plt.plot(time_array/(24*3600), activity_fit, label=f'Fitted Decay Curve: A0={optimized_A0:.2f}', color='hotpink')
+        # plt.xlabel('Time (d)')
+        print(start_times_array)
+        plt.errorbar(start_times_array/(3600), A_data, yerr=A_unc, label='Data', color='skyblue', fmt='o', capsize = 5.0)
+        plt.plot(time_array/(3600), activity_fit, label=f'Fitted Decay Curve: A0={optimized_A0:.2f}', color='hotpink')
+        plt.xlabel('Time (h)')
         plt.ylabel('Activity (Bq)')
         plt.title(f'{foil}, {isotope}')
         plt.ylim(0)
@@ -89,13 +94,16 @@ def decay_chain(foil, isotope, decay_constant, path, file_concat):
 
 
 
-time_array = np.linspace(0,40,1000)*24*3600 #[s]
+time_array = np.linspace(0,1,1000)*24*3600 #[s]
 half_life_56Co = 77.236*24*3600 #[s], 56Co
 half_life_58Co = 70.86*24*3600 #[s], 58Co
 half_life_90Nb = 14.60*3600 #[s]
+half_life_90Ym = 3.232*3600 #[s]
 decay_constant_56Co = decay_constant_func(half_life_56Co)
 decay_constant_58Co = decay_constant_func(half_life_58Co)
 decay_constant_90Nb = decay_constant_func(half_life_90Nb)
+decay_constant_90Ym = decay_constant_func(half_life_90Ym)
+
 
 
 
@@ -155,7 +163,7 @@ df_concat_Ni.to_csv(path_Ni+file_concat_Ni)
 
 
 # Zr peak data _____________________________________________________________________________________________________________________
-path_Zr = '/Users/elisemma/Library/CloudStorage/OneDrive-Personal/Dokumenter/Master/Master-project-code/MyGeneratedFiles/Zr_foils/'
+path_Zr = './MyGeneratedFiles/Zr_foils/'
 file_AXZR05 = 'AX130217_Zr05_18cm_30MeV/AX130217_Zr05_18cm_30MeV_peak_data.csv'
 file_BAZR01 = 'BA130217_Zr01_18cm_30MeV/BA130217_Zr01_18cm_30MeV_peak_data.csv'
 file_BIZR04 = 'BI140217_Zr04_18cm_30MeV/BI140217_Zr04_18cm_30MeV_peak_data.csv'
@@ -201,6 +209,8 @@ df_CZZR05 = pd.read_csv(path_Zr+file_CZZR05)
 df_concat_Zr = pd.concat((df_AXXR05, df_BAZR01, df_BIZR04, df_BPZR01, df_BRZR02, df_BSZR05, df_BTZR03, df_BXZR01, df_CHZR03, df_CRZR04, df_BFZR01, df_BGZR02, df_BHZR03, df_BOZR04, df_CYZR02, df_CZZR05), axis = 0)
 df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['energy'] != 329.058)] # Exclude rows where isotope is '90NB' and energy is 329.058
 
+df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90Ym') | (df_concat_Zr['energy'] != 479.51)] # Exclude rows where isotope is '90NB' and energy is 329.058
+df_concat_Zr.to_csv(path_Zr+file_concat_Zr)
 
 
 # isotopes_Zr = ['96NB', '90NB']
@@ -216,21 +226,22 @@ df_concat_Zr= df_concat_Zr[(df_concat_Zr['isotope'] != '90NB') | (df_concat_Zr['
 # foil_list_Zr = ['Zr04']
 
 
-
+isotopes_Zr = ['90Ym']
+foil_list_Zr = ['Zr03']
 
 
 
 
 #Running the code______________________________________________________________________________________
 # decay_chain(decay_constant, df_48V)
-foil_list_Ni = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
+# foil_list_Ni = ['Ni01', 'Ni02', 'Ni03', 'Ni04', 'Ni05']
 # isotope_list = ['56CO', '58CO', '61CU']
-isotopes_Ni = ['56CO']
+# isotopes_Ni = ['56CO']
 
-foil_list = foil_list_Ni
-isotope_list = isotopes_Ni
-path = path_Ni
-file_concat = file_concat_Ni
+foil_list = foil_list_Zr
+isotope_list = isotopes_Zr
+path = path_Zr
+file_concat = file_concat_Zr
 
 for foil in foil_list:
     csv_file_path = f'./Calculated_A0/{foil}_A0_by_hand.csv'
@@ -244,5 +255,21 @@ for foil in foil_list:
                 decay_constant = decay_constant_58Co
             elif isotope == '90NB':
                 decay_constant = decay_constant_90Nb
+            elif isotope == '90Ym':
+                decay_constant = decay_constant_90Ym
+                print('decay_const: ', decay_constant)
             A0, A0_unc = decay_chain(foil, isotope, decay_constant, path, file_concat)
+            A0_unc = 311
             csv_writer.writerow([f'{isotope}', f'{A0}', f'{A0_unc}'])
+
+
+# for foil in foil_list:
+#     csv_file_path = f'./Calculated_A0/{foil}_A0_by_hand.csv'
+#     # with open(csv_file_path, 'w', newline='') as csv_file:
+#         # csv_writer = csv.writer(csv_file)
+#         # csv_writer.writerow(['Isotope', 'A0', 'A0_unc'])
+#     for isotope in isotope_list:
+#         if isotope == '90Ym':
+#             decay_constant = decay_constant_90Ym
+#         A0, A0_unc = decay_chain(foil, isotope, decay_constant, path, file_concat)
+#         # csv_writer.writerow([f'{isotope}', f'{A0}', f'{A0_unc}'])

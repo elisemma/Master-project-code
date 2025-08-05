@@ -107,7 +107,11 @@ for i, reaction_list in enumerate(reaction_list_list_Ti):
         data_by_reaction[reaction]['energy'].append(beam_energy_in_foil_list_list_Ti[i][j])
 
 
+
+print(f'_________________________ dp = {dp} ________________________')
 print(data_by_reaction)
+print(f'____________________________________________________________')
+
 
 
 # ______________________________Plotting________________________________________

@@ -1,16 +1,46 @@
 import matplotlib.pylab as plt
 
 
-# A list of all isotopes you want extracted for plotting
-products= ['40-Zr-87', '39-Y-88', '41-Nb-88', '40-Zr-88', '40-Zr-95', '41-Nb-96']
-products= ['39-Y-86']
-target = '90Zr'
+# # A list of all isotopes you want extracted for plotting
+# products= ['38-Sr- 90', 
+#            '39-Y - 86', '39-Y - 87', '39-Y - 88', '39-Y - 95', 
+#            '40-Zr- 86', '40-Zr- 87', '40-Zr- 88', '40-Zr- 89', '40-Zr- 95',
+#            '41-Nb- 86', '41-Nb- 87', '41-Nb- 88', '41-Nb- 89', '41-Nb- 90', '41-Nb- 95', '41-Nb- 96'
+#            ]
+# # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
+# element = 'Zr'
+# target = '96Zr'
 
 
-# Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-target = '90Zr'
+products= ['25-Mn- 52', '25-Mn- 54', '25-Mn- 60',
+           '26-Fe- 52', '26-Fe- 60', 
+           '27-Co- 52', '27-Co- 55', '27-Co- 56', '27-Co- 57', '27-Co- 58', '27-Co- 60',
+           '28-Ni- 52', '28-Ni- 55', '28-Ni- 56', '28-Ni- 57', '28-Ni- 65',
+           '29-Cu- 55', '29-Cu- 57', '29-Cu- 61', '29-Cu- 64'
+           ]
+element = 'Ni'
+target = '64Ni'
 
-with open('./'+target[-2:]+'/'+target+'/defaults.lst', 'r') as f:
+
+# products= ['20-Ca- 47', '20-Ca- 48'
+#            '21-Sc- 44', '21-Sc- 46', '21-Sc- 47', '21-Sc- 48', 
+#            '23-V - 48'
+#            ]
+# element = 'Ti'
+# target = '50Ti'
+
+
+# products= ['23-V - 48',
+#            '24-Cr- 48',
+#            '25-Mn- 48', '25-Mn- 52', '25-Mn- 54', 
+#            '26-Fe- 48', '26-Fe- 52',
+#            '27-Co- 48', '27-Co- 52', '27-Co- 55', '27-Co- 56', '27-Co- 57', '27-Co- 58'
+#            ]
+# element = 'Fe'
+# target = '58Fe'
+
+
+with open('./'+element+'/'+target+'/defaults.lst', 'r') as f:
 
     # energies = [2.0]
     energies = []
@@ -58,12 +88,12 @@ for isotope in products:
         plt.xlabel('Proton Energy (MeV)')
         plt.ylabel('Cross Section (mb)')
         plt.title(isotope)
-        # plt.savefig(target+'/plots/'+isotope+"_empire.png")
-        plt.show()
+        plt.savefig('./'+element+'/'+target+'/xs_plots/'+isotope+"G_empire.png")
+        # plt.show()
         plt.close()
     except ValueError:
         continue
-    # with open('.plots/'+isotope.replace(" ","")+"_empire.txt",'w') as f:
-    with open('./'+target[-2:]+'/'+target+'/plots/'+isotope.replace("-","")+"_empire.txt",'w') as f:
+    with open('./'+element+'/'+target+'/xs_plots/'+isotope.replace(" ","")+"G_empire.txt",'w') as f:
+    # with open('./'+element+'/'+target+'/xs_plots/'+isotope.replace("-","")+"G_empire.txt",'w') as f:
         for i in range(len(energies)):
             f.write(str(energies[i])+"\t"+str(cross_sections[isotope][i])+"\n")

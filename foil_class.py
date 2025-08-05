@@ -104,7 +104,7 @@ class Foil:
         self.beam_energy_in_foil = np.sum(energy_from_stack_calc * flux_from_stack_calc)/np.sum(flux_from_stack_calc)
         # Using the IAEA data to get the monitor cross section for the energy in a foil
         for reaction_product in self.reaction_list:
-            filename = './Monitor_cross_section_data/IAEA_monitor_xs_' + reaction_product + '.txt'
+            filename = './Monitor_cross_section_data/IAEA_monitor_xs_'+self.target_material+ '_dx_' + reaction_product + '.txt'
             with open(filename) as file:
                 lines = file.readlines()[6:-1]
                 E_mon_list = []
@@ -122,6 +122,7 @@ class Foil:
             E_mon = np.array(E_mon_list)
             xs_mon = np.array(xs_list)*1e-28*1e-3 #convert mb to m^2
             unc_xs_mon = np.array(xs_unc_list)*1e-28*1e-3 #convert mb to m^2
+            # print(f"unc_xs_mon: {unc_xs_mon}")
             weights = 1 / unc_xs_mon
             # interp_xs = interp1d(E_mon, xs_mon,kind='linear')
             # interp_unc_xs = interp1d(E_mon, unc_xs_mon, kind='linear')

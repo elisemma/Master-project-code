@@ -6,10 +6,10 @@ import matplotlib.pylab as plt
 #            '050-112Sn', '050-113Sn', '050-114Sn', '050-115Sn', '050-116Sn', '050-117Sn', '050-118Sn', '050-119Sn', '050-120Sn' #, 
 #            # etc etc
 #            ]
-products= ['021-048Sc']
+products= ['029-060Cu']
 
 # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-target = '46Ti'
+target = '64Ni'
 
 # Run 'cat out_coh_*_MeV.dat > out_coh_merged.dat' in the ./output directory to unify files for parsing
 with open('./'+target+'/output/out_coh_merged.dat','r') as f:

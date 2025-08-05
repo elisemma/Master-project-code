@@ -126,7 +126,7 @@ plt.xlabel('Deuteron Energy (MeV)', fontsize=12)
 plt.ylabel('Reltive Deutron Flux', fontsize=12)
 plt.title('Energy distribution for Zr foils', fontsize=12)
 plt.legend(fontsize=11)
-plt.savefig('./Figures/Zr_energies.pdf', dpi=600)
+# plt.savefig('./Figures/Zr_energies.pdf', dpi=600)
 plt.show()
 
 

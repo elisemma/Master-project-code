@@ -1,0 +1,16 @@
+#ZVView-data-copy:  12-Nov-2024 17:46:28
+#=======================================
+#
+#name:   28-NI-0(D,X)27-CO-56,[CUM],SIG
+#X.axis: Incident Energy
+#Y.axis: Cross Section
+#wdata:  3
+#ldata:  1
+#data...
+#            X            Y         +-dY  # Comments...
+#          MeV        barns        barns  # Year,Author(s)           ## EXFOR-ID
+          39.5            0       0.0884       0.0119  # 2007,K.Ochiai+           ## E2121016  #dY:13.5% 
+          39.5            0       0.0884       0.0119  # 2007,K.Ochiai+           ## E2121016  #dY:13.5%  
+
+//
+#-------------------------------------------------------------------------------

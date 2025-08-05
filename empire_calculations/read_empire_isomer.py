@@ -8,30 +8,29 @@ import matplotlib.pylab as plt
 # Syntax:  'Ex': 'isotope'
 # products= {'0.0895':'50-Sn-119', '0.1636':'51-Sb-122'}
 
-# Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-# target = '123Sb'
+products= {'0.2183':'39-Y-86', '0.3808':'39-Y-87', ' 0.5878':'40-Zr-89', '0.6817':'39-Y-90', '0.1355':'41-Nb-92', '0.2357':'41-Nb-95'}
+element = 'Zr'
+target = '96Zr'
 
+# products= {'0.2712':'21-Sc-44'}
+# element = 'Ti'
+# target = '50Ti'
 
-# products= {'0.2183':'39-Y-86', '0.3808':'39-Y-87', '0.6817':'39-Y-90', 
-#            '0.5878':'40-Zr-89', 
-#            '0.0350':'41-Nb-89', '0.1247':'41-Nb-90', '0.1046':'41-Nb-91', 
-#            '0.1355':'41-Nb-92', '0.2357':'41-Nb-95'
-#            }
+# products= {'0.3777':'25-Mn-52'}
+# element = 'Fe'
+# target = '57Fe'
+
+# products= {'0.3777':'25-Mn-52', '0.0586':'27-Co-60'}
+# element = 'Ni'
+# target = '64Ni'
+
 # # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-# target = '96Zr'
-
-products= {'0.0586':'27-Co-60', '0.0249':'27-Co-58', '0.3777':'25-Mn-52', 
-           '0.5878':'40-Zr-89', 
-           '0.0350':'41-Nb-89', '0.1247':'41-Nb-90', '0.1046':'41-Nb-91', 
-           '0.1355':'41-Nb-92', '0.2357':'41-Nb-95'
-           }
-
-products = ['025-052Mn', '025-054Mn', '027-055Co', '027-056Co', '028-057Ni', '027-057Co', '027-058Co', '027-060Co', '029-061Cu', '029-064Cu', '028-065Ni'] 
+# target = '123Sb'
+# with open('./'+target+'/defaults.lst', 'r') as f:
 # Target isotope - needed if you have multiple sub-directories for each target isotope in an element
-target = '58Ni'
 
 
-with open('./'+target[-2:]+'/'+target+'/defaults.lst', 'r') as f:
+with open('./'+element+'/'+target+'/defaults.lst', 'r') as f:
 
     # energies = [2.0]
     energies = []
@@ -73,11 +72,12 @@ for isotope in products:
         plt.xlabel('Proton Energy (MeV)')
         plt.ylabel('Cross Section (mb)')
         plt.title(products[isotope]+" M")
-        # plt.savefig(target+'/plots/'+products[isotope]+"M_empire.png")
-        plt.show()
+        plt.savefig('./'+element+'/'+target+'/xs_plots/'+products[isotope]+"M_empire.png")
+        # plt.show()
         plt.close()
     except ValueError:
         continue
-    with open('./'+target[-2:]+'/'+target+'/'+products[isotope].replace(" ","")+"M_empire.txt",'w') as f:
+    # with open('./'+target+'/plots/'+products[isotope].replace(" ","")+"M_empire.txt",'w') as f:
+    with open('./'+element+'/'+target+'/xs_plots/'+products[isotope].replace(" ","")+"M_empire.txt",'w') as f:
         for i in range(len(energies)):
             f.write(str(energies[i])+"\t"+str(cross_sections[isotope][i])+"\n")

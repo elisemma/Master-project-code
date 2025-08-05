@@ -152,7 +152,7 @@ calc_xs_list_of_list_Ti_p1, calc_xs_unc_list_of_list_Ti_p1, beam_energy_in_foil_
 
 data_by_reaction_p0 = {}
 
-# Iterate through reaction_list_list_Ni
+# Iterate through reaction_list_list_Fe
 for i, reaction_list in enumerate(reaction_list_list_Fe_p0):
     for j, reaction in enumerate(reaction_list):
         if reaction not in data_by_reaction_p0:
@@ -177,7 +177,7 @@ for i, reaction_list in enumerate(reaction_list_list_Ti_p0):
 
 data_by_reaction_p1 = {}
 
-# Iterate through reaction_list_list_Ni
+# Iterate through reaction_list_list_Fe
 for i, reaction_list in enumerate(reaction_list_list_Fe_p1):
     for j, reaction in enumerate(reaction_list):
         if reaction not in data_by_reaction_p1:
@@ -376,6 +376,9 @@ plt.show()
 # plt.legend()
 # plt.xlim(0,50)
 # plt.show()
+
+
+
 
 
 
