@@ -408,6 +408,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
     #Get data from exfor
     markers = ['.', '*', 'v', '^', '+', '<', '>', 's', 'h',     '.', '*', 'v', '^', '+', '<', '>', 's', 'h']
     grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver',     'silver', 'lightgrey', 'darkgrey', 'dimgrey', 'k','silver', 'lightgrey', 'dimgrey', 'darkgrey']
+    ref_numbers = ['[49]', '[50]', '[51]', '[52]', '[53]', '[54]', '[55]', '[56]']
 
     if exfor_manuel == False:
         product = reaction_product[2:]+'-'+reaction_product[0:2]
@@ -486,7 +487,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
                             author_name = re.sub(r'\b[A-Z]\.\b|\+', '', author_name)
                             break  # Stop after finding the first occurrence of name and year
             # Create the label
-            label = f"{author_name} ({year})"
+            label = f"{author_name} ({year}) {ref_numbers[i]}"
 
             plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 

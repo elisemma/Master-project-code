@@ -441,6 +441,8 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
     #Get data from exfor
     markers = ['.', '*', 'v', '^', '+', '<', '>', 's', 'h',     '.', '*', 'v', '^', '+', '<', '>', 's', 'h', '.', '*', 'v', '^', '+', '<', '>', 's', 'h',     '.', '*', 'v', '^', '+', '<', '>', 's', 'h']
     grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver',     'silver', 'lightgrey', 'darkgrey', 'dimgrey', 'k','silver', 'lightgrey', 'dimgrey', 'darkgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver',     'silver', 'lightgrey', 'darkgrey', 'dimgrey', 'k','silver', 'lightgrey', 'dimgrey', 'darkgrey', 'dimgrey']
+    # ref_numbers = ['[66]', '[57]', '[62]', '[58]', '[59]', '[64]']
+    ref_numbers = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
     if exfor_manuel == False:
         product = reaction_product[2:]+'-'+reaction_product[0:2]
@@ -463,14 +465,14 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
                 # Need to set up list of marker sizes to iterate over with k
                 # print(k)
                 if exfor_dict[index][2].shape[1] == 4:
-                    plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=1E3*exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                    plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=1E3*exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
 
                 elif exfor_dict[index][2].shape[1] == 3:
-                    plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], yerr=1E3*exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                    plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], yerr=1E3*exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
 
                 elif exfor_dict[index][2].shape[1] >= 5:
                     print('WARNING: Plotting',str(exfor_dict[index][2].shape[1])+'-column EXFOR data retrieved for subentry', exfor_dict[index][3]+', please make sure data look reasonable - column formatting is inconsistent for >4 columns.')
-                    plt.errorbar(exfor_dict[index][2][:,4],exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                    plt.errorbar(exfor_dict[index][2][:,4],exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
                 k=k+1
 
         except UnboundLocalError:
@@ -512,7 +514,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
                             break  # Stop after finding the first occurrence of name and year
 
             # Create the label
-            label = f"{author_name} ({year})"
+            label = f"{author_name} ({year}) {ref_numbers[i]}"
 
 
             plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
@@ -536,11 +538,11 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
     # plt.plot(energy_array, splev(energy_array, talys_spline)*1.1, linewidth=2, color='mediumpurple', linestyle=':', label='test.')
 
     if reaction_product == '86Y':
-        plt.errorbar(E_86_haleema, xs_86_haleema, xerr=dE_86_haleema, yerr=d_xs_86_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018)')
+        plt.errorbar(E_86_haleema, xs_86_haleema, xerr=dE_86_haleema, yerr=d_xs_86_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018) [24]')
     if reaction_product == '87Y':
-        plt.errorbar(E_87_haleema, xs_87_haleema, xerr=dE_87_haleema, yerr=d_xs_87_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018)')
+        plt.errorbar(E_87_haleema, xs_87_haleema, xerr=dE_87_haleema, yerr=d_xs_87_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018) [24]')
     if reaction_product == '88Y':
-        plt.errorbar(E_88_haleema, xs_88_haleema, xerr=dE_88_haleema, yerr=d_xs_88_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018)')
+        plt.errorbar(E_88_haleema, xs_88_haleema, xerr=dE_88_haleema, yerr=d_xs_88_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018) [24]')
 
     plt.plot(energy_array, splev(energy_array, talys_spline), linewidth=1, color='mediumseagreen', label='TALYS-2.0')
     plt.plot(energy_array, alice_spline(energy_array), linewidth=1, color='mediumblue', linestyle=(0,(5,5)), label='ALICE-2020')
@@ -618,6 +620,20 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
 # plot_xs('55CO', 'ground_state', 27, 55, ['Fe01', 'Fe02', 'Fe03', 'Fe04', 'Fe05'], r'$^{nat}$Fe(d,x)$^{55}$Co - ', 'Independent', save_fig=True, write_csv=False, exfor_manuel=True)
 # plot_xs('57CO', 'ground_state', 27, 57, ['Fe01', 'Fe02', 'Fe03', 'Fe04', 'Fe05'], r'$^{nat}$Fe(d,x)$^{57}$Co - ', 'Independent', save_fig=True, write_csv=False, exfor_manuel=True)
 # plot_xs('58CO', 'ground_state', 27, 58, ['Fe03', 'Fe04', 'Fe05'], r'$^{nat}$Fe(d,x)$^{58}$Co - ', 'Independent', save_fig=True, write_csv=False, exfor_manuel=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -400,6 +400,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
     #Get data from exfor
     markers = ['.', '*', 'v', '^', '+', '<', '>', 's', 'h',     '.', '*', 'v', '^', '+', '<', '>', 's', 'h']
     grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver',     'silver', 'lightgrey', 'darkgrey', 'dimgrey', 'k','silver', 'lightgrey', 'dimgrey', 'darkgrey']
+    ref_numbers = ['[36]', '[39]', '[37]', '[40]']
 
     if exfor_manuel == False:
         product = reaction_product[2:]+'-'+reaction_product[0:2]
@@ -417,30 +418,30 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
             exfor_dict = get_exfor_data(target, 'D,*', product)
              #Plot results
             
-            k=0
+            k=0 
             for index in exfor_dict:
                 # Need to set up list of marker sizes to iterate over with k
                 # print(k)
                 print(exfor_dict[index][0])
                 if exfor_dict[index][2].shape[1] == 4:
                     if exfor_dict[index][0] == 'Vysotskij':
-                        plt.errorbar(exfor_dict[index][2][:,0],exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                        plt.errorbar(exfor_dict[index][2][:,0],exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
                     else:
-                        plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=1E3*exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                        plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], xerr=exfor_dict[index][2][:,2], yerr=1E3*exfor_dict[index][2][:,3], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
 
                 elif exfor_dict[index][2].shape[1] == 3:
                     if exfor_dict[index][0] == 'Vysotskij':
-                        plt.errorbar(exfor_dict[index][2][:,0],exfor_dict[index][2][:,1], yerr=exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                        plt.errorbar(exfor_dict[index][2][:,0],exfor_dict[index][2][:,1], yerr=exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
                     else:
-                        plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], yerr=1E3*exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                        plt.errorbar(exfor_dict[index][2][:,0],1E3*exfor_dict[index][2][:,1], yerr=1E3*exfor_dict[index][2][:,2], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
                 elif exfor_dict[index][2].shape[1] >= 5:
                     if exfor_dict[index][0] == 'Vysotskij':
 
                         print('WARNING: Plotting',str(exfor_dict[index][2].shape[1])+'-column EXFOR data retrieved for subentry', exfor_dict[index][3]+', please make sure data look reasonable - column formatting is inconsistent for >4 columns.')
-                        plt.errorbar(exfor_dict[index][2][:,4],1E-3*exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=1E-3*exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                        plt.errorbar(exfor_dict[index][2][:,4],1E-3*exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=1E-3*exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
                     else:
                         print('WARNING: Plotting',str(exfor_dict[index][2].shape[1])+'-column EXFOR data retrieved for subentry', exfor_dict[index][3]+', please make sure data look reasonable - column formatting is inconsistent for >4 columns.')
-                        plt.errorbar(exfor_dict[index][2][:,4],exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
+                        plt.errorbar(exfor_dict[index][2][:,4],exfor_dict[index][2][:,5], xerr=exfor_dict[index][2][:,0], yerr=exfor_dict[index][2][:,6], ls='none', capsize=1, label=exfor_dict[index][0]+' ('+exfor_dict[index][1]+')'+f' {ref_numbers[k]}', marker=markers[k], markersize=4, linewidth=1, color=grey_colors[k])
                 k=k+1
 
         except UnboundLocalError:

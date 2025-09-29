@@ -150,6 +150,7 @@ grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'da
 
 plt.figure(figsize=(8, 6))
 path = f'./Monitor_cross_section_data/Recommended_monitor_xs_Ni_dx_56CO/'
+ref_numbers_Ni_dx_56Co = ['[45]', '[41]', '[93]', '[42]', '[94]', '[44]']
  # List all files in the folder
 files = os.listdir(path)
 # Loop through each file
@@ -176,7 +177,7 @@ for i, file_name in enumerate(files):
                     author_name = re.sub(r'\b[A-Z]\.\b|\+', '', author_name)
                     break  # Stop after finding the first occurrence of name and year
     # Create the label
-    label = f"{author_name} ({year})"
+    label = f"{author_name} ({year}) {ref_numbers_Ni_dx_56Co[i]}"
     plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 # plt.errorbar(energies_56CO_p0, calc_xs_56CO_p0, xerr=[Ni_energy_min_unc_list[:-1], Ni_energy_plus_unc_list[:-1]], yerr=calc_xs_unc_56CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.plot(E_mon_array, interp_xs_Ni_dx_56CO(E_mon_array), color='cornflowerblue', label='IAEA')
@@ -188,13 +189,14 @@ plt.title(r'$^{nat}$Ni(d,x)$^{56}$Co', fontsize=14)
 plt.legend()
 plt.xlim(0,30)
 plt.ylim(0,60)
-# plt.savefig('./Figures/xs_mon_30MeV_56Co.pdf', dpi=600)
+plt.savefig('./Figures/PhD/xs_mon_Ni_dx_56Co.pdf', dpi=600)
 plt.show()
 
 
 
 plt.figure(figsize=(8, 6))
 path = f'./Monitor_cross_section_data/Recommended_monitor_xs_Ni_dx_58CO/'
+ref_numbers_Ni_dx_58Co = ['[41]', '[42]', '[64]', '[44]']
  # List all files in the folder
 files = os.listdir(path)
 # Loop through each file
@@ -221,7 +223,7 @@ for i, file_name in enumerate(files):
                     author_name = re.sub(r'\b[A-Z]\.\b|\+', '', author_name)
                     break  # Stop after finding the first occurrence of name and year
     # Create the label
-    label = f"{author_name} ({year})"
+    label = f"{author_name} ({year}) {ref_numbers_Ni_dx_58Co[i]}"
     plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 # plt.errorbar(energies_58CO_p0, calc_xs_58CO_p0, xerr=[Ni_energy_min_unc_list, Ni_energy_plus_unc_list], yerr=calc_xs_unc_58CO_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.plot(E_mon_array, interp_xs_Ni_dx_58CO(E_mon_array), color='cornflowerblue', label='IAEA')
@@ -233,13 +235,14 @@ plt.title(r'$^{nat}$Ni(d,x)$^{58}$Co', fontsize=14)
 plt.legend()
 plt.xlim(0,30)
 plt.ylim(0)
-# plt.savefig('./Figures/xs_mon_30MeV_58Co.pdf', dpi=600)
+plt.savefig('./Figures/PhD/xs_mon_Ni_dx_58Co.pdf', dpi=600)
 plt.show()
 
 
 
 plt.figure(figsize=(8, 6))
 path = f'./Monitor_cross_section_data/Recommended_monitor_xs_Ni_dx_61CU/'
+ref_numbers_Ni_dx_61Cu = ['[98]', '[41]', '[47]', '[48]', '[95]', '[44]', '[96]']
  # List all files in the folder
 files = os.listdir(path)
 # Loop through each file
@@ -266,7 +269,7 @@ for i, file_name in enumerate(files):
                     author_name = re.sub(r'\b[A-Z]\.\b|\+', '', author_name)
                     break  # Stop after finding the first occurrence of name and year
     # Create the label
-    label = f"{author_name} ({year})"
+    label = f"{author_name} ({year}) {ref_numbers_Ni_dx_61Cu[i]}"
     plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 # plt.errorbar(energies_61CU_p0, calc_xs_61CU_p0, xerr=[Ni_energy_min_unc_list, Ni_energy_plus_unc_list], yerr=calc_xs_unc_61CU_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.plot(E_mon_array, interp_xs_Ni_dx_61CU(E_mon_array), color='cornflowerblue', label='IAEA')
@@ -278,13 +281,14 @@ plt.title(r'$^{nat}$Ni(d,x)$^{61}$Cu', fontsize=14)
 plt.legend()
 plt.xlim(0,30)
 plt.ylim(0)
-# plt.savefig('./Figures/xs_mon_30MeV_61Cu.pdf', dpi=600)
+plt.savefig('./Figures/PhD/xs_mon_Ni_dx_61Cu.pdf', dpi=600)
 plt.show()
 
 
 
 plt.figure(figsize=(8, 6))
 path = f'./Monitor_cross_section_data/Recommended_monitor_xs_Ti_dx_46SC/'
+ref_numbers_Ti_dx_46Sc = ['[50]', '[51]', '[52]', '[97]', '[54]', '[56]']
  # List all files in the folder
 files = os.listdir(path)
 # Loop through each file
@@ -311,7 +315,7 @@ for i, file_name in enumerate(files):
                     author_name = re.sub(r'\b[A-Z]\.\b|\+', '', author_name)
                     break  # Stop after finding the first occurrence of name and year
     # Create the label
-    label = f"{author_name} ({year})"
+    label = f"{author_name} ({year}) {ref_numbers_Ti_dx_46Sc[i]}"
     plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 # plt.errorbar(energies_46SC_p0, calc_xs_46SC_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_46SC_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.plot(E_mon_array, interp_xs_Ti_dx_46SC(E_mon_array), color='cornflowerblue', label='IAEA')
@@ -323,13 +327,14 @@ plt.title(r'$^{nat}$Ti(d,x)$^{46}$Sc', fontsize=14)
 plt.legend()
 plt.xlim(0,50)
 plt.ylim(0)
-# plt.savefig('./Figures/xs_mon_30MeV_46Sc.pdf', dpi=600)
+plt.savefig('./Figures/PhD/xs_mon_Ti_dx_46Sc.pdf', dpi=600)
 plt.show()
 
 
 
 plt.figure(figsize=(8, 6))
 path = f'./Monitor_cross_section_data/Recommended_monitor_xs_Ti_dx_48V/'
+ref_numbers_Ti_dx_48V = ['[98]', '[50]', '[51]', '[52]']
  # List all files in the folder
 files = os.listdir(path)
 # Loop through each file
@@ -356,7 +361,7 @@ for i, file_name in enumerate(files):
                     author_name = re.sub(r'\b[A-Z]\.\b|\+', '', author_name)
                     break  # Stop after finding the first occurrence of name and year
     # Create the label
-    label = f"{author_name} ({year})"
+    label = f"{author_name} ({year}) {ref_numbers_Ti_dx_48V[i]}"
     plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 # plt.errorbar(energies_48V_p0, calc_xs_48V_p0, xerr = [Ti_energy_min_unc_list, Ti_energy_plus_unc_list], yerr=calc_xs_unc_48V_p0, marker='d', markersize=5, linestyle='', color='deepskyblue', label='p0')
 plt.plot(E_mon_array, interp_xs_Ti_dx_48V(E_mon_array), color='cornflowerblue', label='IAEA')
@@ -368,13 +373,14 @@ plt.title(r'$^{nat}$Ti(d,x)$^{48}$V', fontsize=14)
 plt.legend()
 plt.xlim(0,50)
 plt.ylim(0)
-# plt.savefig('./Figures/xs_mon_30MeV_48V.pdf', dpi=600)
+plt.savefig('./Figures/PhD/xs_mon_Ti_dx_48V.pdf', dpi=600)
 plt.show()
 
 
 
 plt.figure(figsize=(8, 6))
 path = f'./Monitor_cross_section_data/Recommended_monitor_xs_Fe_dx_56CO/'
+ref_numbers_Fe_dx_56Co = ['[66]', '[57]', '[98]', '[45]', '[63]', '[58]', '[59]']
  # List all files in the folder
 files = os.listdir(path)
 # Loop through each file
@@ -401,7 +407,7 @@ for i, file_name in enumerate(files):
                     author_name = re.sub(r'\b[A-Z]\.\b|\+', '', author_name)
                     break  # Stop after finding the first occurrence of name and year
     # Create the label
-    label = f"{author_name} ({year})"
+    label = f"{author_name} ({year}) {ref_numbers_Fe_dx_56Co[i]}"
     plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 plt.plot(E_mon_array, interp_xs_Fe_dx_56CO(E_mon_array), color='cornflowerblue', label='IAEA')
 plt.fill_between(E_mon_array, interp_xs_Fe_dx_56CO(E_mon_array)-interp_unc_xs_Fe_dx_56CO(E_mon_array), interp_xs_Fe_dx_56CO(E_mon_array)+interp_unc_xs_Fe_dx_56CO(E_mon_array), color='lavender')
@@ -412,7 +418,7 @@ plt.title(r'$^{nat}$Fe(d,x)$^{56}$Co', fontsize=14)
 plt.legend()
 plt.xlim(0,50)
 plt.ylim(0)
-# plt.savefig('./Figures/xs_mon_30MeV_56Co.pdf', dpi=600)
+plt.savefig('./Figures/PhD/xs_mon_Fe_dx_56Co.pdf', dpi=600)
 plt.show()
 
 

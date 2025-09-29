@@ -1,0 +1,15 @@
+#ZVView-data-copy:  17-Aug-2025 20:45:26
+#=======================================
+#
+#name:   28-NI-0(D,X)27-CO-58,,SIG
+#X.axis: Incident Energy
+#Y.axis: Cross Section
+#wdata:  3
+#ldata:  2
+#data...
+#            X         +-dX            Y  # Comments...
+#          MeV          MeV        barns  # Year,Author(s)           ## EXFOR-ID
+           8.3          0.7       0.0278            0  # 1991,P.Jung              ## D4058045             
+          13.5          0.5        0.157            0  # 1991,P.Jung              ## D4058045             
+//
+#-------------------------------------------------------------------------------

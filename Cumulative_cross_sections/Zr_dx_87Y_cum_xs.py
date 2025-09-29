@@ -465,6 +465,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
     #Get data from exfor
     markers = ['.', '*', 'v', '^', '+', '<', '>', 's', 'h',     '.', '*', 'v', '^', '+', '<', '>', 's', 'h']
     grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver',     'silver', 'lightgrey', 'darkgrey', 'dimgrey', 'k','silver', 'lightgrey', 'dimgrey', 'darkgrey']
+    ref_numbers = ['[37]', '[39]']
 
     if exfor_manuel == False:
         product = reaction_product[2:]+'-'+reaction_product[0:2]
@@ -544,7 +545,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
                             break  # Stop after finding the first occurrence of name and year
 
             # Create the label
-            label = f"{author_name} ({year})"
+            label = f"{author_name} ({year}) {ref_numbers[i]}"
 
             plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 
@@ -553,7 +554,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
     if reaction_product == '86Y':
         plt.errorbar(E_86_haleema, xs_86_haleema, xerr=dE_86_haleema, yerr=d_xs_86_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018)')
     if reaction_product == '87Y':
-        plt.errorbar(E_87_haleema, xs_87_haleema, xerr=dE_87_haleema, yerr=d_xs_87_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018)')
+        plt.errorbar(E_87_haleema, xs_87_haleema, xerr=dE_87_haleema, yerr=d_xs_87_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018) [24]')
     if reaction_product == '88Y':
         plt.errorbar(E_88_haleema, xs_88_haleema, xerr=dE_88_haleema, yerr=d_xs_88_haleema, linewidth = 1, capsize = 1, marker='s', linestyle='None', color='black', label= 'Zaneb (2018)')
 

@@ -518,7 +518,8 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
 
     #Get data from exfor
     markers = ['.', '*', 'v', '^', '+', '<', '>', 's', 'h',     '.', '*', 'v', '^', '+', '<', '>', 's', 'h']
-    grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver',     'silver', 'lightgrey', 'darkgrey', 'dimgrey', 'k','silver', 'lightgrey', 'dimgrey', 'darkgrey']
+    grey_colors = ['dimgrey', 'darkgrey', 'lightgrey', 'silver', 'k', 'dimgrey', 'darkgrey', 'lightgrey', 'silver',  'silver', 'lightgrey', 'darkgrey', 'dimgrey', 'k','silver', 'lightgrey', 'dimgrey', 'darkgrey']
+    ref_numbers = ['[36]', '[38]', '[37]', '[39]', '[40]']
 
     if exfor_manuel == False:
         product = reaction_product[2:]+'-'+reaction_product[0:2]
@@ -598,7 +599,7 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
                             break  # Stop after finding the first occurrence of name and year
 
             # Create the label
-            label = f"{author_name} ({year})"
+            label = f"{author_name} ({year}) {ref_numbers[i]}"
 
             plt.errorbar(energy, cross_section, xerr=energy_unc, yerr=cross_section_unc, ls='none', capsize=1, marker=markers[i], markersize=4, linewidth=1, color=grey_colors[i], label=label)
 
@@ -635,5 +636,5 @@ def plot_xs(reaction_product, state, Z, A, foil_list, title, xs_type, exfor_manu
 
 #_________________________________Running the code______________________________________________________________________________________________________________
 
-plot_xs('88Y', 'ground_state', 39, 88, ['Zr01', 'Zr02', 'Zr03', 'Zr04'], r'$^{nat}$Zr(d,x)$^{88}$Y - ', 'Cumulative', save_fig=True, write_csv=False, exfor_manuel=False)
+plot_xs('88Y', 'ground_state', 39, 88, ['Zr01', 'Zr02', 'Zr03', 'Zr04'], r'$^{nat}$Zr(d,x)$^{88}$Y - ', 'Cumulative', save_fig=True, write_csv=False, exfor_manuel=True)
 
